@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Title } from "react-native-paper";
+import { StyleSheet } from "react-native";
 
-import { Scaffold } from "../components";
+import { Scaffold, Button } from "../components";
 
 const OnBoardingScreen = ({ navigation }) => {
   return (
     <Scaffold>
       <Title>Travel Buddy</Title>
+      <Button mode="contained">LOGIN!</Button>
     </Scaffold>
   );
 };

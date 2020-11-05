@@ -35,7 +35,7 @@ const theme = {
   fonts: configureFonts(fontConfig),
   colors: {
     ...DefaultTheme.colors,
-    primary: "#6C63FF",
+    primary: "#5C3DA5",
   },
 };
 
