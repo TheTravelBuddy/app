@@ -1,3 +1,5 @@
+import "react-native-gesture-handler";
+
 import React from "react";
 import {
   configureFonts,
@@ -34,12 +36,6 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: "#6C63FF",
-    primaryDark: "#4B45B2",
-    accent: "#FF7364",
-    greyDark: "#696969",
-    grey: "#AAAAAA",
-    greyLight: "#B2B2B2",
-    greyPrimary: "#3F3D56",
   },
 };
 
