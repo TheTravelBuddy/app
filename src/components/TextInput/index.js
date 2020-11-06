@@ -4,8 +4,10 @@ import { TextInput as PaperTextInput, useTheme } from "react-native-paper";
 
 import Label from "../Typography/Label";
 
-const TextInput = ({}) => {
-  return <TextInput mode="flat" label="Email" />;
+const TextInput = ({ children, style, ...props }) => {
+  const theme = useTheme();
+
+  return <PaperTextInput mode="flat" label="Email" />;
 };
 
 // import React from 'react';
