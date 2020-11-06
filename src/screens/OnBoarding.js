@@ -1,15 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Title } from "react-native-paper";
-import { StyleSheet } from "react-native";
+import { View } from "react-native";
 
-import { Scaffold, Button } from "../components";
+import styles, { SCREEN_PADDING } from "./styles/authStyles";
+import { Scaffold, Button, Title } from "../components";
+import useScreenDimensions from "../hooks/useScreenDimensions";
+import OnBoardingIllustration from "../../assets/illustrations/OnBoardingIllustration.svg";
 
 const OnBoardingScreen = ({ navigation }) => {
+  const { width } = useScreenDimensions();
+
   return (
     <Scaffold>
-      <Title>Travel Buddy</Title>
-      <Button mode="contained">LOGIN!</Button>
+      <View style={styles.Container}>
+        <View style={styles.Header}>
+          <Title>Travel Buddy</Title>
+        </View>
+        <View style={styles.IllustrationContainer}>
+          <OnBoardingIllustration width={width - 2 * SCREEN_PADDING} />
+        </View>
+        <View>
+          <Button mode="contained" onPress={() => navigation.navigate("Login")}>
+            LOGIN
+          </Button>
+        </View>
+      </View>
     </Scaffold>
   );
 };
