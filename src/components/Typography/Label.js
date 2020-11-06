@@ -1,11 +1,11 @@
 import React from "react";
-import { Caption as PaperCaption, useTheme } from "react-native-paper";
+import { Caption, useTheme } from "react-native-paper";
 
 const Label = ({ children, style, ...props }) => {
   const theme = useTheme();
 
   return (
-    <PaperCaption
+    <Caption
       style={[
         styles.Title,
         { color: theme.colors.textSecondary },
@@ -15,7 +15,7 @@ const Label = ({ children, style, ...props }) => {
       {...props}
     >
       {children}
-    </PaperCaption>
+    </Caption>
   );
 };
 

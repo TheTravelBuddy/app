@@ -1,4 +1,4 @@
-import React from "react-native";
+import React from "react";
 import { Text, useTheme } from "react-native-paper";
 
 const Tagline = ({ children, style, ...props }) => {
@@ -23,7 +23,6 @@ const styles = {
   Tagline: {
     fontSize: 24,
     lineHeight: 32,
-    marginVertical: 8,
     letterSpacing: 0,
   },
 };

@@ -13,7 +13,7 @@ const fontConfig = {
   default: {
     light: {
       fontFamily: "Poppins-Light",
-      fontWeight: "normal",
+      fontWeight: "light",
     },
     regular: {
       fontFamily: "Poppins-Regular",
@@ -21,11 +21,11 @@ const fontConfig = {
     },
     medium: {
       fontFamily: "Poppins-Medium",
-      fontWeight: "normal",
+      fontWeight: "500",
     },
     bold: {
       fontFamily: "Poppins-Bold",
-      fontWeight: "normal",
+      fontWeight: "bold",
     },
   },
 };

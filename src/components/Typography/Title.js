@@ -23,7 +23,7 @@ const styles = {
   Title: {
     fontSize: 34,
     lineHeight: 32,
-    marginVertical: 8,
+    marginTop: 16,
     letterSpacing: 0,
   },
 };
