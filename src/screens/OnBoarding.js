@@ -21,7 +21,10 @@ const OnBoardingScreen = ({ navigation }) => {
           <OnBoardingIllustration width={width - 2 * SCREEN_PADDING} />
         </View>
         <View>
-          <Button mode="contained" onPress={() => navigation.navigate("Login")}>
+          <Button
+            mode="contained"
+            onPress={() => navigation.navigate("LoginScreen")}
+          >
             LOGIN
           </Button>
         </View>

@@ -15,7 +15,18 @@ export default {
   IllustrationContainer: {
     paddingVertical: SCREEN_PADDING,
   },
-  BottomInput: {
+  FormInput: {
     marginBottom: 12,
+  },
+  FormInputContainer: {
+    flexDirection: "row",
+  },
+  FormInputLeft: {
+    flex: 1,
+    marginRight: 4,
+  },
+  FormInputRight: {
+    flex: 1,
+    marginLeft: 4,
   },
 };

@@ -6,9 +6,9 @@ import { TextInput } from "react-native-paper";
 import styles, { SCREEN_PADDING } from "./styles/authStyles";
 import { Scaffold, Button, Title, Tagline } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
-import LoginIllustration from "../../assets/illustrations/LoginIllustration.svg";
+import OTPIllustration from "../../assets/illustrations/OTPIllustration.svg";
 
-const LoginScreen = ({ navigation }) => {
+const OtpScreen = ({ navigation }) => {
   const { width } = useScreenDimensions();
 
   return (
@@ -19,35 +19,36 @@ const LoginScreen = ({ navigation }) => {
           <Tagline>Your Travel Companion</Tagline>
         </View>
         <View style={styles.IllustrationContainer}>
-          <LoginIllustration width={width - 2 * SCREEN_PADDING} />
+          <OTPIllustration width={width - 2 * SCREEN_PADDING} />
         </View>
         <View>
-          <TextInput
-            label="Phone Number"
-            style={styles.FormInput}
-            textContentType="telephoneNumber"
-            keyboardType="phone-pad"
-            autoCompleteType="tel"
-            maxLength={10}
-            returnKeyType="done"
-            left={<TextInput.Affix text="+91 " />}
-          />
-          <Button
-            mode="contained"
-            onPress={() => navigation.navigate("OtpScreen")}
-          >
-            SEND OTP
-          </Button>
+          <TextInput label="Enter OTP" style={styles.FormInput} />
+          <View style={styles.FormInputContainer}>
+            <Button
+              style={styles.FormInputLeft}
+              onPress={() => navigation.navigate("SignUpScreen")}
+              mode="outlined"
+            >
+              RESEND
+            </Button>
+            <Button
+              style={styles.FormInputRight}
+              mode="contained"
+              onPress={() => navigation.navigate("SignUpScreen")}
+            >
+              CONFIRM
+            </Button>
+          </View>
         </View>
       </View>
     </Scaffold>
   );
 };
 
-LoginScreen.propTypes = {
+OtpScreen.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired,
   }).isRequired,
 };
 
-export default LoginScreen;
+export default OtpScreen;
