@@ -9,6 +9,9 @@ export default {
   Header: {
     alignItems: "center",
   },
+  HeaderTitle: {
+    marginTop: SCREEN_PADDING,
+  },
   IllustrationContainer: {
     paddingVertical: SCREEN_PADDING,
   },

@@ -14,7 +14,7 @@ const OnBoardingScreen = ({ navigation }) => {
     <Scaffold>
       <View style={styles.Container}>
         <View style={styles.Header}>
-          <Title>Travel Buddy</Title>
+          <Title style={styles.HeaderTitle}>Travel Buddy</Title>
           <Tagline>Your Travel Companion</Tagline>
         </View>
         <View style={styles.IllustrationContainer}>
