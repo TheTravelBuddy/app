@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { View } from "react-native";
+import { TextInput } from "react-native-paper";
 
 import styles, { SCREEN_PADDING } from "./styles/authStyles";
 import { Scaffold, Button, Title, Tagline } from "../components";
@@ -21,6 +22,7 @@ const Login = ({ navigation }) => {
           <LoginIllustration width={width - 2 * SCREEN_PADDING} />
         </View>
         <View>
+          <TextInput label="Phone Number" style={styles.BottomInput} />
           <Button
             mode="contained"
             onPress={() => navigation.navigate("OnBoardingScreen")}

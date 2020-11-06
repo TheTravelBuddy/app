@@ -15,4 +15,7 @@ export default {
   IllustrationContainer: {
     paddingVertical: SCREEN_PADDING,
   },
+  BottomInput: {
+    marginBottom: 12,
+  },
 };
