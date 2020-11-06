@@ -22,7 +22,16 @@ const Login = ({ navigation }) => {
           <LoginIllustration width={width - 2 * SCREEN_PADDING} />
         </View>
         <View>
-          <TextInput label="Phone Number" style={styles.BottomInput} />
+          <TextInput
+            label="Phone Number"
+            style={styles.BottomInput}
+            textContentType="telephoneNumber"
+            keyboardType="phone-pad"
+            autoCompleteType="tel"
+            maxLength={10}
+            returnKeyType="done"
+            left={<TextInput.Affix text="+91 " />}
+          />
           <Button
             mode="contained"
             onPress={() => navigation.navigate("OnBoardingScreen")}
