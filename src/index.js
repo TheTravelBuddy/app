@@ -8,6 +8,7 @@ import {
 } from "react-native-paper";
 
 import Navigator from "./Navigator";
+import { AuthProvider } from "./stores/Auth";
 
 const fontConfig = {
   default: {
@@ -43,7 +44,9 @@ const theme = {
 
 const App = () => (
   <PaperProvider theme={theme}>
-    <Navigator />
+    <AuthProvider>
+      <Navigator />
+    </AuthProvider>
   </PaperProvider>
 );
 

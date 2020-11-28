@@ -13,7 +13,7 @@ export default {
     marginTop: SCREEN_PADDING,
   },
   IllustrationContainer: {
-    paddingVertical: SCREEN_PADDING,
+    paddingVertical: SCREEN_PADDING * 2,
   },
   FormInput: {
     marginBottom: 12,

@@ -1,4 +1,4 @@
-package com.app;
+package com.yourtravelbuddy;
 
 import com.facebook.react.ReactActivity;
 
