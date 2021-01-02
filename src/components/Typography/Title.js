@@ -24,6 +24,7 @@ const styles = {
     fontSize: 34,
     lineHeight: 32,
     letterSpacing: 0,
+    textAlign: "center",
   },
 };
 

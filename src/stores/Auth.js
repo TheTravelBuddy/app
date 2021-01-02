@@ -1,113 +1,106 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  useCallback,
-} from "react";
 import auth from "@react-native-firebase/auth";
+import produce from "immer";
+import create from "zustand";
+
+import API from "../helpers/API";
+import log from "../helpers/log";
 
 const authStates = {
   LOADING: "LOADING",
   NO_AUTH: "NO_AUTH",
+  UNREGISTERED: "UNREGISTERED",
   LOGGED_IN: "LOGGED_IN",
 };
 
-const initialState = { user: null, authState: authStates.LOADING };
-const AuthContext = createContext(initialState);
-
-const AuthProvider = ({ children }) => {
-  const [state, setState] = useState(initialState);
-
-  const loginWithPhoneNumber = useCallback(
-    (phoneNumber) =>
-      new Promise((resolve, reject) => {
-        console.log("LOGIN: phone", phoneNumber);
-        auth()
-          .signInWithPhoneNumber(`+91${phoneNumber}`)
-          .then((phoneConfirmation) => {
-            setState((oldState) => ({
-              ...oldState,
-              loginTry: { phoneConfirmation, phoneNumber },
-            }));
-            resolve();
-          })
-          .catch(reject);
-      }),
-    []
-  );
-
-  const resendOtp = useCallback(
-    () =>
-      new Promise((resolve, reject) => {
-        console.log("RESEND: loginTry", state.loginTry);
-        if (state.loginTry)
-          auth()
-            .signInWithPhoneNumber(`+91${state.loginTry.phoneNumber}`, true)
-            .then((phoneConfirmation) => {
-              setState((oldState) => ({
-                ...oldState,
-                loginTry: {
-                  phoneConfirmation,
-                  phoneNumber: state.loginTry.phoneNumber,
-                },
-              }));
-              resolve();
-            })
-            .catch(reject);
-      }),
-    [state]
-  );
-
-  const verifyOtp = useCallback(
-    (otp) =>
-      new Promise((resolve, reject) => {
-        console.log("VERIFY: loginTry", state.loginTry);
-        if (state.loginTry) {
-          state.loginTry.phoneConfirmation
-            .confirm(otp)
-            .then(() => {
-              resolve();
-            })
-            .catch(reject);
-        } else {
-          reject();
-        }
-      }),
-    [state]
-  );
-
-  const logout = useCallback(
-    () =>
-      new Promise((resolve, reject) => {
-        auth().signOut().then(resolve).catch(reject);
-      }),
-    []
-  );
-
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged((user) => {
-      console.log("AUTH CHANGED: user", user);
-      setState((oldState) => ({
-        ...oldState,
-        user,
-        authState: user ? authStates.LOGGED_IN : authStates.NO_AUTH,
-      }));
-    });
-    return subscriber;
-  }, []);
-
-  useEffect(() => console.log("NEW STATE", state), [state]);
-
-  return (
-    <AuthContext.Provider
-      value={{ ...state, loginWithPhoneNumber, verifyOtp, resendOtp, logout }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+const getAuthToken = async () => {
+  if (auth().currentUser) return auth().currentUser.getIdToken(true);
 };
 
-const useAuth = () => useContext(AuthContext);
+const useAuth = create(
+  log((set, get) => ({
+    user: null,
+    authState: authStates.LOADING,
+    initAuthHandler: () => {
+      const subscriber = auth().onAuthStateChanged(async (user) => {
+        API.defaults.headers.common = {
+          Authorization: `bearer ${await getAuthToken()}`,
+        };
 
-export { authStates, useAuth, AuthProvider };
+        if (!user)
+          set(
+            produce((draftState) => {
+              draftState.user = null;
+              draftState.authState = authStates.NO_AUTH;
+            })
+          );
+        else await get().getUserDetails();
+      });
+      return subscriber;
+    },
+    loginWithPhoneNumber: async (phoneNumber) => {
+      const phoneConfirmation = await auth().signInWithPhoneNumber(
+        `+91${phoneNumber}`
+      );
+      set(
+        produce((draftState) => {
+          draftState.loginTry = { phoneConfirmation, phoneNumber };
+        })
+      );
+    },
+    resendOtp: async () => {
+      const { loginTry } = get();
+      if (!loginTry) return;
+
+      const phoneConfirmation = await auth().signInWithPhoneNumber(
+        `+91${loginTry.phoneNumber}`,
+        true
+      );
+      set(
+        produce((draftState) => {
+          draftState.loginTry = {
+            phoneConfirmation,
+            phoneNumber: draftState.loginTry.phoneNumber,
+          };
+        })
+      );
+    },
+    verifyOtp: async (otp) => {
+      const { loginTry } = get();
+      if (!loginTry) return;
+      await loginTry.phoneConfirmation.confirm(otp);
+      set(
+        produce((draftState) => {
+          draftState.loginTry = null;
+        })
+      );
+    },
+    logout: async () => {
+      await auth().signOut();
+    },
+    getUserDetails: async () => {
+      const { status, data: userData } = await API({
+        url: "/traveller/auth/userData",
+        method: "GET",
+      });
+
+      if (status !== 200) return;
+
+      const { uid } = auth().currentUser;
+      const { registered, name, phoneNumber } = userData;
+
+      set(
+        produce((draftState) => {
+          if (registered) {
+            draftState.user = { uid, name, phoneNumber };
+            draftState.authState = authStates.LOGGED_IN;
+          } else {
+            draftState.user = { uid };
+            draftState.authState = authStates.UNREGISTERED;
+          }
+        })
+      );
+    },
+  }))
+);
+
+export { authStates, useAuth };

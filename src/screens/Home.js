@@ -1,5 +1,4 @@
 import React from "react";
-// import PropTypes from "prop-types";
 import { View } from "react-native";
 
 import styles from "./styles/authStyles";
@@ -7,7 +6,7 @@ import { Scaffold, Button, Title } from "../components";
 import { useAuth } from "../stores/Auth";
 
 const HomeScreen = () => {
-  const { logout } = useAuth();
+  const logout = useAuth((state) => state.logout);
 
   return (
     <Scaffold>
@@ -21,12 +20,6 @@ const HomeScreen = () => {
       </View>
     </Scaffold>
   );
-};
-
-HomeScreen.propTypes = {
-  // navigation: PropTypes.shape({
-  //   navigate: PropTypes.func.isRequired,
-  // }).isRequired,
 };
 
 export default HomeScreen;

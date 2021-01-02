@@ -17,7 +17,7 @@ const LoginScreen = ({ navigation }) => {
   const loading = useToggle();
   const phoneNumber = useTextInput();
   const errorSnackbar = useSnackbarHandler();
-  const { loginWithPhoneNumber } = useAuth();
+  const loginWithPhoneNumber = useAuth((state) => state.loginWithPhoneNumber);
 
   const handleLogin = useCallback(() => {
     loading.start();

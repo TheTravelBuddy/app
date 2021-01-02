@@ -18,7 +18,8 @@ const OtpScreen = ({ route }) => {
   const errorSnackbar = useSnackbarHandler();
   const resendSnackbar = useSnackbarHandler();
   const otp = useTextInput();
-  const { verifyOtp, resendOtp } = useAuth();
+  const verifyOtp = useAuth((state) => state.verifyOtp);
+  const resendOtp = useAuth((state) => state.resendOtp);
 
   const handleOtp = useCallback(() => {
     loading.start();

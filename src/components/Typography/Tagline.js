@@ -1,11 +1,11 @@
 import React from "react";
-import { Text, useTheme } from "react-native-paper";
+import { Title as PaperTagline, useTheme } from "react-native-paper";
 
 const Tagline = ({ children, style, ...props }) => {
   const theme = useTheme();
 
   return (
-    <Text
+    <PaperTagline
       style={[
         styles.Tagline,
         { color: theme.colors.textSecondary },
@@ -15,7 +15,7 @@ const Tagline = ({ children, style, ...props }) => {
       {...props}
     >
       {children}
-    </Text>
+    </PaperTagline>
   );
 };
 
@@ -24,6 +24,7 @@ const styles = {
     fontSize: 24,
     lineHeight: 32,
     letterSpacing: 0,
+    textAlign: "center",
   },
 };
 

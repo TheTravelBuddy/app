@@ -1,20 +1,22 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { View } from "react-native";
 import { TextInput } from "react-native-paper";
 
 import styles from "./styles/authStyles";
-import { Scaffold, Button, Title } from "../components";
+import { Scaffold, Button, Title, Label } from "../components";
+import { useAuth } from "../stores/Auth";
 
-const SignUpScreen = ({ navigation }) => {
+const SignUpScreen = () => {
+  const logout = useAuth((state) => state.logout);
+
   return (
     <Scaffold>
       <View style={styles.Container}>
         <View style={styles.Header}>
-          <Title style={styles.HeaderTitle}>Let us get started</Title>
-          {/* <Tagline>Before we start, tell us something about you.</Tagline> */}
+          <Title style={styles.HeaderTitle}>Travel Buddy</Title>
         </View>
         <View>
+          <Label>Before we start, tell us something about you.</Label>
           <TextInput label="Name" style={styles.FormInput} />
           <View style={styles.FormInputContainer}>
             <TextInput
@@ -27,22 +29,26 @@ const SignUpScreen = ({ navigation }) => {
             />
           </View>
           <TextInput label="Prefered Seasons" style={styles.FormInput} />
-          <Button
-            mode="contained"
-            onPress={() => navigation.navigate("OnBoardingScreen")}
-          >
-            CREATE
-          </Button>
+          <View style={styles.FormInputContainer}>
+            <Button
+              style={styles.FormInputLeft}
+              onPress={logout}
+              mode="outlined"
+            >
+              Cancel
+            </Button>
+            <Button
+              style={styles.FormInputRight}
+              mode="contained"
+              onPress={() => {}}
+            >
+              Save
+            </Button>
+          </View>
         </View>
       </View>
     </Scaffold>
   );
-};
-
-SignUpScreen.propTypes = {
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func.isRequired,
-  }).isRequired,
 };
 
 export default SignUpScreen;
