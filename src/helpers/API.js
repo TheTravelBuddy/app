@@ -1,7 +1,8 @@
 import axios from "axios";
+import { serverUrl } from "./secret-config.json";
 
 const API = axios.create({
-  baseURL: "http://82be6b7234c6.ngrok.io/",
+  baseURL: serverUrl,
 });
 
 export default API;
