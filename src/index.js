@@ -1,3 +1,5 @@
+import "react-native-gesture-handler";
+
 import React from "react";
 import {
   configureFonts,
@@ -11,7 +13,7 @@ const fontConfig = {
   default: {
     light: {
       fontFamily: "Poppins-Light",
-      fontWeight: "normal",
+      fontWeight: "light",
     },
     regular: {
       fontFamily: "Poppins-Regular",
@@ -19,11 +21,11 @@ const fontConfig = {
     },
     medium: {
       fontFamily: "Poppins-Medium",
-      fontWeight: "normal",
+      fontWeight: "500",
     },
     bold: {
       fontFamily: "Poppins-Bold",
-      fontWeight: "normal",
+      fontWeight: "bold",
     },
   },
 };
@@ -33,13 +35,9 @@ const theme = {
   fonts: configureFonts(fontConfig),
   colors: {
     ...DefaultTheme.colors,
-    primary: "#6C63FF",
-    primaryDark: "#4B45B2",
-    accent: "#FF7364",
-    greyDark: "#696969",
-    grey: "#AAAAAA",
-    greyLight: "#B2B2B2",
-    greyPrimary: "#3F3D56",
+    primary: "#5C3DA5",
+    textSecondary: "#9D9BA6",
+    textPrimary: "#342F46",
   },
 };
 
