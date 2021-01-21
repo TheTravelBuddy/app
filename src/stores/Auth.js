@@ -77,6 +77,15 @@ const useAuth = create(
     logout: async () => {
       await auth().signOut();
     },
+    register: async (userDetails) => {
+      const { status } = await API({
+        url: "/traveller/auth/registerUser",
+        method: "POST",
+        data: userDetails,
+      });
+
+      if (status === 200) await get().getUserDetails();
+    },
     getUserDetails: async () => {
       const { status, data: userData } = await API({
         url: "/traveller/auth/userData",
