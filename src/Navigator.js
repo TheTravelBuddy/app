@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 import OnBoardingScreen from "./screens/OnBoarding";
 import LoginScreen from "./screens/Login";
@@ -12,7 +13,7 @@ import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
 
 const AuthStack = createStackNavigator();
-const MainStack = createStackNavigator();
+const MainTab = createMaterialBottomTabNavigator();
 
 const Navigator = () => {
   const initAuthHandler = useAuth((state) => state.initAuthHandler);
@@ -34,9 +35,9 @@ const Navigator = () => {
       ) : authState === authStates.UNREGISTERED ? (
         <SignUpScreen />
       ) : authState === authStates.LOGGED_IN ? (
-        <MainStack.Navigator headerMode="none">
-          <MainStack.Screen name="HomeScreen" component={HomeScreen} />
-        </MainStack.Navigator>
+        <MainTab.Navigator>
+          <MainTab.Screen name="HomeScreen" component={HomeScreen} />
+        </MainTab.Navigator>
       ) : (
         <LoadingScreen />
       )}

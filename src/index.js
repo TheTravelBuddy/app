@@ -7,6 +7,8 @@ import {
   Provider as PaperProvider,
 } from "react-native-paper";
 
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
 import Navigator from "./Navigator";
 
 const fontConfig = {
@@ -42,9 +44,11 @@ const theme = {
 };
 
 const App = () => (
-  <PaperProvider theme={theme}>
-    <Navigator />
-  </PaperProvider>
+  <SafeAreaProvider>
+    <PaperProvider theme={theme}>
+      <Navigator />
+    </PaperProvider>
+  </SafeAreaProvider>
 );
 
 export default App;
