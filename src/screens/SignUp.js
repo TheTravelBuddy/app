@@ -1,13 +1,25 @@
 import React, { useCallback } from "react";
 import { View } from "react-native";
 import { TextInput } from "react-native-paper";
+import moment from "moment";
 
 import styles from "./styles/authStyles";
-import { Scaffold, Button, Picker, Title, Label } from "../components";
+import {
+  Scaffold,
+  Button,
+  Picker,
+  DateTimePicker,
+  Title,
+  Label,
+} from "../components";
 import useTextInput from "../hooks/useTextInput";
 import usePicker from "../hooks/usePicker";
+import useDateTimePicker from "../hooks/useDateTimePicker";
 import useToggle from "../hooks/useToggle";
 import { useAuth } from "../stores/Auth";
+
+const today = new Date();
+const initialDate = new Date(1900, 0, 2);
 
 const SignUpScreen = () => {
   const logout = useAuth((state) => state.logout);
@@ -15,7 +27,7 @@ const SignUpScreen = () => {
   const logoutLoading = useToggle(false);
   const registerLoading = useToggle(false);
   const name = useTextInput();
-  const dob = useTextInput();
+  const dob = useDateTimePicker(today);
   const gender = usePicker("M");
   const mood = usePicker("MIXED");
 
@@ -30,7 +42,7 @@ const SignUpScreen = () => {
     registerLoading.start();
     register({
       name: name.value,
-      dob: dob.value,
+      dob: moment(dob.value).format("YYYY-MM-DD"),
       gender: gender.value,
     }).catch(() => {
       registerLoading.stop();
@@ -52,11 +64,13 @@ const SignUpScreen = () => {
             style={styles.FormInput}
           />
           <View style={styles.FormInputContainer}>
-            <TextInput
+            <DateTimePicker
               {...dob.props}
-              disabled={logoutLoading.state || registerLoading.state}
-              label="DOB"
               style={[styles.FormInput, styles.FormInputLeft]}
+              label="DOB"
+              disabled={logoutLoading.state || registerLoading.state}
+              maximumDate={today}
+              minimumDate={initialDate}
             />
             <Picker
               {...gender.props}
