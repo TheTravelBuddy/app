@@ -10,6 +10,7 @@ import {
   Picker,
   DateTimePicker,
   Title,
+  Tagline,
   Label,
 } from "../components";
 import useTextInput from "../hooks/useTextInput";
@@ -54,6 +55,7 @@ const SignUpScreen = () => {
       <View style={styles.Container}>
         <View style={styles.Header}>
           <Title style={styles.HeaderTitle}>Travel Buddy</Title>
+          <Tagline>Your Travel Companion</Tagline>
         </View>
         <View>
           <Label>Before we start, tell us something about you.</Label>

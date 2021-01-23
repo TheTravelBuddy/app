@@ -30,11 +30,7 @@ const DateTimePicker = ({
     () => (
       <TouchableRipple
         disabled={disabled}
-        style={{
-          flexGrow: 1,
-          justifyContent: "center",
-          paddingHorizontal: 12,
-        }}
+        style={styles.TouchArea}
         onPress={pickerVisible.show}
       >
         <View>
@@ -42,17 +38,13 @@ const DateTimePicker = ({
             style={[
               theme.fonts.regular,
               { color: theme.colors.text },
-              {
-                fontSize: 12,
-                paddingTop: 10,
-                opacity: 0.5,
-              },
+              styles.LabelText,
             ]}
           >
             {label}
           </Text>
-          <View style={{ height: 32, paddingVertical: 4 }}>
-            <Text style={{ fontSize: 16 }}>
+          <View style={styles.ValueContainer}>
+            <Text style={styles.ValueText}>
               {mode === "date"
                 ? moment(value).format("DD/MM/YYYY")
                 : moment(value).format("hh:mm A")}
@@ -69,10 +61,7 @@ const DateTimePicker = ({
       <View style={style}>
         <TextInput
           mode="flat"
-          dense={true}
-          style={{
-            height: 64,
-          }}
+          style={styles.TextInputShell}
           render={renderInputText}
         />
       </View>
@@ -86,6 +75,29 @@ const DateTimePicker = ({
       />
     </>
   );
+};
+
+const styles = {
+  TouchArea: {
+    flexGrow: 1,
+    justifyContent: "center",
+    paddingHorizontal: 12,
+  },
+  LabelText: {
+    fontSize: 12,
+    paddingTop: 10,
+    opacity: 0.5,
+  },
+  ValueContainer: {
+    height: 32,
+    paddingVertical: 4,
+  },
+  ValueText: {
+    fontSize: 16,
+  },
+  TextInputShell: {
+    height: 64,
+  },
 };
 
 export default DateTimePicker;

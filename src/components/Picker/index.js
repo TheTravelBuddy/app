@@ -47,7 +47,6 @@ const Picker = ({
   return (
     <View style={style}>
       <TextInput
-        dense
         mode="flat"
         style={[styles.TextInputShell, inputStyle]}
         render={renderInputText}
