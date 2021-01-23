@@ -3,11 +3,9 @@ import { View } from "react-native";
 import { Appbar, useTheme } from "react-native-paper";
 
 // import styles from "./styles/authStyles";
-import { Scaffold, Button, Title } from "../components";
-import { useAuth } from "../stores/Auth";
+import { Scaffold, Title, Rating } from "../components";
 
 const HomeScreen = () => {
-  const logout = useAuth((state) => state.logout);
   const theme = useTheme();
   return (
     <Scaffold
@@ -22,10 +20,8 @@ const HomeScreen = () => {
       <View style={styles.Container}>
         <View>
           <Title style={styles.HeaderTitle}>Travel Buddy</Title>
+          <Rating rating={4.5} />
         </View>
-        {/* <Button mode="contained" onPress={logout}>
-          SIGN OUT
-        </Button> */}
       </View>
     </Scaffold>
   );

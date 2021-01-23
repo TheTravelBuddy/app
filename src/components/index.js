@@ -6,6 +6,7 @@ import DateTimePicker from "./DateTimePicker";
 import Title from "./Typography/Title";
 import Tagline from "./Typography/Tagline";
 import Label from "./Typography/Label";
+import Rating from "./Rating";
 
 export {
   Button,
@@ -16,4 +17,5 @@ export {
   Scaffold,
   Tagline,
   Label,
+  Rating,
 };

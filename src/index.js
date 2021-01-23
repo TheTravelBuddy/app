@@ -40,6 +40,9 @@ const theme = {
     primary: "#5C3DA5",
     textSecondary: "#9D9BA6",
     textPrimary: "#342F46",
+    ratingHigh: "#00C851",
+    ratingMedium: "#FFBB33",
+    ratingLow: "#FF0000",
   },
 };
 
