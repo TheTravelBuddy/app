@@ -2,12 +2,13 @@ import React from "react";
 import { View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 
-const RatingPill = ({ rating }) => {
+const RatingPill = ({ rating, style, ...props }) => {
   const theme = useTheme();
+
   return (
     <View
       style={[
-        styles.container,
+        styles.PillContainer,
         {
           backgroundColor:
             rating >= 4
@@ -16,22 +17,24 @@ const RatingPill = ({ rating }) => {
               ? theme.colors.ratingMedium
               : theme.colors.ratingLow,
         },
+        style,
       ]}
+      {...props}
     >
-      <Text style={[styles.rate, theme.fonts.medium]}>{rating}</Text>
+      <Text style={[styles.PillText, theme.fonts.bold]}>{rating}</Text>
     </View>
   );
 };
 
 const styles = {
-  container: {
+  PillContainer: {
     width: 48,
     height: 22,
     borderRadius: 24,
     alignItems: "center",
     justifyContent: "center",
   },
-  rate: {
+  PillText: {
     color: "#ffffff",
     fontSize: 12,
   },

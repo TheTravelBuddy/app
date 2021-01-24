@@ -1,4 +1,4 @@
-export const SCREEN_PADDING = 16;
+import { SCREEN_PADDING } from "../../constants";
 
 export default {
   Container: {

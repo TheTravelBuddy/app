@@ -7,6 +7,9 @@ import Title from "./Typography/Title";
 import Tagline from "./Typography/Tagline";
 import Label from "./Typography/Label";
 import RatingPill from "./RatingPill";
+import LocationBannerCard from "./LocationBannerCard";
+import LocationHalfCard from "./LocationHalfCard";
+import HotelDetailCard from "./HotelDetailCard";
 
 export {
   Button,
@@ -18,4 +21,7 @@ export {
   Tagline,
   Label,
   RatingPill,
+  LocationBannerCard,
+  LocationHalfCard,
+  HotelDetailCard,
 };

@@ -35,6 +35,7 @@ const fontConfig = {
 const theme = {
   ...DefaultTheme,
   fonts: configureFonts(fontConfig),
+  roundness: 6,
   colors: {
     ...DefaultTheme.colors,
     primary: "#5C3DA5",

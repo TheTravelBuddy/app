@@ -2,8 +2,12 @@ import React from "react";
 import { View } from "react-native";
 import { Appbar, useTheme } from "react-native-paper";
 
-// import styles from "./styles/authStyles";
-import { Scaffold, Title, RatingPill } from "../components";
+import {
+  Scaffold,
+  LocationBannerCard,
+  LocationHalfCard,
+  HotelDetailCard,
+} from "../components";
 
 const HomeScreen = () => {
   const theme = useTheme();
@@ -19,8 +23,23 @@ const HomeScreen = () => {
     >
       <View style={styles.Container}>
         <View>
-          <Title style={styles.HeaderTitle}>Travel Buddy</Title>
-          <RatingPill rating={4.5} />
+          <LocationBannerCard
+            coverUri="https://picsum.photos/1000"
+            name="Magic of the North"
+            rating={3.5}
+          />
+          <LocationHalfCard
+            coverUri="https://picsum.photos/1000"
+            name="Magic of the North"
+            rating={4.9}
+          />
+          <HotelDetailCard
+            coverUri="https://picsum.photos/1000"
+            name="Magic of the North"
+            rating={4.9}
+            location="Colaba, Mumbai"
+            price={1000}
+          />
         </View>
       </View>
     </Scaffold>
