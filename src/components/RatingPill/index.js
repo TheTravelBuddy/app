@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 
-const Rating = ({ rating }) => {
+const RatingPill = ({ rating }) => {
   const theme = useTheme();
   return (
     <View
@@ -37,4 +37,4 @@ const styles = {
   },
 };
 
-export default Rating;
+export default RatingPill;

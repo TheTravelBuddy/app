@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Appbar, useTheme } from "react-native-paper";
 
 // import styles from "./styles/authStyles";
-import { Scaffold, Title, Rating } from "../components";
+import { Scaffold, Title, RatingPill } from "../components";
 
 const HomeScreen = () => {
   const theme = useTheme();
@@ -20,7 +20,7 @@ const HomeScreen = () => {
       <View style={styles.Container}>
         <View>
           <Title style={styles.HeaderTitle}>Travel Buddy</Title>
-          <Rating rating={4.5} />
+          <RatingPill rating={4.5} />
         </View>
       </View>
     </Scaffold>
