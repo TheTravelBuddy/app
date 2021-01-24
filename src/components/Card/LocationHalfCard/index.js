@@ -1,10 +1,10 @@
 import React from "react";
-import { Card, Text } from "react-native-paper";
-import RatingPill from "../RatingPill";
+import { Card } from "react-native-paper";
+import RatingPill from "../../RatingPill";
 
-import useScreenDimensions from "../../hooks/useScreenDimensions";
+import useScreenDimensions from "../../../hooks/useScreenDimensions";
 
-const HotelDetailCard = ({ name, coverUri, rating, location, price }) => {
+const LocationBannerCard = ({ name, coverUri, rating }) => {
   const { width } = useScreenDimensions();
   return (
     <Card style={{ width: Math.round(width / 2) }}>
@@ -13,11 +13,7 @@ const HotelDetailCard = ({ name, coverUri, rating, location, price }) => {
         title={name}
         right={() => <RatingPill rating={rating} />}
         rightStyle={styles.RatingPill}
-        subtitle={location}
       />
-      <Card.Content>
-        <Text>{price}/night</Text>
-      </Card.Content>
     </Card>
   );
 };
@@ -28,4 +24,4 @@ const styles = {
   },
 };
 
-export default HotelDetailCard;
+export default LocationBannerCard;

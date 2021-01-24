@@ -7,6 +7,7 @@ import {
   LocationBannerCard,
   LocationHalfCard,
   HotelDetailCard,
+  BlogCard,
 } from "../components";
 
 const HomeScreen = () => {
@@ -39,6 +40,12 @@ const HomeScreen = () => {
             rating={4.9}
             location="Colaba, Mumbai"
             price={1000}
+          />
+          <BlogCard
+            profilePic="https://picsum.photos/1000"
+            title="Magic of the North"
+            likes={43}
+            content="This summer vacation we went to the one of the best tourist spots of India."
           />
         </View>
       </View>
