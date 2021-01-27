@@ -1,9 +1,11 @@
+import Appbar from "./Appbar";
 import Button from "./Button";
 import Loader from "./Loader";
 import Scaffold from "./Scaffold";
 import Picker from "./Picker";
 import DateTimePicker from "./DateTimePicker";
 import Title from "./Typography/Title";
+import SectionHeader from "./Typography/SectionHeader";
 import Tagline from "./Typography/Tagline";
 import Label from "./Typography/Label";
 import Paragraph from "./Typography/Paragraph";
@@ -14,11 +16,13 @@ import HotelDetailCard from "./Card/HotelDetailCard";
 import BlogCard from "./Card/BlogCard";
 
 export {
+  Appbar,
   Button,
   Loader,
   Picker,
   DateTimePicker,
   Title,
+  SectionHeader,
   Scaffold,
   Tagline,
   Label,
