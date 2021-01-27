@@ -19,11 +19,11 @@ const AuthStack = createStackNavigator();
 const MainTab = createMaterialBottomTabNavigator();
 
 const Navigator = () => {
+  const theme = useTheme();
   const initAuthHandler = useAuth((state) => state.initAuthHandler);
   const authState = useAuth((state) => state.authState);
 
   useEffect(initAuthHandler, [initAuthHandler]);
-  const theme = useTheme();
 
   return (
     <NavigationContainer>
