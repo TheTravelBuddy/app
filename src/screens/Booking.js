@@ -8,7 +8,6 @@ import {
   LocationBannerCard,
   LocationHalfCard,
   HotelDetailCard,
-  BlogCard,
   Chips,
 } from "../components";
 import { CARD_SPACING, SCREEN_PADDING } from "../constants";
@@ -92,32 +91,6 @@ const hoteldetailsData = [
   },
 ];
 
-const blogsData = [
-  {
-    id: 1,
-    profilePic: "https://picsum.photos/1001",
-    title: "My Vacation to Goa",
-    likes: 43,
-    content:
-      "This summer vacation we went to the one of the best tourist spots of India.",
-  },
-  {
-    id: 2,
-    profilePic: "https://picsum.photos/1000",
-    title: "Food Experiences Every...",
-    likes: 69,
-    content:
-      "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
-  },
-  {
-    id: 3,
-    profilePic: "https://picsum.photos/1000",
-    title: "Magic of the North",
-    likes: 15,
-    content:
-      "This summer vacation we went to the one of the best tourist spots of India.",
-  },
-];
 const BookingScreen = () => {
   return (
     <Scaffold
@@ -217,23 +190,6 @@ const BookingScreen = () => {
               />
             )
           )}
-        </ScrollView>
-      </View>
-      <View style={styles.Section}>
-        <SectionHeader style={styles.SectionHeader}>Top Blogs</SectionHeader>
-        <ScrollView
-          horizontal
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.CardsScrollerContainer}
-        >
-          {blogsData.map(({ id, profilePic, title, likes, content }) => (
-            <BlogCard
-              key={id}
-              {...{ id, profilePic, title, likes, content }}
-              style={styles.CardsScrollerCard}
-            />
-          ))}
         </ScrollView>
       </View>
     </Scaffold>
