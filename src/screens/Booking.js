@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView, View } from "react-native";
 
 import {
@@ -8,9 +8,14 @@ import {
   LocationBannerCard,
   LocationHalfCard,
   HotelDetailCard,
-  Chips,
+  Chip,
 } from "../components";
 import { CARD_SPACING, SCREEN_PADDING } from "../constants";
+import {
+  displayFilter,
+  shouldDisplayFilter,
+  useBookingFilters,
+} from "../stores/BookingFilters";
 
 const packagesData = [
   {
@@ -92,6 +97,18 @@ const hoteldetailsData = [
 ];
 
 const BookingScreen = () => {
+  const city = useBookingFilters((state) => state.city);
+  const bookingType = useBookingFilters((state) => state.bookingType);
+  const filterValues = useBookingFilters((state) => state.filterValues);
+  const searchQuery = useBookingFilters((state) => state.searchQuery);
+  const initData = useBookingFilters((state) => state.initData);
+  const clearFilter = useBookingFilters((state) => state.clearFilter);
+  const clearSearch = useBookingFilters((state) => state.clearSearch);
+
+  console.log(filterValues);
+
+  useEffect(initData, [initData]);
+
   return (
     <Scaffold
       renderHeader={() => (
@@ -108,31 +125,40 @@ const BookingScreen = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.CardsScrollerContainer}
         >
-          <Chips
-            chipIcon="map-marker-outline"
-            chipText="Mumbai"
+          {city && (
+            <Chip icon="map-marker-outline" style={styles.CardsScrollerCard}>
+              {city.name}
+            </Chip>
+          )}
+          {bookingType && (
+            <Chip icon="home-outline" style={styles.CardsScrollerCard}>
+              {bookingType}
+            </Chip>
+          )}
+          <Chip
+            icon="magnify"
             style={styles.CardsScrollerCard}
-          />
-          <Chips
-            chipIcon="filter-outline"
-            chipText="Filter"
-            style={styles.CardsScrollerCard}
-          />
-          <Chips
-            chipIcon="magnify"
-            chipText="Search"
-            style={styles.CardsScrollerCard}
-          />
-          <Chips
-            chipIcon="magnify"
-            chipText="Search"
-            style={styles.CardsScrollerCard}
-          />
-          <Chips
-            chipIcon="magnify"
-            chipText="Search"
-            style={styles.CardsScrollerCard}
-          />
+            onClose={searchQuery && clearSearch}
+          >
+            {searchQuery ? `"${searchQuery}"` : "Search"}
+          </Chip>
+          <Chip icon="filter-outline" style={styles.CardsScrollerCard}>
+            Filters
+          </Chip>
+          {Object.entries(filterValues).map(
+            ([filterName, filterValue]) =>
+              shouldDisplayFilter[filterName](filterValue) && (
+                <Chip
+                  key={filterName}
+                  style={styles.CardsScrollerCard}
+                  onClose={() => {
+                    clearFilter(filterName);
+                  }}
+                >
+                  {displayFilter[filterName](filterValue)}
+                </Chip>
+              )
+          )}
         </ScrollView>
       </View>
       <View style={styles.Section}>
@@ -177,6 +203,7 @@ const BookingScreen = () => {
         </SectionHeader>
         <ScrollView
           horizontal
+          style={{ overflow: "visible" }}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.CardsScrollerContainer}
@@ -209,6 +236,7 @@ const styles = {
   },
   CardsScrollerContainer: {
     paddingHorizontal: (3 / 4) * SCREEN_PADDING,
+    paddingVertical: 2,
   },
   CardsScrollerCard: {
     marginHorizontal: SCREEN_PADDING / 4,

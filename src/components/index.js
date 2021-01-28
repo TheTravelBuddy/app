@@ -14,7 +14,7 @@ import LocationBannerCard from "./Card/LocationBannerCard";
 import LocationHalfCard from "./Card/LocationHalfCard";
 import HotelDetailCard from "./Card/HotelDetailCard";
 import BlogCard from "./Card/BlogCard";
-import Chips from "./Chips";
+import Chip from "./Chip";
 
 export {
   Appbar,
@@ -33,5 +33,5 @@ export {
   LocationHalfCard,
   HotelDetailCard,
   BlogCard,
-  Chips,
+  Chip,
 };

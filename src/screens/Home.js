@@ -217,6 +217,7 @@ const styles = {
   },
   CardsScrollerContainer: {
     paddingHorizontal: (3 / 4) * SCREEN_PADDING,
+    paddingVertical: 2,
   },
   CardsScrollerCard: {
     marginHorizontal: SCREEN_PADDING / 4,
