@@ -4,13 +4,13 @@ import { Appbar, useTheme } from "react-native-paper";
 const Action = (props) => {
   const theme = useTheme();
 
-  return <Appbar.Action color={theme.colors.greyDark} {...props} />;
+  return <Appbar.Action color={theme.colors.textPrimary} {...props} />;
 };
 
 const BackAction = (props) => {
   const theme = useTheme();
 
-  return <Appbar.BackAction color={theme.colors.greyDark} {...props} />;
+  return <Appbar.BackAction color={theme.colors.textPrimary} {...props} />;
 };
 
 const Content = ({ titleStyle, ...props }) => {

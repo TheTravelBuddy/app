@@ -12,6 +12,7 @@ import OtpScreen from "./screens/Otp";
 import SignUpScreen from "./screens/SignUp";
 
 import HomeScreen from "./screens/Home";
+import BookingScreen from "./screens/Booking";
 import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
 
@@ -62,7 +63,7 @@ const Navigator = () => {
           />
           <MainTab.Screen
             name="BookingScreen"
-            component={HomeScreen}
+            component={BookingScreen}
             options={{
               tabBarLabel: "Booking",
 
