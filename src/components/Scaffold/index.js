@@ -4,7 +4,7 @@ import { useTheme } from "react-native-paper";
 
 export const HEADER_HEIGHT = 56;
 
-const ScreenWrapper = ({
+const Scaffold = ({
   children,
   statusBarColor,
   renderHeader,
@@ -24,6 +24,8 @@ const ScreenWrapper = ({
       <ScrollView
         overScrollMode="never"
         keyboardShouldPersistTaps="handled"
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={[
           styles.ContentContainer,
           { backgroundColor: theme.colors.background },
@@ -43,4 +45,4 @@ const styles = {
   },
 };
 
-export default ScreenWrapper;
+export default Scaffold;

@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import { View } from "react-native";
 import { TextInput, Snackbar } from "react-native-paper";
 
-import styles, { SCREEN_PADDING } from "./styles/authStyles";
+import styles from "./styles/authStyles";
+import { SCREEN_PADDING } from "../constants";
 import { Scaffold, Button, Title, Tagline } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import OTPIllustration from "../../assets/illustrations/OTPIllustration.svg";

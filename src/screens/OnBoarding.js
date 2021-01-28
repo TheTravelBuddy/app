@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { View } from "react-native";
 
-import styles, { SCREEN_PADDING } from "./styles/authStyles";
+import styles from "./styles/authStyles";
+import { SCREEN_PADDING } from "../constants";
 import { Scaffold, Button, Title, Tagline } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import OnBoardingIllustration from "../../assets/illustrations/OnBoardingIllustration.svg";
