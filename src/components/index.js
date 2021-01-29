@@ -4,6 +4,7 @@ import Loader from "./Loader";
 import Scaffold from "./Scaffold";
 import Picker from "./Picker";
 import DateTimePicker from "./DateTimePicker";
+import HorizontalScroller from "./HorizontalScroller";
 import Title from "./Typography/Title";
 import SectionHeader from "./Typography/SectionHeader";
 import Tagline from "./Typography/Tagline";
@@ -22,6 +23,7 @@ export {
   Loader,
   Picker,
   DateTimePicker,
+  HorizontalScroller,
   Title,
   SectionHeader,
   Scaffold,

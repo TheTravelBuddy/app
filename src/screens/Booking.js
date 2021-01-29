@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 import {
@@ -10,6 +10,7 @@ import {
   LocationHalfCard,
   HotelDetailCard,
   Chip,
+  HorizontalScroller,
 } from "../components";
 import { CARD_SPACING, SCREEN_PADDING } from "../constants";
 import {
@@ -118,12 +119,7 @@ const BookingScreen = () => {
       )}
     >
       <View style={styles.Section}>
-        <ScrollView
-          horizontal
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.CardsScrollerContainer}
-        >
+        <HorizontalScroller>
           <Chip icon="map-marker-outline" style={styles.CardsScrollerCard}>
             {selectedCity ? selectedCity.name : <ActivityIndicator size={12} />}
           </Chip>
@@ -156,16 +152,11 @@ const BookingScreen = () => {
                 </Chip>
               )
           )}
-        </ScrollView>
+        </HorizontalScroller>
       </View>
       <View style={styles.Section}>
         <SectionHeader style={styles.SectionHeader}>Top Packages</SectionHeader>
-        <ScrollView
-          horizontal
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.CardsScrollerContainer}
-        >
+        <HorizontalScroller>
           {packagesData.map(({ id, coverUri, name, rating }) => (
             <LocationBannerCard
               key={id}
@@ -173,18 +164,13 @@ const BookingScreen = () => {
               style={styles.CardsScrollerCard}
             />
           ))}
-        </ScrollView>
+        </HorizontalScroller>
       </View>
       <View style={styles.Section}>
         <SectionHeader style={styles.SectionHeader}>
           Top Destinations
         </SectionHeader>
-        <ScrollView
-          horizontal
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.CardsScrollerContainer}
-        >
+        <HorizontalScroller>
           {destinationsData.map(({ id, coverUri, name, rating }) => (
             <LocationHalfCard
               key={id}
@@ -192,18 +178,13 @@ const BookingScreen = () => {
               style={styles.CardsScrollerCard}
             />
           ))}
-        </ScrollView>
+        </HorizontalScroller>
       </View>
       <View style={styles.Section}>
         <SectionHeader style={styles.SectionHeader}>
           Hotels Nearby
         </SectionHeader>
-        <ScrollView
-          horizontal
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.CardsScrollerContainer}
-        >
+        <HorizontalScroller>
           {hoteldetailsData.map(
             ({ id, coverUri, name, rating, area, city, price }) => (
               <HotelDetailCard
@@ -213,7 +194,7 @@ const BookingScreen = () => {
               />
             )
           )}
-        </ScrollView>
+        </HorizontalScroller>
       </View>
     </Scaffold>
   );
@@ -229,13 +210,6 @@ const styles = {
   SectionHeader: {
     marginHorizontal: SCREEN_PADDING,
     marginBottom: CARD_SPACING / 2,
-  },
-  CardsScrollerContainer: {
-    paddingHorizontal: (3 / 4) * SCREEN_PADDING,
-    paddingVertical: 2,
-  },
-  CardsScrollerCard: {
-    marginHorizontal: SCREEN_PADDING / 4,
   },
 };
 

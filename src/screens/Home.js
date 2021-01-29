@@ -1,8 +1,9 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 
 import {
   Appbar,
+  HorizontalScroller,
   SectionHeader,
   Scaffold,
   LocationBannerCard,
@@ -128,12 +129,7 @@ const HomeScreen = () => {
     >
       <View style={styles.Section}>
         <SectionHeader style={styles.SectionHeader}>Top Packages</SectionHeader>
-        <ScrollView
-          horizontal
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.CardsScrollerContainer}
-        >
+        <HorizontalScroller>
           {packagesData.map(({ id, coverUri, name, rating }) => (
             <LocationBannerCard
               key={id}
@@ -141,18 +137,13 @@ const HomeScreen = () => {
               style={styles.CardsScrollerCard}
             />
           ))}
-        </ScrollView>
+        </HorizontalScroller>
       </View>
       <View style={styles.Section}>
         <SectionHeader style={styles.SectionHeader}>
           Top Destinations
         </SectionHeader>
-        <ScrollView
-          horizontal
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.CardsScrollerContainer}
-        >
+        <HorizontalScroller>
           {destinationsData.map(({ id, coverUri, name, rating }) => (
             <LocationHalfCard
               key={id}
@@ -160,18 +151,13 @@ const HomeScreen = () => {
               style={styles.CardsScrollerCard}
             />
           ))}
-        </ScrollView>
+        </HorizontalScroller>
       </View>
       <View style={styles.Section}>
         <SectionHeader style={styles.SectionHeader}>
           Hotels Nearby
         </SectionHeader>
-        <ScrollView
-          horizontal
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.CardsScrollerContainer}
-        >
+        <HorizontalScroller>
           {hoteldetailsData.map(
             ({ id, coverUri, name, rating, area, city, price }) => (
               <HotelDetailCard
@@ -181,16 +167,11 @@ const HomeScreen = () => {
               />
             )
           )}
-        </ScrollView>
+        </HorizontalScroller>
       </View>
       <View style={styles.Section}>
         <SectionHeader style={styles.SectionHeader}>Top Blogs</SectionHeader>
-        <ScrollView
-          horizontal
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.CardsScrollerContainer}
-        >
+        <HorizontalScroller>
           {blogsData.map(({ id, profilePic, title, likes, content }) => (
             <BlogCard
               key={id}
@@ -198,7 +179,7 @@ const HomeScreen = () => {
               style={styles.CardsScrollerCard}
             />
           ))}
-        </ScrollView>
+        </HorizontalScroller>
       </View>
     </Scaffold>
   );
@@ -214,13 +195,6 @@ const styles = {
   SectionHeader: {
     marginHorizontal: SCREEN_PADDING,
     marginBottom: CARD_SPACING / 2,
-  },
-  CardsScrollerContainer: {
-    paddingHorizontal: (3 / 4) * SCREEN_PADDING,
-    paddingVertical: 2,
-  },
-  CardsScrollerCard: {
-    marginHorizontal: SCREEN_PADDING / 4,
   },
 };
 
