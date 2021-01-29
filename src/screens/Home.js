@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 
+import styles from "./styles";
 import {
   Appbar,
   HorizontalScroller,
@@ -11,7 +12,6 @@ import {
   HotelDetailCard,
   BlogCard,
 } from "../components";
-import { CARD_SPACING, SCREEN_PADDING } from "../constants";
 
 const packagesData = [
   {
@@ -183,19 +183,6 @@ const HomeScreen = () => {
       </View>
     </Scaffold>
   );
-};
-
-const styles = {
-  Header: {
-    elevation: 0,
-  },
-  Section: {
-    paddingVertical: SCREEN_PADDING / 2,
-  },
-  SectionHeader: {
-    marginHorizontal: SCREEN_PADDING,
-    marginBottom: CARD_SPACING / 2,
-  },
 };
 
 export default HomeScreen;

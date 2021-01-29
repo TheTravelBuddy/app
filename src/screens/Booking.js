@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
+import styles from "./styles";
 import {
   Appbar,
   SectionHeader,
@@ -12,7 +13,6 @@ import {
   Chip,
   HorizontalScroller,
 } from "../components";
-import { CARD_SPACING, SCREEN_PADDING } from "../constants";
 import {
   displayFilter,
   shouldDisplayFilter,
@@ -198,19 +198,6 @@ const BookingScreen = () => {
       </View>
     </Scaffold>
   );
-};
-
-const styles = {
-  Header: {
-    elevation: 0,
-  },
-  Section: {
-    paddingVertical: SCREEN_PADDING / 2,
-  },
-  SectionHeader: {
-    marginHorizontal: SCREEN_PADDING,
-    marginBottom: CARD_SPACING / 2,
-  },
 };
 
 export default BookingScreen;
