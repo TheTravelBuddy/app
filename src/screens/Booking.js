@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { ScrollView, View } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 
 import {
   Appbar,
@@ -97,15 +98,13 @@ const hoteldetailsData = [
 ];
 
 const BookingScreen = () => {
-  const city = useBookingFilters((state) => state.city);
-  const bookingType = useBookingFilters((state) => state.bookingType);
+  const selectedCity = useBookingFilters((state) => state.city);
+  const selectedBookingType = useBookingFilters((state) => state.bookingType);
   const filterValues = useBookingFilters((state) => state.filterValues);
   const searchQuery = useBookingFilters((state) => state.searchQuery);
   const initData = useBookingFilters((state) => state.initData);
   const clearFilter = useBookingFilters((state) => state.clearFilter);
   const clearSearch = useBookingFilters((state) => state.clearSearch);
-
-  console.log(filterValues);
 
   useEffect(initData, [initData]);
 
@@ -125,14 +124,12 @@ const BookingScreen = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.CardsScrollerContainer}
         >
-          {city && (
-            <Chip icon="map-marker-outline" style={styles.CardsScrollerCard}>
-              {city.name}
-            </Chip>
-          )}
-          {bookingType && (
+          <Chip icon="map-marker-outline" style={styles.CardsScrollerCard}>
+            {selectedCity ? selectedCity.name : <ActivityIndicator size={12} />}
+          </Chip>
+          {selectedBookingType && (
             <Chip icon="home-outline" style={styles.CardsScrollerCard}>
-              {bookingType}
+              {selectedBookingType}
             </Chip>
           )}
           <Chip
@@ -203,7 +200,6 @@ const BookingScreen = () => {
         </SectionHeader>
         <ScrollView
           horizontal
-          style={{ overflow: "visible" }}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.CardsScrollerContainer}

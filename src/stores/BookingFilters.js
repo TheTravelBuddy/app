@@ -2,7 +2,6 @@ import produce from "immer";
 import create from "zustand";
 import moment from "moment";
 
-import API from "../helpers/API";
 import log from "../helpers/log";
 import defaultDict from "../helpers/defaultDict";
 
@@ -52,6 +51,7 @@ const displayFilter = {
 };
 
 const initialState = {
+  city: { id: 0, name: "Mumbai" },
   bookingType: bookingTypes.HOTEL,
   searchResults: [],
 };
@@ -63,16 +63,7 @@ const useBookingFilters = create(
     ...initialState,
     filterValues: { ...initialFilterValues },
     initData: () => {
-      set(
-        produce((draftState) => {
-          draftState.searchQuery = "Divy";
-          draftState.city = { id: 1, name: "Mumbai" };
-          draftState.filterValues.budget = [400, null];
-          draftState.filterValues.date = new Date();
-          draftState.filterValues.numberOfDays = 10;
-          draftState.filterValues.numberOfPeople = 1;
-        })
-      );
+      return get().clearFilters();
     },
     clearFilters: () => {
       set(
