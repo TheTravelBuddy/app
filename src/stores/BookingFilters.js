@@ -17,16 +17,17 @@ const travelMoods = {
 };
 
 const initialFilterValues = {
-  budget: [null, null],
+  budget: [null, 1000],
+  // date: new Date(),
+  // numberOfDays: 2,
+  // booking: {
+  //   rooms: 1,
+  //   adults: 1,
+  //   children: 0,
+  // },
 };
 
-const filterNames = [
-  "date",
-  "numberOfDays",
-  "numberOfPeople",
-  "travelMood",
-  "budget",
-];
+const filterNames = ["date", "numberOfDays", "booking", "travelMood", "budget"];
 
 const shouldDisplayFilter = defaultDict(
   {
@@ -105,6 +106,14 @@ const useBookingFilters = create(
       set(
         produce((draftState) => {
           draftState.searchQuery = undefined;
+        })
+      );
+      get().updateResults();
+    },
+    setBookingType: (bookingType) => {
+      set(
+        produce((draftState) => {
+          draftState.bookingType = bookingType;
         })
       );
       get().updateResults();

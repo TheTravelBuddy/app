@@ -22,7 +22,7 @@ const Title = ({ children, style, ...props }) => {
 const styles = {
   Title: {
     fontSize: 34,
-    lineHeight: 32,
+    lineHeight: 40,
     letterSpacing: 0,
     textAlign: "center",
   },

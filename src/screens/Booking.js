@@ -12,12 +12,15 @@ import {
   HotelDetailCard,
   Chip,
   HorizontalScroller,
+  BottomModal,
+  CardTitle,
 } from "../components";
 import {
   displayFilter,
   shouldDisplayFilter,
   useBookingFilters,
 } from "../stores/BookingFilters";
+import useToggle from "../hooks/useToggle";
 
 const packagesData = [
   {
@@ -105,7 +108,13 @@ const BookingScreen = () => {
   const searchQuery = useBookingFilters((state) => state.searchQuery);
   const initData = useBookingFilters((state) => state.initData);
   const clearFilter = useBookingFilters((state) => state.clearFilter);
+  const setBookingType = useBookingFilters((state) => state.setBookingType);
   const clearSearch = useBookingFilters((state) => state.clearSearch);
+
+  const locationModal = useToggle(false);
+  const bookingTypeModal = useToggle(false);
+  const searchModal = useToggle(false);
+  const filtersModal = useToggle(false);
 
   useEffect(initData, [initData]);
 
@@ -119,23 +128,89 @@ const BookingScreen = () => {
       )}
     >
       <View style={styles.Section}>
+        <BottomModal
+          visible={locationModal.visible}
+          onDismiss={locationModal.hide}
+        >
+          <CardTitle>Select Location</CardTitle>
+          <View
+            style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
+          >
+            <Chip icon="crosshairs-gps" style={{ margin: 4 }}>
+              Current Location
+            </Chip>
+            <Chip style={{ margin: 4 }}>Mumbai</Chip>
+            <Chip style={{ margin: 4 }}>Delhi</Chip>
+            <Chip style={{ margin: 4 }}>Shimla</Chip>
+            <Chip style={{ margin: 4 }}>Jaipur</Chip>
+          </View>
+        </BottomModal>
+        <BottomModal
+          visible={bookingTypeModal.visible}
+          onDismiss={bookingTypeModal.hide}
+        >
+          <CardTitle>Select Booking Type</CardTitle>
+          <View style={{ display: "flex", flexDirection: "row" }}>
+            <Chip
+              style={{ margin: 4 }}
+              onPress={() => {
+                setBookingType("Hotel");
+                bookingTypeModal.hide();
+              }}
+            >
+              Hotel
+            </Chip>
+            <Chip
+              style={{ margin: 4 }}
+              onPress={() => {
+                setBookingType("Package");
+                bookingTypeModal.hide();
+              }}
+            >
+              Package
+            </Chip>
+          </View>
+        </BottomModal>
+
+        <BottomModal visible={searchModal.visible} onDismiss={searchModal.hide}>
+          <CardTitle>Search</CardTitle>
+        </BottomModal>
+        <BottomModal
+          visible={filtersModal.visible}
+          onDismiss={filtersModal.hide}
+        >
+          <CardTitle>Filters</CardTitle>
+        </BottomModal>
         <HorizontalScroller>
-          <Chip icon="map-marker-outline" style={styles.CardsScrollerCard}>
+          <Chip
+            icon="map-marker-outline"
+            style={styles.CardsScrollerCard}
+            onPress={locationModal.show}
+          >
             {selectedCity ? selectedCity.name : <ActivityIndicator size={12} />}
           </Chip>
           {selectedBookingType && (
-            <Chip icon="home-outline" style={styles.CardsScrollerCard}>
+            <Chip
+              icon="home-outline"
+              style={styles.CardsScrollerCard}
+              onPress={bookingTypeModal.show}
+            >
               {selectedBookingType}
             </Chip>
           )}
           <Chip
             icon="magnify"
             style={styles.CardsScrollerCard}
+            onPress={searchModal.show}
             onClose={searchQuery && clearSearch}
           >
             {searchQuery ? `"${searchQuery}"` : "Search"}
           </Chip>
-          <Chip icon="filter-outline" style={styles.CardsScrollerCard}>
+          <Chip
+            icon="filter-outline"
+            style={styles.CardsScrollerCard}
+            onPress={filtersModal.show}
+          >
             Filters
           </Chip>
           {Object.entries(filterValues).map(
