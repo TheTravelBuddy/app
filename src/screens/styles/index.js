@@ -1,6 +1,8 @@
 import { SCREEN_PADDING, CARD_SPACING } from "../../constants";
+import authStyles from "./authStyles";
 
 export default {
+  ...authStyles,
   Header: {
     elevation: 0,
   },

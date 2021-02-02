@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { View } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator, TextInput, Card } from "react-native-paper";
 
 import styles from "./styles";
+
 import {
   Appbar,
+  Button,
   SectionHeader,
   Scaffold,
   LocationBannerCard,
@@ -14,6 +16,8 @@ import {
   HorizontalScroller,
   BottomModal,
   CardTitle,
+  Picker,
+  DateTimePicker,
 } from "../components";
 import {
   displayFilter,
@@ -21,6 +25,11 @@ import {
   useBookingFilters,
 } from "../stores/BookingFilters";
 import useToggle from "../hooks/useToggle";
+import usePicker from "../hooks/usePicker";
+import useDateTimePicker from "../hooks/useDateTimePicker";
+
+const today = new Date();
+const initialDate = new Date(1900, 0, 2);
 
 const packagesData = [
   {
@@ -115,6 +124,8 @@ const BookingScreen = () => {
   const bookingTypeModal = useToggle(false);
   const searchModal = useToggle(false);
   const filtersModal = useToggle(false);
+  const mood = usePicker("MIXED");
+  const checkindate = useDateTimePicker(today);
 
   useEffect(initData, [initData]);
 
@@ -150,36 +161,110 @@ const BookingScreen = () => {
           onDismiss={bookingTypeModal.hide}
         >
           <CardTitle>Select Booking Type</CardTitle>
-          <View style={{ display: "flex", flexDirection: "row" }}>
-            <Chip
-              style={{ margin: 4 }}
-              onPress={() => {
-                setBookingType("Hotel");
-                bookingTypeModal.hide();
-              }}
-            >
-              Hotel
-            </Chip>
-            <Chip
-              style={{ margin: 4 }}
-              onPress={() => {
-                setBookingType("Package");
-                bookingTypeModal.hide();
-              }}
-            >
-              Package
-            </Chip>
+          <View style={styles.Section}>
+            <View style={styles.FormInputContainer}>
+              <Card style={styles.FormInputLeft}>
+                <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+                <Card.Title title="Hotel" />
+              </Card>
+              <Card style={styles.FormInputLeft}>
+                <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+                <Card.Title title="Package" />
+              </Card>
+            </View>
           </View>
         </BottomModal>
 
         <BottomModal visible={searchModal.visible} onDismiss={searchModal.hide}>
-          <CardTitle>Search</CardTitle>
+          <CardTitle>(Search)</CardTitle>
+          <TextInput label="Search" />
+          <View style={styles.Section}>
+            <View style={styles.FormInputContainer}>
+              <Button mode="outlined" style={styles.FormInputLeft}>
+                Clear
+              </Button>
+              <Button mode="contained" style={styles.FormInputRight}>
+                Search
+              </Button>
+            </View>
+          </View>
         </BottomModal>
         <BottomModal
           visible={filtersModal.visible}
           onDismiss={filtersModal.hide}
         >
-          <CardTitle>Filters</CardTitle>
+          <View style={styles.Section}>
+            <CardTitle>(Mood Header)</CardTitle>
+            <Picker
+              label="Travel Mood"
+              {...mood.props}
+              items={[
+                { value: "RELAX", label: "Relax" },
+                { value: "ADVENTURE", label: "Adventure" },
+                { value: "MIXED", label: "Mixed" },
+              ]}
+            />
+          </View>
+          <View style={styles.Section}>
+            <CardTitle>(Timing Header)</CardTitle>
+            <View style={styles.FormInputContainer}>
+              <DateTimePicker
+                {...checkindate.props}
+                style={styles.FormInputLeft}
+                label="Check In "
+                maximumDate={today}
+                minimumDate={initialDate}
+              />
+              <TextInput label="No of days" style={styles.FormInputRight} />
+            </View>
+          </View>
+          <View style={styles.Section}>
+            <CardTitle>(Stay)</CardTitle>
+            <TextInput
+              label="Rooms"
+              keyboardType="number-pad"
+              style={styles.FormInput}
+            />
+            <View style={styles.FormInputContainer}>
+              <TextInput
+                label="Adults"
+                keyboardType="number-pad"
+                style={styles.FormInputLeft}
+              />
+              <TextInput
+                label="Children"
+                keyboardType="number-pad"
+                style={styles.FormInputRight}
+              />
+            </View>
+          </View>
+          <View style={styles.Section}>
+            <CardTitle>Budget</CardTitle>
+            <View style={styles.FormInputContainer}>
+              <TextInput
+                left={<TextInput.Affix text="₹ " />}
+                label="Min"
+                keyboardType="number-pad"
+                style={styles.FormInputLeft}
+              />
+              <TextInput
+                left={<TextInput.Affix text="₹ " />}
+                label="Max"
+                keyboardType="number-pad"
+                style={styles.FormInputRight}
+              />
+            </View>
+          </View>
+          <View style={styles.Section}>
+            <View style={styles.FormInputContainer}>
+              <Button mode="outlined" style={styles.FormInputLeft}>
+                Clear
+              </Button>
+              <Button mode="contained" style={styles.FormInputRight}>
+                Save
+              </Button>
+            </View>
+          </View>
         </BottomModal>
         <HorizontalScroller>
           <Chip
