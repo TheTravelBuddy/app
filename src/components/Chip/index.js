@@ -1,15 +1,16 @@
 import React from "react";
 import { Chip as PaperChip, useTheme } from "react-native-paper";
 
-const Chip = ({ style, children, ...props }) => {
+const Chip = ({ style, children, mode = "contained", ...props }) => {
   const theme = useTheme();
   return (
     <PaperChip
       style={[
-        styles.ChipContainer,
-        { backgroundColor: theme.colors.surface },
+        mode === "contained" ? styles.FlatChip : styles.OutlinedChip,
+        mode === "contained" && { backgroundColor: theme.colors.surface },
         style,
       ]}
+      mode={mode === "outlined" ? "outlined" : "flat"}
       {...props}
     >
       {children}
@@ -18,11 +19,12 @@ const Chip = ({ style, children, ...props }) => {
 };
 
 const styles = {
-  ChipContainer: {
+  FlatChip: {
     elevation: 2,
     borderRadius: 6,
-    alignItems: "center",
-    justifyContent: "center",
+  },
+  OutlinedChip: {
+    borderRadius: 6,
   },
 };
 

@@ -19,6 +19,7 @@ import {
   Picker,
   DateTimePicker,
 } from "../components";
+import BookingLocationModal from "../components/Modals/BookingLocationModal";
 import {
   displayFilter,
   shouldDisplayFilter,
@@ -139,23 +140,10 @@ const BookingScreen = () => {
       )}
     >
       <View style={styles.Section}>
-        <BottomModal
+        <BookingLocationModal
           visible={locationModal.visible}
           onDismiss={locationModal.hide}
-        >
-          <CardTitle>Select Location</CardTitle>
-          <View
-            style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
-          >
-            <Chip icon="crosshairs-gps" style={{ margin: 4 }}>
-              Current Location
-            </Chip>
-            <Chip style={{ margin: 4 }}>Mumbai</Chip>
-            <Chip style={{ margin: 4 }}>Delhi</Chip>
-            <Chip style={{ margin: 4 }}>Shimla</Chip>
-            <Chip style={{ margin: 4 }}>Jaipur</Chip>
-          </View>
-        </BottomModal>
+        />
         <BottomModal
           visible={bookingTypeModal.visible}
           onDismiss={bookingTypeModal.hide}
@@ -174,7 +162,6 @@ const BookingScreen = () => {
             </View>
           </View>
         </BottomModal>
-
         <BottomModal visible={searchModal.visible} onDismiss={searchModal.hide}>
           <CardTitle>(Search)</CardTitle>
           <TextInput label="Search" />

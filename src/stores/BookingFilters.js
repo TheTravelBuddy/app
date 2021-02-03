@@ -118,6 +118,14 @@ const useBookingFilters = create(
       );
       get().updateResults();
     },
+    setCity: (city) => {
+      set(
+        produce((draftState) => {
+          draftState.city = city;
+        })
+      );
+      get().updateResults();
+    },
     updateResults: () => {
       const { filters } = get();
       console.log("filters", filters);
