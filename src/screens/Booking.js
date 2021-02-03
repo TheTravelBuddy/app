@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { View } from "react-native";
-import { ActivityIndicator, TextInput, Card } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 
 import styles from "./styles";
 
 import {
   Appbar,
-  Button,
   SectionHeader,
   Scaffold,
   LocationBannerCard,
@@ -14,23 +13,18 @@ import {
   HotelDetailCard,
   Chip,
   HorizontalScroller,
-  BottomModal,
-  CardTitle,
-  Picker,
-  DateTimePicker,
 } from "../components";
 import BookingLocationModal from "../components/Modals/BookingLocationModal";
+import BookingTypeModal from "../components/Modals/BookingTypeModal";
+import BookingSearchModal from "../components/Modals/BookingSearchModal";
+import BookingFiltersModal from "../components/Modals/BookingFiltersModal";
 import {
+  bookingTypes,
   displayFilter,
   shouldDisplayFilter,
   useBookingFilters,
 } from "../stores/BookingFilters";
 import useToggle from "../hooks/useToggle";
-import usePicker from "../hooks/usePicker";
-import useDateTimePicker from "../hooks/useDateTimePicker";
-
-const today = new Date();
-const initialDate = new Date(1900, 0, 2);
 
 const packagesData = [
   {
@@ -118,15 +112,12 @@ const BookingScreen = () => {
   const searchQuery = useBookingFilters((state) => state.searchQuery);
   const initData = useBookingFilters((state) => state.initData);
   const clearFilter = useBookingFilters((state) => state.clearFilter);
-  const setBookingType = useBookingFilters((state) => state.setBookingType);
   const clearSearch = useBookingFilters((state) => state.clearSearch);
 
   const locationModal = useToggle(false);
   const bookingTypeModal = useToggle(false);
   const searchModal = useToggle(false);
   const filtersModal = useToggle(false);
-  const mood = usePicker("MIXED");
-  const checkindate = useDateTimePicker(today);
 
   useEffect(initData, [initData]);
 
@@ -144,115 +135,18 @@ const BookingScreen = () => {
           visible={locationModal.visible}
           onDismiss={locationModal.hide}
         />
-        <BottomModal
+        <BookingTypeModal
           visible={bookingTypeModal.visible}
           onDismiss={bookingTypeModal.hide}
-        >
-          <CardTitle>Select Booking Type</CardTitle>
-          <View style={styles.Section}>
-            <View style={styles.FormInputContainer}>
-              <Card style={styles.FormInputLeft}>
-                <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
-                <Card.Title title="Hotel" />
-              </Card>
-              <Card style={styles.FormInputLeft}>
-                <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
-                <Card.Title title="Package" />
-              </Card>
-            </View>
-          </View>
-        </BottomModal>
-        <BottomModal visible={searchModal.visible} onDismiss={searchModal.hide}>
-          <CardTitle>(Search)</CardTitle>
-          <TextInput label="Search" />
-          <View style={styles.Section}>
-            <View style={styles.FormInputContainer}>
-              <Button mode="outlined" style={styles.FormInputLeft}>
-                Clear
-              </Button>
-              <Button mode="contained" style={styles.FormInputRight}>
-                Search
-              </Button>
-            </View>
-          </View>
-        </BottomModal>
-        <BottomModal
+        />
+        <BookingSearchModal
+          visible={searchModal.visible}
+          onDismiss={searchModal.hide}
+        />
+        <BookingFiltersModal
           visible={filtersModal.visible}
           onDismiss={filtersModal.hide}
-        >
-          <View style={styles.Section}>
-            <CardTitle>(Mood Header)</CardTitle>
-            <Picker
-              label="Travel Mood"
-              {...mood.props}
-              items={[
-                { value: "RELAX", label: "Relax" },
-                { value: "ADVENTURE", label: "Adventure" },
-                { value: "MIXED", label: "Mixed" },
-              ]}
-            />
-          </View>
-          <View style={styles.Section}>
-            <CardTitle>(Timing Header)</CardTitle>
-            <View style={styles.FormInputContainer}>
-              <DateTimePicker
-                {...checkindate.props}
-                style={styles.FormInputLeft}
-                label="Check In "
-                maximumDate={today}
-                minimumDate={initialDate}
-              />
-              <TextInput label="No of days" style={styles.FormInputRight} />
-            </View>
-          </View>
-          <View style={styles.Section}>
-            <CardTitle>(Stay)</CardTitle>
-            <TextInput
-              label="Rooms"
-              keyboardType="number-pad"
-              style={styles.FormInput}
-            />
-            <View style={styles.FormInputContainer}>
-              <TextInput
-                label="Adults"
-                keyboardType="number-pad"
-                style={styles.FormInputLeft}
-              />
-              <TextInput
-                label="Children"
-                keyboardType="number-pad"
-                style={styles.FormInputRight}
-              />
-            </View>
-          </View>
-          <View style={styles.Section}>
-            <CardTitle>Budget</CardTitle>
-            <View style={styles.FormInputContainer}>
-              <TextInput
-                left={<TextInput.Affix text="₹ " />}
-                label="Min"
-                keyboardType="number-pad"
-                style={styles.FormInputLeft}
-              />
-              <TextInput
-                left={<TextInput.Affix text="₹ " />}
-                label="Max"
-                keyboardType="number-pad"
-                style={styles.FormInputRight}
-              />
-            </View>
-          </View>
-          <View style={styles.Section}>
-            <View style={styles.FormInputContainer}>
-              <Button mode="outlined" style={styles.FormInputLeft}>
-                Clear
-              </Button>
-              <Button mode="contained" style={styles.FormInputRight}>
-                Save
-              </Button>
-            </View>
-          </View>
-        </BottomModal>
+        />
         <HorizontalScroller>
           <Chip
             icon="map-marker-outline"
@@ -267,7 +161,7 @@ const BookingScreen = () => {
               style={styles.CardsScrollerCard}
               onPress={bookingTypeModal.show}
             >
-              {selectedBookingType}
+              {bookingTypes[selectedBookingType]}
             </Chip>
           )}
           <Chip

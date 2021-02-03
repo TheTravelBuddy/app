@@ -10,6 +10,11 @@ const bookingTypes = {
   PACKAGE: "Package",
 };
 
+const bookingTypeIllutrations = {
+  HOTEL: "https://picsum.photos/702",
+  PACKAGE: "https://picsum.photos/701",
+};
+
 const travelMoods = {
   RELAX: "Relax",
   ADVENTURE: "Adventure",
@@ -17,7 +22,7 @@ const travelMoods = {
 };
 
 const initialFilterValues = {
-  budget: [null, 1000],
+  budget: [undefined, 1000],
   // date: new Date(),
   // numberOfDays: 2,
   // booking: {
@@ -31,7 +36,7 @@ const filterNames = ["date", "numberOfDays", "booking", "travelMood", "budget"];
 
 const shouldDisplayFilter = defaultDict(
   {
-    budget: ([lower, upper]) => lower !== null || upper !== null,
+    budget: ([lower, upper]) => lower !== undefined || upper !== undefined,
   },
   (value) => !!value
 );
@@ -40,20 +45,28 @@ const displayFilter = {
   date: (date) => moment(date).format("ddd, Do MMM"),
   numberOfDays: (numberOfDays) =>
     numberOfDays > 1 ? `${numberOfDays} Days` : `1 Day`,
-  numberOfPeople: (numberOfPeople) =>
-    numberOfPeople > 1 ? `${numberOfPeople} People` : `1 Person`,
+  booking: ({ rooms, adults, children }) => {
+    const list = [];
+    if (rooms) list.push(`${rooms} rooms`);
+    if (adults) list.push(`${adults} adults`);
+    if (children) list.push(`${children} chidren`);
+
+    return list.join(", ");
+  },
+  // numberOfPeople: (numberOfPeople) =>
+  //   numberOfPeople > 1 ? `${numberOfPeople} People` : `1 Person`,
   travelMood: (travelMood) => `Mood: ${travelMoods[travelMood]}`,
   budget: ([lower, upper]) =>
-    lower === null
+    lower === undefined
       ? `Less than ₹${upper}`
-      : upper === null
+      : upper === undefined
       ? `More than ₹${lower}`
       : `₹${lower} to ₹${upper}`,
 };
 
 const initialState = {
   city: { id: 0, name: "Mumbai" },
-  bookingType: bookingTypes.HOTEL,
+  bookingType: "HOTEL",
   searchResults: [],
 };
 
@@ -77,6 +90,14 @@ const useBookingFilters = create(
           });
         })
       );
+    },
+    setFilters: (filters) => {
+      set(
+        produce((draftState) => {
+          draftState.filterValues = filters;
+        })
+      );
+      get().updateResults();
     },
     clearFilter: (filter) => {
       set(
@@ -137,6 +158,7 @@ const useBookingFilters = create(
 export {
   travelMoods,
   bookingTypes,
+  bookingTypeIllutrations,
   displayFilter,
   shouldDisplayFilter,
   useBookingFilters,
