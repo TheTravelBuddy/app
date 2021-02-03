@@ -4,7 +4,7 @@ import { TextInput, useTheme } from "react-native-paper";
 
 import styles from "../../screens/styles";
 
-import { BottomModal, CardTitle, Button } from "..";
+import { BottomModal, ModalTitle, Button } from "..";
 import { useBookingFilters } from "../../stores/BookingFilters";
 import useTextInput from "../../hooks/useTextInput";
 
@@ -24,7 +24,7 @@ const BookingSearchModal = ({ visible, onDismiss }) => {
 
   return (
     <BottomModal {...{ visible, onDismiss }}>
-      <CardTitle>(Search)</CardTitle>
+      <ModalTitle>What are you looking for?</ModalTitle>
       <TextInput
         dense
         label="Search"

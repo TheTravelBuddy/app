@@ -1,10 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View } from "react-native";
 import { TextInput } from "react-native-paper";
 
 import styles from "../../screens/styles";
 
-import { Button, BottomModal, CardTitle, Picker, DateTimePicker } from "..";
+import {
+  BottomModal,
+  Button,
+  CardTitle,
+  Picker,
+  DateTimePicker,
+  ModalTitle,
+} from "..";
+
 import { useBookingFilters } from "../../stores/BookingFilters";
 
 import useTextInput from "../../hooks/useTextInput";
@@ -30,8 +38,10 @@ const BookingFiltersModal = ({ visible, onDismiss }) => {
 
   return (
     <BottomModal {...{ visible, onDismiss }}>
+      <ModalTitle>Filtering your Trip</ModalTitle>
+
       <View style={styles.Section}>
-        <CardTitle>(Mood Header)</CardTitle>
+        <CardTitle>Your Mood</CardTitle>
         <Picker
           dense
           label="Travel Mood"
@@ -44,7 +54,7 @@ const BookingFiltersModal = ({ visible, onDismiss }) => {
         />
       </View>
       <View style={styles.Section}>
-        <CardTitle>(Timing Header)</CardTitle>
+        <CardTitle>Duration</CardTitle>
         <View style={styles.FormInputContainer}>
           <DateTimePicker
             dense
@@ -63,7 +73,7 @@ const BookingFiltersModal = ({ visible, onDismiss }) => {
         </View>
       </View>
       <View style={styles.Section}>
-        <CardTitle>(Stay)</CardTitle>
+        <CardTitle>Rooms & Guests</CardTitle>
         <TextInput
           dense
           label="Rooms"

@@ -4,7 +4,7 @@ import { Card } from "react-native-paper";
 
 import styles from "../../screens/styles";
 
-import { BottomModal, CardTitle } from "..";
+import { BottomModal, ModalTitle } from "..";
 import {
   bookingTypeIllutrations,
   useBookingFilters,
@@ -15,7 +15,7 @@ const BookingTypeModal = ({ visible, onDismiss }) => {
 
   return (
     <BottomModal {...{ visible, onDismiss }}>
-      <CardTitle>Select Booking Type</CardTitle>
+      <ModalTitle>Select Booking Type</ModalTitle>
       <View style={styles.Section}>
         <View style={styles.FormInputContainer}>
           <Card
