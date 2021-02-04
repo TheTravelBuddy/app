@@ -17,6 +17,7 @@ import RatingPill from "./RatingPill";
 import LocationBannerCard from "./Card/LocationBannerCard";
 import LocationHalfCard from "./Card/LocationHalfCard";
 import HotelDetailCard from "./Card/HotelDetailCard";
+import BookingSearchCard from "./Card/BookingSearchCard";
 import BlogCard from "./Card/BlogCard";
 import Chip from "./Chip";
 import BookingFiltersModal from "./Modals/BookingFiltersModal";
@@ -43,6 +44,7 @@ export {
   LocationBannerCard,
   LocationHalfCard,
   HotelDetailCard,
+  BookingSearchCard,
   BlogCard,
   Chip,
   ModalTitle,

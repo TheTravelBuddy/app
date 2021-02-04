@@ -15,6 +15,7 @@ import {
   LocationBannerCard,
   LocationHalfCard,
   HotelDetailCard,
+  BookingSearchCard,
   Chip,
   HorizontalScroller,
 } from "../components";
@@ -194,6 +195,19 @@ const BookingScreen = () => {
               )
           )}
         </HorizontalScroller>
+      </View>
+      <View style={styles.Section}>
+        <SectionHeader style={styles.SectionHeader}>Search Card</SectionHeader>
+        <BookingSearchCard
+          coverUri="https://static.toiimg.com/photo/msid-52005539,width-96,height-65.cms"
+          name="Magic of the North"
+          rating={4.9}
+          area="Colaba"
+          city="Mumbai"
+          price={1000}
+          distance={5}
+          style={styles.CardsScrollerCard}
+        />
       </View>
       <View style={styles.Section}>
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
