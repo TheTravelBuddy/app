@@ -128,7 +128,9 @@ const HomeScreen = () => {
       )}
     >
       <View style={styles.Section}>
-        <SectionHeader style={styles.SectionHeader}>Top Packages</SectionHeader>
+        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
+          Top Packages
+        </SectionHeader>
         <HorizontalScroller>
           {packagesData.map(({ id, coverUri, name, rating }) => (
             <LocationBannerCard
@@ -140,7 +142,7 @@ const HomeScreen = () => {
         </HorizontalScroller>
       </View>
       <View style={styles.Section}>
-        <SectionHeader style={styles.SectionHeader}>
+        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
           Top Destinations
         </SectionHeader>
         <HorizontalScroller>
@@ -154,7 +156,7 @@ const HomeScreen = () => {
         </HorizontalScroller>
       </View>
       <View style={styles.Section}>
-        <SectionHeader style={styles.SectionHeader}>
+        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
           Hotels Nearby
         </SectionHeader>
         <HorizontalScroller>
@@ -170,7 +172,9 @@ const HomeScreen = () => {
         </HorizontalScroller>
       </View>
       <View style={styles.Section}>
-        <SectionHeader style={styles.SectionHeader}>Top Blogs</SectionHeader>
+        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
+          Top Blogs
+        </SectionHeader>
         <HorizontalScroller>
           {blogsData.map(({ id, profilePic, title, likes, content }) => (
             <BlogCard

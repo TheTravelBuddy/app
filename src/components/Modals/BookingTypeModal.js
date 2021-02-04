@@ -1,43 +1,43 @@
 import React from "react";
 import { View } from "react-native";
-import { Card } from "react-native-paper";
 
+import BottomModal from "../BottomModal";
+import ModalTitle from "../Typography/ModalTitle";
 import styles from "../../screens/styles";
+import HotelSelectIllustration from "../../../assets/illustrations/HotelSelectIllustration.svg";
+import PackageSelectIllustration from "../../../assets/illustrations/PackageSelectIllustration.svg";
 
-import { BottomModal, ModalTitle } from "..";
-import {
-  bookingTypeIllutrations,
-  useBookingFilters,
-} from "../../stores/BookingFilters";
+import { bookingTypes, useBookingFilters } from "../../stores/BookingFilters";
+import BookingTypeCard from "../Card/BookingTypeCard";
 
 const BookingTypeModal = ({ visible, onDismiss }) => {
   const setBookingType = useBookingFilters((state) => state.setBookingType);
 
   return (
     <BottomModal {...{ visible, onDismiss }}>
-      <ModalTitle>Select Booking Type</ModalTitle>
+      <ModalTitle>What?</ModalTitle>
       <View style={styles.Section}>
-        <View style={styles.FormInputContainer}>
-          <Card
-            style={styles.FormInputLeft}
+        <View style={{ flexDirection: "row" }}>
+          <BookingTypeCard
+            title="Hotel"
+            renderIllustration={(props) => (
+              <HotelSelectIllustration {...props} />
+            )}
             onPress={() => {
               setBookingType("HOTEL");
               onDismiss();
             }}
-          >
-            <Card.Cover source={{ uri: bookingTypeIllutrations.HOTEL }} />
-            <Card.Title title="Hotel" />
-          </Card>
-          <Card
-            style={styles.FormInputRight}
+          />
+          <BookingTypeCard
+            title="Package"
+            renderIllustration={(props) => (
+              <PackageSelectIllustration {...props} />
+            )}
             onPress={() => {
               setBookingType("PACKAGE");
               onDismiss();
             }}
-          >
-            <Card.Cover source={{ uri: bookingTypeIllutrations.PACKAGE }} />
-            <Card.Title title="Package" />
-          </Card>
+          />
         </View>
       </View>
     </BottomModal>

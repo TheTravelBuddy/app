@@ -6,6 +6,10 @@ import styles from "./styles";
 
 import {
   Appbar,
+  BookingFiltersModal,
+  BookingLocationModal,
+  BookingSearchModal,
+  BookingTypeModal,
   SectionHeader,
   Scaffold,
   LocationBannerCard,
@@ -14,10 +18,6 @@ import {
   Chip,
   HorizontalScroller,
 } from "../components";
-import BookingLocationModal from "../components/Modals/BookingLocationModal";
-import BookingTypeModal from "../components/Modals/BookingTypeModal";
-import BookingSearchModal from "../components/Modals/BookingSearchModal";
-import BookingFiltersModal from "../components/Modals/BookingFiltersModal";
 import {
   bookingTypes,
   displayFilter,
@@ -196,7 +196,9 @@ const BookingScreen = () => {
         </HorizontalScroller>
       </View>
       <View style={styles.Section}>
-        <SectionHeader style={styles.SectionHeader}>Top Packages</SectionHeader>
+        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
+          Top Packages
+        </SectionHeader>
         <HorizontalScroller>
           {packagesData.map(({ id, coverUri, name, rating }) => (
             <LocationBannerCard
@@ -208,7 +210,7 @@ const BookingScreen = () => {
         </HorizontalScroller>
       </View>
       <View style={styles.Section}>
-        <SectionHeader style={styles.SectionHeader}>
+        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
           Top Destinations
         </SectionHeader>
         <HorizontalScroller>
@@ -222,7 +224,7 @@ const BookingScreen = () => {
         </HorizontalScroller>
       </View>
       <View style={styles.Section}>
-        <SectionHeader style={styles.SectionHeader}>
+        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
           Hotels Nearby
         </SectionHeader>
         <HorizontalScroller>

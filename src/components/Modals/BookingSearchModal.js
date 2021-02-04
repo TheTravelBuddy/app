@@ -4,7 +4,10 @@ import { TextInput, useTheme } from "react-native-paper";
 
 import styles from "../../screens/styles";
 
-import { BottomModal, ModalTitle, Button } from "..";
+import BottomModal from "../BottomModal";
+import Button from "../Button";
+import ModalTitle from "../Typography/ModalTitle";
+
 import { useBookingFilters } from "../../stores/BookingFilters";
 import useTextInput from "../../hooks/useTextInput";
 
@@ -13,7 +16,6 @@ const BookingSearchModal = ({ visible, onDismiss }) => {
 
   const searchQuery = useBookingFilters((state) => state.searchQuery);
   const setSearch = useBookingFilters((state) => state.setSearch);
-  const clearSearch = useBookingFilters((state) => state.clearSearch);
 
   const searchInput = useTextInput(searchQuery);
   const { onChangeText: handleQueryChanged } = searchInput.props;
@@ -24,21 +26,23 @@ const BookingSearchModal = ({ visible, onDismiss }) => {
 
   return (
     <BottomModal {...{ visible, onDismiss }}>
-      <ModalTitle>What are you looking for?</ModalTitle>
-      <TextInput
-        dense
-        label="Search"
-        {...searchInput.props}
-        right={
-          searchInput.value && (
-            <TextInput.Icon
-              color={theme.colors.textSecondary}
-              name="close"
-              onPress={searchInput.clear}
-            />
-          )
-        }
-      />
+      <ModalTitle>Something specific?</ModalTitle>
+      <View style={styles.Section}>
+        <TextInput
+          dense
+          label="Search"
+          {...searchInput.props}
+          right={
+            searchInput.value && (
+              <TextInput.Icon
+                color={theme.colors.textSecondary}
+                name="close"
+                onPress={searchInput.clear}
+              />
+            )
+          }
+        />
+      </View>
       <View style={styles.Section}>
         <View style={styles.FormInputContainer}>
           <Button

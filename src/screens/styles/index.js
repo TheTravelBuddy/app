@@ -10,7 +10,9 @@ export default {
     paddingVertical: SCREEN_PADDING / 2,
   },
   SectionHeader: {
-    marginHorizontal: SCREEN_PADDING,
     marginBottom: CARD_SPACING / 2,
+  },
+  ScreenPadded: {
+    marginHorizontal: SCREEN_PADDING,
   },
 };

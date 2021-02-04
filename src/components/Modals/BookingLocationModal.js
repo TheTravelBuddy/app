@@ -1,9 +1,14 @@
 import React from "react";
 import { View } from "react-native";
 
-import { BottomModal, CardTitle, Chip } from "..";
+import BottomModal from "../BottomModal";
+import Button from "../Button";
+import Chip from "../Chip";
+import ModalTitle from "../Typography/ModalTitle";
+import CardTitle from "../Typography/CardTitle";
 
 import { useBookingFilters } from "../../stores/BookingFilters";
+import styles from "../../screens/styles";
 
 const cities = [
   { id: 0, name: "Mumbai" },
@@ -18,23 +23,34 @@ const BookingLocationModal = ({ visible, onDismiss }) => {
 
   return (
     <BottomModal {...{ visible, onDismiss }}>
-      <CardTitle>Select Location</CardTitle>
-      <View style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
-        <Chip mode="outlined" icon="crosshairs-gps" style={{ margin: 4 }}>
+      <ModalTitle>Where?</ModalTitle>
+      <View style={styles.Section}>
+        <Button
+          compact
+          mode="outlined"
+          icon="crosshairs-gps"
+          style={{ margin: 4 }}
+        >
           Current Location
-        </Chip>
-        {cities.map((city) => (
-          <Chip
-            mode={selectedCity.id === city.id ? "outlined" : "flat"}
-            style={{ margin: 4 }}
-            onPress={() => {
-              setCity(city);
-              onDismiss();
-            }}
-          >
-            {city.name}
-          </Chip>
-        ))}
+        </Button>
+      </View>
+      <View style={styles.Section}>
+        <CardTitle style={styles.SectionHeader}>Popular Destinations</CardTitle>
+        <View
+          style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
+        >
+          {cities.map((city) => (
+            <Chip
+              mode={selectedCity.id === city.id ? "contained" : "flat"}
+              style={{ margin: 4 }}
+              onPress={() => {
+                setCity(city);
+              }}
+            >
+              {city.name}
+            </Chip>
+          ))}
+        </View>
       </View>
     </BottomModal>
   );
