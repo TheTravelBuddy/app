@@ -6,21 +6,9 @@ const DistanceSubtitle = ({ distance, style, ...props }) => {
   const theme = useTheme();
 
   return (
-    <View style={styles.TitleContainer}>
-      <Text
-        style={[styles.Title, theme.fonts.bold, style]}
-        numberOfLines={1}
-        {...props}
-      >
-        {`${distance} Km `}
-      </Text>
-      <Text
-        style={[styles.Title, theme.fonts.regular, style]}
-        numberOfLines={1}
-        {...props}
-      >
-        from center
-      </Text>
+    <View style={[styles.TitleContainer, style]} {...props}>
+      <Text style={[styles.Title, theme.fonts.bold]}>{`${distance} km `}</Text>
+      <Text style={[styles.Title, theme.fonts.regular]}>from center</Text>
     </View>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
-import { View } from "react-native";
-import { Card } from "react-native-paper";
+import { View, Image } from "react-native";
+import { Card, useTheme } from "react-native-paper";
 
 import styles from "./styles";
 import RatingPill from "../RatingPill";
@@ -9,7 +9,7 @@ import LocationSubtitle from "../Typography/LocationSubtitle";
 import DistanceSubtitle from "../Typography/DistanceSubtitle ";
 import SearchPriceSummary from "../Typography/SearchPriceSummary";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
-import { SCREEN_PADDING } from "../../constants";
+import { CARD_SPACING, SCREEN_PADDING } from "../../constants";
 
 const BookingSearchCard = ({
   coverUri,
@@ -23,31 +23,36 @@ const BookingSearchCard = ({
   price,
 }) => {
   const { width } = useScreenDimensions();
+  const theme = useTheme();
+
   return (
-    <Card style={[{ width: width - 2 * SCREEN_PADDING, padding: 12 }, style]}>
+    <Card
+      style={[
+        { width: width - 2 * SCREEN_PADDING, padding: CARD_SPACING },
+        style,
+      ]}
+    >
       <View style={{ flex: 1, flexDirection: "row" }}>
-        <Card.Cover
+        <Image
           style={{
             width: width / 4,
-            height: Math.round(width / 2 - SCREEN_PADDING),
+            height: width / 4,
+            borderRadius: theme.roundness,
           }}
           source={{ uri: coverUri }}
         />
-        <View style={[{ flex: 1 }, styles.CardContainer]}>
+        <View style={[{ flex: 1, marginLeft: CARD_SPACING }]}>
           <View style={styles.CardTitleContainer}>
             <CardTitle style={styles.CardTitleText}>{name}</CardTitle>
             <RatingPill rating={rating} />
           </View>
           <LocationSubtitle {...{ area, city }} />
           <DistanceSubtitle {...{ distance }} />
-          <View
-            style={[
-              { position: "absolute", bottom: 0, right: 0 },
-              styles.CardContent,
-            ]}
-          >
-            <SearchPriceSummary {...{ price }} />
-          </View>
+          <View style={{ flexGrow: 1 }} />
+          <SearchPriceSummary
+            {...{ price }}
+            style={{ alignSelf: "flex-end" }}
+          />
         </View>
       </View>
     </Card>

@@ -6,21 +6,9 @@ const PriceSummary = ({ price, style, ...props }) => {
   const theme = useTheme();
 
   return (
-    <View style={styles.TitleContainer}>
-      <Text
-        style={[styles.Title, theme.fonts.bold, style]}
-        numberOfLines={1}
-        {...props}
-      >
-        {`₹${price}`}
-      </Text>
-      <Text
-        style={[styles.Title, theme.fonts.regular, style]}
-        numberOfLines={1}
-        {...props}
-      >
-        /night
-      </Text>
+    <View style={[styles.TitleContainer, style]} {...props}>
+      <Text style={[styles.Title, theme.fonts.bold]}>{`₹${price}`}</Text>
+      <Text style={[styles.Title, theme.fonts.regular]}>/night</Text>
     </View>
   );
 };
