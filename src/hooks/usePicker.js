@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 
 const usePicker = (initialValue = "") => {
   const [value, setValue] = useState(initialValue);
@@ -10,6 +10,7 @@ const usePicker = (initialValue = "") => {
   return useMemo(
     () => ({
       value,
+      setValue,
       props: {
         value,
         onValueChange: setValue,
@@ -20,4 +21,17 @@ const usePicker = (initialValue = "") => {
   );
 };
 
+const useReactivePicker = (externalValue = "") => {
+  const textInput = usePicker(externalValue);
+
+  const { setValue } = textInput;
+
+  useEffect(() => {
+    setValue(externalValue);
+  }, [externalValue, setValue]);
+
+  return textInput;
+};
+
 export default usePicker;
+export { useReactivePicker };

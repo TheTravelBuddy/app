@@ -46,8 +46,12 @@ const DateTimePicker = ({
           <View style={styles.ValueContainer}>
             <Text style={styles.ValueText}>
               {mode === "date"
-                ? moment(value).format("DD/MM/YYYY")
-                : moment(value).format("hh:mm A")}
+                ? !value
+                  ? "Select Date"
+                  : moment(value || new Date()).format("DD/MM/YYYY")
+                : !value
+                ? "Select Time"
+                : moment(value || new Date()).format("hh:mm A")}
             </Text>
           </View>
         </View>
@@ -67,7 +71,7 @@ const DateTimePicker = ({
       </View>
       <DateTimePickerModal
         isVisible={pickerVisible.value}
-        date={value}
+        date={value || new Date()}
         mode={mode}
         onConfirm={handleConfirm}
         onCancel={pickerVisible.hide}

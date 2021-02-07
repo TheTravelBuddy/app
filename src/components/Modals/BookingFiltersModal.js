@@ -13,9 +13,9 @@ import ModalTitle from "../Typography/ModalTitle";
 
 import { useBookingFilters } from "../../stores/BookingFilters";
 
-import useTextInput from "../../hooks/useTextInput";
-import usePicker from "../../hooks/usePicker";
-import useDateTimePicker from "../../hooks/useDateTimePicker";
+import { useReactiveTextInput } from "../../hooks/useTextInput";
+import { useReactivePicker } from "../../hooks/usePicker";
+import { useReactiveDateTimePicker } from "../../hooks/useDateTimePicker";
 
 const today = new Date();
 const initialDate = new Date(1900, 0, 2);
@@ -25,14 +25,14 @@ const BookingFiltersModal = ({ visible, onDismiss }) => {
   const setFilters = useBookingFilters((state) => state.setFilters);
   const clearFilters = useBookingFilters((state) => state.clearFilters);
 
-  const mood = usePicker(filterValues.travelMood);
-  const checkInDate = useDateTimePicker(filterValues.date);
-  const noOfDays = useTextInput(filterValues.days);
-  const noOfRooms = useTextInput(filterValues.booking?.rooms);
-  const noOfAdults = useTextInput(filterValues.booking?.adults);
-  const noOfChildren = useTextInput(filterValues.booking?.children);
-  const minBudget = useTextInput(filterValues.budget[0]);
-  const maxBudget = useTextInput(filterValues.budget[1]);
+  const mood = useReactivePicker(filterValues.travelMood);
+  const checkInDate = useReactiveDateTimePicker(filterValues.date);
+  const noOfDays = useReactiveTextInput(filterValues.days);
+  const noOfRooms = useReactiveTextInput(filterValues.booking?.rooms);
+  const noOfAdults = useReactiveTextInput(filterValues.booking?.adults);
+  const noOfChildren = useReactiveTextInput(filterValues.booking?.children);
+  const minBudget = useReactiveTextInput(filterValues.budget?.low);
+  const maxBudget = useReactiveTextInput(filterValues.budget?.high);
 
   return (
     <BottomModal {...{ visible, onDismiss }}>
@@ -138,7 +138,6 @@ const BookingFiltersModal = ({ visible, onDismiss }) => {
             style={styles.FormInputLeft}
             onPress={() => {
               clearFilters();
-              onDismiss();
             }}
           >
             Clear
@@ -156,8 +155,8 @@ const BookingFiltersModal = ({ visible, onDismiss }) => {
                   adults: noOfAdults.value,
                   children: noOfChildren.value,
                 },
-                noOfDays: noOfDays.value,
-                budget: [minBudget.value, maxBudget.value],
+                numberOfDays: noOfDays.value,
+                budget: { low: minBudget.value, high: maxBudget.value },
               });
               onDismiss();
             }}

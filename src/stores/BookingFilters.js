@@ -21,22 +21,15 @@ const travelMoods = {
   MIXED: "Mixed",
 };
 
-const initialFilterValues = {
-  budget: [undefined, 1000],
-  // date: new Date(),
-  // numberOfDays: 2,
-  // booking: {
-  //   rooms: 1,
-  //   adults: 1,
-  //   children: 0,
-  // },
-};
+const initialFilterValues = {};
 
 const filterNames = ["date", "numberOfDays", "booking", "travelMood", "budget"];
 
 const shouldDisplayFilter = defaultDict(
   {
-    budget: ([lower, upper]) => lower !== undefined || upper !== undefined,
+    budget: (budget) => Boolean(budget?.low || budget?.high),
+    booking: (booking) =>
+      Boolean(booking?.rooms || booking?.adults || booking?.children),
   },
   (value) => !!value
 );
@@ -47,21 +40,19 @@ const displayFilter = {
     numberOfDays > 1 ? `${numberOfDays} Days` : `1 Day`,
   booking: ({ rooms, adults, children }) => {
     const list = [];
-    if (rooms) list.push(`${rooms} rooms`);
-    if (adults) list.push(`${adults} adults`);
-    if (children) list.push(`${children} chidren`);
+    if (rooms) list.push(`${rooms} ${rooms > 1 ? "Rooms" : "Room"}`);
+    if (adults) list.push(`${adults} ${adults > 1 ? "Adults" : "Adult"}`);
+    if (children) list.push(`${children} ${adults > 1 ? "Children" : "Child"}`);
 
     return list.join(", ");
   },
-  // numberOfPeople: (numberOfPeople) =>
-  //   numberOfPeople > 1 ? `${numberOfPeople} People` : `1 Person`,
   travelMood: (travelMood) => `Mood: ${travelMoods[travelMood]}`,
-  budget: ([lower, upper]) =>
-    lower === undefined
-      ? `Less than ₹${upper}`
-      : upper === undefined
-      ? `More than ₹${lower}`
-      : `₹${lower} to ₹${upper}`,
+  budget: (budget) =>
+    !budget.low
+      ? `Less than ₹${budget.high}`
+      : !budget.high
+      ? `More than ₹${budget.low}`
+      : `₹${budget.low} to ₹${budget.high}`,
 };
 
 const initialState = {
@@ -76,6 +67,8 @@ const useBookingFilters = create(
   log((set, get) => ({
     ...initialState,
     filterValues: { ...initialFilterValues },
+    pristineFilters: true,
+    pristineSearch: true,
     initData: () => {
       return get().clearFilters();
     },
@@ -85,9 +78,7 @@ const useBookingFilters = create(
           filterNames.forEach((filter) => {
             draftState.filterValues[filter] = initialFilterValues[filter];
           });
-          stateNames.forEach((state) => {
-            draftState[state] = initialState[state];
-          });
+          draftState.pristineFilters = true;
         })
       );
     },
@@ -95,6 +86,7 @@ const useBookingFilters = create(
       set(
         produce((draftState) => {
           draftState.filterValues = filters;
+          draftState.pristineFilters = false;
         })
       );
       get().updateResults();
@@ -119,6 +111,7 @@ const useBookingFilters = create(
       set(
         produce((draftState) => {
           draftState.searchQuery = searchQuery;
+          draftState.pristineSearch = false;
         })
       );
       get().updateResults();
@@ -126,7 +119,8 @@ const useBookingFilters = create(
     clearSearch: () => {
       set(
         produce((draftState) => {
-          draftState.searchQuery = undefined;
+          draftState.searchQuery = "";
+          draftState.pristineSearch = true;
         })
       );
       get().updateResults();
@@ -151,6 +145,22 @@ const useBookingFilters = create(
       const { filters } = get();
       console.log("filters", filters);
       console.log("Updating results from server.");
+      set(
+        produce((draftState) => {
+          draftState.searchResults = [
+            {
+              coverUri:
+                "https://static.toiimg.com/photo/msid-52005539,width-96,height-65.cms",
+              name: "Magic of the North",
+              rating: 4.9,
+              area: "Colaba",
+              city: "Mumbai",
+              price: 1000,
+              distance: 5,
+            },
+          ];
+        })
+      );
     },
   }))
 );

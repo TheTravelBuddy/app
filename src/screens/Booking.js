@@ -114,6 +114,9 @@ const BookingScreen = () => {
   const initData = useBookingFilters((state) => state.initData);
   const clearFilter = useBookingFilters((state) => state.clearFilter);
   const clearSearch = useBookingFilters((state) => state.clearSearch);
+  const pristineFilters = useBookingFilters((state) => state.pristineFilters);
+  const pristineSearch = useBookingFilters((state) => state.pristineSearch);
+  const searchResults = useBookingFilters((state) => state.searchResults);
 
   const locationModal = useToggle(false);
   const bookingTypeModal = useToggle(false);
@@ -196,65 +199,68 @@ const BookingScreen = () => {
           )}
         </HorizontalScroller>
       </View>
-      <View style={styles.Section}>
-        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
-          Search Results
-        </SectionHeader>
-        <BookingSearchCard
-          coverUri="https://static.toiimg.com/photo/msid-52005539,width-96,height-65.cms"
-          name="Magic of the North"
-          rating={4.9}
-          area="Colaba"
-          city="Mumbai"
-          price={1000}
-          distance={5}
-          style={styles.ScreenPadded}
-        />
-      </View>
-      <View style={styles.Section}>
-        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
-          Top Packages
-        </SectionHeader>
-        <HorizontalScroller>
-          {packagesData.map(({ id, coverUri, name, rating }) => (
-            <LocationBannerCard
-              key={id}
-              {...{ id, coverUri, name, rating }}
-              style={styles.CardsScrollerCard}
-            />
-          ))}
-        </HorizontalScroller>
-      </View>
-      <View style={styles.Section}>
-        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
-          Top Destinations
-        </SectionHeader>
-        <HorizontalScroller>
-          {destinationsData.map(({ id, coverUri, name, rating }) => (
-            <LocationHalfCard
-              key={id}
-              {...{ id, coverUri, name, rating }}
-              style={styles.CardsScrollerCard}
-            />
-          ))}
-        </HorizontalScroller>
-      </View>
-      <View style={styles.Section}>
-        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
-          Hotels Nearby
-        </SectionHeader>
-        <HorizontalScroller>
-          {hoteldetailsData.map(
-            ({ id, coverUri, name, rating, area, city, price }) => (
-              <HotelDetailCard
-                key={id}
-                {...{ id, coverUri, name, rating, area, city, price }}
-                style={styles.CardsScrollerCard}
+      {pristineSearch && pristineFilters ? (
+        <>
+          <View style={styles.Section}>
+            <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
+              Top Packages
+            </SectionHeader>
+            <HorizontalScroller>
+              {packagesData.map(({ id, coverUri, name, rating }) => (
+                <LocationBannerCard
+                  key={id}
+                  {...{ id, coverUri, name, rating }}
+                  style={styles.CardsScrollerCard}
+                />
+              ))}
+            </HorizontalScroller>
+          </View>
+          <View style={styles.Section}>
+            <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
+              Top Destinations
+            </SectionHeader>
+            <HorizontalScroller>
+              {destinationsData.map(({ id, coverUri, name, rating }) => (
+                <LocationHalfCard
+                  key={id}
+                  {...{ id, coverUri, name, rating }}
+                  style={styles.CardsScrollerCard}
+                />
+              ))}
+            </HorizontalScroller>
+          </View>
+          <View style={styles.Section}>
+            <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
+              Hotels Nearby
+            </SectionHeader>
+            <HorizontalScroller>
+              {hoteldetailsData.map(
+                ({ id, coverUri, name, rating, area, city, price }) => (
+                  <HotelDetailCard
+                    key={id}
+                    {...{ id, coverUri, name, rating, area, city, price }}
+                    style={styles.CardsScrollerCard}
+                  />
+                )
+              )}
+            </HorizontalScroller>
+          </View>
+        </>
+      ) : (
+        <View style={styles.Section}>
+          <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
+            Search Results
+          </SectionHeader>
+          {searchResults.map(
+            ({ coverUri, name, rating, area, city, price, distance }) => (
+              <BookingSearchCard
+                {...{ coverUri, name, rating, area, city, price, distance }}
+                style={styles.ScreenPadded}
               />
             )
           )}
-        </HorizontalScroller>
-      </View>
+        </View>
+      )}
     </Scaffold>
   );
 };

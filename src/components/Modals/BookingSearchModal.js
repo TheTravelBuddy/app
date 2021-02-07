@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View } from "react-native";
 import { TextInput, useTheme } from "react-native-paper";
 
@@ -9,7 +9,7 @@ import Button from "../Button";
 import ModalTitle from "../Typography/ModalTitle";
 
 import { useBookingFilters } from "../../stores/BookingFilters";
-import useTextInput from "../../hooks/useTextInput";
+import { useReactiveTextInput } from "../../hooks/useTextInput";
 
 const BookingSearchModal = ({ visible, onDismiss }) => {
   const theme = useTheme();
@@ -17,12 +17,7 @@ const BookingSearchModal = ({ visible, onDismiss }) => {
   const searchQuery = useBookingFilters((state) => state.searchQuery);
   const setSearch = useBookingFilters((state) => state.setSearch);
 
-  const searchInput = useTextInput(searchQuery);
-  const { onChangeText: handleQueryChanged } = searchInput.props;
-
-  useEffect(() => {
-    handleQueryChanged(searchQuery);
-  }, [searchQuery, handleQueryChanged]);
+  const searchInput = useReactiveTextInput(searchQuery);
 
   return (
     <BottomModal {...{ visible, onDismiss }}>
