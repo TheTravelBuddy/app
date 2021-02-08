@@ -39,30 +39,16 @@ const BookingFiltersModal = ({ visible, onDismiss }) => {
       <ModalTitle>Filters</ModalTitle>
       <View style={styles.Section}>
         <CardTitle style={styles.SectionHeader}>Mood</CardTitle>
-        <View style={styles.FormInputContainer}>
-          <Picker
-            dense
-            label="Travel Mood"
-            {...mood.props}
-            items={[
-              { value: "RELAX", label: "Relax" },
-              { value: "ADVENTURE", label: "Adventure" },
-              { value: "MIXED", label: "Mixed" },
-            ]}
-            style={styles.FormInputLeft}
-          />
-          <Picker
-            dense
-            label="Weather"
-            items={[
-              { value: "WARM", label: "Warm" },
-              { value: "COOL", label: "Cool" },
-              { value: "SNOW", label: "Snow" },
-              { value: "WET", label: "Wet" },
-            ]}
-            style={styles.FormInputRight}
-          />
-        </View>
+        <Picker
+          dense
+          label="Travel Mood"
+          {...mood.props}
+          items={[
+            { value: "RELAX", label: "Relax" },
+            { value: "ADVENTURE", label: "Adventure" },
+            { value: "MIXED", label: "Mixed" },
+          ]}
+        />
       </View>
       <View style={styles.Section}>
         <CardTitle style={styles.SectionHeader}>Duration</CardTitle>

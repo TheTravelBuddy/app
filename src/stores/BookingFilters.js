@@ -42,11 +42,12 @@ const displayFilter = {
     const list = [];
     if (rooms) list.push(`${rooms} ${rooms > 1 ? "Rooms" : "Room"}`);
     if (adults) list.push(`${adults} ${adults > 1 ? "Adults" : "Adult"}`);
-    if (children) list.push(`${children} ${adults > 1 ? "Children" : "Child"}`);
+    if (children)
+      list.push(`${children} ${children > 1 ? "Children" : "Child"}`);
 
     return list.join(", ");
   },
-  travelMood: (travelMood) => `Mood: ${travelMoods[travelMood]}`,
+  travelMood: (travelMood) => `${travelMoods[travelMood]} Mood`,
   budget: (budget) =>
     !budget.low
       ? `Less than ₹${budget.high}`
@@ -67,10 +68,18 @@ const useBookingFilters = create(
   log((set, get) => ({
     ...initialState,
     filterValues: { ...initialFilterValues },
-    pristineFilters: true,
-    pristineSearch: true,
     initData: () => {
-      return get().clearFilters();
+      return get().clearState;
+    },
+    clearState: () => {
+      set(
+        produce((draftState) => {
+          stateNames.forEach((state) => {
+            draftState[state] = initialState[state];
+          });
+        })
+      );
+      get().clearFilters();
     },
     clearFilters: () => {
       set(
@@ -78,7 +87,6 @@ const useBookingFilters = create(
           filterNames.forEach((filter) => {
             draftState.filterValues[filter] = initialFilterValues[filter];
           });
-          draftState.pristineFilters = true;
         })
       );
     },
@@ -86,7 +94,6 @@ const useBookingFilters = create(
       set(
         produce((draftState) => {
           draftState.filterValues = filters;
-          draftState.pristineFilters = false;
         })
       );
       get().updateResults();
@@ -111,7 +118,6 @@ const useBookingFilters = create(
       set(
         produce((draftState) => {
           draftState.searchQuery = searchQuery;
-          draftState.pristineSearch = false;
         })
       );
       get().updateResults();
@@ -120,7 +126,6 @@ const useBookingFilters = create(
       set(
         produce((draftState) => {
           draftState.searchQuery = "";
-          draftState.pristineSearch = true;
         })
       );
       get().updateResults();

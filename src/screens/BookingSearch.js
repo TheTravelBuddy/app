@@ -21,7 +21,7 @@ import {
   useBookingFilters,
 } from "../stores/BookingFilters";
 import useToggle from "../hooks/useToggle";
-import { CARD_SPACING, SCREEN_PADDING } from "../constants";
+import { SCREEN_PADDING } from "../constants";
 
 const BookingSearchScreen = () => {
   const theme = useTheme();
@@ -64,19 +64,6 @@ const BookingSearchScreen = () => {
             onChangeText={setSearch}
             style={styles.SearchHeader}
           />
-          <BookingLocationModal
-            visible={locationModal.visible}
-            onDismiss={locationModal.hide}
-          />
-          <BookingTypeModal
-            visible={bookingTypeModal.visible}
-            onDismiss={bookingTypeModal.hide}
-          />
-
-          <BookingFiltersModal
-            visible={filtersModal.visible}
-            onDismiss={filtersModal.hide}
-          />
           <HorizontalScroller
             horizontalSpacing={SCREEN_PADDING}
             gap={SCREEN_PADDING / 4}
@@ -118,14 +105,27 @@ const BookingSearchScreen = () => {
           Search Results
         </SectionHeader>
         {searchResults.map(
-          ({ coverUri, name, rating, area, city, price, distance }) => (
+          ({ id, coverUri, name, rating, area, city, price, distance }) => (
             <BookingSearchCard
+              key={id}
               {...{ coverUri, name, rating, area, city, price, distance }}
               style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
             />
           )
         )}
       </View>
+      <BookingLocationModal
+        visible={locationModal.visible}
+        onDismiss={locationModal.hide}
+      />
+      <BookingTypeModal
+        visible={bookingTypeModal.visible}
+        onDismiss={bookingTypeModal.hide}
+      />
+      <BookingFiltersModal
+        visible={filtersModal.visible}
+        onDismiss={filtersModal.hide}
+      />
     </Scaffold>
   );
 };
@@ -137,6 +137,7 @@ const styles = {
   SearchHeader: {
     marginHorizontal: SCREEN_PADDING,
     marginBottom: SCREEN_PADDING / 4,
+    elevation: 2,
   },
 };
 
