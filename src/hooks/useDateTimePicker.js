@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 
 const useDateTimePicker = (initialValue = "") => {
   const [value, setValue] = useState(initialValue);
@@ -10,6 +10,7 @@ const useDateTimePicker = (initialValue = "") => {
   return useMemo(
     () => ({
       value,
+      setValue,
       props: {
         value,
         onChange: setValue,
@@ -20,4 +21,17 @@ const useDateTimePicker = (initialValue = "") => {
   );
 };
 
+const useReactiveDateTimePicker = (externalValue = "") => {
+  const textInput = useDateTimePicker(externalValue);
+
+  const { setValue } = textInput;
+
+  useEffect(() => {
+    setValue(externalValue);
+  }, [externalValue, setValue]);
+
+  return textInput;
+};
+
 export default useDateTimePicker;
+export { useReactiveDateTimePicker };

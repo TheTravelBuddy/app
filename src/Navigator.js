@@ -12,14 +12,102 @@ import OtpScreen from "./screens/Otp";
 import SignUpScreen from "./screens/SignUp";
 
 import HomeScreen from "./screens/Home";
+import BookingScreen from "./screens/Booking";
+import BookingSearchScreen from "./screens/BookingSearch";
+import BookingFavoritesScreen from "./screens/BookingFavorites";
 import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
 
 const AuthStack = createStackNavigator();
-const MainTab = createMaterialBottomTabNavigator();
+const AppStack = createStackNavigator();
+const HomeTab = createMaterialBottomTabNavigator();
+
+const HomeTabNavigator = () => {
+  const theme = useTheme();
+
+  return (
+    <HomeTab.Navigator
+      labeled
+      shifting={false}
+      initialRouteName="HomeScreen"
+      activeColor={theme.colors.primary}
+      barStyle={{ backgroundColor: theme.colors.surface }}
+    >
+      <HomeTab.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: "Home",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="home-outline"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <HomeTab.Screen
+        name="BookingStackNavigator"
+        component={BookingScreen}
+        options={{
+          tabBarLabel: "Booking",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="briefcase-check-outline"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <HomeTab.Screen
+        name="ExploreScreen"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: "Explore",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="compass-outline"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <HomeTab.Screen
+        name="CommunityScreen"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: "Community",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="forum-outline"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+      <HomeTab.Screen
+        name="ProfileScreen"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: "Profile",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="account-outline"
+              color={color}
+              size={26}
+            />
+          ),
+        }}
+      />
+    </HomeTab.Navigator>
+  );
+};
 
 const Navigator = () => {
-  const theme = useTheme();
   const initAuthHandler = useAuth((state) => state.initAuthHandler);
   const authState = useAuth((state) => state.authState);
 
@@ -39,85 +127,20 @@ const Navigator = () => {
       ) : authState === authStates.UNREGISTERED ? (
         <SignUpScreen />
       ) : authState === authStates.LOGGED_IN ? (
-        <MainTab.Navigator
-          initialRouteName="HomeScreen"
-          activeColor="#5C3DA5"
-          shifting={false}
-          labeled={true}
-          barStyle={{ backgroundColor: theme.colors.surface }}
-        >
-          <MainTab.Screen
-            name="HomeScreen"
-            component={HomeScreen}
-            options={{
-              tabBarLabel: "Home",
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons
-                  name="home-outline"
-                  color={color}
-                  size={26}
-                />
-              ),
-            }}
+        <AppStack.Navigator headerMode="none">
+          <AppStack.Screen
+            name="HomeTabNavigator"
+            component={HomeTabNavigator}
           />
-          <MainTab.Screen
-            name="BookingScreen"
-            component={HomeScreen}
-            options={{
-              tabBarLabel: "Booking",
-
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons
-                  name="briefcase-check-outline"
-                  color={color}
-                  size={26}
-                />
-              ),
-            }}
+          <AppStack.Screen
+            name="BookingSearchScreen"
+            component={BookingSearchScreen}
           />
-          <MainTab.Screen
-            name="ExploreScreen"
-            component={HomeScreen}
-            options={{
-              tabBarLabel: "Explore",
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons
-                  name="compass-outline"
-                  color={color}
-                  size={26}
-                />
-              ),
-            }}
+          <AppStack.Screen
+            name="BookingFavoritesScreen"
+            component={BookingFavoritesScreen}
           />
-          <MainTab.Screen
-            name="CommunityScreen"
-            component={HomeScreen}
-            options={{
-              tabBarLabel: "Community",
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons
-                  name="forum-outline"
-                  color={color}
-                  size={26}
-                />
-              ),
-            }}
-          />
-          <MainTab.Screen
-            name="ProfileScreen"
-            component={HomeScreen}
-            options={{
-              tabBarLabel: "Profile",
-              tabBarIcon: ({ color }) => (
-                <MaterialCommunityIcons
-                  name="account-outline"
-                  color={color}
-                  size={26}
-                />
-              ),
-            }}
-          />
-        </MainTab.Navigator>
+        </AppStack.Navigator>
       ) : (
         <LoadingScreen />
       )}

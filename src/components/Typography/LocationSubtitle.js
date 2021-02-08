@@ -6,21 +6,9 @@ const LocationSubtitle = ({ area, city, style, ...props }) => {
   const theme = useTheme();
 
   return (
-    <View style={styles.TitleContainer}>
-      <Text
-        style={[styles.Title, theme.fonts.bold, style]}
-        numberOfLines={1}
-        {...props}
-      >
-        {area}
-      </Text>
-      <Text
-        style={[styles.Title, theme.fonts.regular, style]}
-        numberOfLines={1}
-        {...props}
-      >
-        {`, ${city}`}
-      </Text>
+    <View style={[styles.TitleContainer, style]} {...props}>
+      <Text style={[styles.Title, theme.fonts.bold]}>{area}</Text>
+      <Text style={[styles.Title, theme.fonts.regular]}>{`, ${city}`}</Text>
     </View>
   );
 };

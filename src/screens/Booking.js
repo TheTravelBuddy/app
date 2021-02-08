@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 
 import styles from "./styles";
+
 import {
   Appbar,
-  HorizontalScroller,
   SectionHeader,
   Scaffold,
   LocationBannerCard,
   LocationHalfCard,
   HotelDetailCard,
-  BlogCard,
+  HorizontalScroller,
 } from "../components";
+import { useBookingFilters } from "../stores/BookingFilters";
 
 const packagesData = [
   {
@@ -36,26 +37,19 @@ const packagesData = [
   },
 ];
 
-const destinationsData = [
+const topRatedPackagesData = [
   {
     id: 1,
     coverUri:
       "https://static.toiimg.com/photo/msid-52005539,width-96,height-65.cms",
-    name: "Shimla",
+    name: "Beauty of South",
     rating: 4.5,
   },
   {
     id: 2,
     coverUri: "https://static.toiimg.com/photo/24476893.cms",
-    name: "Jaipur",
+    name: "Magic of North",
     rating: 4.9,
-  },
-  {
-    id: 3,
-    coverUri:
-      "https://static.toiimg.com/thumb/msid-51892205,width-748,height-499,resizemode=4,imgsize-266613/.jpg",
-    name: "Goa",
-    rating: 3.5,
   },
 ];
 
@@ -92,58 +86,34 @@ const hoteldetailsData = [
   },
 ];
 
-const blogsData = [
-  {
-    id: 1,
-    profilePic: "https://picsum.photos/1001",
-    title: "My Vacation to Goa",
-    likes: 43,
-    content:
-      "This summer vacation we went to the one of the best tourist spots of India.",
-  },
-  {
-    id: 2,
-    profilePic: "https://picsum.photos/1000",
-    title: "Food Experiences Every...",
-    likes: 69,
-    content:
-      "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
-  },
-  {
-    id: 3,
-    profilePic: "https://picsum.photos/1000",
-    title: "Magic of the North",
-    likes: 15,
-    content:
-      "This summer vacation we went to the one of the best tourist spots of India.",
-  },
-];
-const HomeScreen = () => {
+const BookingScreen = ({ navigation }) => {
+  const initData = useBookingFilters((state) => state.initData);
+
+  useEffect(initData, [initData]);
+
   return (
     <Scaffold
       renderHeader={() => (
         <Appbar.Header>
-          <Appbar.Content title="Travel Buddy" />
+          <Appbar.Content title="Booking" />
+          <Appbar.Action
+            icon="magnify"
+            onPress={() => navigation.navigate("BookingSearchScreen")}
+          />
+          <Appbar.Action
+            icon="heart-outline"
+            onPress={() => navigation.navigate("BookingFavoritesScreen")}
+          />
         </Appbar.Header>
       )}
     >
       <View style={styles.Section}>
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
-          Top Packages
+          Recommended Packages
         </SectionHeader>
         <HorizontalScroller>
           {packagesData.map(({ id, coverUri, name, rating }) => (
             <LocationBannerCard key={id} {...{ id, coverUri, name, rating }} />
-          ))}
-        </HorizontalScroller>
-      </View>
-      <View style={styles.Section}>
-        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
-          Top Destinations
-        </SectionHeader>
-        <HorizontalScroller>
-          {destinationsData.map(({ id, coverUri, name, rating }) => (
-            <LocationHalfCard key={id} {...{ id, coverUri, name, rating }} />
           ))}
         </HorizontalScroller>
       </View>
@@ -164,16 +134,31 @@ const HomeScreen = () => {
       </View>
       <View style={styles.Section}>
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
-          Top Blogs
+          Highest Rated Packages
         </SectionHeader>
         <HorizontalScroller>
-          {blogsData.map(({ id, profilePic, title, likes, content }) => (
-            <BlogCard key={id} {...{ id, profilePic, title, likes, content }} />
+          {topRatedPackagesData.map(({ id, coverUri, name, rating }) => (
+            <LocationHalfCard key={id} {...{ id, coverUri, name, rating }} />
           ))}
+        </HorizontalScroller>
+      </View>
+      <View style={styles.Section}>
+        <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
+          Hotels on a Budget
+        </SectionHeader>
+        <HorizontalScroller>
+          {hoteldetailsData.map(
+            ({ id, coverUri, name, rating, area, city, price }) => (
+              <HotelDetailCard
+                key={id}
+                {...{ id, coverUri, name, rating, area, city, price }}
+              />
+            )
+          )}
         </HorizontalScroller>
       </View>
     </Scaffold>
   );
 };
 
-export default HomeScreen;
+export default BookingScreen;
