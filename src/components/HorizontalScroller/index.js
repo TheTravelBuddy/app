@@ -3,31 +3,32 @@ import { ScrollView } from "react-native";
 
 import { SCREEN_PADDING } from "../../constants";
 
-const HorizontalScroller = ({ children }) => {
+const HorizontalScroller = ({
+  children,
+  horizontalSpacing = SCREEN_PADDING,
+  verticalSpacing = 2,
+  gap = SCREEN_PADDING / 2,
+}) => {
+  const marginHorizontal = Math.round(gap / 2);
+  const paddingVertical = verticalSpacing;
+  const paddingHorizontal = horizontalSpacing - marginHorizontal;
+
   return (
     <ScrollView
       horizontal
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={styles.CardsScrollerContainer}
+      contentContainerStyle={{ paddingHorizontal, paddingVertical }}
     >
       {Children.map(children, (child) =>
         isValidElement(child)
-          ? cloneElement(child, { style: styles.CardsScrollerCard })
+          ? cloneElement(child, {
+              style: { marginHorizontal },
+            })
           : child
       )}
     </ScrollView>
   );
-};
-
-const styles = {
-  CardsScrollerContainer: {
-    paddingHorizontal: (3 / 4) * SCREEN_PADDING,
-    paddingVertical: 2,
-  },
-  CardsScrollerCard: {
-    marginHorizontal: SCREEN_PADDING / 4,
-  },
 };
 
 export default HorizontalScroller;

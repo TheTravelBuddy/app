@@ -133,11 +133,7 @@ const HomeScreen = () => {
         </SectionHeader>
         <HorizontalScroller>
           {packagesData.map(({ id, coverUri, name, rating }) => (
-            <LocationBannerCard
-              key={id}
-              {...{ id, coverUri, name, rating }}
-              style={styles.CardsScrollerCard}
-            />
+            <LocationBannerCard key={id} {...{ id, coverUri, name, rating }} />
           ))}
         </HorizontalScroller>
       </View>
@@ -147,11 +143,7 @@ const HomeScreen = () => {
         </SectionHeader>
         <HorizontalScroller>
           {destinationsData.map(({ id, coverUri, name, rating }) => (
-            <LocationHalfCard
-              key={id}
-              {...{ id, coverUri, name, rating }}
-              style={styles.CardsScrollerCard}
-            />
+            <LocationHalfCard key={id} {...{ id, coverUri, name, rating }} />
           ))}
         </HorizontalScroller>
       </View>
@@ -165,7 +157,6 @@ const HomeScreen = () => {
               <HotelDetailCard
                 key={id}
                 {...{ id, coverUri, name, rating, area, city, price }}
-                style={styles.CardsScrollerCard}
               />
             )
           )}
@@ -177,11 +168,7 @@ const HomeScreen = () => {
         </SectionHeader>
         <HorizontalScroller>
           {blogsData.map(({ id, profilePic, title, likes, content }) => (
-            <BlogCard
-              key={id}
-              {...{ id, profilePic, title, likes, content }}
-              style={styles.CardsScrollerCard}
-            />
+            <BlogCard key={id} {...{ id, profilePic, title, likes, content }} />
           ))}
         </HorizontalScroller>
       </View>

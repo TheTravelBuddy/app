@@ -15,4 +15,7 @@ export default {
   ScreenPadded: {
     marginHorizontal: SCREEN_PADDING,
   },
+  HorizontalCard: {
+    marginVertical: CARD_SPACING / 2,
+  },
 };
