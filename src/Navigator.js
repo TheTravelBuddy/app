@@ -17,6 +17,7 @@ import CommunityScreen from "./screens/Community";
 import ProfileScreen from "./screens/Profile";
 import BookingSearchScreen from "./screens/BookingSearch";
 import BookingFavoritesScreen from "./screens/BookingFavorites";
+import HotelDetailsScreen from "./screens/HotelDetails";
 import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
 
@@ -65,7 +66,7 @@ const HomeTabNavigator = () => {
       />
       <HomeTab.Screen
         name="ExploreScreen"
-        component={HomeScreen}
+        component={HotelDetailsScreen}
         options={{
           tabBarLabel: "Explore",
           tabBarIcon: ({ color }) => (
