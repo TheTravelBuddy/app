@@ -10,6 +10,7 @@ import CardTitle from "./Typography/CardTitle";
 import Title from "./Typography/Title";
 import SectionHeader from "./Typography/SectionHeader";
 import Tagline from "./Typography/Tagline";
+import LocationSubtitle from "./Typography/LocationSubtitle";
 import ModalTitle from "./Typography/ModalTitle";
 import ScreenTitle from "./Typography/ScreenTitle";
 import Label from "./Typography/Label";
@@ -43,6 +44,7 @@ export {
   Scaffold,
   Tagline,
   Label,
+  LocationSubtitle,
   Paragraph,
   RatingPill,
   LocationBannerCard,
