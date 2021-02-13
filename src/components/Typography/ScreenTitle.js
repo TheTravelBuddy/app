@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, useTheme } from "react-native-paper";
+import { CARD_SPACING } from "../../constants";
 
 const ScreenTitle = ({ children, style, ...props }) => {
   const theme = useTheme();
