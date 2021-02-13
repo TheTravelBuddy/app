@@ -79,7 +79,7 @@ const HotelDetailsScreen = () => {
           </View>
         </View>
         <View style={styles.SectionHeader}>
-          <ModalTitle style={[styles.ScreenPadded, styles, SectionHeader]}>
+          <ModalTitle style={[styles.ScreenPadded, SectionHeader]}>
             Amenities
           </ModalTitle>
           <View
