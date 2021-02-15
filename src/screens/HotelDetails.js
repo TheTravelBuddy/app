@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Image, Text } from "react-native";
-import { useTheme } from "react-native-paper";
+import { Card, useTheme } from "react-native-paper";
 
 import styles from "./styles";
 
@@ -14,9 +14,12 @@ import {
   ScreenTitle,
   RatingPill,
   SearchPriceSummary,
+  Paragraph,
+  CardTitle,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
-import { CHIP_SPACING, SCREEN_PADDING } from "../constants";
+import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
+import { useBookingFilters, displayFilter } from "../stores/BookingFilters";
 
 const hotelDetails = {
   id: 1,
@@ -46,9 +49,15 @@ const hotelDetails = {
 
 const reviews = [
   {
-    username: "Riddhi",
+    username: "Riddhi Dholakia",
     rating: 4.5,
-    reviewtext:
+    reviewText:
+      "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
+  },
+  {
+    username: "Riddhi Dholakia",
+    rating: 3.6,
+    reviewText:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
   },
 ];
@@ -56,25 +65,45 @@ const reviews = [
 const HotelDetailsScreen = () => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
+  const filterValues = useBookingFilters((state) => state.filterValues);
+
   return (
     <Scaffold
       renderFooter={() => (
         <View
           style={{
-            flexDirection: "row",
-            height: 56,
-            alignItems: "center",
             backgroundColor: theme.colors.surface,
-            paddingHorizontal: SCREEN_PADDING,
             elevation: 4,
           }}
         >
-          <View style={{ flexGrow: 1 }}>
-            <SearchPriceSummary price={hotelDetails.price} />
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text>
+              {displayFilter["numberOfDays"](filterValues?.numberOfDays)}
+            </Text>
+            <Button
+              compact
+              mode="text"
+              icon="pencil-outline"
+              onPress={() => {}}
+            >
+              Edit
+            </Button>
           </View>
-          <Button compact mode="contained" style={{ flexGrow: 1 }}>
-            BOOK
-          </Button>
+          <View
+            style={{
+              flexDirection: "row",
+              height: 56,
+              alignItems: "center",
+              paddingHorizontal: SCREEN_PADDING,
+            }}
+          >
+            <View style={{ flexGrow: 1 }}>
+              <SearchPriceSummary price={hotelDetails.price} />
+            </View>
+            <Button disabled compact mode="contained" style={{ flexGrow: 1 }}>
+              BOOK
+            </Button>
+          </View>
         </View>
       )}
     >
@@ -149,13 +178,34 @@ const HotelDetailsScreen = () => {
         <View style={styles.Section}>
           <View style={styles.SectionHeader}>
             <SectionHeader style={[styles.ScreenPadded, SectionHeader]}>
-              Guests Feedback
+              Reviews
             </SectionHeader>
           </View>
-          <View style={{ marginHorizontal: SCREEN_PADDING }}>
-            <RatingPill rating={hotelDetails.rating} />
-            <SectionHeader>Review</SectionHeader>
-            <View></View>
+          <View style={styles.ScreenPadded}>
+            {/* <RatingPill rating={hotelDetails.rating} /> */}
+            {reviews.map((review) => (
+              <Card
+                style={{
+                  padding: CARD_SPACING,
+                  marginVertical: Math.round(CARD_SPACING / 2),
+                }}
+              >
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <RatingPill rating={review.rating} />
+                  <CardTitle style={{ flex: 1, marginLeft: CARD_SPACING }}>
+                    {review.username}
+                  </CardTitle>
+                </View>
+                <Paragraph>{review.reviewText}</Paragraph>
+              </Card>
+            ))}
+            <Button
+              compact
+              style={{ alignSelf: "flex-end" }}
+              onPress={() => {}}
+            >
+              READ MORE
+            </Button>
           </View>
         </View>
       </View>

@@ -13,14 +13,14 @@ import { CARD_SPACING, SCREEN_PADDING } from "../../constants";
 
 const BookingSearchCard = ({
   coverUri,
-  style,
   name,
   rating,
   locality,
   city,
   distance,
-
   price,
+  style,
+  ...props
 }) => {
   const { width } = useScreenDimensions();
   const theme = useTheme();
@@ -31,6 +31,7 @@ const BookingSearchCard = ({
         { width: width - 2 * SCREEN_PADDING, padding: CARD_SPACING },
         style,
       ]}
+      {...props}
     >
       <View style={styles.CardContent}>
         <Image

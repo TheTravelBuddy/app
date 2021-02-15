@@ -23,7 +23,7 @@ import {
 import useToggle from "../hooks/useToggle";
 import { SCREEN_PADDING } from "../constants";
 
-const BookingSearchScreen = () => {
+const BookingSearchScreen = ({ navigation }) => {
   const theme = useTheme();
 
   const searchInput = useRef(null);
@@ -42,9 +42,9 @@ const BookingSearchScreen = () => {
   const filtersModal = useToggle(false);
 
   useEffect(initData, [initData]);
-  useEffect(() => {
-    searchInput.current?.focus();
-  }, []);
+  // useEffect(() => {
+  //   searchInput.current?.focus();
+  // }, []);
 
   return (
     <Scaffold
@@ -110,6 +110,7 @@ const BookingSearchScreen = () => {
               key={id}
               {...{ coverUri, name, rating, locality, city, price, distance }}
               style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
+              onPress={() => navigation.navigate("HotelDetailsScreen")}
             />
           )
         )}

@@ -156,7 +156,7 @@ const useBookingFilters = create(
             {
               coverUri:
                 "https://static.toiimg.com/photo/msid-52005539,width-96,height-65.cms",
-              name: "Magic of the North",
+              name: "Taj Mahal Palace",
               rating: 4.9,
               locality: "Colaba",
               city: "Mumbai",

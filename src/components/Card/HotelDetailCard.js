@@ -17,10 +17,12 @@ const HotelDetailCard = ({
   rating,
   price,
   style,
+  ...props
 }) => {
   const { width } = useScreenDimensions();
+
   return (
-    <Card style={[{ width: width / 2 }, style]}>
+    <Card style={[{ width: width / 2 }, style]} {...props}>
       <Card.Cover
         style={{ height: Math.round(width * 0.3) }}
         source={{ uri: coverUri }}
