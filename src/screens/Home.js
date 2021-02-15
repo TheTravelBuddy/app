@@ -1,5 +1,6 @@
 import React from "react";
 import { View } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 
 import styles from "./styles";
 import {
@@ -12,29 +13,7 @@ import {
   HotelDetailCard,
   BlogCard,
 } from "../components";
-
-const packagesData = [
-  {
-    id: 1,
-    coverUri:
-      "https://static.toiimg.com/photo/77652252/oie_2095710glh9nB1O.jpg?width=748&resize=4",
-    name: "Beauty of South",
-    rating: 3.5,
-  },
-  {
-    id: 2,
-    coverUri:
-      "https://images.news18.com/ibnlive/uploads/2016/07/Chitkul-Valley-Himachal-PradeshIndia-Edited-in-Lightroom-5-Imgur.jpg",
-    name: "Magic of the North",
-    rating: 3.5,
-  },
-  {
-    id: 3,
-    coverUri: "https://picsum.photos/1005",
-    name: "Magic of the North",
-    rating: 3.5,
-  },
-];
+import { useAPI } from "../helpers/API";
 
 const destinationsData = [
   {
@@ -119,6 +98,10 @@ const blogsData = [
   },
 ];
 const HomeScreen = () => {
+  const [topPackagesRequest] = useAPI("/traveller/home/topPackages");
+
+  console.log(topPackagesRequest.data);
+
   return (
     <Scaffold
       renderHeader={() => (
@@ -131,11 +114,18 @@ const HomeScreen = () => {
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
           Top Packages
         </SectionHeader>
-        <HorizontalScroller>
-          {packagesData.map(({ id, coverUri, name, rating }) => (
-            <LocationBannerCard key={id} {...{ id, coverUri, name, rating }} />
-          ))}
-        </HorizontalScroller>
+        {topPackagesRequest.loading ? (
+          <ActivityIndicator />
+        ) : (
+          <HorizontalScroller>
+            {topPackagesRequest.data?.map(({ id, photos, name, rating }) => (
+              <LocationBannerCard
+                key={id}
+                {...{ id, coverUri: photos[0], name, rating }}
+              />
+            ))}
+          </HorizontalScroller>
+        )}
       </View>
       <View style={styles.Section}>
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
