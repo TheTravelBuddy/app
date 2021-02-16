@@ -100,8 +100,6 @@ const blogsData = [
 const HomeScreen = () => {
   const [topPackagesRequest] = useAPI("/traveller/home/topPackages");
 
-  console.log(topPackagesRequest.data);
-
   return (
     <Scaffold
       renderHeader={() => (
@@ -118,10 +116,10 @@ const HomeScreen = () => {
           <ActivityIndicator />
         ) : (
           <HorizontalScroller>
-            {topPackagesRequest.data?.map(({ id, photos, name, rating }) => (
+            {topPackagesRequest.data?.map(({ id, coverUri, name, rating }) => (
               <LocationBannerCard
                 key={id}
-                {...{ id, coverUri: photos[0], name, rating }}
+                {...{ id, coverUri, name, rating }}
               />
             ))}
           </HorizontalScroller>
