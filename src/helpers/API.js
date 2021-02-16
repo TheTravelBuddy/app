@@ -10,4 +10,9 @@ export const useAPI = makeUseAxios({
   axios: API,
 });
 
+if (__DEV__)
+  API.defaults.headers.common = {
+    "Cache-Control": "no-cache",
+  };
+
 export default API;

@@ -9,9 +9,9 @@ import CardTitle from "../Typography/CardTitle";
 import LocationSubtitle from "../Typography/LocationSubtitle";
 import PriceSummary from "../Typography/PriceSummary";
 
-const LocationBannerCard = ({
+const HotelDetailCard = ({
   name,
-  area,
+  locality,
   city,
   coverUri,
   rating,
@@ -30,7 +30,7 @@ const LocationBannerCard = ({
           <CardTitle style={styles.CardTitleText}>{name}</CardTitle>
           <RatingPill rating={rating} />
         </View>
-        <LocationSubtitle {...{ area, city }} />
+        <LocationSubtitle {...{ area: locality, city }} />
         <View style={styles.CardContent}>
           <PriceSummary {...{ price }} />
         </View>
@@ -39,4 +39,4 @@ const LocationBannerCard = ({
   );
 };
 
-export default LocationBannerCard;
+export default HotelDetailCard;

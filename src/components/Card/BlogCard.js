@@ -21,11 +21,13 @@ const BlogCard = ({ id, title, content, profilePic, likes, style }) => {
     <Card style={[{ width: width * 0.6 }, style]}>
       <View style={styles.CardContainer}>
         <View style={styles.CardTitleContainer}>
-          <Avatar.Image
-            size={24}
-            source={{ uri: profilePic }}
-            style={styles.CardTitleIcon}
-          />
+          {profilePic && (
+            <Avatar.Image
+              size={24}
+              source={{ uri: profilePic }}
+              style={styles.CardTitleIcon}
+            />
+          )}
           <CardTitle style={styles.CardTitleText}>{title}</CardTitle>
         </View>
         <View style={styles.CardContent}>
