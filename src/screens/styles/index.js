@@ -18,4 +18,9 @@ export default {
   HorizontalCard: {
     marginVertical: CARD_SPACING / 2,
   },
+  ActivityContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    flexGrow: 1,
+  },
 };
