@@ -60,7 +60,7 @@ const hoteldetailsData = [
       "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/a5/d8/c1/exterior.jpg",
     name: "Taj Mahal Palace",
     rating: 4.5,
-    area: "Colaba",
+    locality: "Colaba",
     city: "Mumbai",
     price: 3550,
   },
@@ -70,7 +70,7 @@ const hoteldetailsData = [
       "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/27/36/2736904_v5.jpeg",
     name: "JW Marriott",
     rating: 5,
-    area: "Colaba",
+    locality: "Colaba",
     city: "Mumbai",
     price: 4000,
   },
@@ -80,7 +80,7 @@ const hoteldetailsData = [
       "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/99/50/99501_v5.jpeg",
     name: "Adarsh Baug Hotel",
     rating: 3.5,
-    area: "Kalbadevi",
+    locality: "Kalbadevi",
     city: "Mumbai",
     price: 1050,
   },
@@ -123,10 +123,10 @@ const BookingScreen = ({ navigation }) => {
         </SectionHeader>
         <HorizontalScroller>
           {hoteldetailsData.map(
-            ({ id, coverUri, name, rating, area, city, price }) => (
+            ({ id, coverUri, name, rating, locality, city, price }) => (
               <HotelDetailCard
                 key={id}
-                {...{ id, coverUri, name, rating, area, city, price }}
+                {...{ id, coverUri, name, rating, locality, city, price }}
               />
             )
           )}
@@ -148,10 +148,10 @@ const BookingScreen = ({ navigation }) => {
         </SectionHeader>
         <HorizontalScroller>
           {hoteldetailsData.map(
-            ({ id, coverUri, name, rating, area, city, price }) => (
+            ({ id, coverUri, name, rating, locality, city, price }) => (
               <HotelDetailCard
                 key={id}
-                {...{ id, coverUri, name, rating, area, city, price }}
+                {...{ id, coverUri, name, rating, locality, city, price }}
               />
             )
           )}

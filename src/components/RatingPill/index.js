@@ -21,7 +21,9 @@ const RatingPill = ({ rating, style, ...props }) => {
       ]}
       {...props}
     >
-      <Text style={[styles.PillText, theme.fonts.bold]}>{rating}</Text>
+      <Text style={[styles.PillText, theme.fonts.bold]}>
+        {rating.toFixed(1)}
+      </Text>
     </View>
   );
 };

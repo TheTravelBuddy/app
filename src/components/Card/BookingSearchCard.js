@@ -16,7 +16,7 @@ const BookingSearchCard = ({
   style,
   name,
   rating,
-  area,
+  locality,
   city,
   distance,
 
@@ -46,7 +46,7 @@ const BookingSearchCard = ({
             <CardTitle style={commonStyles.CardTitleText}>{name}</CardTitle>
             <RatingPill rating={rating} />
           </View>
-          <LocationSubtitle {...{ area, city }} />
+          <LocationSubtitle {...{ locality, city }} />
           <DistanceSubtitle {...{ distance }} />
           <View style={commonStyles.CardActionsSpacer} />
           <SearchPriceSummary {...{ price }} style={styles.CardPrice} />
