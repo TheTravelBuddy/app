@@ -111,8 +111,7 @@
         }
       ],
       "react/jsx-closing-bracket-location": 1,
-      "react/jsx-props-no-spreading": 0,
-      "prettier/prettier": "off"
+      "react/jsx-props-no-spreading": 0
     },
     "parser": "babel-eslint",
     "parserOptions": {
