@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Text } from "react-native";
+import { View, Image } from "react-native";
 import { Card, useTheme } from "react-native-paper";
 
 import styles from "./styles";
@@ -19,7 +19,6 @@ import {
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
-import { useBookingFilters, displayFilter } from "../stores/BookingFilters";
 
 const hotelDetails = {
   id: 1,
@@ -65,7 +64,6 @@ const reviews = [
 const HotelDetailsScreen = () => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
-  const filterValues = useBookingFilters((state) => state.filterValues);
 
   return (
     <Scaffold
@@ -74,36 +72,15 @@ const HotelDetailsScreen = () => {
           style={{
             backgroundColor: theme.colors.surface,
             elevation: 4,
+            flexDirection: "row",
+            alignItems: "center",
+            padding: Math.round(CARD_SPACING / 2),
           }}
         >
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>
-              {displayFilter["numberOfDays"](filterValues?.numberOfDays)}
-            </Text>
-            <Button
-              compact
-              mode="text"
-              icon="pencil-outline"
-              onPress={() => {}}
-            >
-              Edit
-            </Button>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              height: 56,
-              alignItems: "center",
-              paddingHorizontal: SCREEN_PADDING,
-            }}
-          >
-            <View style={{ flexGrow: 1 }}>
-              <SearchPriceSummary price={hotelDetails.price} />
-            </View>
-            <Button disabled compact mode="contained" style={{ flexGrow: 1 }}>
-              BOOK
-            </Button>
-          </View>
+          <SearchPriceSummary style={{ flex: 1 }} price={hotelDetails.price} />
+          <Button mode="contained" style={{ flex: 1 }}>
+            BOOK
+          </Button>
         </View>
       )}
     >
