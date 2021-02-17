@@ -8,9 +8,8 @@ import {
   SectionHeader,
   Scaffold,
   BlogBannerCard,
-  BlogHalfCard,
+  BlogLocationCard,
   BlogTopicCard,
- 
 } from "../components";
 
 const blogSummaryData = [
@@ -87,10 +86,11 @@ const topicData = [
     title: "Beaches",
   },
   {
-    id: 3,
+    id: 4,
     title: "Historical",
   },
 ];
+
 const CommunityScreen = () => {
   return (
     <Scaffold
@@ -105,14 +105,9 @@ const CommunityScreen = () => {
           Recommended For You
         </SectionHeader>
         <HorizontalScroller>
-          {blogSummaryData.map(
-            ({ id, title, coverUri, style, content, likes, dop }) => (
-              <BlogBannerCard
-                key={id}
-                {...{ title, coverUri, style, content, likes, dop }}
-              />
-            )
-          )}
+          {blogSummaryData.map((blogDetails) => (
+            <BlogBannerCard key={blogDetails.id} {...blogDetails} />
+          ))}
         </HorizontalScroller>
       </View>
       <View style={styles.Section}>
@@ -120,18 +115,18 @@ const CommunityScreen = () => {
           Discover More
         </SectionHeader>
         <HorizontalScroller>
-          {topicData.map(({ id, title }) => (
-            <BlogTopicCard key={id} {...{ title }} />
+          {topicData.map((topicDetails) => (
+            <BlogTopicCard key={topicDetails.id} {...topicDetails} />
           ))}
         </HorizontalScroller>
       </View>
       <View style={styles.Section}>
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
-          From your favourite destinations
+          Top Blogs From
         </SectionHeader>
         <HorizontalScroller>
           {blogsData.map((blogDetails) => (
-            <BlogHalfCard key={blogDetails.id} {...blogDetails} />
+            <BlogLocationCard key={blogDetails.id} {...blogDetails} />
           ))}
         </HorizontalScroller>
       </View>

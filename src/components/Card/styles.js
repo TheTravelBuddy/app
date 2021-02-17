@@ -24,6 +24,7 @@ export default {
   CardActionsContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginTop: CARD_SPACING / 2,
   },
   CardActionsIcon: {
     margin: 0,
@@ -34,5 +35,4 @@ export default {
   CardActionsSpacer: {
     flexGrow: 1,
   },
-  
 };

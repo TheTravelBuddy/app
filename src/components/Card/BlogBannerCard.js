@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { Card,useTheme,IconButton,Text} from "react-native-paper";
+import { Card, useTheme, IconButton, Text } from "react-native-paper";
 
 import styles from "./styles";
 
@@ -9,7 +9,7 @@ import Paragraph from "../Typography/Paragraph";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
 import { SCREEN_PADDING } from "../../constants";
 
-const BlogBannerCard = ({ title, coverUri, style ,content,likes,dop}) => {
+const BlogBannerCard = ({ title, coverUri, style, content, likes, dop }) => {
   const { width } = useScreenDimensions();
   const theme = useTheme();
   return (
@@ -24,41 +24,40 @@ const BlogBannerCard = ({ title, coverUri, style ,content,likes,dop}) => {
         </View>
         <View style={styles.CardContent}>
           <Paragraph numberOfLines={2}>{content}</Paragraph>
-          <View style={styles.CardActionsContainer}>
+        </View>
+        <View style={styles.CardActionsContainer}>
           <IconButton
-              size={18}
-              color={theme.colors.textSecondary}
-              style={styles.CardActionsIcon}
-              icon="clock-outline"
-              onPress={() => {}}
+            size={18}
+            color={theme.colors.textSecondary}
+            style={styles.CardActionsIcon}
+            icon="clock-outline"
+            onPress={() => {}}
           />
-            <Text
-              style={[
-                { color: theme.colors.textSecondary },
-                styles.CardActionsText,
-              ]}
-            >
-              {dop}
-            </Text> 
-            <View style={styles.CardActionsSpacer} />
-            <IconButton
-              size={18}
-              color={theme.colors.textSecondary}
-              style={styles.CardActionsIcon}
-              icon="heart-outline"
-              onPress={() => {}}
-            />
-            <Text
-              style={[
-                { color: theme.colors.textSecondary },
-                styles.CardActionsText,
-              ]}
-            >
-              {likes}
-            </Text>
-      </View>
-      
-      </View>
+          <Text
+            style={[
+              { color: theme.colors.textSecondary },
+              styles.CardActionsText,
+            ]}
+          >
+            {dop}
+          </Text>
+          <View style={styles.CardActionsSpacer} />
+          <IconButton
+            size={18}
+            color={theme.colors.textSecondary}
+            style={styles.CardActionsIcon}
+            icon="heart-outline"
+            onPress={() => {}}
+          />
+          <Text
+            style={[
+              { color: theme.colors.textSecondary },
+              styles.CardActionsText,
+            ]}
+          >
+            {likes}
+          </Text>
+        </View>
       </View>
     </Card>
   );
