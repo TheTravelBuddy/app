@@ -13,6 +13,7 @@ import SignUpScreen from "./screens/SignUp";
 
 import HomeScreen from "./screens/Home";
 import BookingScreen from "./screens/Booking";
+import CommunityScreen from "./screens/Community";
 import ProfileScreen from "./screens/Profile";
 import BookingSearchScreen from "./screens/BookingSearch";
 import BookingFavoritesScreen from "./screens/BookingFavorites";
@@ -78,7 +79,7 @@ const HomeTabNavigator = () => {
       />
       <HomeTab.Screen
         name="CommunityScreen"
-        component={HomeScreen}
+        component={CommunityScreen}
         options={{
           tabBarLabel: "Community",
           tabBarIcon: ({ color }) => (

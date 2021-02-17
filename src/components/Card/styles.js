@@ -7,6 +7,10 @@ export default {
   CardTitleContainer: {
     flexDirection: "row",
   },
+  CardTitleHeader: {
+    flexDirection: "row",
+    marginBottom: CARD_SPACING / 2,
+  },
   CardTitleText: {
     flex: 1,
     marginRight: CARD_SPACING / 2,
@@ -30,4 +34,5 @@ export default {
   CardActionsSpacer: {
     flexGrow: 1,
   },
+  
 };
