@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { View } from "react-native";
 
 import styles from "./styles";
 import {
-  Appbar,
   HorizontalScroller,
   SectionHeader,
   Scaffold,
@@ -93,13 +92,7 @@ const topicData = [
 
 const CommunityScreen = () => {
   return (
-    <Scaffold
-      renderHeader={() => (
-        <Appbar.Header>
-          <Appbar.Content title="Community" />
-        </Appbar.Header>
-      )}
-    >
+    <Scaffold header={useMemo(() => ({ title: "Community" }), [])}>
       <View style={styles.Section}>
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
           Recommended For You
