@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { Avatar, Divider, useTheme, List } from "react-native-paper";
+import { Avatar, Divider, List } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import styles from "./styles";
@@ -14,7 +14,6 @@ import {
 import { SCREEN_PADDING } from "../constants";
 
 const ProfileScreen = () => {
-  const theme = useTheme();
   return (
     <Scaffold
       renderHeader={() => (
@@ -40,12 +39,6 @@ const ProfileScreen = () => {
             Riddhi Dholakia
           </ScreenTitle>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            {/* <MaterialCommunityIcons
-              name="calendar-month-outline"
-              size={18}
-              style={{ marginRight: 10 }}
-            />
-            <CardTitle>16-09-1999</CardTitle> */}
             <MaterialCommunityIcons
               name="phone-outline"
               size={18}
