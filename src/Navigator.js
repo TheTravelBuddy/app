@@ -117,7 +117,8 @@ const Navigator = () => {
   return (
     <NavigationContainer>
       {authState === authStates.NO_AUTH ? (
-        <AuthStack.Navigator headerMode="none">
+        <AuthStack.Navigator headerMode="none" initialRouteName="ProfileScreen">
+          <AuthStack.Screen name="ProfileScreen" component={ProfileScreen} />
           <AuthStack.Screen
             name="OnBoardingScreen"
             component={OnBoardingScreen}

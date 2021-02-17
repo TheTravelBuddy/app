@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Avatar, Divider, List } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import styles from "./styles";
+import screenStyles from "./styles";
 import {
   Appbar,
   Scaffold,
@@ -23,35 +23,28 @@ const ProfileScreen = () => {
         </Appbar.Header>
       )}
     >
-      <View style={styles.Section}>
-        <View
-          style={{
-            alignItems: "center",
-            marginTop: SCREEN_PADDING,
-          }}
-        >
+      <View style={screenStyles.Section}>
+        <View style={styles.ProfileContainer}>
           <Avatar.Image
             size={98}
-            style={{ elevation: 4 }}
+            style={styles.ProfileImage}
             source={{ uri: "https://picsum.photos/1420" }}
           />
-          <ScreenTitle style={{ marginTop: 12, marginBottom: 4 }}>
-            Riddhi Dholakia
-          </ScreenTitle>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <ScreenTitle style={styles.UserName}>Riddhi Dholakia</ScreenTitle>
+          <View style={styles.ProfileDetails}>
             <MaterialCommunityIcons
               name="phone-outline"
               size={18}
-              style={{ marginHorizontal: 10 }}
+              style={styles.Icon}
             />
-            <CardTitle>+91 6969420420</CardTitle>
+            <CardTitle>+91 9029378546</CardTitle>
           </View>
           <Button mode="text" icon="pencil-outline" compact onPress={() => {}}>
             Edit Profile
           </Button>
         </View>
       </View>
-      <View style={[styles.Section, { paddingHorizontal: SCREEN_PADDING }]}>
+      <View style={[screenStyles.Section, styles.ListContainer]}>
         <List.Item
           title="My Bookings"
           onPress={() => {}}
@@ -59,19 +52,19 @@ const ProfileScreen = () => {
             <List.Icon {...props} icon="briefcase-check-outline" />
           )}
         />
-        <Divider style={{ flex: 1 }} />
+        <Divider style={styles.Divider} />
         <List.Item
           title="My Reviews"
           onPress={() => {}}
           left={(props) => <List.Icon {...props} icon="pencil-box-outline" />}
         />
-        <Divider style={{ flex: 1 }} />
+        <Divider style={styles.Divider} />
         <List.Item
           title="My Blogs"
           onPress={() => {}}
           left={(props) => <List.Icon {...props} icon="card-text-outline" />}
         />
-        <Divider style={{ flex: 1 }} />
+        <Divider style={styles.Divider} />
         <List.Item
           title="Favourites"
           onPress={() => {}}
@@ -80,6 +73,26 @@ const ProfileScreen = () => {
       </View>
     </Scaffold>
   );
+};
+
+const styles = {
+  Divider: {
+    flex: 1,
+  },
+  ProfileContainer: {
+    alignItems: "center",
+    marginTop: SCREEN_PADDING,
+  },
+  ProfileImage: { elevation: 4 },
+  UserName: {
+    marginTop: 12,
+    marginBottom: 4,
+  },
+  ProfileDetails: { flexDirection: "row", alignItems: "center" },
+  Icon: { marginHorizontal: 10 },
+  ListContainer: {
+    paddingHorizontal: SCREEN_PADDING,
+  },
 };
 
 export default ProfileScreen;
