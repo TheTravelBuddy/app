@@ -17,9 +17,9 @@ const BookingFavoritesScreen = ({ navigation }) => {
     >
       <View style={commonStyles.Section}>
         {/* {searchResults.map(
-          ({ coverUri, name, rating, area, city, price, distance }) => (
+          ({ coverUri, name, rating, locality, city, price, distance }) => (
             <BookingSearchCard
-              {...{ coverUri, name, rating, area, city, price, distance }}
+              {...{ coverUri, name, rating, locality, city, price, distance }}
               style={[commonStyles.ScreenPadded, styles.SearchCard]}
             />
           )

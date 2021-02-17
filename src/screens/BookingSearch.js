@@ -105,10 +105,10 @@ const BookingSearchScreen = () => {
           Search Results
         </SectionHeader>
         {searchResults.map(
-          ({ id, coverUri, name, rating, area, city, price, distance }) => (
+          ({ id, coverUri, name, rating, locality, city, price, distance }) => (
             <BookingSearchCard
               key={id}
-              {...{ coverUri, name, rating, area, city, price, distance }}
+              {...{ coverUri, name, rating, locality, city, price, distance }}
               style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
             />
           )

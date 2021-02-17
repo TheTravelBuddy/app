@@ -30,7 +30,7 @@ const HotelDetailCard = ({
           <CardTitle style={styles.CardTitleText}>{name}</CardTitle>
           <RatingPill rating={rating} />
         </View>
-        <LocationSubtitle {...{ area: locality, city }} />
+        <LocationSubtitle {...{ locality, city }} />
         <View style={styles.CardContent}>
           <PriceSummary {...{ price }} />
         </View>
