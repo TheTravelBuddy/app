@@ -11,6 +11,7 @@ import Title from "./Typography/Title";
 import SectionHeader from "./Typography/SectionHeader";
 import Tagline from "./Typography/Tagline";
 import ModalTitle from "./Typography/ModalTitle";
+import ScreenTitle from "./Typography/ScreenTitle";
 import Label from "./Typography/Label";
 import Paragraph from "./Typography/Paragraph";
 import RatingPill from "./RatingPill";
@@ -52,4 +53,5 @@ export {
   BookingTypeModal,
   BookingSearchModal,
   BookingLocationModal,
+  ScreenTitle,
 };

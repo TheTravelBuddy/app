@@ -13,6 +13,7 @@ import SignUpScreen from "./screens/SignUp";
 
 import HomeScreen from "./screens/Home";
 import BookingScreen from "./screens/Booking";
+import ProfileScreen from "./screens/Profile";
 import BookingSearchScreen from "./screens/BookingSearch";
 import BookingFavoritesScreen from "./screens/BookingFavorites";
 import { useAuth, authStates } from "./stores/Auth";
@@ -91,7 +92,7 @@ const HomeTabNavigator = () => {
       />
       <HomeTab.Screen
         name="ProfileScreen"
-        component={HomeScreen}
+        component={ProfileScreen}
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ color }) => (
@@ -116,7 +117,8 @@ const Navigator = () => {
   return (
     <NavigationContainer>
       {authState === authStates.NO_AUTH ? (
-        <AuthStack.Navigator headerMode="none">
+        <AuthStack.Navigator headerMode="none" initialRouteName="ProfileScreen">
+          <AuthStack.Screen name="ProfileScreen" component={ProfileScreen} />
           <AuthStack.Screen
             name="OnBoardingScreen"
             component={OnBoardingScreen}
