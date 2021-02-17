@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { View } from "react-native";
 
 import styles from "./styles";
 
 import {
-  Appbar,
   SectionHeader,
   Scaffold,
   LocationBannerCard,
@@ -53,7 +52,7 @@ const topRatedPackagesData = [
   },
 ];
 
-const hoteldetailsData = [
+const hotelDetailsData = [
   {
     id: 1,
     coverUri:
@@ -86,25 +85,28 @@ const hoteldetailsData = [
   },
 ];
 
-const BookingScreen = ({ navigation }) => {
+const BookingScreen = ({ navigation: { navigate } }) => {
   const initData = useBookingFilters((state) => state.initData);
 
   useEffect(initData, [initData]);
 
   return (
     <Scaffold
-      renderHeader={() => (
-        <Appbar.Header>
-          <Appbar.Content title="Booking" />
-          <Appbar.Action
-            icon="magnify"
-            onPress={() => navigation.navigate("BookingSearchScreen")}
-          />
-          <Appbar.Action
-            icon="heart-outline"
-            onPress={() => navigation.navigate("BookingFavoritesScreen")}
-          />
-        </Appbar.Header>
+      header={useMemo(
+        () => ({
+          title: "Booking",
+          actions: [
+            {
+              icon: "magnify",
+              onPress: () => navigate("BookingSearchScreen"),
+            },
+            {
+              icon: "heart-outline",
+              onPress: () => navigate("BookingFavoritesScreen"),
+            },
+          ],
+        }),
+        [navigate]
       )}
     >
       <View style={styles.Section}>
@@ -122,7 +124,7 @@ const BookingScreen = ({ navigation }) => {
           Hotels Nearby
         </SectionHeader>
         <HorizontalScroller>
-          {hoteldetailsData.map(
+          {hotelDetailsData.map(
             ({ id, coverUri, name, rating, locality, city, price }) => (
               <HotelDetailCard
                 key={id}
@@ -147,7 +149,7 @@ const BookingScreen = ({ navigation }) => {
           Hotels on a Budget
         </SectionHeader>
         <HorizontalScroller>
-          {hoteldetailsData.map(
+          {hotelDetailsData.map(
             ({ id, coverUri, name, rating, locality, city, price }) => (
               <HotelDetailCard
                 key={id}

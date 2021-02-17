@@ -2,22 +2,23 @@ import React from "react";
 import { StatusBar, SafeAreaView, StyleSheet, ScrollView } from "react-native";
 import { useTheme } from "react-native-paper";
 
-export const HEADER_HEIGHT = 56;
+import Appbar from "../Appbar";
 
 const Scaffold = ({
   children,
   statusBarColor,
+  header,
   renderHeader,
   renderFooter,
-  style = {},
+  style,
 }) => {
   const theme = useTheme();
 
   return (
     <SafeAreaView style={StyleSheet.absoluteFill}>
       <StatusBar
+        animated
         backgroundColor={statusBarColor || theme.colors.background}
-        animated={true}
         barStyle="dark-content"
       />
       {renderHeader && renderHeader()}
@@ -32,6 +33,18 @@ const Scaffold = ({
           style,
         ]}
       >
+        {!!header && (
+          <Appbar.Header>
+            {header.backAction && (
+              <Appbar.BackAction onPress={header.backAction} />
+            )}
+            <Appbar.Content title={header.title} />
+            {header.actions &&
+              header.actions.map((props) => (
+                <Appbar.Action key={props.icon} {...props} />
+              ))}
+          </Appbar.Header>
+        )}
         {children}
       </ScrollView>
       {renderFooter && renderFooter()}

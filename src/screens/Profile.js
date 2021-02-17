@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { View } from "react-native";
 import { Avatar, Divider, List } from "react-native-paper";
 
 import screenStyles from "./styles";
-import { Appbar, Scaffold, ScreenTitle, CardTitle } from "../components";
+import { Scaffold, ScreenTitle, CardTitle } from "../components";
 import { SCREEN_PADDING } from "../constants";
 import { useAuth } from "../stores/Auth";
 
@@ -13,12 +13,18 @@ const ProfileScreen = () => {
 
   return (
     <Scaffold
-      renderHeader={() => (
-        <Appbar.Header>
-          <Appbar.Content title="Profile" />
-          <Appbar.Action icon="pencil-outline" onPress={() => {}} />
-          <Appbar.Action icon="exit-to-app" onPress={logout} />
-        </Appbar.Header>
+      header={useMemo(
+        () => ({
+          title: "Profile",
+          actions: [
+            { icon: "pencil-outline", onPress: () => {} },
+            {
+              icon: "exit-to-app",
+              onPress: logout,
+            },
+          ],
+        }),
+        [logout]
       )}
     >
       <View style={styles.ProfileContainer}>

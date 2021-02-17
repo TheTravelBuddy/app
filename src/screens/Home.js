@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 
 import styles from "./styles";
 import {
-  Appbar,
   HorizontalScroller,
   SectionHeader,
   Scaffold,
@@ -19,13 +18,7 @@ const HomeScreen = () => {
   const [apiRequest] = useAPI("/traveller/home");
 
   return (
-    <Scaffold
-      renderHeader={() => (
-        <Appbar.Header>
-          <Appbar.Content title="Travel Buddy" />
-        </Appbar.Header>
-      )}
-    >
+    <Scaffold header={useMemo(() => ({ title: "Travel Buddy" }), [])}>
       {apiRequest.loading ? (
         <View style={styles.ActivityContainer}>
           <ActivityIndicator size="large" />

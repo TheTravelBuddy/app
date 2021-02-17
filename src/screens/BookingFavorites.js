@@ -1,19 +1,16 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { View } from "react-native";
 
 import commonStyles from "./styles";
 
-import { Appbar, Scaffold } from "../components";
+import { Scaffold } from "../components";
 
-const BookingFavoritesScreen = ({ navigation }) => {
+const BookingFavoritesScreen = ({ navigation: { goBack } }) => {
   return (
     <Scaffold
-      renderHeader={() => (
-        <Appbar.Header>
-          <Appbar.BackAction onPress={navigation.goBack} />
-          <Appbar.Content title="Favorites" />
-        </Appbar.Header>
-      )}
+      header={useMemo(() => ({ title: "Favorites", backAction: goBack }), [
+        goBack,
+      ])}
     >
       <View style={commonStyles.Section}>
         {/* {searchResults.map(

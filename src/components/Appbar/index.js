@@ -28,15 +28,15 @@ const Content = ({ titleStyle, ...props }) => {
   );
 };
 
-const Header = ({ children, animated = false, style, ...props }) => {
+const Header = ({ children, style, ...props }) => {
   const theme = useTheme();
 
   return (
     <Appbar.Header
       style={[
         styles.Header,
-        style,
         { backgroundColor: theme.colors.background },
+        style,
       ]}
       {...props}
     >
