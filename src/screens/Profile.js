@@ -1,47 +1,35 @@
 import React from "react";
 import { View } from "react-native";
 import { Avatar, Divider, List } from "react-native-paper";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import screenStyles from "./styles";
-import {
-  Appbar,
-  Scaffold,
-  Button,
-  ScreenTitle,
-  CardTitle,
-} from "../components";
+import { Appbar, Scaffold, ScreenTitle, CardTitle } from "../components";
 import { SCREEN_PADDING } from "../constants";
+import { useAuth } from "../stores/Auth";
 
 const ProfileScreen = () => {
+  const user = useAuth((state) => state.user);
+  const logout = useAuth((state) => state.logout);
+
   return (
     <Scaffold
       renderHeader={() => (
         <Appbar.Header>
           <Appbar.Content title="Profile" />
-          <Appbar.Action icon="exit-to-app" onPress={() => {}} />
+          <Appbar.Action icon="pencil-outline" onPress={() => {}} />
+          <Appbar.Action icon="exit-to-app" onPress={logout} />
         </Appbar.Header>
       )}
     >
-      <View style={screenStyles.Section}>
-        <View style={styles.ProfileContainer}>
-          <Avatar.Image
-            size={98}
-            style={styles.ProfileImage}
-            source={{ uri: "https://picsum.photos/1420" }}
-          />
-          <ScreenTitle style={styles.UserName}>Riddhi Dholakia</ScreenTitle>
-          <View style={styles.ProfileDetails}>
-            <MaterialCommunityIcons
-              name="phone-outline"
-              size={18}
-              style={styles.Icon}
-            />
-            <CardTitle>+91 9029378546</CardTitle>
-          </View>
-          <Button mode="text" icon="pencil-outline" compact onPress={() => {}}>
-            Edit Profile
-          </Button>
+      <View style={styles.ProfileContainer}>
+        <Avatar.Image
+          size={108}
+          style={styles.ProfileImage}
+          source={{ uri: "https://picsum.photos/1420" }}
+        />
+        <View style={styles.ProfileDetails}>
+          <ScreenTitle>{user.name}</ScreenTitle>
+          <CardTitle>{user.phoneNumber}</CardTitle>
         </View>
       </View>
       <View style={[screenStyles.Section, styles.ListContainer]}>
@@ -52,21 +40,21 @@ const ProfileScreen = () => {
             <List.Icon {...props} icon="briefcase-check-outline" />
           )}
         />
-        <Divider style={styles.Divider} />
+        <Divider />
         <List.Item
           title="My Reviews"
           onPress={() => {}}
           left={(props) => <List.Icon {...props} icon="pencil-box-outline" />}
         />
-        <Divider style={styles.Divider} />
+        <Divider />
         <List.Item
           title="My Blogs"
           onPress={() => {}}
           left={(props) => <List.Icon {...props} icon="card-text-outline" />}
         />
-        <Divider style={styles.Divider} />
+        <Divider />
         <List.Item
-          title="Favourites"
+          title="My Favourites"
           onPress={() => {}}
           left={(props) => <List.Icon {...props} icon="heart-outline" />}
         />
@@ -80,16 +68,16 @@ const styles = {
     flex: 1,
   },
   ProfileContainer: {
+    margin: SCREEN_PADDING,
+  },
+  ProfileDetails: {
+    marginVertical: SCREEN_PADDING,
     alignItems: "center",
-    marginTop: SCREEN_PADDING,
+    justifyContent: "center",
   },
-  ProfileImage: { elevation: 4 },
-  UserName: {
-    marginTop: 12,
-    marginBottom: 4,
+  ProfileImage: {
+    alignSelf: "center",
   },
-  ProfileDetails: { flexDirection: "row", alignItems: "center" },
-  Icon: { marginHorizontal: 10 },
   ListContainer: {
     paddingHorizontal: SCREEN_PADDING,
   },
