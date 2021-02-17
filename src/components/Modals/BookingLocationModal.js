@@ -8,7 +8,7 @@ import ModalTitle from "../Typography/ModalTitle";
 import CardTitle from "../Typography/CardTitle";
 
 import { useBookingFilters } from "../../stores/BookingFilters";
-import styles from "../../screens/styles";
+import screenStyles from "../../screens/styles";
 
 const cities = [
   { id: 0, name: "Mumbai" },
@@ -24,25 +24,25 @@ const BookingLocationModal = ({ visible, onDismiss }) => {
   return (
     <BottomModal {...{ visible, onDismiss }}>
       <ModalTitle>Where?</ModalTitle>
-      <View style={styles.Section}>
+      <View style={screenStyles.Section}>
         <Button
           compact
           mode="outlined"
           icon="crosshairs-gps"
-          style={{ margin: 4 }}
+          style={styles.LocationSelector}
         >
           Current Location
         </Button>
       </View>
-      <View style={styles.Section}>
-        <CardTitle style={styles.SectionHeader}>Popular Destinations</CardTitle>
-        <View
-          style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}
-        >
+      <View style={screenStyles.Section}>
+        <CardTitle style={screenStyles.SectionHeader}>
+          Popular Destinations
+        </CardTitle>
+        <View style={styles.OtherLocationsContainer}>
           {cities.map((city) => (
             <Chip
               mode={selectedCity.id === city.id ? "contained" : "flat"}
-              style={{ margin: 4 }}
+              style={styles.LocationSelector}
               onPress={() => {
                 setCity(city);
               }}
@@ -54,6 +54,17 @@ const BookingLocationModal = ({ visible, onDismiss }) => {
       </View>
     </BottomModal>
   );
+};
+
+const styles = {
+  LocationSelector: {
+    margin: 4,
+  },
+  OtherLocationsContainer: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
 };
 
 export default BookingLocationModal;

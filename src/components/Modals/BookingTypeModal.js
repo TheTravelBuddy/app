@@ -3,11 +3,11 @@ import { View } from "react-native";
 
 import BottomModal from "../BottomModal";
 import ModalTitle from "../Typography/ModalTitle";
-import styles from "../../screens/styles";
+import screenStyles from "../../screens/styles";
 import HotelSelectIllustration from "../../../assets/illustrations/HotelSelectIllustration.svg";
 import PackageSelectIllustration from "../../../assets/illustrations/PackageSelectIllustration.svg";
 
-import { bookingTypes, useBookingFilters } from "../../stores/BookingFilters";
+import { useBookingFilters } from "../../stores/BookingFilters";
 import BookingTypeCard from "../Card/BookingTypeCard";
 
 const BookingTypeModal = ({ visible, onDismiss }) => {
@@ -16,8 +16,8 @@ const BookingTypeModal = ({ visible, onDismiss }) => {
   return (
     <BottomModal {...{ visible, onDismiss }}>
       <ModalTitle>What?</ModalTitle>
-      <View style={styles.Section}>
-        <View style={{ flexDirection: "row" }}>
+      <View style={screenStyles.Section}>
+        <View style={styles.ButtonsContainer}>
           <BookingTypeCard
             title="Hotel"
             renderIllustration={(props) => (
@@ -42,6 +42,12 @@ const BookingTypeModal = ({ visible, onDismiss }) => {
       </View>
     </BottomModal>
   );
+};
+
+const styles = {
+  ButtonsContainer: {
+    flexDirection: "row",
+  },
 };
 
 export default BookingTypeModal;

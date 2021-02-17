@@ -2,7 +2,7 @@ import React from "react";
 import { View, Image } from "react-native";
 import { Card, useTheme } from "react-native-paper";
 
-import styles from "./styles";
+import commonStyles from "./styles";
 import RatingPill from "../RatingPill";
 import CardTitle from "../Typography/CardTitle";
 import LocationSubtitle from "../Typography/LocationSubtitle";
@@ -32,7 +32,7 @@ const BookingSearchCard = ({
         style,
       ]}
     >
-      <View style={{ flex: 1, flexDirection: "row" }}>
+      <View style={styles.CardContent}>
         <Image
           style={{
             width: width / 4,
@@ -41,22 +41,33 @@ const BookingSearchCard = ({
           }}
           source={{ uri: coverUri }}
         />
-        <View style={[{ flex: 1, marginLeft: CARD_SPACING }]}>
-          <View style={styles.CardTitleContainer}>
-            <CardTitle style={styles.CardTitleText}>{name}</CardTitle>
+        <View style={styles.CardBody}>
+          <View style={commonStyles.CardTitleContainer}>
+            <CardTitle style={commonStyles.CardTitleText}>{name}</CardTitle>
             <RatingPill rating={rating} />
           </View>
           <LocationSubtitle {...{ area, city }} />
           <DistanceSubtitle {...{ distance }} />
-          <View style={{ flexGrow: 1 }} />
-          <SearchPriceSummary
-            {...{ price }}
-            style={{ alignSelf: "flex-end" }}
-          />
+          <View style={commonStyles.CardActionsSpacer} />
+          <SearchPriceSummary {...{ price }} style={styles.CardPrice} />
         </View>
       </View>
     </Card>
   );
+};
+
+const styles = {
+  CardContent: {
+    flex: 1,
+    flexDirection: "row",
+  },
+  CardBody: {
+    flex: 1,
+    marginLeft: CARD_SPACING,
+  },
+  CardPrice: {
+    alignSelf: "flex-end",
+  },
 };
 
 export default BookingSearchCard;
