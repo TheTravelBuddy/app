@@ -37,7 +37,7 @@ const HomeScreen = () => {
               Top Packages
             </SectionHeader>
             <HorizontalScroller>
-              {apiRequest.data?.topHotels.map((packageDetails) => (
+              {apiRequest.data?.topPackages.map((packageDetails) => (
                 <LocationBannerCard
                   key={packageDetails.id}
                   {...packageDetails}
