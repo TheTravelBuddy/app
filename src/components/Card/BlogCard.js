@@ -14,17 +14,17 @@ import CardTitle from "../Typography/CardTitle";
 import Paragraph from "../Typography/Paragraph";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
 
-const BlogCard = ({ id, title, content, profilePic, likes, style }) => {
+const BlogCard = ({ id, title, content, authorProfile, likes, style }) => {
   const { width } = useScreenDimensions();
   const theme = useTheme();
   return (
     <Card style={[{ width: width * 0.6 }, style]}>
       <View style={styles.CardContainer}>
         <View style={styles.CardTitleContainer}>
-          {profilePic && (
+          {authorProfile && (
             <Avatar.Image
               size={24}
-              source={{ uri: profilePic }}
+              source={{ uri: authorProfile }}
               style={styles.CardTitleIcon}
             />
           )}
