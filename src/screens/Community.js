@@ -9,6 +9,7 @@ import {
   BlogBannerCard,
   BlogLocationCard,
   BlogTopicCard,
+  Button,
 } from "../components";
 
 const blogSummaryData = [
@@ -94,6 +95,16 @@ const CommunityScreen = () => {
   return (
     <Scaffold header={useMemo(() => ({ title: "Community" }), [])}>
       <View style={styles.Section}>
+        <Button
+          mode="contained"
+          icon="pencil-outline"
+          style={styles.ScreenPadded}
+          theme={{ colors: { primary: "white" } }}
+        >
+          Write a Blog
+        </Button>
+      </View>
+      <View style={styles.Section}>
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
           Recommended For You
         </SectionHeader>
@@ -115,7 +126,7 @@ const CommunityScreen = () => {
       </View>
       <View style={styles.Section}>
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
-          Top Blogs From
+          Destination Blogs
         </SectionHeader>
         <HorizontalScroller>
           {blogsData.map((blogDetails) => (

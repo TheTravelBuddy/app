@@ -15,7 +15,15 @@ import CardTitle from "../Typography/CardTitle";
 import Paragraph from "../Typography/Paragraph";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
 
-const BlogCard = ({ id, title, city, content, profilePic, likes, style }) => {
+const BlogLocationCard = ({
+  id,
+  title,
+  city,
+  content,
+  profilePic,
+  likes,
+  style,
+}) => {
   const { width } = useScreenDimensions();
   const theme = useTheme();
   return (
@@ -23,7 +31,7 @@ const BlogCard = ({ id, title, city, content, profilePic, likes, style }) => {
       <View style={[commonStyles.CardContainer, styles.LocationContainer]}>
         <MaterialCommunityIcons
           name="map-marker-outline"
-          size={16}
+          size={18}
           color="#4A4A4A"
           style={styles.LocationIcon}
         />
@@ -75,4 +83,4 @@ const styles = {
   },
 };
 
-export default BlogCard;
+export default BlogLocationCard;
