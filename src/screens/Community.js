@@ -21,7 +21,7 @@ const blogSummaryData = [
     content:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
     likes: 43,
-    dop: "6 mins ago",
+    datetime: "6 mins ago",
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const blogSummaryData = [
     content:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
     likes: 43,
-    dop: "5 hrs ago",
+    datetime: "5 hrs ago",
   },
   {
     id: 3,
@@ -40,14 +40,15 @@ const blogSummaryData = [
     content:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
     likes: 43,
-    dop: "1 week ago",
+    datetime: "1 week ago",
   },
 ];
 const blogsData = [
   {
     id: 1,
-    city: "Goa",
-    profilePic: "https://picsum.photos/1001",
+    locationId: 1,
+    locationName: "Goa",
+    authorProfile: "https://picsum.photos/1001",
     title: "My Vacation to Goa",
     likes: 43,
     content:
@@ -55,8 +56,9 @@ const blogsData = [
   },
   {
     id: 2,
-    city: "Mumbai",
-    profilePic: "https://picsum.photos/1000",
+    locationId: 2,
+    locationName: "Mumbai",
+    authorProfile: "https://picsum.photos/1000",
     title: "Food Experiences Every...",
     likes: 69,
     content:
@@ -64,8 +66,9 @@ const blogsData = [
   },
   {
     id: 3,
-    city: "Delhi",
-    profilePic: "https://picsum.photos/1000",
+    locationId: 3,
+    locationName: "Delhi",
+    authorProfile: "https://picsum.photos/1000",
     title: "Magic of the North",
     likes: 15,
     content:
@@ -73,22 +76,10 @@ const blogsData = [
   },
 ];
 const topicData = [
-  {
-    id: 1,
-    title: "Adventure",
-  },
-  {
-    id: 2,
-    title: "Cuisine",
-  },
-  {
-    id: 3,
-    title: "Beaches",
-  },
-  {
-    id: 4,
-    title: "Historical",
-  },
+  { id: 1, name: "Adventure" },
+  { id: 2, name: "Cuisine" },
+  { id: 3, name: "Beaches" },
+  { id: 4, name: "Historical" },
 ];
 
 const CommunityScreen = () => {
@@ -100,6 +91,10 @@ const CommunityScreen = () => {
           icon="pencil-outline"
           style={styles.ScreenPadded}
           theme={{ colors: { primary: "white" } }}
+          onPress={() => {
+            // eslint-disable-next-line no-alert
+            alert("WIP: Write Blog Screen Endpoint");
+          }}
         >
           Write a Blog
         </Button>

@@ -1,20 +1,36 @@
 import React from "react";
-import { useTheme } from "react-native-paper";
+import { Card, useTheme } from "react-native-paper";
 
-import Button from "../Button";
+import CardTitle from "../Typography/CardTitle";
+import { SCREEN_PADDING } from "../../constants";
 
-const BlogTopicCard = ({ title, ...props }) => {
+const BlogTopicCard = ({ id, name, style, ...props }) => {
   const theme = useTheme();
 
   return (
-    <Button
-      mode="contained"
-      theme={{ colors: { primary: theme.colors.surface } }}
-      {...props}
+    <Card
+      style={[styles.Container, style]}
+      onPress={() => {
+        // eslint-disable-next-line no-alert
+        alert("WIP: Blog Topic Screen Navigation");
+      }}
     >
-      {title}
-    </Button>
+      <CardTitle style={[styles.TitleText, theme.fonts.medium]}>
+        {name}
+      </CardTitle>
+    </Card>
   );
+};
+
+const styles = {
+  Container: {
+    paddingHorizontal: SCREEN_PADDING * 2,
+    paddingVertical: SCREEN_PADDING,
+  },
+  TitleText: {
+    letterSpacing: 1.35,
+    textTransform: "uppercase",
+  },
 };
 
 export default BlogTopicCard;

@@ -7,6 +7,7 @@ import {
   IconButton,
   useTheme,
   Divider,
+  TouchableRipple,
 } from "react-native-paper";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -18,31 +19,46 @@ import useScreenDimensions from "../../hooks/useScreenDimensions";
 const BlogLocationCard = ({
   id,
   title,
-  city,
+  locationName,
   content,
-  profilePic,
+  authorProfile,
   likes,
   style,
 }) => {
   const { width } = useScreenDimensions();
   const theme = useTheme();
   return (
-    <Card style={[{ width: width * 0.6 }, style]}>
-      <View style={[commonStyles.CardContainer, styles.LocationContainer]}>
-        <MaterialCommunityIcons
-          name="map-marker-outline"
-          size={18}
-          color="#4A4A4A"
-          style={styles.LocationIcon}
-        />
-        <CardTitle style={commonStyles.CardTitleText}>{city}</CardTitle>
-      </View>
+    <Card
+      style={[styles.LocationCard, { width: width * 0.6 }, style]}
+      onPress={() => {
+        // eslint-disable-next-line no-alert
+        alert("WIP: Blog Screen Navigation ");
+      }}
+    >
+      <TouchableRipple
+        onPress={() => {
+          // eslint-disable-next-line no-alert
+          alert("WIP: City Details Screen Navigation ");
+        }}
+      >
+        <View style={[commonStyles.CardContainer, styles.LocationContainer]}>
+          <MaterialCommunityIcons
+            name="map-marker-outline"
+            size={18}
+            color="#4A4A4A"
+            style={styles.LocationIcon}
+          />
+          <CardTitle style={commonStyles.CardTitleText}>
+            {locationName}
+          </CardTitle>
+        </View>
+      </TouchableRipple>
       <Divider />
       <View style={commonStyles.CardContainer}>
         <View style={commonStyles.CardTitleContainer}>
           <Avatar.Image
             size={24}
-            source={{ uri: profilePic }}
+            source={{ uri: authorProfile }}
             style={commonStyles.CardTitleIcon}
           />
           <CardTitle style={commonStyles.CardTitleText}>{title}</CardTitle>
@@ -56,7 +72,10 @@ const BlogLocationCard = ({
               color={theme.colors.textSecondary}
               style={commonStyles.CardActionsIcon}
               icon="heart-outline"
-              onPress={() => {}}
+              onPress={() => {
+                // eslint-disable-next-line no-alert
+                alert("WIP: Like Blog Endpoint");
+              }}
             />
             <Text
               style={[
@@ -74,6 +93,9 @@ const BlogLocationCard = ({
 };
 
 const styles = {
+  LocationCard: {
+    overflow: "hidden",
+  },
   LocationContainer: {
     flexDirection: "row",
     alignItems: "center",
