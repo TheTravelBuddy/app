@@ -23,4 +23,10 @@ export default {
     justifyContent: "center",
     flexGrow: 1,
   },
+  Flex: {
+    flex: 1,
+  },
+  FlexMore: {
+    flex: 2,
+  },
 };

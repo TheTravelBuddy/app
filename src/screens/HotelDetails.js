@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import { View, Image } from "react-native";
-import { Card, FAB, useTheme } from "react-native-paper";
+import { FAB, useTheme } from "react-native-paper";
 
-import styles from "./styles";
+import screenStyles from "./styles";
 
 import {
   SectionHeader,
@@ -15,8 +15,7 @@ import {
   RatingPill,
   SearchPriceSummary,
   Paragraph,
-  CardTitle,
-  Appbar,
+  ReviewCard,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
@@ -35,28 +34,20 @@ const hotelDetails = {
     "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/99/50/99501_v5.jpeg",
     "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/a5/d8/c1/exterior.jpg",
   ],
-  amenities: [
-    "wifi",
-    "ac",
-    "pool",
-    "parking",
-    "pool",
-    "parking",
-    "spa",
-    "ac",
-    "wifi",
-  ],
+  amenities: ["Wifi", "AC", "Pool", "Parking", "Spa"],
   price: 3550,
 };
 
 const reviews = [
   {
+    id: 1,
     username: "Riddhi Dholakia",
     rating: 4.5,
     reviewText:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
   },
   {
+    id: 2,
     username: "Riddhi Dholakia",
     rating: 3.6,
     reviewText:
@@ -80,55 +71,17 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
 
   return (
     <Scaffold
-      renderHeader={() => (
-        <></>
-        //   <FAB
-        //     small
-        //     style={{
-        //       position: "absolute",
-        //       margin: 8,
-        //       top: 0,
-        //       left: 0,
-        //       zIndex: 4,
-        //     }}
-        //     mode="contained"
-        //     icon="arrow-left"
-        //     theme={whiteButtonTheme}
-        //     onPress={goBack}
-        //   />
-        //   <FAB
-        //     small
-        //     style={{
-        //       position: "absolute",
-        //       margin: 8,
-        //       top: 0,
-        //       right: 0,
-        //       zIndex: 4,
-        //     }}
-        //     mode="contained"
-        //     icon="heart-outline"
-        //     theme={whiteButtonTheme}
-        //     onPress={() => {
-        //       // eslint-disable-next-line no-alert
-        //       alert("WIP: Like Hotel API");
-        //     }}
-        //   />
-      )}
       renderFooter={() => (
         <View
-          style={{
-            backgroundColor: theme.colors.surface,
-            elevation: 4,
-            flexDirection: "row",
-            alignItems: "center",
-            padding: Math.round(CARD_SPACING / 2),
-            paddingLeft: SCREEN_PADDING,
-          }}
+          style={[styles.BottomBar, { backgroundColor: theme.colors.surface }]}
         >
-          <SearchPriceSummary style={{ flex: 2 }} price={hotelDetails.price} />
+          <SearchPriceSummary
+            style={screenStyles.FlexMore}
+            price={hotelDetails.price}
+          />
           <Button
             mode="contained"
-            style={{ flex: 1 }}
+            style={screenStyles.Flex}
             onPress={() => {
               // eslint-disable-next-line no-alert
               alert("WIP: Booking Flow");
@@ -139,41 +92,11 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
         </View>
       )}
     >
-      {/* <Appbar.Header
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          top: 0,
-          zIndex: 10,
-          // backgroundColor: "transparent",
-        }}
-      > */}
-      {/* <View style={{ flex: 1 }} /> */}
-      {/* <FAB
-        small
-        style={{ position: "absolute", margin: 8, top: 0, left: 0 }}
-        mode="contained"
-        icon="arrow-left"
-        theme={whiteButtonTheme}
-        onPress={() => alert("Hi")}
-      />
-      <FAB
-        small
-        style={{ position: "absolute", margin: 8, top: 0, right: 0 }}
-        mode="contained"
-        icon="heart-outline"
-        theme={whiteButtonTheme}
-        onPress={() => {
-          // eslint-disable-next-line no-alert
-          alert("WIP: Like Hotel API");
-        }}
-      /> */}
-      {/* </Appbar.Header> */}
       <View>
         <HorizontalScroller gap={0} verticalSpacing={0} horizontalSpacing={0}>
           {hotelDetails.photos.map((photoUri) => (
             <Image
+              key={photoUri}
               source={{
                 uri: photoUri,
               }}
@@ -185,13 +108,7 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
         <>
           <FAB
             small
-            style={{
-              position: "absolute",
-              margin: 8,
-              top: 0,
-              left: 0,
-              zIndex: 4,
-            }}
+            style={styles.HeaderBackFAB}
             mode="contained"
             icon="arrow-left"
             theme={whiteButtonTheme}
@@ -199,13 +116,7 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
           />
           <FAB
             small
-            style={{
-              position: "absolute",
-              margin: 8,
-              top: 0,
-              right: 0,
-              zIndex: 4,
-            }}
+            style={styles.HeaderFavoriteFAB}
             mode="contained"
             icon="heart-outline"
             theme={whiteButtonTheme}
@@ -215,28 +126,27 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
             }}
           />
         </>
-        <View style={[styles.Section]}>
-          <View
-            style={[
-              { flex: 1, flexDirection: "row", marginTop: SCREEN_PADDING },
-              styles.ScreenPadded,
-            ]}
-          >
-            <ScreenTitle style={{ flex: 1 }}>{hotelDetails.name}</ScreenTitle>
+        <View style={[screenStyles.Section]}>
+          <View style={[screenStyles.ScreenPadded, styles.TitleContainer]}>
+            <ScreenTitle style={screenStyles.Flex}>
+              {hotelDetails.name}
+            </ScreenTitle>
             <RatingPill rating={hotelDetails.rating} />
           </View>
           <LocationSubtitle
-            style={styles.ScreenPadded}
+            style={screenStyles.ScreenPadded}
             area={hotelDetails.area}
             city={hotelDetails.city}
           />
         </View>
-        <View style={styles.Section}>
-          <View style={[styles.FormInputContainer, styles.ScreenPadded]}>
+        <View style={screenStyles.Section}>
+          <View
+            style={[screenStyles.FormInputContainer, screenStyles.ScreenPadded]}
+          >
             <Button
               mode="contained"
               icon="map-marker-outline"
-              style={styles.FormInputLeft}
+              style={screenStyles.FormInputLeft}
               theme={whiteButtonTheme}
               onPress={() => {
                 // eslint-disable-next-line no-alert
@@ -248,7 +158,7 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
             <Button
               mode="contained"
               icon="phone-outline"
-              style={styles.FormInputRight}
+              style={screenStyles.FormInputRight}
               theme={whiteButtonTheme}
               onPress={() => {
                 // eslint-disable-next-line no-alert
@@ -259,61 +169,41 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
             </Button>
           </View>
         </View>
-        <View style={styles.Section}>
-          <SectionHeader style={[styles.ScreenPadded, SectionHeader]}>
+        <View style={screenStyles.Section}>
+          <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
             About
           </SectionHeader>
-          <Paragraph style={styles.ScreenPadded}>
+          <Paragraph style={screenStyles.ScreenPadded}>
             {hotelDetails.about}
           </Paragraph>
         </View>
-        <View style={styles.Section}>
-          <View style={styles.SectionHeader}>
-            <SectionHeader style={[styles.ScreenPadded, SectionHeader]}>
+        <View style={screenStyles.Section}>
+          <View style={screenStyles.SectionHeader}>
+            <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
               Amenities
             </SectionHeader>
           </View>
-          <View
-            style={[
-              {
-                flexDirection: "row",
-                flexWrap: "wrap",
-                marginHorizontal: SCREEN_PADDING - CHIP_SPACING,
-              },
-            ]}
-          >
-            {hotelDetails.amenities.map((amenitiesList) => (
-              <Chip style={{ margin: CHIP_SPACING }}>{amenitiesList}</Chip>
+          <View style={styles.AmenitiesContainer}>
+            {hotelDetails.amenities.map((amenity) => (
+              <Chip key={amenity} style={{ margin: CHIP_SPACING }}>
+                {amenity.toUpperCase()}
+              </Chip>
             ))}
           </View>
         </View>
-        <View style={styles.Section}>
-          <View style={styles.SectionHeader}>
-            <SectionHeader style={[styles.ScreenPadded, SectionHeader]}>
+        <View style={screenStyles.Section}>
+          <View style={screenStyles.SectionHeader}>
+            <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
               Reviews
             </SectionHeader>
           </View>
-          <View style={styles.ScreenPadded}>
-            {/* <RatingPill rating={hotelDetails.rating} /> */}
+          <View style={screenStyles.ScreenPadded}>
             {reviews.map((review) => (
-              <Card
-                style={{
-                  padding: CARD_SPACING,
-                  marginVertical: Math.round(CARD_SPACING / 2),
-                }}
-              >
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <RatingPill rating={review.rating} />
-                  <CardTitle style={{ flex: 1, marginLeft: CARD_SPACING }}>
-                    {review.username}
-                  </CardTitle>
-                </View>
-                <Paragraph>{review.reviewText}</Paragraph>
-              </Card>
+              <ReviewCard key={review.id} {...review} />
             ))}
             <Button
               compact
-              style={{ alignSelf: "flex-end" }}
+              style={styles.SectionRightButton}
               onPress={() => {
                 // eslint-disable-next-line no-alert
                 alert("WIP: Reviews Screen Navigation");
@@ -326,6 +216,43 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
       </View>
     </Scaffold>
   );
+};
+
+const styles = {
+  BottomBar: {
+    elevation: 4,
+    flexDirection: "row",
+    alignItems: "center",
+    padding: Math.round(CARD_SPACING / 2),
+    paddingLeft: SCREEN_PADDING,
+  },
+  HeaderBackFAB: {
+    position: "absolute",
+    margin: 8,
+    top: 0,
+    left: 0,
+    zIndex: 4,
+  },
+  HeaderFavoriteFAB: {
+    position: "absolute",
+    margin: 8,
+    top: 0,
+    right: 0,
+    zIndex: 4,
+  },
+  TitleContainer: {
+    flex: 1,
+    flexDirection: "row",
+    marginTop: SCREEN_PADDING,
+  },
+  AmenitiesContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    marginHorizontal: SCREEN_PADDING - CHIP_SPACING,
+  },
+  SectionRightButton: {
+    alignSelf: "flex-end",
+  },
 };
 
 export default HotelDetailsScreen;

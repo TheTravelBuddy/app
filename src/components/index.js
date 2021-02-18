@@ -25,6 +25,7 @@ import BlogCard from "./Card/BlogCard";
 import BlogBannerCard from "./Card/BlogBannerCard";
 import BlogLocationCard from "./Card/BlogLocationCard";
 import BlogTopicCard from "./Card/BlogTopicCard";
+import ReviewCard from "./Card/ReviewCard";
 import Chip from "./Chip";
 import BookingFiltersModal from "./Modals/BookingFiltersModal";
 import BookingTypeModal from "./Modals/BookingTypeModal";
@@ -58,6 +59,7 @@ export {
   BlogBannerCard,
   BlogLocationCard,
   BlogTopicCard,
+  ReviewCard,
   Chip,
   ModalTitle,
   BookingFiltersModal,

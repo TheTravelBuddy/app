@@ -1,4 +1,4 @@
-import React, { isValidElement, cloneElement, Children } from "react";
+import React, { Children } from "react";
 import { ScrollView, View } from "react-native";
 
 import { SCREEN_PADDING } from "../../constants";
@@ -8,7 +8,7 @@ const HorizontalScroller = ({
   horizontalSpacing = SCREEN_PADDING,
   verticalSpacing = 2,
   gap = SCREEN_PADDING / 2,
-  // contentStyle,
+  contentStyle,
 }) => {
   const marginHorizontal = Math.round(gap / 2);
   const paddingVertical = verticalSpacing;
@@ -21,17 +21,9 @@ const HorizontalScroller = ({
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={{ paddingHorizontal, paddingVertical }}
     >
-      {Children.map(
-        children,
-        (child) => (
-          <View style={{ marginHorizontal }}>{child}</View>
-        )
-        // isValidElement(child)
-        //   ? cloneElement(child, {
-        //       style: [{ marginHorizontal }, contentStyle],
-        //     })
-        //   : child
-      )}
+      {Children.map(children, (child) => (
+        <View style={[{ marginHorizontal }, contentStyle]}>{child}</View>
+      ))}
     </ScrollView>
   );
 };
