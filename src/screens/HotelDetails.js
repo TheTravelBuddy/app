@@ -26,7 +26,7 @@ const hotelDetails = {
   about:
     "The Taj Mahal Palace Hotel is a heritage, five-star, luxury hotel built in the Saracenic Revival style in the Colaba area of Mumbai, Maharashtra, India, situated next to the Gateway of India. Historically it was known as the 'Taj Mahal Hotel' or simply 'The Taj'.",
   rating: 4.5,
-  area: "Colaba",
+  locality: "Colaba",
   city: "Mumbai",
   photos: [
     "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/a5/d8/c1/exterior.jpg",
@@ -135,7 +135,7 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
           </View>
           <LocationSubtitle
             style={screenStyles.ScreenPadded}
-            area={hotelDetails.area}
+            locality={hotelDetails.locality}
             city={hotelDetails.city}
           />
         </View>
