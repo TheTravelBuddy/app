@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { View } from "react-native";
 import { Card } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import RatingPill from "../RatingPill";
@@ -10,6 +11,7 @@ import LocationSubtitle from "../Typography/LocationSubtitle";
 import PriceSummary from "../Typography/PriceSummary";
 
 const HotelDetailCard = ({
+  id,
   name,
   locality,
   city,
@@ -20,9 +22,14 @@ const HotelDetailCard = ({
   ...props
 }) => {
   const { width } = useScreenDimensions();
+  const { navigate } = useNavigation();
+
+  const goToHotel = useCallback(() => {
+    navigate("HotelDetailsScreen", { hotelId: id });
+  }, [id, navigate]);
 
   return (
-    <Card style={[{ width: width / 2 }, style]} {...props}>
+    <Card style={[{ width: width / 2 }, style]} {...props} onPress={goToHotel}>
       <Card.Cover
         style={{ height: Math.round(width * 0.3) }}
         source={{ uri: coverUri }}

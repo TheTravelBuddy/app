@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { View, Image } from "react-native";
-import { Card, useTheme } from "react-native-paper";
+import { Card, FAB, useTheme } from "react-native-paper";
 
 import styles from "./styles";
 
@@ -16,6 +16,7 @@ import {
   SearchPriceSummary,
   Paragraph,
   CardTitle,
+  Appbar,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
@@ -23,6 +24,8 @@ import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
 const hotelDetails = {
   id: 1,
   name: "Taj Mahal Palace",
+  about:
+    "The Taj Mahal Palace Hotel is a heritage, five-star, luxury hotel built in the Saracenic Revival style in the Colaba area of Mumbai, Maharashtra, India, situated next to the Gateway of India. Historically it was known as the 'Taj Mahal Hotel' or simply 'The Taj'.",
   rating: 4.5,
   area: "Colaba",
   city: "Mumbai",
@@ -61,12 +64,56 @@ const reviews = [
   },
 ];
 
-const HotelDetailsScreen = () => {
+const HotelDetailsScreen = ({ navigation: { goBack } }) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
 
+  const whiteButtonTheme = useMemo(
+    () => ({
+      colors: {
+        primary: theme.colors.surface,
+        accent: theme.colors.surface,
+      },
+    }),
+    [theme.colors.surface]
+  );
+
   return (
     <Scaffold
+      renderHeader={() => (
+        <></>
+        //   <FAB
+        //     small
+        //     style={{
+        //       position: "absolute",
+        //       margin: 8,
+        //       top: 0,
+        //       left: 0,
+        //       zIndex: 4,
+        //     }}
+        //     mode="contained"
+        //     icon="arrow-left"
+        //     theme={whiteButtonTheme}
+        //     onPress={goBack}
+        //   />
+        //   <FAB
+        //     small
+        //     style={{
+        //       position: "absolute",
+        //       margin: 8,
+        //       top: 0,
+        //       right: 0,
+        //       zIndex: 4,
+        //     }}
+        //     mode="contained"
+        //     icon="heart-outline"
+        //     theme={whiteButtonTheme}
+        //     onPress={() => {
+        //       // eslint-disable-next-line no-alert
+        //       alert("WIP: Like Hotel API");
+        //     }}
+        //   />
+      )}
       renderFooter={() => (
         <View
           style={{
@@ -75,15 +122,54 @@ const HotelDetailsScreen = () => {
             flexDirection: "row",
             alignItems: "center",
             padding: Math.round(CARD_SPACING / 2),
+            paddingLeft: SCREEN_PADDING,
           }}
         >
-          <SearchPriceSummary style={{ flex: 1 }} price={hotelDetails.price} />
-          <Button mode="contained" style={{ flex: 1 }}>
+          <SearchPriceSummary style={{ flex: 2 }} price={hotelDetails.price} />
+          <Button
+            mode="contained"
+            style={{ flex: 1 }}
+            onPress={() => {
+              // eslint-disable-next-line no-alert
+              alert("WIP: Booking Flow");
+            }}
+          >
             BOOK
           </Button>
         </View>
       )}
     >
+      {/* <Appbar.Header
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          zIndex: 10,
+          // backgroundColor: "transparent",
+        }}
+      > */}
+      {/* <View style={{ flex: 1 }} /> */}
+      {/* <FAB
+        small
+        style={{ position: "absolute", margin: 8, top: 0, left: 0 }}
+        mode="contained"
+        icon="arrow-left"
+        theme={whiteButtonTheme}
+        onPress={() => alert("Hi")}
+      />
+      <FAB
+        small
+        style={{ position: "absolute", margin: 8, top: 0, right: 0 }}
+        mode="contained"
+        icon="heart-outline"
+        theme={whiteButtonTheme}
+        onPress={() => {
+          // eslint-disable-next-line no-alert
+          alert("WIP: Like Hotel API");
+        }}
+      /> */}
+      {/* </Appbar.Header> */}
       <View>
         <HorizontalScroller gap={0} verticalSpacing={0} horizontalSpacing={0}>
           {hotelDetails.photos.map((photoUri) => (
@@ -96,6 +182,39 @@ const HotelDetailsScreen = () => {
             />
           ))}
         </HorizontalScroller>
+        <>
+          <FAB
+            small
+            style={{
+              position: "absolute",
+              margin: 8,
+              top: 0,
+              left: 0,
+              zIndex: 4,
+            }}
+            mode="contained"
+            icon="arrow-left"
+            theme={whiteButtonTheme}
+            onPress={goBack}
+          />
+          <FAB
+            small
+            style={{
+              position: "absolute",
+              margin: 8,
+              top: 0,
+              right: 0,
+              zIndex: 4,
+            }}
+            mode="contained"
+            icon="heart-outline"
+            theme={whiteButtonTheme}
+            onPress={() => {
+              // eslint-disable-next-line no-alert
+              alert("WIP: Like Hotel API");
+            }}
+          />
+        </>
         <View style={[styles.Section]}>
           <View
             style={[
@@ -103,7 +222,7 @@ const HotelDetailsScreen = () => {
               styles.ScreenPadded,
             ]}
           >
-            <ScreenTitle>{hotelDetails.name}</ScreenTitle>
+            <ScreenTitle style={{ flex: 1 }}>{hotelDetails.name}</ScreenTitle>
             <RatingPill rating={hotelDetails.rating} />
           </View>
           <LocationSubtitle
@@ -115,22 +234,38 @@ const HotelDetailsScreen = () => {
         <View style={styles.Section}>
           <View style={[styles.FormInputContainer, styles.ScreenPadded]}>
             <Button
+              mode="contained"
               icon="map-marker-outline"
-              compact
-              mode="outlined"
               style={styles.FormInputLeft}
+              theme={whiteButtonTheme}
+              onPress={() => {
+                // eslint-disable-next-line no-alert
+                alert("WIP: Open Hotel Location on Map");
+              }}
             >
               View on map
             </Button>
             <Button
+              mode="contained"
               icon="phone-outline"
-              compact
-              mode="outlined"
               style={styles.FormInputRight}
+              theme={whiteButtonTheme}
+              onPress={() => {
+                // eslint-disable-next-line no-alert
+                alert("WIP: Open Contact Details");
+              }}
             >
               Contact Us
             </Button>
           </View>
+        </View>
+        <View style={styles.Section}>
+          <SectionHeader style={[styles.ScreenPadded, SectionHeader]}>
+            About
+          </SectionHeader>
+          <Paragraph style={styles.ScreenPadded}>
+            {hotelDetails.about}
+          </Paragraph>
         </View>
         <View style={styles.Section}>
           <View style={styles.SectionHeader}>
@@ -147,8 +282,8 @@ const HotelDetailsScreen = () => {
               },
             ]}
           >
-            {hotelDetails.amenities.map((amenitieslist) => (
-              <Chip style={{ margin: CHIP_SPACING }}>{amenitieslist}</Chip>
+            {hotelDetails.amenities.map((amenitiesList) => (
+              <Chip style={{ margin: CHIP_SPACING }}>{amenitiesList}</Chip>
             ))}
           </View>
         </View>
@@ -179,9 +314,12 @@ const HotelDetailsScreen = () => {
             <Button
               compact
               style={{ alignSelf: "flex-end" }}
-              onPress={() => {}}
+              onPress={() => {
+                // eslint-disable-next-line no-alert
+                alert("WIP: Reviews Screen Navigation");
+              }}
             >
-              READ MORE
+              Read More Reviews
             </Button>
           </View>
         </View>
