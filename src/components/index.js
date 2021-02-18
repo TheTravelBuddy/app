@@ -15,7 +15,6 @@ import ModalTitle from "./Typography/ModalTitle";
 import ScreenTitle from "./Typography/ScreenTitle";
 import Label from "./Typography/Label";
 import Paragraph from "./Typography/Paragraph";
-import ScreenTitle from "./Typography/ScreenTitle";
 import SearchPriceSummary from "./Typography/SearchPriceSummary";
 import RatingPill from "./RatingPill";
 import LocationBannerCard from "./Card/LocationBannerCard";
@@ -65,5 +64,4 @@ export {
   BookingTypeModal,
   BookingSearchModal,
   BookingLocationModal,
-  ScreenTitle,
 };
