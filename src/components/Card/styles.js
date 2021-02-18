@@ -7,6 +7,10 @@ export default {
   CardTitleContainer: {
     flexDirection: "row",
   },
+  CardTitleHeader: {
+    flexDirection: "row",
+    marginBottom: CARD_SPACING / 2,
+  },
   CardTitleText: {
     flex: 1,
     marginRight: CARD_SPACING / 2,
@@ -20,6 +24,7 @@ export default {
   CardActionsContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginTop: CARD_SPACING / 2,
   },
   CardActionsIcon: {
     margin: 0,
