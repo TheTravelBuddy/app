@@ -10,10 +10,12 @@ import CardTitle from "./Typography/CardTitle";
 import Title from "./Typography/Title";
 import SectionHeader from "./Typography/SectionHeader";
 import Tagline from "./Typography/Tagline";
+import LocationSubtitle from "./Typography/LocationSubtitle";
 import ModalTitle from "./Typography/ModalTitle";
 import ScreenTitle from "./Typography/ScreenTitle";
 import Label from "./Typography/Label";
 import Paragraph from "./Typography/Paragraph";
+import SearchPriceSummary from "./Typography/SearchPriceSummary";
 import RatingPill from "./RatingPill";
 import LocationBannerCard from "./Card/LocationBannerCard";
 import LocationHalfCard from "./Card/LocationHalfCard";
@@ -23,6 +25,7 @@ import BlogCard from "./Card/BlogCard";
 import BlogBannerCard from "./Card/BlogBannerCard";
 import BlogLocationCard from "./Card/BlogLocationCard";
 import BlogTopicCard from "./Card/BlogTopicCard";
+import ReviewCard from "./Card/ReviewCard";
 import Chip from "./Chip";
 import BookingFiltersModal from "./Modals/BookingFiltersModal";
 import BookingTypeModal from "./Modals/BookingTypeModal";
@@ -43,6 +46,9 @@ export {
   Scaffold,
   Tagline,
   Label,
+  ScreenTitle,
+  LocationSubtitle,
+  SearchPriceSummary,
   Paragraph,
   RatingPill,
   LocationBannerCard,
@@ -53,11 +59,11 @@ export {
   BlogBannerCard,
   BlogLocationCard,
   BlogTopicCard,
+  ReviewCard,
   Chip,
   ModalTitle,
   BookingFiltersModal,
   BookingTypeModal,
   BookingSearchModal,
   BookingLocationModal,
-  ScreenTitle,
 };
