@@ -1,6 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { Card, useTheme, IconButton, Text } from "react-native-paper";
+import moment from "moment";
 
 import styles from "./styles";
 import CardTitle from "../Typography/CardTitle";
@@ -9,12 +10,13 @@ import useScreenDimensions from "../../hooks/useScreenDimensions";
 import { SCREEN_PADDING } from "../../constants";
 
 const BlogBannerCard = ({
+  id,
   title,
   coverUri,
-  style,
   content,
   likes,
-  datetime,
+  publishedOn,
+  style,
 }) => {
   const { width } = useScreenDimensions();
   const theme = useTheme();
@@ -50,7 +52,7 @@ const BlogBannerCard = ({
               styles.CardActionsText,
             ]}
           >
-            {datetime}
+            {moment(publishedOn).fromNow().toUpperCase()}
           </Text>
           <View style={styles.CardActionsSpacer} />
           <IconButton

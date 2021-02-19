@@ -31,6 +31,7 @@ import BookingFiltersModal from "./Modals/BookingFiltersModal";
 import BookingTypeModal from "./Modals/BookingTypeModal";
 import BookingSearchModal from "./Modals/BookingSearchModal";
 import BookingLocationModal from "./Modals/BookingLocationModal";
+import RenderOnLoad from "./RenderOnLoad";
 
 export {
   Appbar,
@@ -66,4 +67,5 @@ export {
   BookingTypeModal,
   BookingSearchModal,
   BookingLocationModal,
+  RenderOnLoad,
 };
