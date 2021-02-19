@@ -16,9 +16,14 @@ import ScreenTitle from "./Typography/ScreenTitle";
 import Label from "./Typography/Label";
 import Paragraph from "./Typography/Paragraph";
 import SearchPriceSummary from "./Typography/SearchPriceSummary";
+import CardSubtitle from "./Typography/CardSubtitle";
 import RatingPill from "./RatingPill";
 import LocationBannerCard from "./Card/LocationBannerCard";
 import LocationHalfCard from "./Card/LocationHalfCard";
+import BusinessCategoryCard from "./Card/BusinessCategoryCard";
+import AttractionCard from "./Card/AttractionCard";
+import ExploreServiceCard from "./Card/ExploreServiceCard";
+import BusinessBannerCard from "./Card/BusinessBannerCard";
 import HotelDetailCard from "./Card/HotelDetailCard";
 import BookingSearchCard from "./Card/BookingSearchCard";
 import BlogCard from "./Card/BlogCard";
@@ -50,6 +55,7 @@ export {
   ScreenTitle,
   LocationSubtitle,
   SearchPriceSummary,
+  CardSubtitle,
   Paragraph,
   RatingPill,
   LocationBannerCard,
@@ -61,6 +67,10 @@ export {
   BlogLocationCard,
   BlogTopicCard,
   ReviewCard,
+  BusinessCategoryCard,
+  AttractionCard,
+  BusinessBannerCard,
+  ExploreServiceCard,
   Chip,
   ModalTitle,
   BookingFiltersModal,
