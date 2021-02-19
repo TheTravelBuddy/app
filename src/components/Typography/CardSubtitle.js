@@ -8,9 +8,6 @@ const CardSubtitle = ({ children }) => {
 };
 
 const styles = {
-  TitleContainer: {
-    flexDirection: "row",
-  },
   Title: {
     color: "#696969",
     fontSize: 14,

@@ -7,7 +7,7 @@ import RatingPill from "../RatingPill";
 import CardTitle from "../Typography/CardTitle";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
 
-const PlaceCard = ({ name, coverUri, rating, style }) => {
+const AttractionCard = ({ id, name, coverUri, rating, style }) => {
   const { width } = useScreenDimensions();
   return (
     <Card style={[{ width: width / 2 }, style]}>
@@ -25,4 +25,4 @@ const PlaceCard = ({ name, coverUri, rating, style }) => {
   );
 };
 
-export default PlaceCard;
+export default AttractionCard;

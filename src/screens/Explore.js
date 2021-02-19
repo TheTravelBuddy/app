@@ -6,19 +6,18 @@ import {
   HorizontalScroller,
   SectionHeader,
   Scaffold,
-  BusinessCard,
-  PlaceCard,
-  ExploreTopicCard,
+  BusinessCategoryCard,
+  AttractionCard,
+  ExploreServiceCard,
   BusinessBannerCard,
 } from "../components";
 
 const businessData = [
   { id: 1, name: "Cake Shops", coverUri: "https://picsum.photos/1003" },
-  { id: 2, name: "Best Places to eat", coverUri: "https://picsum.photos/1002" },
+  { id: 2, name: "Best Places To Eat", coverUri: "https://picsum.photos/1002" },
   { id: 3, name: "Parks", coverUri: "https://picsum.photos/1001" },
   { id: 4, name: "Shopping Malls", coverUri: "https://picsum.photos/1003" },
 ];
-
 const placesData = [
   {
     id: 1,
@@ -46,31 +45,29 @@ const topicData = [
   { id: 3, name: "Petrol Pump" },
 ];
 
-const topBussinessesData = [
+const topBusinessesData = [
   {
     id: 1,
     coverUri:
       "https://static.toiimg.com/photo/77652252/oie_2095710glh9nB1O.jpg?width=748&resize=4",
-    title: "Bombay Gastro and Grill",
-
+    name: "Bombay Gastro and Grill",
     rating: 4.5,
-    name: "Restaurant",
+    businessType: "Restaurant",
   },
   {
     id: 2,
     coverUri:
       "https://images.news18.com/ibnlive/uploads/2016/07/Chitkul-Valley-Himachal-PradeshIndia-Edited-in-Lightroom-5-Imgur.jpg",
-    title: "RCD Foodie",
-
+    name: "RCD Foodie",
     rating: 5,
-    name: "Restaurant",
+    businessType: "Restaurant",
   },
   {
     id: 3,
     coverUri: "https://picsum.photos/1005",
-    title: "Jugs Kitchen",
+    name: "Jugs Kitchen",
     rating: 4.2,
-    name: "Restaurant",
+    businessType: "Restaurant",
   },
 ];
 
@@ -83,7 +80,7 @@ const ExploreScreen = () => {
         </SectionHeader>
         <HorizontalScroller>
           {businessData.map((businessDataDetails) => (
-            <BusinessCard
+            <BusinessCategoryCard
               key={businessDataDetails.id}
               {...businessDataDetails}
             />
@@ -96,7 +93,7 @@ const ExploreScreen = () => {
         </SectionHeader>
         <HorizontalScroller>
           {placesData.map((placesDataDetails) => (
-            <PlaceCard key={placesDataDetails.id} {...placesDataDetails} />
+            <AttractionCard key={placesDataDetails.id} {...placesDataDetails} />
           ))}
         </HorizontalScroller>
       </View>
@@ -106,7 +103,7 @@ const ExploreScreen = () => {
         </SectionHeader>
         <HorizontalScroller>
           {topicData.map((topicDetails) => (
-            <ExploreTopicCard key={topicDetails.id} {...topicDetails} />
+            <ExploreServiceCard key={topicDetails.id} {...topicDetails} />
           ))}
         </HorizontalScroller>
       </View>
@@ -115,10 +112,10 @@ const ExploreScreen = () => {
           Recommended For You
         </SectionHeader>
         <HorizontalScroller>
-          {topBussinessesData.map((topBussinessesDetails) => (
+          {topBusinessesData.map((topBusinessesDetails) => (
             <BusinessBannerCard
-              key={topBussinessesDetails.id}
-              {...topBussinessesDetails}
+              key={topBusinessesDetails.id}
+              {...topBusinessesDetails}
             />
           ))}
         </HorizontalScroller>

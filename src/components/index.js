@@ -20,9 +20,9 @@ import CardSubtitle from "./Typography/CardSubtitle";
 import RatingPill from "./RatingPill";
 import LocationBannerCard from "./Card/LocationBannerCard";
 import LocationHalfCard from "./Card/LocationHalfCard";
-import BusinessCard from "./Card/BusinessCard";
-import PlaceCard from "./Card/PlaceCard";
-import ExploreTopicCard from "./Card/ExploreTopicCard";
+import BusinessCategoryCard from "./Card/BusinessCategoryCard";
+import AttractionCard from "./Card/AttractionCard";
+import ExploreServiceCard from "./Card/ExploreServiceCard";
 import BusinessBannerCard from "./Card/BusinessBannerCard";
 import HotelDetailCard from "./Card/HotelDetailCard";
 import BookingSearchCard from "./Card/BookingSearchCard";
@@ -67,10 +67,10 @@ export {
   BlogLocationCard,
   BlogTopicCard,
   ReviewCard,
-  BusinessCard,
-  PlaceCard,
+  BusinessCategoryCard,
+  AttractionCard,
   BusinessBannerCard,
-  ExploreTopicCard,
+  ExploreServiceCard,
   Chip,
   ModalTitle,
   BookingFiltersModal,

@@ -4,7 +4,7 @@ import { Card, useTheme } from "react-native-paper";
 import CardTitle from "../Typography/CardTitle";
 import { SCREEN_PADDING } from "../../constants";
 
-const ExploreTopicCard = ({ id, name, style, ...props }) => {
+const ExploreServiceCard = ({ id, name, style, ...props }) => {
   const theme = useTheme();
 
   return (
@@ -12,8 +12,9 @@ const ExploreTopicCard = ({ id, name, style, ...props }) => {
       style={[styles.Container, style]}
       onPress={() => {
         // eslint-disable-next-line no-alert
-        alert("WIP: Explore Topic Screen Navigation");
+        alert("WIP: Explore Service Screen Navigation");
       }}
+      {...props}
     >
       <CardTitle style={[styles.TitleText, theme.fonts.medium]}>
         {name}
@@ -33,4 +34,4 @@ const styles = {
   },
 };
 
-export default ExploreTopicCard;
+export default ExploreServiceCard;

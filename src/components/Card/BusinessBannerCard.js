@@ -6,11 +6,17 @@ import styles from "./styles";
 import CardTitle from "../Typography/CardTitle";
 import CardSubtitle from "../Typography/CardSubtitle";
 import RatingPill from "../RatingPill";
-
 import useScreenDimensions from "../../hooks/useScreenDimensions";
 import { SCREEN_PADDING } from "../../constants";
 
-const BusinessBannerCard = ({ title, coverUri, style, name, rating }) => {
+const BusinessBannerCard = ({
+  id,
+  name,
+  coverUri,
+  businessType,
+  rating,
+  style,
+}) => {
   const { width } = useScreenDimensions();
 
   return (
@@ -18,7 +24,7 @@ const BusinessBannerCard = ({ title, coverUri, style, name, rating }) => {
       style={[{ width: width - 2 * SCREEN_PADDING }, style]}
       onPress={() => {
         // eslint-disable-next-line no-alert
-        alert("WIP: Business Owner Screen Navigation");
+        alert("WIP: Business Screen Navigation");
       }}
     >
       <Card.Cover
@@ -27,11 +33,10 @@ const BusinessBannerCard = ({ title, coverUri, style, name, rating }) => {
       />
       <View style={styles.CardContainer}>
         <View style={styles.CardTitleContainer}>
-          <CardTitle style={styles.CardTitleText}>{title}</CardTitle>
+          <CardTitle style={styles.CardTitleText}>{name}</CardTitle>
           <RatingPill rating={rating} />
         </View>
-
-        <CardSubtitle>{name}</CardSubtitle>
+        <CardSubtitle>{businessType}</CardSubtitle>
       </View>
     </Card>
   );
