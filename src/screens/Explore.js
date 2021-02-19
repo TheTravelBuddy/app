@@ -13,10 +13,10 @@ import {
 } from "../components";
 
 const businessData = [
-  { id: 1, name: "Cake Shop", coverUri: "https://picsum.photos/1003" },
-  { id: 2, name: "Best Place to eat", coverUri: "https://picsum.photos/1002" },
+  { id: 1, name: "Cake Shops", coverUri: "https://picsum.photos/1003" },
+  { id: 2, name: "Best Places to eat", coverUri: "https://picsum.photos/1002" },
   { id: 3, name: "Parks", coverUri: "https://picsum.photos/1001" },
-  { id: 4, name: "Shopping Mall", coverUri: "https://picsum.photos/1003" },
+  { id: 4, name: "Shopping Malls", coverUri: "https://picsum.photos/1003" },
 ];
 
 const placesData = [
@@ -46,7 +46,7 @@ const topicData = [
   { id: 3, name: "Petrol Pump" },
 ];
 
-const businessownerData = [
+const topBussinessesData = [
   {
     id: 1,
     coverUri:
@@ -79,7 +79,7 @@ const ExploreScreen = () => {
     <Scaffold header={useMemo(() => ({ title: "Explore" }), [])}>
       <View style={styles.Section}>
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
-          Latest in Mumbai
+          See What's Nearby
         </SectionHeader>
         <HorizontalScroller>
           {businessData.map((businessDataDetails) => (
@@ -102,7 +102,7 @@ const ExploreScreen = () => {
       </View>
       <View style={styles.Section}>
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
-          Discover More
+          Services Near You
         </SectionHeader>
         <HorizontalScroller>
           {topicData.map((topicDetails) => (
@@ -115,10 +115,10 @@ const ExploreScreen = () => {
           Recommended For You
         </SectionHeader>
         <HorizontalScroller>
-          {businessownerData.map((businessownerDataDetails) => (
+          {topBussinessesData.map((topBussinessesDetails) => (
             <BusinessBannerCard
-              key={businessownerDataDetails.id}
-              {...businessownerDataDetails}
+              key={topBussinessesDetails.id}
+              {...topBussinessesDetails}
             />
           ))}
         </HorizontalScroller>
