@@ -79,7 +79,7 @@ const ExploreScreen = () => {
     <Scaffold header={useMemo(() => ({ title: "Explore" }), [])}>
       <View style={styles.Section}>
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
-          See What's Nearby
+          See Whats Nearby
         </SectionHeader>
         <HorizontalScroller>
           {businessData.map((businessDataDetails) => (
