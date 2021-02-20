@@ -19,6 +19,7 @@ import ProfileScreen from "./screens/Profile";
 import BookingSearchScreen from "./screens/BookingSearch";
 import BookingFavoritesScreen from "./screens/BookingFavorites";
 import HotelDetailsScreen from "./screens/HotelDetails";
+import BlogDetailsScreen from "./screens/BlogDetails";
 import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
 
@@ -94,8 +95,8 @@ const HomeTabNavigator = () => {
         }}
       />
       <HomeTab.Screen
-        name="ProfileScreen"
-        component={ProfileScreen}
+        name="BlogDetailsScreen"
+        component={BlogDetailsScreen}
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ color }) => (
