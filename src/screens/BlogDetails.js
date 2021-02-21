@@ -16,7 +16,7 @@ import {
   CardTitle,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
-import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
+import { CHIP_SPACING, SCREEN_PADDING } from "../constants";
 
 const blogDetails = {
   id: 1,
