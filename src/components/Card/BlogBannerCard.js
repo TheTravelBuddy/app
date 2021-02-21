@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { View } from "react-native";
 import { Card, useTheme, IconButton, Text } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+
 import moment from "moment";
 
 import styles from "./styles";
@@ -20,13 +22,15 @@ const BlogBannerCard = ({
 }) => {
   const { width } = useScreenDimensions();
   const theme = useTheme();
+  const { navigate } = useNavigation();
+
+  const goToBlog = useCallback(() => {
+    navigate("BlogDetailsScreen", { bloglId: id });
+  }, [id, navigate]);
   return (
     <Card
       style={[{ width: width - 2 * SCREEN_PADDING }, style]}
-      onPress={() => {
-        // eslint-disable-next-line no-alert
-        alert("WIP: Blog Screen Navigation");
-      }}
+      onPress={goToBlog}
     >
       <Card.Cover
         style={{ height: Math.round(width / 2 - SCREEN_PADDING) }}

@@ -95,8 +95,8 @@ const HomeTabNavigator = () => {
         }}
       />
       <HomeTab.Screen
-        name="BlogDetailsScreen"
-        component={BlogDetailsScreen}
+        name="ProfileScreen"
+        component={ProfileScreen}
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ color }) => (
@@ -148,6 +148,10 @@ const Navigator = () => {
           <AppStack.Screen
             name="HotelDetailsScreen"
             component={HotelDetailsScreen}
+          />
+          <AppStack.Screen
+            name="BlogDetailsScreen"
+            component={BlogDetailsScreen}
           />
         </AppStack.Navigator>
       ) : (
