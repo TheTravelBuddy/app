@@ -12,7 +12,7 @@ import {
   Chip,
   ScreenTitle,
   Paragraph,
-  ReviewCard,
+  CommentCard,
   CardTitle,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
@@ -24,28 +24,34 @@ const blogDetails = {
   city: "Mumbai",
   topic: "Cusine",
   dop: "5 days ago",
-  likes: 8,
+  likes: 15,
   content:
-    "Mumbai is a stunning paradox of hope and chaos, magic and madness. Where the changing modernity of India has been experienced most intensely. From Gandhi’s arrival from England in 1915 to the protests against the Simon Commission in 1928, Bombay, now Mumbai, has been home to many key events of the freedom struggle. ",
+    "Mumbai is a stunning paradox of hope and chaos, magic and madness. Where the changing modernity of India has been experienced most intensely. From Gandhi’s arrival from England in 1915 to the protests against the Simon Commission in 1928, Bombay, now Mumbai, has been home to many key events of the freedom struggle, Mumbai has different aspects with art, heritage and Culture. During the festivals, we ensure that you get the glimpse of prominent things like Visarjan at Chaupatty, fire cracker celebration during Diwali at Marine Drive and much more, The prime benefit of hiring us is that we are very feasible with prices and you could easily book us. ",
   photos: [
-    "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/a5/d8/c1/exterior.jpg",
-    "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/27/36/2736904_v5.jpeg",
-    "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/99/50/99501_v5.jpeg",
-    "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/a5/d8/c1/exterior.jpg",
+    "https://picsum.photos/1098",
+    "https://picsum.photos/1097",
+    "https://picsum.photos/1099",
+    "https://picsum.photos/1099",
   ],
 };
 
 const comments = [
   {
     id: 1,
-    username: "Riddhi Dholakia",
-    reviewText:
+    username: "Guddi M",
+    commentText:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
   },
   {
     id: 2,
-    username: "Riddhi Dholakia",
-    reviewText:
+    username: "Divya Jain",
+    commentText:
+      "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
+  },
+  {
+    id: 3,
+    username: "Tanvi Inch",
+    commentText:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
   },
 ];
@@ -123,12 +129,12 @@ const BlogDetailsScreen = ({ navigation: { goBack } }) => {
           style={[
             screenStyles.Section,
             screenStyles.ScreenPadded,
-            { flexDirection: "row", alignItems: "center" },
+            styles.UserDetails,
           ]}
         >
           <Avatar.Image
             size={36}
-            style={{ elevation: 4, marginRight: 12 }}
+            style={styles.ProflieImage}
             source={{ uri: "https://picsum.photos/1420" }}
           />
           <CardTitle>Riddhi Dholakia</CardTitle>
@@ -139,26 +145,23 @@ const BlogDetailsScreen = ({ navigation: { goBack } }) => {
             {blogDetails.content}
           </Paragraph>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            alignItems: "center",
-            marginRight: 16,
-          }}
-        >
+        <View style={styles.LikesContainer}>
           <IconButton
             size={22}
             color={theme.colors.textSecondary}
-            style={styles.CardActionsIcon}
+            style={styles.LikesActionsIcon}
             icon="heart-outline"
             onPress={() => {}}
           />
-          <Text style={{ color: theme.colors.textSecondary, fontSize: 16 }}>
+          <Text
+            style={[
+              { color: theme.colors.textSecondary },
+              styles.CardActionsText,
+            ]}
+          >
             {blogDetails.likes}
           </Text>
         </View>
-
         <View style={screenStyles.Section}>
           <View style={screenStyles.SectionHeader}>
             <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
@@ -166,8 +169,8 @@ const BlogDetailsScreen = ({ navigation: { goBack } }) => {
             </SectionHeader>
           </View>
           <View style={screenStyles.ScreenPadded}>
-            {comments.map((review) => (
-              <ReviewCard key={review.id} {...review} />
+            {comments.map((comment) => (
+              <CommentCard key={comment.id} {...comment} />
             ))}
             <Button
               compact
@@ -198,6 +201,26 @@ const styles = {
   },
   SectionRightButton: {
     alignSelf: "flex-end",
+  },
+  UserDetails: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  ProflieImage: {
+    elevation: 4,
+    marginRight: 12,
+  },
+  LikesContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    marginRight: 16,
+  },
+  LikesActionsIcon: {
+    margin: 0,
+  },
+  LikesActionsText: {
+    fontSize: 16,
   },
 };
 
