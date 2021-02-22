@@ -17,6 +17,7 @@ import Label from "./Typography/Label";
 import Paragraph from "./Typography/Paragraph";
 import SearchPriceSummary from "./Typography/SearchPriceSummary";
 import CardSubtitle from "./Typography/CardSubtitle";
+import SectionSubsection from "./Typography/SectionSubsection";
 import RatingPill from "./RatingPill";
 import LocationBannerCard from "./Card/LocationBannerCard";
 import LocationHalfCard from "./Card/LocationHalfCard";
@@ -55,6 +56,7 @@ export {
   Label,
   ScreenTitle,
   LocationSubtitle,
+  SectionSubsection,
   SearchPriceSummary,
   CardSubtitle,
   Paragraph,
