@@ -66,16 +66,16 @@ const placesData = [
 const reviews = [
   {
     id: 1,
-    username: "Riddhi Dholakia",
+    name: "Riddhi Dholakia",
     rating: 4.5,
-    reviewText:
+    review:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
   },
   {
     id: 2,
-    username: "Riddhi Dholakia",
+    name: "Riddhi Dholakia",
     rating: 3.6,
-    reviewText:
+    review:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
   },
 ];
@@ -252,7 +252,9 @@ const CityDetailsScreen = ({ navigation: { goBack } }) => {
           </View>
         </View>
         <View style={screenStyles.Section}>
-          <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
             About
           </SectionHeader>
           <Paragraph style={screenStyles.ScreenPadded}>
@@ -260,7 +262,9 @@ const CityDetailsScreen = ({ navigation: { goBack } }) => {
           </Paragraph>
         </View>
         <View style={screenStyles.Section}>
-          <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
             Places to Visit
           </SectionHeader>
           <HorizontalScroller>
@@ -273,53 +277,46 @@ const CityDetailsScreen = ({ navigation: { goBack } }) => {
           </HorizontalScroller>
         </View>
         <View style={screenStyles.Section}>
-          <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
-            Hotels nearby
-          </SectionHeader>
-          <HorizontalScroller>
-            {hotelDetailsData.map(
-              ({ id, coverUri, name, rating, locality, city, price }) => (
-                <HotelDetailCard
-                  key={id}
-                  {...{ id, coverUri, name, rating, locality, city, price }}
-                />
-              )
-            )}
-          </HorizontalScroller>
-        </View>
-        <View style={screenStyles.Section}>
-          <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
             Popular Packages
           </SectionHeader>
           <HorizontalScroller>
-            {packageDetailsData.map(
-              ({ id, coverUri, name, rating, duration, price }) => (
-                <PackageDetailCard
-                  key={id}
-                  {...{ id, coverUri, name, rating, duration, price }}
-                />
-              )
-            )}
+            {packageDetailsData.map((packageDetails) => (
+              <PackageDetailCard key={packageDetails.id} {...packageDetails} />
+            ))}
           </HorizontalScroller>
         </View>
         <View style={screenStyles.Section}>
-          <View style={screenStyles.SectionHeader}>
-            <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
-              Services Near You
-            </SectionHeader>
-            <HorizontalScroller>
-              {serviceData.map((serviceDetails) => (
-                <ExploreServiceCard
-                  key={serviceDetails.id}
-                  {...serviceDetails}
-                />
-              ))}
-            </HorizontalScroller>
-          </View>
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
+            Top Hotels
+          </SectionHeader>
+          <HorizontalScroller>
+            {hotelDetailsData.map((hotelDetails) => (
+              <HotelDetailCard key={hotelDetails.id} {...hotelDetails} />
+            ))}
+          </HorizontalScroller>
         </View>
         <View style={screenStyles.Section}>
-          <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
-            Popular Blogs
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
+            Services
+          </SectionHeader>
+          <HorizontalScroller>
+            {serviceData.map((serviceDetails) => (
+              <ExploreServiceCard key={serviceDetails.id} {...serviceDetails} />
+            ))}
+          </HorizontalScroller>
+        </View>
+        <View style={screenStyles.Section}>
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
+            Top Liked Blogs
           </SectionHeader>
           <HorizontalScroller>
             {blogData.map((blogDetails) => (
@@ -328,11 +325,11 @@ const CityDetailsScreen = ({ navigation: { goBack } }) => {
           </HorizontalScroller>
         </View>
         <View style={screenStyles.Section}>
-          <View style={screenStyles.SectionHeader}>
-            <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
-              Reviews
-            </SectionHeader>
-          </View>
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
+            Reviews
+          </SectionHeader>
           <View style={screenStyles.ScreenPadded}>
             {reviews.map((review) => (
               <ReviewCard key={review.id} {...review} />

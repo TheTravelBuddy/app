@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { View } from "react-native";
 import { Card } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import RatingPill from "../RatingPill";
@@ -20,8 +21,18 @@ const PackageDetailCard = ({
   ...props
 }) => {
   const { width } = useScreenDimensions();
+  const { navigate } = useNavigation();
+
+  const goToPackage = useCallback(() => {
+    navigate("PackageDetailsScreen", { packageId: id });
+  }, [id, navigate]);
+
   return (
-    <Card style={[{ width: Math.round(width * 0.67) }, style]} {...props}>
+    <Card
+      style={[{ width: Math.round(width * 0.67) }, style]}
+      onPress={goToPackage}
+      {...props}
+    >
       <Card.Cover
         style={{ height: Math.round(width * 0.3) }}
         source={{ uri: coverUri }}

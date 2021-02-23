@@ -166,13 +166,11 @@ const BusinessDetailsScreen = ({ navigation: { goBack } }) => {
           </View>
         </View>
         <View style={screenStyles.Section}>
-          <View style={screenStyles.SectionHeader}>
-            <SectionHeader
-              style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
-            >
-              Reviews
-            </SectionHeader>
-          </View>
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
+            Reviews
+          </SectionHeader>
           <View style={screenStyles.ScreenPadded}>
             {reviews.map((review) => (
               <ReviewCard key={review.id} {...review} />

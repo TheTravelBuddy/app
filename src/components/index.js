@@ -19,11 +19,13 @@ import Paragraph from "./Typography/Paragraph";
 import SearchHotelPriceSummary from "./Typography/SearchHotelPriceSummary";
 import SearchPackagePriceSummary from "./Typography/SearchPackagePriceSummary";
 import PackagePriceSummary from "./Typography/PackagePriceSummary";
+import HotelPriceSummary from "./Typography/HotelPriceSummary";
 import CardSubtitle from "./Typography/CardSubtitle";
 import SectionSubtitle from "./Typography/SectionSubtitle";
 import RatingPill from "./RatingPill";
 import PackageBannerCard from "./Card/PackageBannerCard";
 import PackageHalfCard from "./Card/PackageHalfCard";
+import CityHalfCard from "./Card/CityHalfCard";
 import BusinessCategoryCard from "./Card/BusinessCategoryCard";
 import AttractionCard from "./Card/AttractionCard";
 import ExploreServiceCard from "./Card/ExploreServiceCard";
@@ -65,11 +67,13 @@ export {
   SearchHotelPriceSummary,
   SearchPackagePriceSummary,
   PackagePriceSummary,
+  HotelPriceSummary,
   CardSubtitle,
   Paragraph,
   RatingPill,
   PackageBannerCard,
   PackageHalfCard,
+  CityHalfCard,
   HotelDetailCard,
   PackageDetailCard,
   BookingSearchCard,

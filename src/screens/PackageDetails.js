@@ -170,7 +170,9 @@ const PackageDetailsScreen = ({ navigation: { goBack } }) => {
           </View>
         </View>
         <View style={screenStyles.Section}>
-          <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
             About
           </SectionHeader>
           <Paragraph style={screenStyles.ScreenPadded}>
@@ -178,11 +180,11 @@ const PackageDetailsScreen = ({ navigation: { goBack } }) => {
           </Paragraph>
         </View>
         <View style={screenStyles.Section}>
-          <View style={screenStyles.SectionHeader}>
-            <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
-              Included in the package
-            </SectionHeader>
-          </View>
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
+            Included in the package
+          </SectionHeader>
           <View style={styles.AmenitiesContainer}>
             {packageDetails.amenities.map((amenity) => (
               <Chip key={amenity} style={{ margin: CHIP_SPACING }}>
@@ -192,11 +194,11 @@ const PackageDetailsScreen = ({ navigation: { goBack } }) => {
           </View>
         </View>
         <View style={screenStyles.Section}>
-          <View style={screenStyles.SectionHeader}>
-            <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
-              Reviews
-            </SectionHeader>
-          </View>
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
+            Reviews
+          </SectionHeader>
           <View style={screenStyles.ScreenPadded}>
             {reviews.map((review) => (
               <ReviewCard key={review.id} {...review} />

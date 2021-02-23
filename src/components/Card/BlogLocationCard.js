@@ -21,7 +21,6 @@ const BlogLocationCard = ({
   title,
   locationName,
   content,
-  authorProfile,
   likes,
   style,
 }) => {
@@ -58,11 +57,6 @@ const BlogLocationCard = ({
       <Divider />
       <View style={commonStyles.CardContainer}>
         <View style={commonStyles.CardTitleContainer}>
-          {/* <Avatar.Image
-            size={24}
-            source={{ uri: authorProfile }}
-            style={commonStyles.CardTitleIcon}
-          /> */}
           <CardTitle style={commonStyles.CardTitleText}>{title}</CardTitle>
         </View>
         <View style={commonStyles.CardContent}>
