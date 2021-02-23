@@ -56,7 +56,7 @@ const comments = [
   },
 ];
 
-const BlogDetailsScreen = ({ navigation: { goBack } }) => {
+const BlogScreen = ({ navigation: { goBack } }) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
 
@@ -226,4 +226,4 @@ const styles = {
   },
 };
 
-export default BlogDetailsScreen;
+export default BlogScreen;

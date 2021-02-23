@@ -25,7 +25,7 @@ const BlogBannerCard = ({
   const { navigate } = useNavigation();
 
   const goToBlog = useCallback(() => {
-    navigate("BlogDetailsScreen", { bloglId: id });
+    navigate("BlogScreen", { bloglId: id });
   }, [id, navigate]);
   return (
     <Card
