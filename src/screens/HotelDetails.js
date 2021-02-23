@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { View, Image } from "react-native";
 import { FAB, useTheme } from "react-native-paper";
 
@@ -16,48 +16,20 @@ import {
   SearchPriceSummary,
   Paragraph,
   ReviewCard,
+  RenderOnLoad,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
+import API, { useAPI } from "../helpers/API";
 
-const hotelDetails = {
-  id: 1,
-  name: "Taj Mahal Palace",
-  about:
-    "The Taj Mahal Palace Hotel is a heritage, five-star, luxury hotel built in the Saracenic Revival style in the Colaba area of Mumbai, Maharashtra, India, situated next to the Gateway of India. Historically it was known as the 'Taj Mahal Hotel' or simply 'The Taj'.",
-  rating: 4.5,
-  locality: "Colaba",
-  city: "Mumbai",
-  photos: [
-    "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/a5/d8/c1/exterior.jpg",
-    "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/27/36/2736904_v5.jpeg",
-    "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/99/50/99501_v5.jpeg",
-    "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/a5/d8/c1/exterior.jpg",
-  ],
-  amenities: ["Wifi", "AC", "Pool", "Parking", "Spa"],
-  price: 3550,
-};
-
-const reviews = [
-  {
-    id: 1,
-    username: "Riddhi Dholakia",
-    rating: 4.5,
-    reviewText:
-      "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
-  },
-  {
-    id: 2,
-    username: "Riddhi Dholakia",
-    rating: 3.6,
-    reviewText:
-      "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
-  },
-];
-
-const HotelDetailsScreen = ({ navigation: { goBack } }) => {
+const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
+
+  const [apiRequest, refetchData] = useAPI({
+    url: "/traveller/hotel",
+    params: { hotelId: params.id },
+  });
 
   const whiteButtonTheme = useMemo(
     () => ({
@@ -69,151 +41,195 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
     [theme.colors.surface]
   );
 
+  const likeHotel = useCallback(async () => {
+    await API({
+      method: "post",
+      url: "/traveller/hotel/like",
+      params: { hotelId: params.id },
+    });
+    await refetchData();
+  }, [refetchData, params.id]);
+
+  const unlikeHotel = useCallback(async () => {
+    await API({
+      method: "delete",
+      url: "/traveller/hotel/unlike",
+      params: { hotelId: params.id },
+    });
+    await refetchData();
+  }, [refetchData, params.id]);
+
+  console.log(apiRequest.data);
+
   return (
     <Scaffold
-      renderFooter={() => (
-        <View
-          style={[styles.BottomBar, { backgroundColor: theme.colors.surface }]}
-        >
-          <SearchPriceSummary
-            style={screenStyles.FlexMore}
-            price={hotelDetails.price}
-          />
-          <Button
-            mode="contained"
-            style={screenStyles.Flex}
-            onPress={() => {
-              // eslint-disable-next-line no-alert
-              alert("WIP: Booking Flow");
-            }}
-          >
-            BOOK
-          </Button>
-        </View>
-      )}
-    >
-      <View>
-        <HorizontalScroller gap={0} verticalSpacing={0} horizontalSpacing={0}>
-          {hotelDetails.photos.map((photoUri) => (
-            <Image
-              key={photoUri}
-              source={{
-                uri: photoUri,
-              }}
-              style={{ height: width / 2, width }}
-              height={width / 2}
-            />
-          ))}
-        </HorizontalScroller>
-        <>
-          <FAB
-            small
-            style={styles.HeaderBackFAB}
-            mode="contained"
-            icon="arrow-left"
-            theme={whiteButtonTheme}
-            onPress={goBack}
-          />
-          <FAB
-            small
-            style={styles.HeaderFavoriteFAB}
-            mode="contained"
-            icon="heart-outline"
-            theme={whiteButtonTheme}
-            onPress={() => {
-              // eslint-disable-next-line no-alert
-              alert("WIP: Like Hotel API");
-            }}
-          />
-        </>
-        <View style={[screenStyles.Section]}>
-          <View style={[screenStyles.ScreenPadded, styles.TitleContainer]}>
-            <ScreenTitle style={screenStyles.Flex}>
-              {hotelDetails.name}
-            </ScreenTitle>
-            <RatingPill rating={hotelDetails.rating} />
-          </View>
-          <LocationSubtitle
-            style={screenStyles.ScreenPadded}
-            locality={hotelDetails.locality}
-            city={hotelDetails.city}
-          />
-        </View>
-        <View style={screenStyles.Section}>
+      renderFooter={() =>
+        apiRequest.data && (
           <View
-            style={[screenStyles.FormInputContainer, screenStyles.ScreenPadded]}
+            style={[
+              styles.BottomBar,
+              { backgroundColor: theme.colors.surface },
+            ]}
           >
+            <SearchPriceSummary
+              style={screenStyles.FlexMore}
+              price={apiRequest.data?.hotelDetails.price}
+            />
             <Button
               mode="contained"
-              icon="map-marker-outline"
-              style={screenStyles.FormInputLeft}
-              theme={whiteButtonTheme}
+              style={screenStyles.Flex}
               onPress={() => {
                 // eslint-disable-next-line no-alert
-                alert("WIP: Open Hotel Location on Map");
+                alert("WIP: Booking Flow");
               }}
             >
-              View on map
+              BOOK
             </Button>
-            <Button
-              mode="contained"
-              icon="phone-outline"
-              style={screenStyles.FormInputRight}
-              theme={whiteButtonTheme}
-              onPress={() => {
-                // eslint-disable-next-line no-alert
-                alert("WIP: Open Contact Details");
-              }}
+          </View>
+        )
+      }
+    >
+      <RenderOnLoad loading={!apiRequest.data}>
+        {() => (
+          <View>
+            <HorizontalScroller
+              gap={0}
+              verticalSpacing={0}
+              horizontalSpacing={0}
             >
-              Contact Us
-            </Button>
+              {apiRequest.data?.hotelDetails.photos.map((photoUri) => (
+                <Image
+                  key={photoUri}
+                  source={{
+                    uri: photoUri,
+                  }}
+                  style={{ height: width / 2, width }}
+                  height={width / 2}
+                />
+              ))}
+            </HorizontalScroller>
+            <>
+              <FAB
+                small
+                style={styles.HeaderBackFAB}
+                mode="contained"
+                icon="arrow-left"
+                theme={whiteButtonTheme}
+                onPress={goBack}
+              />
+              <FAB
+                small
+                style={styles.HeaderFavoriteFAB}
+                mode="contained"
+                color={
+                  apiRequest.data.hotelDetails.likes ? "#EB453D" : undefined
+                }
+                icon={
+                  apiRequest.data.hotelDetails.likes ? "heart" : "heart-outline"
+                }
+                theme={whiteButtonTheme}
+                onPress={
+                  apiRequest.data.hotelDetails.likes ? unlikeHotel : likeHotel
+                }
+              />
+            </>
+            <View style={[screenStyles.Section]}>
+              <View style={[screenStyles.ScreenPadded, styles.TitleContainer]}>
+                <ScreenTitle style={screenStyles.Flex}>
+                  {apiRequest.data?.hotelDetails.name}
+                </ScreenTitle>
+                <RatingPill rating={apiRequest.data?.hotelDetails.rating} />
+              </View>
+              <LocationSubtitle
+                style={screenStyles.ScreenPadded}
+                locality={apiRequest.data?.hotelDetails.locality}
+                city={apiRequest.data?.hotelDetails.city}
+              />
+            </View>
+            <View style={screenStyles.Section}>
+              <View
+                style={[
+                  screenStyles.FormInputContainer,
+                  screenStyles.ScreenPadded,
+                ]}
+              >
+                <Button
+                  mode="contained"
+                  icon="map-marker-outline"
+                  style={screenStyles.FormInputLeft}
+                  theme={whiteButtonTheme}
+                  onPress={() => {
+                    // eslint-disable-next-line no-alert
+                    alert("WIP: Open Hotel Location on Map");
+                  }}
+                >
+                  View on map
+                </Button>
+                <Button
+                  mode="contained"
+                  icon="phone-outline"
+                  style={screenStyles.FormInputRight}
+                  theme={whiteButtonTheme}
+                  onPress={() => {
+                    // eslint-disable-next-line no-alert
+                    alert("WIP: Open Contact Details");
+                  }}
+                >
+                  Contact Us
+                </Button>
+              </View>
+            </View>
+            <View style={screenStyles.Section}>
+              <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
+                About
+              </SectionHeader>
+              <Paragraph style={screenStyles.ScreenPadded}>
+                {apiRequest.data?.hotelDetails.about}
+              </Paragraph>
+            </View>
+            <View style={screenStyles.Section}>
+              <View style={screenStyles.SectionHeader}>
+                <SectionHeader
+                  style={[screenStyles.ScreenPadded, SectionHeader]}
+                >
+                  Amenities
+                </SectionHeader>
+              </View>
+              <View style={styles.AmenitiesContainer}>
+                {apiRequest.data?.hotelDetails.amenities.map((amenity) => (
+                  <Chip key={amenity} style={{ margin: CHIP_SPACING }}>
+                    {amenity.toUpperCase()}
+                  </Chip>
+                ))}
+              </View>
+            </View>
+            <View style={screenStyles.Section}>
+              <View style={screenStyles.SectionHeader}>
+                <SectionHeader
+                  style={[screenStyles.ScreenPadded, SectionHeader]}
+                >
+                  Reviews
+                </SectionHeader>
+              </View>
+              <View style={screenStyles.ScreenPadded}>
+                {apiRequest.data.hotelReviews.map((review) => (
+                  <ReviewCard key={review.id} {...review} />
+                ))}
+                <Button
+                  compact
+                  style={styles.SectionRightButton}
+                  onPress={() => {
+                    // eslint-disable-next-line no-alert
+                    alert("WIP: Reviews Screen Navigation");
+                  }}
+                >
+                  Read More Reviews
+                </Button>
+              </View>
+            </View>
           </View>
-        </View>
-        <View style={screenStyles.Section}>
-          <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
-            About
-          </SectionHeader>
-          <Paragraph style={screenStyles.ScreenPadded}>
-            {hotelDetails.about}
-          </Paragraph>
-        </View>
-        <View style={screenStyles.Section}>
-          <View style={screenStyles.SectionHeader}>
-            <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
-              Amenities
-            </SectionHeader>
-          </View>
-          <View style={styles.AmenitiesContainer}>
-            {hotelDetails.amenities.map((amenity) => (
-              <Chip key={amenity} style={{ margin: CHIP_SPACING }}>
-                {amenity.toUpperCase()}
-              </Chip>
-            ))}
-          </View>
-        </View>
-        <View style={screenStyles.Section}>
-          <View style={screenStyles.SectionHeader}>
-            <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
-              Reviews
-            </SectionHeader>
-          </View>
-          <View style={screenStyles.ScreenPadded}>
-            {reviews.map((review) => (
-              <ReviewCard key={review.id} {...review} />
-            ))}
-            <Button
-              compact
-              style={styles.SectionRightButton}
-              onPress={() => {
-                // eslint-disable-next-line no-alert
-                alert("WIP: Reviews Screen Navigation");
-              }}
-            >
-              Read More Reviews
-            </Button>
-          </View>
-        </View>
-      </View>
+        )}
+      </RenderOnLoad>
     </Scaffold>
   );
 };

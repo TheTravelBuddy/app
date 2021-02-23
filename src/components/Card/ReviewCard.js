@@ -7,7 +7,7 @@ import RatingPill from "../RatingPill";
 import CardTitle from "../Typography/CardTitle";
 import Paragraph from "../Typography/Paragraph";
 
-const ReviewCard = ({ id, rating, reviewText, username }) => (
+const ReviewCard = ({ id, rating, review, name }) => (
   <Card
     style={{
       padding: CARD_SPACING,
@@ -20,9 +20,9 @@ const ReviewCard = ({ id, rating, reviewText, username }) => (
   >
     <View style={styles.Container}>
       <RatingPill rating={rating} />
-      <CardTitle style={styles.UserNameText}>{username}</CardTitle>
+      <CardTitle style={styles.UserNameText}>{name}</CardTitle>
     </View>
-    <Paragraph>{reviewText}</Paragraph>
+    <Paragraph numberOfLines={2}>{review}</Paragraph>
   </Card>
 );
 

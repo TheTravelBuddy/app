@@ -25,7 +25,7 @@ const HotelDetailCard = ({
   const { navigate } = useNavigation();
 
   const goToHotel = useCallback(() => {
-    navigate("HotelDetailsScreen", { hotelId: id });
+    navigate("HotelDetailsScreen", { id });
   }, [id, navigate]);
 
   return (
