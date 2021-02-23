@@ -59,8 +59,6 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
     await refetchData();
   }, [refetchData, params.id]);
 
-  console.log(apiRequest.data);
-
   return (
     <Scaffold
       renderFooter={() =>
