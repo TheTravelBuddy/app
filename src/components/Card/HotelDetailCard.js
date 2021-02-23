@@ -8,7 +8,7 @@ import RatingPill from "../RatingPill";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
 import CardTitle from "../Typography/CardTitle";
 import LocationSubtitle from "../Typography/LocationSubtitle";
-import PriceSummary from "../Typography/PriceSummary";
+import HotelPriceSummary from "../Typography/HotelPriceSummary";
 
 const HotelDetailCard = ({
   id,
@@ -41,7 +41,7 @@ const HotelDetailCard = ({
         </View>
         <LocationSubtitle {...{ locality, city }} />
         <View style={styles.CardContent}>
-          <PriceSummary {...{ price }} />
+          <HotelPriceSummary {...{ price }} />
         </View>
       </View>
     </Card>

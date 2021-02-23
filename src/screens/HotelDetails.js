@@ -13,7 +13,7 @@ import {
   Chip,
   ScreenTitle,
   RatingPill,
-  SearchPriceSummary,
+  SearchHotelPriceSummary,
   Paragraph,
   ReviewCard,
   RenderOnLoad,
@@ -69,7 +69,7 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
               { backgroundColor: theme.colors.surface },
             ]}
           >
-            <SearchPriceSummary
+            <SearchHotelPriceSummary
               style={screenStyles.FlexMore}
               price={apiRequest.data?.hotelDetails.price}
             />

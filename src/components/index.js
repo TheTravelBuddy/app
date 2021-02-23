@@ -11,16 +11,18 @@ import Title from "./Typography/Title";
 import SectionHeader from "./Typography/SectionHeader";
 import Tagline from "./Typography/Tagline";
 import LocationSubtitle from "./Typography/LocationSubtitle";
+import PackageDurationSubtitle from "./Typography/PackageDurationSubtitle";
 import ModalTitle from "./Typography/ModalTitle";
 import ScreenTitle from "./Typography/ScreenTitle";
 import Label from "./Typography/Label";
 import Paragraph from "./Typography/Paragraph";
-import SearchPriceSummary from "./Typography/SearchPriceSummary";
+import SearchHotelPriceSummary from "./Typography/SearchHotelPriceSummary";
+import SearchPackagePriceSummary from "./Typography/SearchPackagePriceSummary";
 import CardSubtitle from "./Typography/CardSubtitle";
 import SectionSubtitle from "./Typography/SectionSubtitle";
 import RatingPill from "./RatingPill";
-import LocationBannerCard from "./Card/LocationBannerCard";
-import LocationHalfCard from "./Card/LocationHalfCard";
+import PackageBannerCard from "./Card/PackageBannerCard";
+import PackageHalfCard from "./Card/PackageHalfCard";
 import BusinessCategoryCard from "./Card/BusinessCategoryCard";
 import AttractionCard from "./Card/AttractionCard";
 import ExploreServiceCard from "./Card/ExploreServiceCard";
@@ -57,12 +59,14 @@ export {
   ScreenTitle,
   LocationSubtitle,
   SectionSubtitle,
-  SearchPriceSummary,
+  PackageDurationSubtitle,
+  SearchHotelPriceSummary,
+  SearchPackagePriceSummary,
   CardSubtitle,
   Paragraph,
   RatingPill,
-  LocationBannerCard,
-  LocationHalfCard,
+  PackageBannerCard,
+  PackageHalfCard,
   HotelDetailCard,
   BookingSearchCard,
   BlogCard,

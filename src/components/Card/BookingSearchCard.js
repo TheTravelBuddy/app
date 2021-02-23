@@ -7,7 +7,7 @@ import RatingPill from "../RatingPill";
 import CardTitle from "../Typography/CardTitle";
 import LocationSubtitle from "../Typography/LocationSubtitle";
 import DistanceSubtitle from "../Typography/DistanceSubtitle ";
-import SearchPriceSummary from "../Typography/SearchPriceSummary";
+import SearchHotelPriceSummary from "../Typography/SearchHotelPriceSummary";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
 import { CARD_SPACING, SCREEN_PADDING } from "../../constants";
 
@@ -50,7 +50,7 @@ const BookingSearchCard = ({
           <LocationSubtitle {...{ locality, city }} />
           <DistanceSubtitle {...{ distance }} />
           <View style={commonStyles.CardActionsSpacer} />
-          <SearchPriceSummary {...{ price }} style={styles.CardPrice} />
+          <SearchHotelPriceSummary {...{ price }} style={styles.CardPrice} />
         </View>
       </View>
     </Card>
