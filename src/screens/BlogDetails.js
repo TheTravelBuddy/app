@@ -31,7 +31,7 @@ const blogDetails = {
     "https://picsum.photos/1098",
     "https://picsum.photos/1097",
     "https://picsum.photos/1099",
-    "https://picsum.photos/1099",
+    "https://picsum.photos/1100",
   ],
 };
 
@@ -101,7 +101,7 @@ const BlogDetailsScreen = ({ navigation: { goBack } }) => {
           </View>
         </View>
         <View style={screenStyles.Section}>
-          <View style={styles.BlogdetailContainer}>
+          <View style={styles.BlogDetailContainer}>
             <Chip
               icon="map-marker-outline"
               style={{ margin: CHIP_SPACING }}
@@ -139,9 +139,8 @@ const BlogDetailsScreen = ({ navigation: { goBack } }) => {
           />
           <CardTitle>Riddhi Dholakia</CardTitle>
         </View>
-
         <View style={screenStyles.Section}>
-          <Paragraph style={screenStyles.ScreenPadded}>
+          <Paragraph style={[screenStyles.ScreenPadded, styles.BlogContent]}>
             {blogDetails.content}
           </Paragraph>
         </View>
@@ -194,10 +193,15 @@ const styles = {
     left: 0,
     zIndex: 4,
   },
-  BlogdetailContainer: {
+  BlogDetailContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
     marginHorizontal: SCREEN_PADDING - CHIP_SPACING,
+  },
+  BlogContent: {
+    lineHeight: 24,
+    letterSpacing: 0.5,
+    textAlign: "justify",
   },
   SectionRightButton: {
     alignSelf: "flex-end",
@@ -207,7 +211,6 @@ const styles = {
     alignItems: "center",
   },
   ProflieImage: {
-    elevation: 4,
     marginRight: 12,
   },
   LikesContainer: {
