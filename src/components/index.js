@@ -31,6 +31,7 @@ import BlogBannerCard from "./Card/BlogBannerCard";
 import BlogLocationCard from "./Card/BlogLocationCard";
 import BlogTopicCard from "./Card/BlogTopicCard";
 import ReviewCard from "./Card/ReviewCard";
+import CommentCard from "./Card/CommentCard";
 import Chip from "./Chip";
 import BookingFiltersModal from "./Modals/BookingFiltersModal";
 import BookingTypeModal from "./Modals/BookingTypeModal";
@@ -67,6 +68,7 @@ export {
   BlogLocationCard,
   BlogTopicCard,
   ReviewCard,
+  CommentCard,
   BusinessCategoryCard,
   AttractionCard,
   BusinessBannerCard,

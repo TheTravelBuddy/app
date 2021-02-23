@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { View } from "react-native";
 import {
   Text,
@@ -9,6 +9,7 @@ import {
   Divider,
   TouchableRipple,
 } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import commonStyles from "./styles";
@@ -27,13 +28,15 @@ const BlogLocationCard = ({
 }) => {
   const { width } = useScreenDimensions();
   const theme = useTheme();
+  const { navigate } = useNavigation();
+
+  const goToBlog = useCallback(() => {
+    navigate("BlogScreen", { bloglId: id });
+  }, [id, navigate]);
   return (
     <Card
       style={[styles.LocationCard, { width: width * 0.6 }, style]}
-      onPress={() => {
-        // eslint-disable-next-line no-alert
-        alert("WIP: Blog Screen Navigation ");
-      }}
+      onPress={goToBlog}
     >
       <TouchableRipple
         onPress={() => {

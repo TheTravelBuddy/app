@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { View } from "react-native";
 import {
   Text,
@@ -8,6 +8,7 @@ import {
   IconButton,
   useTheme,
 } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import CardTitle from "../Typography/CardTitle";
@@ -17,8 +18,13 @@ import useScreenDimensions from "../../hooks/useScreenDimensions";
 const BlogCard = ({ id, title, content, authorProfile, likes, style }) => {
   const { width } = useScreenDimensions();
   const theme = useTheme();
+  const { navigate } = useNavigation();
+
+  const goToBlog = useCallback(() => {
+    navigate("BlogScreen", { bloglId: id });
+  }, [id, navigate]);
   return (
-    <Card style={[{ width: width * 0.6 }, style]}>
+    <Card style={[{ width: width * 0.6 }, style]} onPress={goToBlog}>
       <View style={styles.CardContainer}>
         <View style={styles.CardTitleContainer}>
           {authorProfile && (
