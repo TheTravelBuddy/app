@@ -145,7 +145,7 @@ const PackageDetailsScreen = ({ navigation: { goBack } }) => {
           >
             <Button
               mode="contained"
-              icon="account-multiple-outline"
+              icon="information-outline"
               style={screenStyles.FormInputLeft}
               theme={whiteButtonTheme}
               onPress={() => {
