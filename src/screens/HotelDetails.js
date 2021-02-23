@@ -28,7 +28,7 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
 
   const [apiRequest, refetchData] = useAPI({
     url: "/traveller/hotel",
-    params: { hotelId: params.id },
+    params: { hotelId: params.hotelId },
   });
 
   const whiteButtonTheme = useMemo(
@@ -178,7 +178,9 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
               </View>
             </View>
             <View style={screenStyles.Section}>
-              <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
+              <SectionHeader
+                style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+              >
                 About
               </SectionHeader>
               <Paragraph style={screenStyles.ScreenPadded}>
@@ -186,13 +188,11 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
               </Paragraph>
             </View>
             <View style={screenStyles.Section}>
-              <View style={screenStyles.SectionHeader}>
-                <SectionHeader
-                  style={[screenStyles.ScreenPadded, SectionHeader]}
-                >
-                  Amenities
-                </SectionHeader>
-              </View>
+              <SectionHeader
+                style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+              >
+                Amenities
+              </SectionHeader>
               <View style={styles.AmenitiesContainer}>
                 {apiRequest.data?.hotelDetails.amenities.map((amenity) => (
                   <Chip key={amenity} style={{ margin: CHIP_SPACING }}>
@@ -202,13 +202,11 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
               </View>
             </View>
             <View style={screenStyles.Section}>
-              <View style={screenStyles.SectionHeader}>
-                <SectionHeader
-                  style={[screenStyles.ScreenPadded, SectionHeader]}
-                >
-                  Reviews
-                </SectionHeader>
-              </View>
+              <SectionHeader
+                style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+              >
+                Reviews
+              </SectionHeader>
               <View style={screenStyles.ScreenPadded}>
                 {apiRequest.data.hotelReviews.map((review) => (
                   <ReviewCard key={review.id} {...review} />

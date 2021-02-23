@@ -158,11 +158,11 @@ const BlogScreen = ({ navigation: { goBack } }) => {
           </Text>
         </View>
         <View style={screenStyles.Section}>
-          <View style={screenStyles.SectionHeader}>
-            <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
-              Comments
-            </SectionHeader>
-          </View>
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
+            Comments
+          </SectionHeader>
           <View style={screenStyles.ScreenPadded}>
             {comments.map((comment) => (
               <CommentCard key={comment.id} {...comment} />

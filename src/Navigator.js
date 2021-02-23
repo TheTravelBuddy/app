@@ -23,6 +23,8 @@ import BlogScreen from "./screens/Blog";
 import AttractionDetailsScreen from "./screens/AttractionDetails";
 import BusinessDetailsScreen from "./screens/BusinessDetails";
 import PackageDetailsScreen from "./screens/PackageDetails";
+import CityDetailsScreen from "./screens/CityDetails";
+
 import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
 
@@ -164,6 +166,10 @@ const Navigator = () => {
           <AppStack.Screen
             name="PackageDetailsScreen"
             component={PackageDetailsScreen}
+          />
+          <AppStack.Screen
+            name="CityDetailsScreen"
+            component={CityDetailsScreen}
           />
         </AppStack.Navigator>
       ) : (

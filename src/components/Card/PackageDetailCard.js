@@ -7,14 +7,13 @@ import styles from "./styles";
 import RatingPill from "../RatingPill";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
 import CardTitle from "../Typography/CardTitle";
-import LocationSubtitle from "../Typography/LocationSubtitle";
-import HotelPriceSummary from "../Typography/HotelPriceSummary";
+import CardSubtitle from "../Typography/CardSubtitle";
+import PackagePriceSummary from "../Typography/PackagePriceSummary";
 
-const HotelDetailCard = ({
+const PackageDetailCard = ({
   id,
   name,
-  locality,
-  city,
+  duration,
   coverUri,
   rating,
   price,
@@ -24,12 +23,16 @@ const HotelDetailCard = ({
   const { width } = useScreenDimensions();
   const { navigate } = useNavigation();
 
-  const goToHotel = useCallback(() => {
-    navigate("HotelDetailsScreen", { hotelId: id });
+  const goToPackage = useCallback(() => {
+    navigate("PackageDetailsScreen", { packageId: id });
   }, [id, navigate]);
 
   return (
-    <Card style={[{ width: width / 2 }, style]} {...props} onPress={goToHotel}>
+    <Card
+      style={[{ width: Math.round(width * 0.67) }, style]}
+      onPress={goToPackage}
+      {...props}
+    >
       <Card.Cover
         style={{ height: Math.round(width * 0.3) }}
         source={{ uri: coverUri }}
@@ -39,13 +42,13 @@ const HotelDetailCard = ({
           <CardTitle style={styles.CardTitleText}>{name}</CardTitle>
           <RatingPill rating={rating} />
         </View>
-        <LocationSubtitle {...{ locality, city }} />
+        <CardSubtitle>{duration}</CardSubtitle>
         <View style={styles.CardContent}>
-          <HotelPriceSummary {...{ price }} />
+          <PackagePriceSummary {...{ price }} />
         </View>
       </View>
     </Card>
   );
 };
 
-export default HotelDetailCard;
+export default PackageDetailCard;
