@@ -6,7 +6,7 @@ import screenStyles from "./styles";
 
 import {
   SectionHeader,
-  SectionSubsection,
+  SectionSubtitle,
   Scaffold,
   HorizontalScroller,
   LocationSubtitle,
@@ -155,11 +155,11 @@ const AttractionDetailsScreen = ({ navigation: { goBack } }) => {
             {attractionDetails.about}
           </Paragraph>
           <View style={screenStyles.ScreenPadded}>
-            <SectionSubsection>Address</SectionSubsection>
+            <SectionSubtitle>Address</SectionSubtitle>
             <Paragraph>{attractionDetails.address}</Paragraph>
           </View>
           <View style={screenStyles.ScreenPadded}>
-            <SectionSubsection>Timings</SectionSubsection>
+            <SectionSubtitle>Timings</SectionSubtitle>
 
             <Paragraph>{attractionDetails.timings}</Paragraph>
           </View>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, useTheme } from "react-native-paper";
 
-const SectionSubsection = ({ children, style, ...props }) => {
+const SectionSubtitle = ({ children, style, ...props }) => {
   const theme = useTheme();
 
   return (
@@ -20,4 +20,4 @@ const styles = {
   },
 };
 
-export default SectionSubsection;
+export default SectionSubtitle;

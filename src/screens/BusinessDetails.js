@@ -6,7 +6,7 @@ import screenStyles from "./styles";
 
 import {
   SectionHeader,
-  SectionSubsection,
+  SectionSubtitle,
   Scaffold,
   HorizontalScroller,
   LocationSubtitle,
@@ -155,12 +155,11 @@ const BusinessDetailsScreen = ({ navigation: { goBack } }) => {
             {businessDetails.about}
           </Paragraph>
           <View style={screenStyles.ScreenPadded}>
-            <SectionSubsection>Address</SectionSubsection>
+            <SectionSubtitle>Address</SectionSubtitle>
             <Paragraph>{businessDetails.address}</Paragraph>
           </View>
           <View style={screenStyles.ScreenPadded}>
-            <SectionSubsection>Timings</SectionSubsection>
-
+            <SectionSubtitle>Timings</SectionSubtitle>
             <Paragraph>{businessDetails.timings}</Paragraph>
           </View>
         </View>
@@ -211,7 +210,6 @@ const styles = {
     flexDirection: "row",
     marginTop: SCREEN_PADDING,
   },
-
   SectionRightButton: {
     alignSelf: "flex-end",
   },
