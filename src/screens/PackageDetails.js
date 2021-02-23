@@ -8,33 +8,33 @@ import {
   SectionHeader,
   Scaffold,
   HorizontalScroller,
-  LocationSubtitle,
+  PackageDurationSubtitle,
   Button,
   Chip,
   ScreenTitle,
   RatingPill,
-  SearchPriceSummary,
+  SearchPackagePriceSummary,
   Paragraph,
   ReviewCard,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
 
-const hotelDetails = {
+const packageDetails = {
   id: 1,
-  name: "Taj Tours & packages",
+  name: "Have Pleasure in Pune",
   about:
     "The Taj Mahal Palace Hotel is a heritage, five-star, luxury hotel built in the Saracenic Revival style in the Colaba area of Mumbai, Maharashtra, India, situated next to the Gateway of India. Historically it was known as the 'Taj Mahal Hotel' or simply 'The Taj'.",
   rating: 4.5,
-  date: "14-20 February",
-  city: "Mumbai",
+  nights: "4 Nights",
+  days: "5 Days",
   photos: [
     "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/a5/d8/c1/exterior.jpg",
     "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/27/36/2736904_v5.jpeg",
     "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/99/50/99501_v5.jpeg",
     "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/a5/d8/c1/exterior.jpg",
   ],
-  packages: ["Hotel", "Sightseeing", "Pool", "Parking", "Spa"],
+  amenities: ["Hotel", "Sightseeing", "Activities", "Flights", "Transfers"],
   price: 3550,
 };
 
@@ -55,7 +55,7 @@ const reviews = [
   },
 ];
 
-const HotelDetailsScreen = ({ navigation: { goBack } }) => {
+const PackageDetailsScreen = ({ navigation: { goBack } }) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
 
@@ -75,9 +75,9 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
         <View
           style={[styles.BottomBar, { backgroundColor: theme.colors.surface }]}
         >
-          <SearchPriceSummary
+          <SearchPackagePriceSummary
             style={screenStyles.FlexMore}
-            price={hotelDetails.price}
+            price={packageDetails.price}
           />
           <Button
             mode="contained"
@@ -94,7 +94,7 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
     >
       <View>
         <HorizontalScroller gap={0} verticalSpacing={0} horizontalSpacing={0}>
-          {hotelDetails.photos.map((photoUri) => (
+          {packageDetails.photos.map((photoUri) => (
             <Image
               key={photoUri}
               source={{
@@ -129,14 +129,14 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
         <View style={[screenStyles.Section]}>
           <View style={[screenStyles.ScreenPadded, styles.TitleContainer]}>
             <ScreenTitle style={screenStyles.Flex}>
-              {hotelDetails.name}
+              {packageDetails.name}
             </ScreenTitle>
-            <RatingPill rating={hotelDetails.rating} />
+            <RatingPill rating={packageDetails.rating} />
           </View>
-          <LocationSubtitle
+          <PackageDurationSubtitle
             style={screenStyles.ScreenPadded}
-            locality={hotelDetails.locality}
-            city={hotelDetails.city}
+            nights={packageDetails.nights}
+            days={packageDetails.days}
           />
         </View>
         <View style={screenStyles.Section}>
@@ -145,7 +145,7 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
           >
             <Button
               mode="contained"
-              icon="map-marker-outline"
+              icon="account-multiple-outline"
               style={screenStyles.FormInputLeft}
               theme={whiteButtonTheme}
               onPress={() => {
@@ -174,7 +174,7 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
             About
           </SectionHeader>
           <Paragraph style={screenStyles.ScreenPadded}>
-            {hotelDetails.about}
+            {packageDetails.about}
           </Paragraph>
         </View>
         <View style={screenStyles.Section}>
@@ -184,7 +184,7 @@ const HotelDetailsScreen = ({ navigation: { goBack } }) => {
             </SectionHeader>
           </View>
           <View style={styles.AmenitiesContainer}>
-            {hotelDetails.packages.map((amenity) => (
+            {packageDetails.amenities.map((amenity) => (
               <Chip key={amenity} style={{ margin: CHIP_SPACING }}>
                 {amenity.toUpperCase()}
               </Chip>
@@ -255,4 +255,4 @@ const styles = {
   },
 };
 
-export default HotelDetailsScreen;
+export default PackageDetailsScreen;

@@ -11,11 +11,13 @@ import Title from "./Typography/Title";
 import SectionHeader from "./Typography/SectionHeader";
 import Tagline from "./Typography/Tagline";
 import LocationSubtitle from "./Typography/LocationSubtitle";
+import PackageDurationSubtitle from "./Typography/PackageDurationSubtitle";
 import ModalTitle from "./Typography/ModalTitle";
 import ScreenTitle from "./Typography/ScreenTitle";
 import Label from "./Typography/Label";
 import Paragraph from "./Typography/Paragraph";
 import SearchPriceSummary from "./Typography/SearchPriceSummary";
+import SearchPackagePriceSummary from "./Typography/SearchPackagePriceSummary";
 import CardSubtitle from "./Typography/CardSubtitle";
 import SectionSubtitle from "./Typography/SectionSubtitle";
 import RatingPill from "./RatingPill";
@@ -57,7 +59,9 @@ export {
   ScreenTitle,
   LocationSubtitle,
   SectionSubtitle,
+  PackageDurationSubtitle,
   SearchPriceSummary,
+  SearchPackagePriceSummary,
   CardSubtitle,
   Paragraph,
   RatingPill,
