@@ -18,6 +18,7 @@ import Label from "./Typography/Label";
 import Paragraph from "./Typography/Paragraph";
 import SearchHotelPriceSummary from "./Typography/SearchHotelPriceSummary";
 import SearchPackagePriceSummary from "./Typography/SearchPackagePriceSummary";
+import PackagePriceSummary from "./Typography/PackagePriceSummary";
 import CardSubtitle from "./Typography/CardSubtitle";
 import SectionSubtitle from "./Typography/SectionSubtitle";
 import RatingPill from "./RatingPill";
@@ -28,6 +29,7 @@ import AttractionCard from "./Card/AttractionCard";
 import ExploreServiceCard from "./Card/ExploreServiceCard";
 import BusinessBannerCard from "./Card/BusinessBannerCard";
 import HotelDetailCard from "./Card/HotelDetailCard";
+import PackageDetailCard from "./Card/PackageDetailCard";
 import BookingSearchCard from "./Card/BookingSearchCard";
 import BlogCard from "./Card/BlogCard";
 import BlogBannerCard from "./Card/BlogBannerCard";
@@ -62,12 +64,14 @@ export {
   PackageDurationSubtitle,
   SearchHotelPriceSummary,
   SearchPackagePriceSummary,
+  PackagePriceSummary,
   CardSubtitle,
   Paragraph,
   RatingPill,
   PackageBannerCard,
   PackageHalfCard,
   HotelDetailCard,
+  PackageDetailCard,
   BookingSearchCard,
   BlogCard,
   BlogBannerCard,

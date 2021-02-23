@@ -3,7 +3,6 @@ import { View } from "react-native";
 import {
   Text,
   Card,
-  Avatar,
   IconButton,
   useTheme,
   Divider,
@@ -59,11 +58,11 @@ const BlogLocationCard = ({
       <Divider />
       <View style={commonStyles.CardContainer}>
         <View style={commonStyles.CardTitleContainer}>
-          <Avatar.Image
+          {/* <Avatar.Image
             size={24}
             source={{ uri: authorProfile }}
             style={commonStyles.CardTitleIcon}
-          />
+          /> */}
           <CardTitle style={commonStyles.CardTitleText}>{title}</CardTitle>
         </View>
         <View style={commonStyles.CardContent}>
