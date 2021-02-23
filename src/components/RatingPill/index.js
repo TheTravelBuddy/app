@@ -10,19 +10,20 @@ const RatingPill = ({ rating, style, ...props }) => {
       style={[
         styles.PillContainer,
         {
-          backgroundColor:
-            rating >= 4
-              ? theme.colors.ratingHigh
-              : rating >= 3
-              ? theme.colors.ratingMedium
-              : theme.colors.ratingLow,
+          backgroundColor: !rating
+            ? theme.colors.ratingNull
+            : rating >= 4
+            ? theme.colors.ratingHigh
+            : rating >= 3
+            ? theme.colors.ratingMedium
+            : theme.colors.ratingLow,
         },
         style,
       ]}
       {...props}
     >
       <Text style={[styles.PillText, theme.fonts.bold]}>
-        {rating.toFixed(1)}
+        {rating ? rating.toFixed(1) : "-"}
       </Text>
     </View>
   );

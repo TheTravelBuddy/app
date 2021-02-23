@@ -24,13 +24,13 @@ const placesData = [
     coverUri:
       "https://static.toiimg.com/photo/msid-52005539,width-96,height-65.cms",
     name: "Kanheri Caves",
-    rating: 4.5,
+    rating: undefined,
   },
   {
     id: 2,
     coverUri: "https://static.toiimg.com/photo/24476893.cms",
     name: "National Park",
-    rating: 4.9,
+    rating: undefined,
   },
   {
     id: 3,
