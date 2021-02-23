@@ -44,7 +44,7 @@ const theme = {
     ratingHigh: "#00C851",
     ratingMedium: "#FFBB33",
     ratingLow: "#FF0000",
-    ratingnull: "#BEBEBE",
+    ratingNull: "#BEBEBE",
   },
 };
 

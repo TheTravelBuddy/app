@@ -11,7 +11,7 @@ const RatingPill = ({ rating, style, ...props }) => {
         styles.PillContainer,
         {
           backgroundColor: !rating
-            ? theme.colors.ratingnull
+            ? theme.colors.ratingNull
             : rating >= 4
             ? theme.colors.ratingHigh
             : rating >= 3
