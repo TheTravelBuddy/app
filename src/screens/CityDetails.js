@@ -21,7 +21,7 @@ import {
   BlogCard,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
-import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
+import { SCREEN_PADDING } from "../constants";
 
 const cityDetails = {
   id: 1,
@@ -355,13 +355,6 @@ const CityDetailsScreen = ({ navigation: { goBack } }) => {
 };
 
 const styles = {
-  BottomBar: {
-    elevation: 4,
-    flexDirection: "row",
-    alignItems: "center",
-    padding: Math.round(CARD_SPACING / 2),
-    paddingLeft: SCREEN_PADDING,
-  },
   HeaderBackFAB: {
     position: "absolute",
     margin: 8,
@@ -381,11 +374,7 @@ const styles = {
     flexDirection: "row",
     marginTop: SCREEN_PADDING,
   },
-  AmenitiesContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    marginHorizontal: SCREEN_PADDING - CHIP_SPACING,
-  },
+
   SectionRightButton: {
     alignSelf: "flex-end",
   },
