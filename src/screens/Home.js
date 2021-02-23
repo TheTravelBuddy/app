@@ -6,8 +6,8 @@ import {
   HorizontalScroller,
   SectionHeader,
   Scaffold,
-  LocationBannerCard,
-  LocationHalfCard,
+  PackageBannerCard,
+  PackageHalfCard,
   HotelDetailCard,
   BlogCard,
   RenderOnLoad,
@@ -30,7 +30,7 @@ const HomeScreen = () => {
               </SectionHeader>
               <HorizontalScroller>
                 {apiRequest.data?.topPackages.map((packageDetails) => (
-                  <LocationBannerCard
+                  <PackageBannerCard
                     key={packageDetails.id}
                     {...packageDetails}
                   />
@@ -45,7 +45,7 @@ const HomeScreen = () => {
               </SectionHeader>
               <HorizontalScroller>
                 {apiRequest.data?.topDestinations.map((cityDetails) => (
-                  <LocationHalfCard key={cityDetails.id} {...cityDetails} />
+                  <PackageHalfCard key={cityDetails.id} {...cityDetails} />
                 ))}
               </HorizontalScroller>
             </View>

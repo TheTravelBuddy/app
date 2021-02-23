@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 
-const SearchPriceSummary = ({ price, style, ...props }) => {
+const SearchHotelPriceSummary = ({ price, style, ...props }) => {
   const theme = useTheme();
 
   return (
@@ -29,4 +29,4 @@ const styles = {
   },
 };
 
-export default SearchPriceSummary;
+export default SearchHotelPriceSummary;

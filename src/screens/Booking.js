@@ -6,8 +6,8 @@ import styles from "./styles";
 import {
   SectionHeader,
   Scaffold,
-  LocationBannerCard,
-  LocationHalfCard,
+  PackageBannerCard,
+  PackageHalfCard,
   HotelDetailCard,
   HorizontalScroller,
 } from "../components";
@@ -115,7 +115,7 @@ const BookingScreen = ({ navigation: { navigate } }) => {
         </SectionHeader>
         <HorizontalScroller>
           {packagesData.map(({ id, coverUri, name, rating }) => (
-            <LocationBannerCard key={id} {...{ id, coverUri, name, rating }} />
+            <PackageBannerCard key={id} {...{ id, coverUri, name, rating }} />
           ))}
         </HorizontalScroller>
       </View>
@@ -140,7 +140,7 @@ const BookingScreen = ({ navigation: { navigate } }) => {
         </SectionHeader>
         <HorizontalScroller>
           {topRatedPackagesData.map(({ id, coverUri, name, rating }) => (
-            <LocationHalfCard key={id} {...{ id, coverUri, name, rating }} />
+            <PackageHalfCard key={id} {...{ id, coverUri, name, rating }} />
           ))}
         </HorizontalScroller>
       </View>

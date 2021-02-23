@@ -7,9 +7,8 @@ import styles from "./styles";
 import RatingPill from "../RatingPill";
 import CardTitle from "../Typography/CardTitle";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
-import { SCREEN_PADDING } from "../../constants";
 
-const LocationBannerCard = ({ id, name, coverUri, rating, style }) => {
+const PackageHalfCard = ({ id, name, coverUri, rating, style }) => {
   const { width } = useScreenDimensions();
   const { navigate } = useNavigation();
 
@@ -18,12 +17,9 @@ const LocationBannerCard = ({ id, name, coverUri, rating, style }) => {
   }, [id, navigate]);
 
   return (
-    <Card
-      style={[{ width: width - 2 * SCREEN_PADDING }, style]}
-      onPress={goToPackage}
-    >
+    <Card style={[{ width: width / 2 }, style]} onPress={goToPackage}>
       <Card.Cover
-        style={{ height: Math.round(width / 2 - SCREEN_PADDING) }}
+        style={{ height: Math.round(width * 0.3) }}
         source={{ uri: coverUri }}
       />
       <View style={styles.CardContainer}>
@@ -36,4 +32,4 @@ const LocationBannerCard = ({ id, name, coverUri, rating, style }) => {
   );
 };
 
-export default LocationBannerCard;
+export default PackageHalfCard;
