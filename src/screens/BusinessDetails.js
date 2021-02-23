@@ -40,16 +40,16 @@ const businessDetails = {
 const reviews = [
   {
     id: 1,
-    username: "Riddhi Dholakia",
+    name: "Riddhi Dholakia",
     rating: 3.6,
-    reviewText:
+    review:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
   },
   {
     id: 2,
-    username: "Tanvi Inch",
+    name: "Tanvi Inch",
     rating: 4.5,
-    reviewText:
+    review:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
   },
 ];
@@ -148,7 +148,9 @@ const BusinessDetailsScreen = ({ navigation: { goBack } }) => {
           </View>
         </View>
         <View style={screenStyles.Section}>
-          <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
+          <SectionHeader
+            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+          >
             About
           </SectionHeader>
           <Paragraph style={screenStyles.ScreenPadded}>
@@ -165,7 +167,9 @@ const BusinessDetailsScreen = ({ navigation: { goBack } }) => {
         </View>
         <View style={screenStyles.Section}>
           <View style={screenStyles.SectionHeader}>
-            <SectionHeader style={[screenStyles.ScreenPadded, SectionHeader]}>
+            <SectionHeader
+              style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+            >
               Reviews
             </SectionHeader>
           </View>
