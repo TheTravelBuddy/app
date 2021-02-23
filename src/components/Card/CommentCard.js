@@ -17,7 +17,7 @@ const CommentCard = ({ id, commentText, username }) => (
     <View>
       <CardTitle>{username}</CardTitle>
     </View>
-    <Paragraph>{commentText}</Paragraph>
+    <Paragraph numberOfLines={2}>{commentText}</Paragraph>
   </Card>
 );
 

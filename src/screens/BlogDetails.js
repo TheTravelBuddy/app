@@ -104,23 +104,19 @@ const BlogDetailsScreen = ({ navigation: { goBack } }) => {
           <View style={styles.BlogDetailContainer}>
             <Chip
               icon="map-marker-outline"
-              style={{ margin: CHIP_SPACING }}
+              style={styles.BlogDetailChip}
               onPress={() => {}}
             >
               {blogDetails.city}
             </Chip>
             <Chip
               icon="card-text-outline"
-              style={{ margin: CHIP_SPACING }}
+              style={styles.BlogDetailChip}
               onPress={() => {}}
             >
               {blogDetails.topic}
             </Chip>
-            <Chip
-              icon="clock-outline"
-              style={{ margin: CHIP_SPACING }}
-              onPress={() => {}}
-            >
+            <Chip icon="clock-outline" style={styles.BlogDetailChip}>
               {blogDetails.dop}
             </Chip>
           </View>
@@ -202,6 +198,9 @@ const styles = {
     lineHeight: 24,
     letterSpacing: 0.5,
     textAlign: "justify",
+  },
+  BlogDetailChip: {
+    margin: CHIP_SPACING,
   },
   SectionRightButton: {
     alignSelf: "flex-end",
