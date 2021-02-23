@@ -3,7 +3,7 @@ import { View } from "react-native";
 
 import commonStyles from "./styles";
 
-import { Scaffold, SectionHeader, BlogSearchCard } from "../components";
+import { Scaffold, BlogSearchCard } from "../components";
 
 const blogsData = [
   {
