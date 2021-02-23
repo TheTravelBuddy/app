@@ -20,6 +20,8 @@ import BookingSearchScreen from "./screens/BookingSearch";
 import BookingFavoritesScreen from "./screens/BookingFavorites";
 import HotelDetailsScreen from "./screens/HotelDetails";
 import BlogScreen from "./screens/Blog";
+import AttractionDetailsScreen from "./screens/AttractionDetails";
+import BusinessDetailsScreen from "./screens/BusinessDetails";
 import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
 
@@ -150,6 +152,14 @@ const Navigator = () => {
             component={HotelDetailsScreen}
           />
           <AppStack.Screen name="BlogScreen" component={BlogScreen} />
+          <AppStack.Screen
+            name="AttractionDetailsScreen"
+            component={AttractionDetailsScreen}
+          />
+          <AppStack.Screen
+            name="BusinessDetailsScreen"
+            component={BusinessDetailsScreen}
+          />
         </AppStack.Navigator>
       ) : (
         <LoadingScreen />
