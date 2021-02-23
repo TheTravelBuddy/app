@@ -133,7 +133,7 @@ const BlogDetailsScreen = ({ navigation: { goBack } }) => {
           ]}
         >
           <Avatar.Image
-            size={36}
+            size={24}
             style={styles.ProflieImage}
             source={{ uri: "https://picsum.photos/1420" }}
           />
