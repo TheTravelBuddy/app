@@ -41,16 +41,16 @@ const packageDetails = {
 const reviews = [
   {
     id: 1,
-    username: "Riddhi Dholakia",
+    name: "Riddhi Dholakia",
     rating: 4.5,
-    reviewText:
+    review:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
   },
   {
     id: 2,
-    username: "Riddhi Dholakia",
+    name: "Riddhi Dholakia",
     rating: 3.6,
-    reviewText:
+    review:
       "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
   },
 ];
