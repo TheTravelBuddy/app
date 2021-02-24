@@ -10,11 +10,11 @@ const BlogTopicCard = ({ id, name, style, ...props }) => {
   const { navigate } = useNavigation();
 
   const goToBlogTopic = useCallback(() => {
-    navigate("BlogTopicScreen", { blogSearchlId: id });
+    navigate("BlogTopicScreen", { blogTopicId: id });
   }, [id, navigate]);
 
   return (
-    <Card style={[styles.Container, style]} onPress={goToBlogTopic}>
+    <Card style={[styles.Container, style]} onPress={goToBlogTopic} {...props}>
       <CardTitle style={[styles.TitleText, theme.fonts.medium]}>
         {name}
       </CardTitle>
