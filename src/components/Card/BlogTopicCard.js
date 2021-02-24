@@ -10,7 +10,7 @@ const BlogTopicCard = ({ id, name, style, ...props }) => {
   const { navigate } = useNavigation();
 
   const goToBlogTopic = useCallback(() => {
-    navigate("BlogSearchScreen", { blogSearchlId: id });
+    navigate("BlogTopicScreen", { blogSearchlId: id });
   }, [id, navigate]);
 
   return (

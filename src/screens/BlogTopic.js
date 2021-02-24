@@ -63,7 +63,7 @@ const blogsData = [
   },
 ];
 
-const BlogSearchScreen = ({ navigation: { goBack } }) => {
+const BlogTopicScreen = ({ navigation: { goBack } }) => {
   return (
     <Scaffold
       header={useMemo(() => ({ title: "Adventure", backAction: goBack }), [
@@ -83,4 +83,4 @@ const BlogSearchScreen = ({ navigation: { goBack } }) => {
   );
 };
 
-export default BlogSearchScreen;
+export default BlogTopicScreen;
