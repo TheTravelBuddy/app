@@ -22,6 +22,7 @@ import PackagePriceSummary from "./Typography/PackagePriceSummary";
 import HotelPriceSummary from "./Typography/HotelPriceSummary";
 import CardSubtitle from "./Typography/CardSubtitle";
 import SectionSubtitle from "./Typography/SectionSubtitle";
+import BlogSubtitle from "./Typography/BlogSubtitle";
 import RatingPill from "./RatingPill";
 import PackageBannerCard from "./Card/PackageBannerCard";
 import PackageHalfCard from "./Card/PackageHalfCard";
@@ -39,6 +40,7 @@ import BlogLocationCard from "./Card/BlogLocationCard";
 import BlogTopicCard from "./Card/BlogTopicCard";
 import ReviewCard from "./Card/ReviewCard";
 import CommentCard from "./Card/CommentCard";
+import BlogSearchCard from "./Card/BlogSearchCard";
 import Chip from "./Chip";
 import BookingFiltersModal from "./Modals/BookingFiltersModal";
 import BookingTypeModal from "./Modals/BookingTypeModal";
@@ -70,6 +72,7 @@ export {
   HotelPriceSummary,
   CardSubtitle,
   Paragraph,
+  BlogSubtitle,
   RatingPill,
   PackageBannerCard,
   PackageHalfCard,
@@ -87,6 +90,7 @@ export {
   AttractionCard,
   BusinessBannerCard,
   ExploreServiceCard,
+  BlogSearchCard,
   Chip,
   ModalTitle,
   BookingFiltersModal,
