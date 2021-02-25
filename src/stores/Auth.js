@@ -1,6 +1,7 @@
 import auth from "@react-native-firebase/auth";
 import produce from "immer";
 import create from "zustand";
+import moment from "moment";
 
 import API from "../helpers/API";
 import log from "../helpers/log";
@@ -95,12 +96,28 @@ const useAuth = create(
       if (status !== 200) return;
 
       const { uid } = auth().currentUser;
-      const { registered, name, phoneNumber } = userData;
+      const {
+        registered,
+        name,
+        phoneNumber,
+        mood,
+        gender,
+        dob,
+        profilePicture,
+      } = userData;
 
       set(
         produce((draftState) => {
           if (registered) {
-            draftState.user = { uid, name, phoneNumber };
+            draftState.user = {
+              uid,
+              name,
+              phoneNumber,
+              mood,
+              gender,
+              dob: moment(dob).toDate(),
+              profilePicture,
+            };
             draftState.authState = authStates.LOGGED_IN;
           } else {
             draftState.user = { uid };

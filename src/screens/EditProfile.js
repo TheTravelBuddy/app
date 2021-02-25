@@ -11,19 +11,22 @@ import {
   Button,
 } from "../components";
 
-import useTextInput from "../hooks/useTextInput";
-import usePicker from "../hooks/usePicker";
-import useDateTimePicker from "../hooks/useDateTimePicker";
+import { useReactiveTextInput } from "../hooks/useTextInput";
+import { useReactivePicker } from "../hooks/usePicker";
+import { useReactiveDateTimePicker } from "../hooks/useDateTimePicker";
 import { SCREEN_PADDING } from "../constants";
+import { useAuth } from "../stores/Auth";
 
 const today = new Date();
 const initialDate = new Date(1900, 0, 2);
 
 const EditProfileScreen = ({ navigation: { goBack } }) => {
-  const name = useTextInput();
-  const dob = useDateTimePicker(today);
-  const gender = usePicker("M");
-  const mood = usePicker("MIXED");
+  const userDetails = useAuth((state) => state.user);
+
+  const name = useReactiveTextInput(userDetails.name);
+  const dob = useReactiveDateTimePicker(userDetails.dob);
+  const gender = useReactivePicker(userDetails.gender);
+  const mood = useReactivePicker(userDetails.mood);
 
   return (
     <Scaffold
@@ -35,10 +38,10 @@ const EditProfileScreen = ({ navigation: { goBack } }) => {
         <Avatar.Image
           size={108}
           style={styles.ProfileImage}
-          source={{ uri: "https://picsum.photos/1420" }}
+          source={{ uri: userDetails.profilePicture }}
         />
         <View style={styles.ProfileDetails}>
-          <CardTitle>+91123456789</CardTitle>
+          <CardTitle>{userDetails.phoneNumber}</CardTitle>
         </View>
       </View>
       <View style={[commonStyles.Section, commonStyles.ScreenPadded]}>
