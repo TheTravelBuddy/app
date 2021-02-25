@@ -14,7 +14,7 @@ const BlogCard = ({ id, title, content, likes, style }) => {
   const { navigate } = useNavigation();
 
   const goToBlog = useCallback(() => {
-    navigate("BlogScreen", { bloglId: id });
+    navigate("BlogScreen", { blogId: id });
   }, [id, navigate]);
   return (
     <Card style={[{ width: width * 0.6 }, style]} onPress={goToBlog}>

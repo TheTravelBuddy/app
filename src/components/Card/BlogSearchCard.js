@@ -26,7 +26,7 @@ const BlogSearchCard = ({
   const { navigate } = useNavigation();
 
   const goToBlog = useCallback(() => {
-    navigate("BlogScreen", { bloglId: id });
+    navigate("BlogScreen", { blogId: id });
   }, [id, navigate]);
   return (
     <Card

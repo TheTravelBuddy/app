@@ -1,6 +1,7 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { View, Image } from "react-native";
 import { Avatar, FAB, useTheme, IconButton, Text } from "react-native-paper";
+import moment from "moment";
 
 import screenStyles from "./styles";
 
@@ -14,51 +15,38 @@ import {
   Paragraph,
   CommentCard,
   CardTitle,
+  RenderOnLoad,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import { CHIP_SPACING, SCREEN_PADDING } from "../constants";
+import API, { useAPI } from "../helpers/API";
 
-const blogDetails = {
-  id: 1,
-  name: "Masti in Mumbai",
-  city: "Mumbai",
-  topic: "Cusine",
-  dop: "5 days ago",
-  likes: 15,
-  content:
-    "Mumbai is a stunning paradox of hope and chaos, magic and madness. Where the changing modernity of India has been experienced most intensely. From Gandhi’s arrival from England in 1915 to the protests against the Simon Commission in 1928, Bombay, now Mumbai, has been home to many key events of the freedom struggle, Mumbai has different aspects with art, heritage and Culture. During the festivals, we ensure that you get the glimpse of prominent things like Visarjan at Chaupatty, fire cracker celebration during Diwali at Marine Drive and much more, The prime benefit of hiring us is that we are very feasible with prices and you could easily book us. ",
-  photos: [
-    "https://picsum.photos/1098",
-    "https://picsum.photos/1097",
-    "https://picsum.photos/1099",
-    "https://picsum.photos/1100",
-  ],
-};
-
-const comments = [
-  {
-    id: 1,
-    username: "Guddi M",
-    commentText:
-      "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
-  },
-  {
-    id: 2,
-    username: "Divya Jain",
-    commentText:
-      "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
-  },
-  {
-    id: 3,
-    username: "Tanvi Inch",
-    commentText:
-      "An unforgettable dish doesn’t have to be anything fancy. Editor Nathan Lump had one of his all-time favorite food experiences in Mumbai: a bowl of perfectly in-season Alphonso mango..",
-  },
-];
-
-const BlogScreen = ({ navigation: { goBack } }) => {
+const BlogScreen = ({ navigation: { goBack }, route: { params } }) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
+
+  const [apiRequest, refetchData] = useAPI({
+    url: "/traveller/blog",
+    params: { blogId: params.blogId },
+  });
+
+  const likeBlog = useCallback(async () => {
+    await API({
+      method: "post",
+      url: "/traveller/blog/like",
+      params: { blogId: params.blogId },
+    });
+    await refetchData();
+  }, [refetchData, params.blogId]);
+
+  const unlikeBlog = useCallback(async () => {
+    await API({
+      method: "delete",
+      url: "/traveller/blog/unlike",
+      params: { blogId: params.blogId },
+    });
+    await refetchData();
+  }, [refetchData, params.blogId]);
 
   const whiteButtonTheme = useMemo(
     () => ({
@@ -72,111 +60,113 @@ const BlogScreen = ({ navigation: { goBack } }) => {
 
   return (
     <Scaffold>
-      <View>
-        <HorizontalScroller gap={0} verticalSpacing={0} horizontalSpacing={0}>
-          {blogDetails.photos.map((photoUri) => (
-            <Image
-              key={photoUri}
-              source={{
-                uri: photoUri,
-              }}
-              style={{ height: width / 2, width }}
-              height={width / 2}
-            />
-          ))}
-        </HorizontalScroller>
-        <>
-          <FAB
-            small
-            style={styles.HeaderBackFAB}
-            mode="contained"
-            icon="arrow-left"
-            theme={whiteButtonTheme}
-            onPress={goBack}
-          />
-        </>
-        <View style={([screenStyles.Section], { marginTop: 16 })}>
-          <View style={[screenStyles.ScreenPadded]}>
-            <ScreenTitle>{blogDetails.name}</ScreenTitle>
-          </View>
-        </View>
-        <View style={screenStyles.Section}>
-          <View style={styles.BlogDetailContainer}>
-            <Chip
-              icon="map-marker-outline"
-              style={styles.BlogDetailChip}
-              onPress={() => {}}
+      <RenderOnLoad loading={!apiRequest.data}>
+        {() => (
+          <View>
+            <HorizontalScroller
+              gap={0}
+              verticalSpacing={0}
+              horizontalSpacing={0}
             >
-              {blogDetails.city}
-            </Chip>
-            <Chip
-              icon="card-text-outline"
-              style={styles.BlogDetailChip}
-              onPress={() => {}}
+              {apiRequest.data.photos.map((photoUri) => (
+                <Image
+                  key={photoUri}
+                  source={{ uri: photoUri }}
+                  style={{ height: width / 2, width }}
+                  height={width / 2}
+                />
+              ))}
+            </HorizontalScroller>
+            <>
+              <FAB
+                small
+                style={styles.HeaderBackFAB}
+                mode="contained"
+                icon="arrow-left"
+                theme={whiteButtonTheme}
+                onPress={goBack}
+              />
+            </>
+            <View style={([screenStyles.Section], { marginTop: 16 })}>
+              <View style={[screenStyles.ScreenPadded]}>
+                <ScreenTitle>{apiRequest.data.title}</ScreenTitle>
+              </View>
+            </View>
+            <View style={screenStyles.Section}>
+              <View style={styles.BlogDetailContainer}>
+                <Chip icon="map-marker-outline" style={styles.BlogDetailChip}>
+                  {apiRequest.data.location}
+                </Chip>
+                <Chip icon="card-text-outline" style={styles.BlogDetailChip}>
+                  {apiRequest.data.topic}
+                </Chip>
+                <Chip icon="clock-outline" style={styles.BlogDetailChip}>
+                  {moment(apiRequest.data.publishedOn).fromNow()}
+                </Chip>
+              </View>
+            </View>
+            <View
+              style={[
+                screenStyles.Section,
+                screenStyles.ScreenPadded,
+                styles.UserDetails,
+              ]}
             >
-              {blogDetails.topic}
-            </Chip>
-            <Chip icon="clock-outline" style={styles.BlogDetailChip}>
-              {blogDetails.dop}
-            </Chip>
+              <Avatar.Image
+                size={24}
+                style={styles.ProflieImage}
+                source={{ uri: apiRequest.data.authorProfile }}
+              />
+              <CardTitle>{apiRequest.data.authorName}</CardTitle>
+            </View>
+            <View style={screenStyles.Section}>
+              <Paragraph
+                style={[screenStyles.ScreenPadded, styles.BlogContent]}
+              >
+                {apiRequest.data.content}
+              </Paragraph>
+            </View>
+            <View style={styles.LikesContainer}>
+              <IconButton
+                size={22}
+                style={styles.LikesActionsIcon}
+                color={
+                  apiRequest.data.liked ? "#EB453D" : theme.colors.textSecondary
+                }
+                icon={apiRequest.data.liked ? "heart" : "heart-outline"}
+                onPress={apiRequest.data.liked ? unlikeBlog : likeBlog}
+              />
+              <Text
+                style={[
+                  { color: theme.colors.textSecondary },
+                  styles.CardActionsText,
+                ]}
+              >
+                {apiRequest.data.likes}
+              </Text>
+            </View>
+            <View style={screenStyles.Section}>
+              <SectionHeader
+                style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
+              >
+                Comments
+              </SectionHeader>
+              <View style={screenStyles.ScreenPadded}>
+                {apiRequest.data.comments.map((comment) => (
+                  <CommentCard key={comment.name} {...comment} />
+                ))}
+                <Button
+                  compact
+                  style={styles.SectionRightButton}
+                  onPress={() => {}}
+                >
+                  Read More Comments
+                </Button>
+              </View>
+            </View>
           </View>
-        </View>
-        <View
-          style={[
-            screenStyles.Section,
-            screenStyles.ScreenPadded,
-            styles.UserDetails,
-          ]}
-        >
-          <Avatar.Image
-            size={24}
-            style={styles.ProflieImage}
-            source={{ uri: "https://picsum.photos/1420" }}
-          />
-          <CardTitle>Riddhi Dholakia</CardTitle>
-        </View>
-        <View style={screenStyles.Section}>
-          <Paragraph style={[screenStyles.ScreenPadded, styles.BlogContent]}>
-            {blogDetails.content}
-          </Paragraph>
-        </View>
-        <View style={styles.LikesContainer}>
-          <IconButton
-            size={22}
-            color={theme.colors.textSecondary}
-            style={styles.LikesActionsIcon}
-            icon="heart-outline"
-            onPress={() => {}}
-          />
-          <Text
-            style={[
-              { color: theme.colors.textSecondary },
-              styles.CardActionsText,
-            ]}
-          >
-            {blogDetails.likes}
-          </Text>
-        </View>
-        <View style={screenStyles.Section}>
-          <SectionHeader
-            style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
-          >
-            Comments
-          </SectionHeader>
-          <View style={screenStyles.ScreenPadded}>
-            {comments.map((comment) => (
-              <CommentCard key={comment.id} {...comment} />
-            ))}
-            <Button
-              compact
-              style={styles.SectionRightButton}
-              onPress={() => {}}
-            >
-              Read More Comments
-            </Button>
-          </View>
-        </View>
-      </View>
+        )}
+      </RenderOnLoad>
     </Scaffold>
   );
 };

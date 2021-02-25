@@ -6,7 +6,7 @@ import { CARD_SPACING } from "../../constants";
 import CardTitle from "../Typography/CardTitle";
 import Paragraph from "../Typography/Paragraph";
 
-const CommentCard = ({ id, commentText, username }) => (
+const CommentCard = ({ id, comment, name }) => (
   <Card
     style={{
       padding: CARD_SPACING,
@@ -15,9 +15,9 @@ const CommentCard = ({ id, commentText, username }) => (
     onPress={() => {}}
   >
     <View>
-      <CardTitle>{username}</CardTitle>
+      <CardTitle>{name}</CardTitle>
     </View>
-    <Paragraph numberOfLines={2}>{commentText}</Paragraph>
+    <Paragraph numberOfLines={2}>{comment}</Paragraph>
   </Card>
 );
 
