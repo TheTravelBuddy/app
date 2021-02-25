@@ -45,19 +45,19 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
     await API({
       method: "post",
       url: "/traveller/hotel/like",
-      params: { hotelId: params.id },
+      params: { hotelId: params.hotelId },
     });
     await refetchData();
-  }, [refetchData, params.id]);
+  }, [refetchData, params.hotelId]);
 
   const unlikeHotel = useCallback(async () => {
     await API({
       method: "delete",
       url: "/traveller/hotel/unlike",
-      params: { hotelId: params.id },
+      params: { hotelId: params.hotelId },
     });
     await refetchData();
-  }, [refetchData, params.id]);
+  }, [refetchData, params.hotelId]);
 
   return (
     <Scaffold
@@ -71,7 +71,7 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
           >
             <SearchHotelPriceSummary
               style={screenStyles.FlexMore}
-              price={apiRequest.data?.hotelDetails.price}
+              price={apiRequest.data.price}
             />
             <Button
               mode="contained"
@@ -95,7 +95,7 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
               verticalSpacing={0}
               horizontalSpacing={0}
             >
-              {apiRequest.data?.hotelDetails.photos.map((photoUri) => (
+              {apiRequest.data.photos.map((photoUri) => (
                 <Image
                   key={photoUri}
                   source={{
@@ -119,29 +119,23 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
                 small
                 style={styles.HeaderFavoriteFAB}
                 mode="contained"
-                color={
-                  apiRequest.data.hotelDetails.likes ? "#EB453D" : undefined
-                }
-                icon={
-                  apiRequest.data.hotelDetails.likes ? "heart" : "heart-outline"
-                }
+                color={apiRequest.data.liked ? "#EB453D" : undefined}
+                icon={apiRequest.data.liked ? "heart" : "heart-outline"}
                 theme={whiteButtonTheme}
-                onPress={
-                  apiRequest.data.hotelDetails.likes ? unlikeHotel : likeHotel
-                }
+                onPress={apiRequest.data.liked ? unlikeHotel : likeHotel}
               />
             </>
             <View style={[screenStyles.Section]}>
               <View style={[screenStyles.ScreenPadded, styles.TitleContainer]}>
                 <ScreenTitle style={screenStyles.Flex}>
-                  {apiRequest.data?.hotelDetails.name}
+                  {apiRequest.data.name}
                 </ScreenTitle>
-                <RatingPill rating={apiRequest.data?.hotelDetails.rating} />
+                <RatingPill rating={apiRequest.data.rating} />
               </View>
               <LocationSubtitle
                 style={screenStyles.ScreenPadded}
-                locality={apiRequest.data?.hotelDetails.locality}
-                city={apiRequest.data?.hotelDetails.city}
+                locality={apiRequest.data.locality}
+                city={apiRequest.data.city}
               />
             </View>
             <View style={screenStyles.Section}>
@@ -184,7 +178,7 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
                 About
               </SectionHeader>
               <Paragraph style={screenStyles.ScreenPadded}>
-                {apiRequest.data?.hotelDetails.about}
+                {apiRequest.data.about}
               </Paragraph>
             </View>
             <View style={screenStyles.Section}>
@@ -194,7 +188,7 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
                 Amenities
               </SectionHeader>
               <View style={styles.AmenitiesContainer}>
-                {apiRequest.data?.hotelDetails.amenities.map((amenity) => (
+                {apiRequest.data.amenities.map((amenity) => (
                   <Chip key={amenity} style={{ margin: CHIP_SPACING }}>
                     {amenity.toUpperCase()}
                   </Chip>
@@ -208,7 +202,7 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
                 Reviews
               </SectionHeader>
               <View style={screenStyles.ScreenPadded}>
-                {apiRequest.data.hotelReviews.map((review) => (
+                {apiRequest.data.reviews.map((review) => (
                   <ReviewCard key={review.id} {...review} />
                 ))}
                 <Button
