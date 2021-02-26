@@ -10,7 +10,8 @@ import {
   BookingTypeModal,
   SectionHeader,
   Scaffold,
-  BookingSearchCard,
+  HotelSearchCard,
+  PackageSearchCard,
   Chip,
   HorizontalScroller,
 } from "../components";
@@ -22,6 +23,35 @@ import {
 } from "../stores/BookingFilters";
 import useToggle from "../hooks/useToggle";
 import { SCREEN_PADDING } from "../constants";
+
+// const packageDetailsData = [
+//   {
+//     id: 1,
+//     coverUri: "https://static.toiimg.com/photo/24476893.cms",
+//     name: "Majistic Mumbai",
+//     rating: 4.5,
+//     duration: "5N/6D",
+//     price: 3550,
+//   },
+//   {
+//     id: 2,
+//     coverUri:
+//       "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/27/36/2736904_v5.jpeg",
+//     name: "Have Pleasure in Mumbai",
+//     rating: 5,
+//     duration: "5N/6D",
+//     price: 4000,
+//   },
+//   {
+//     id: 3,
+//     coverUri:
+//       "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/99/50/99501_v5.jpeg",
+//     name: "Adarsh Baug Hotel",
+//     rating: 3.5,
+//     duration: "5N/6D",
+//     price: 1050,
+//   },
+// ];
 
 const BookingSearchScreen = ({ navigation }) => {
   const theme = useTheme();
@@ -106,9 +136,19 @@ const BookingSearchScreen = ({ navigation }) => {
         </SectionHeader>
         {searchResults.map(
           ({ id, coverUri, name, rating, locality, city, price, distance }) => (
-            <BookingSearchCard
+            <HotelSearchCard
               key={id}
               {...{ coverUri, name, rating, locality, city, price, distance }}
+              style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
+              onPress={() => navigation.navigate("HotelDetailsScreen")}
+            />
+          )
+        )}
+        {searchResults.map(
+          ({ id, coverUri, name, rating, nights, days, price }) => (
+            <PackageSearchCard
+              key={id}
+              {...{ coverUri, name, rating, nights, days, price }}
               style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
               onPress={() => navigation.navigate("HotelDetailsScreen")}
             />
