@@ -14,7 +14,6 @@ import SectionHeader from "./Typography/SectionHeader";
 import Tagline from "./Typography/Tagline";
 import LocationSubtitle from "./Typography/LocationSubtitle";
 import PackageDurationSubtitle from "./Typography/PackageDurationSubtitle";
-import HotelGuestSubtitle from "./Typography/HotelGuestSubtitle";
 import ModalTitle from "./Typography/ModalTitle";
 import ScreenTitle from "./Typography/ScreenTitle";
 import Label from "./Typography/Label";
@@ -75,7 +74,6 @@ export {
   LocationSubtitle,
   SectionSubtitle,
   PackageDurationSubtitle,
-  HotelGuestSubtitle,
   SearchHotelPriceSummary,
   SearchPackagePriceSummary,
   PackagePriceSummary,

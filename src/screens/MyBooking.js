@@ -15,6 +15,13 @@ const hotelData = [
     city: "Mumbai",
     price: 5000,
     distance: 5,
+    booking: {
+      adults: 3,
+      children: 3,
+      rooms: 2,
+      date: new Date(),
+      numberOfDays: 4,
+    },
   },
 ];
 
@@ -26,15 +33,13 @@ const MyBookingScreen = ({ navigation: { goBack } }) => {
       ])}
     >
       <View style={commonStyles.Section}>
-        {hotelData.map(
-          ({ id, coverUri, name, rating, locality, city, price, distance }) => (
-            <MyBookingHotelCard
-              key={id}
-              {...{ coverUri, name, rating, locality, city, price, distance }}
-              style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
-            />
-          )
-        )}
+        {hotelData.map((bookingDetails) => (
+          <MyBookingHotelCard
+            key={bookingDetails.id}
+            {...bookingDetails}
+            style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
+          />
+        ))}
       </View>
     </Scaffold>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Image } from "react-native";
-import { Card, Divider, useTheme, Text, IconButton } from "react-native-paper";
+import { Card, Divider, useTheme, Text } from "react-native-paper";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import commonStyles from "./styles";
 import RatingPill from "../RatingPill";
@@ -10,15 +11,10 @@ import DistanceSubtitle from "../Typography/DistanceSubtitle ";
 import SearchHotelPriceSummary from "../Typography/SearchHotelPriceSummary";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
 import { CARD_SPACING, SCREEN_PADDING } from "../../constants";
-import CardSubtitle from "../Typography/CardSubtitle";
 import HotelPriceSummary from "../Typography/HotelPriceSummary";
-import HotelGuestSubtitle from "../Typography/HotelGuestSubtitle";
+import CardSubtitle from "../Typography/CardSubtitle";
+import { displayFilter } from "../../stores/BookingFilters";
 
-const guestDetails = {
-  id: 1,
-  adults: "2 Adults",
-  child: "2 Children",
-};
 const MyBookingHotelCard = ({
   coverUri,
   name,
@@ -27,88 +23,103 @@ const MyBookingHotelCard = ({
   city,
   distance,
   price,
+  booking: { adults, children, rooms, numberOfDays, date } = {},
   style,
-  adults,
-  child,
   ...props
 }) => {
   const { width } = useScreenDimensions();
   const theme = useTheme();
 
   return (
-    <Card
-      style={[
-        { width: width - 2 * SCREEN_PADDING, padding: CARD_SPACING },
-        style,
-      ]}
-      {...props}
-    >
-      <View style={styles.CardContent}>
-        <Image
-          style={{
-            width: width / 6,
-            // height: width / 7,
-            borderRadius: theme.roundness,
-          }}
-          source={{ uri: coverUri }}
-        />
-        <View style={styles.CardBody}>
-          <View style={commonStyles.CardTitleContainer}>
-            <CardTitle style={commonStyles.CardTitleText}>{name}</CardTitle>
-            <RatingPill rating={rating} />
-          </View>
-          <LocationSubtitle {...{ locality, city }} />
-          <DistanceSubtitle {...{ distance }} />
-        </View>
-      </View>
-      <View style={{ marginTop: 12 }} />
-      <Divider />
-      <View style={commonStyles.CardActionsContainer}>
-        <IconButton
-          size={18}
-          color={theme.colors.textSecondary}
-          style={commonStyles.CardActionsIcon}
-          icon="account-multiple-outline"
-        />
-        <HotelGuestSubtitle
-          style={commonStyles.ScreenPadded}
-          adults={guestDetails.adults}
-          child={guestDetails.child}
-        />
-        <View style={commonStyles.CardActionsSpacer} />
-        <IconButton
-          size={18}
-          color={theme.colors.textSecondary}
-          style={commonStyles.CardActionsIcon}
-          icon="calendar-month-outline"
-          onPress={() => {
-            // eslint-disable-next-line no-alert
-            alert("WIP: Like Blog Endpoint");
-          }}
-        />
-        <Text
-          style={[
-            { color: theme.colors.textSecondary },
-            commonStyles.CardActionsText,
-          ]}
-        >
-          25 February 2021
-        </Text>
-      </View>
-      <View style={styles.CardBody}>
+    <Card style={[{ width: width - 2 * SCREEN_PADDING }, style]} {...props}>
+      <View style={commonStyles.CardContainer}>
         <View style={styles.CardContent}>
-          <HotelPriceSummary {...{ price }} />
+          <Image
+            style={{
+              width: width / 6,
+              height: width / 6,
+              borderRadius: theme.roundness,
+            }}
+            source={{ uri: coverUri }}
+          />
+          <View style={styles.CardBody}>
+            <View style={commonStyles.CardTitleContainer}>
+              <CardTitle style={commonStyles.CardTitleText}>{name}</CardTitle>
+              <RatingPill rating={rating} />
+            </View>
+            <LocationSubtitle {...{ locality, city }} />
+            <DistanceSubtitle {...{ distance }} />
+          </View>
         </View>
-        <View style={commonStyles.CardActionsSpacer} />
-        <SearchHotelPriceSummary {...{ price }} style={styles.CardPrice} />
+      </View>
+      <Divider />
+      <View style={commonStyles.CardContainer}>
+        <View style={styles.CardContent}>
+          <View style={styles.TextContainer}>
+            <MaterialCommunityIcons
+              name="account-multiple-outline"
+              size={16}
+              color={theme.colors.textSecondary}
+              style={[commonStyles.CardActionsIcon, styles.TextIcon]}
+            />
+            <Text
+              style={[
+                { color: theme.colors.textSecondary },
+                commonStyles.CardActionsText,
+              ]}
+            >
+              {displayFilter.booking({ adults, children })}
+            </Text>
+          </View>
+          <View style={commonStyles.CardActionsSpacer} />
+          <View style={styles.TextContainer}>
+            <MaterialCommunityIcons
+              size={16}
+              color={theme.colors.textSecondary}
+              style={[commonStyles.CardActionsIcon, styles.TextIcon]}
+              name="calendar-month-outline"
+              onPress={() => {
+                // eslint-disable-next-line no-alert
+                alert("WIP: Like Blog Endpoint");
+              }}
+            />
+            <Text
+              style={[
+                { color: theme.colors.textSecondary },
+                commonStyles.CardActionsText,
+              ]}
+            >
+              {displayFilter.date(date)}
+            </Text>
+          </View>
+        </View>
+        <View style={[commonStyles.CardContent, styles.CardContent]}>
+          <View style={styles.BillContainer}>
+            <HotelPriceSummary {...{ price }} />
+            <CardSubtitle>{`× ${displayFilter.booking({
+              rooms,
+            })}`}</CardSubtitle>
+            <CardSubtitle>{`× ${displayFilter.numberOfDays(
+              numberOfDays
+            )}`}</CardSubtitle>
+          </View>
+          <View style={commonStyles.CardActionsSpacer} />
+          <SearchHotelPriceSummary {...{ price }} style={styles.CardPrice} />
+        </View>
       </View>
     </Card>
   );
 };
 
 const styles = {
+  TextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  TextIcon: {
+    marginRight: CARD_SPACING / 2,
+  },
   CardContent: {
-    flex: 1,
     flexDirection: "row",
   },
   CardBody: {
