@@ -1,5 +1,7 @@
 import Appbar from "./Appbar";
 import BottomModal from "./BottomModal";
+import CommentModal from "./Modals/CommentModal";
+import ReviewModal from "./Modals/ReviewModal";
 import Button from "./Button";
 import Loader from "./Loader";
 import Scaffold from "./Scaffold";
@@ -51,6 +53,8 @@ import RenderOnLoad from "./RenderOnLoad";
 export {
   Appbar,
   BottomModal,
+  CommentModal,
+  ReviewModal,
   Button,
   Loader,
   Picker,

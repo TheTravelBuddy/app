@@ -170,7 +170,7 @@ const blogData = [
       "This summer vacation we went to the one of the best tourist spots of India.",
   },
 ];
-const CityDetailsScreen = ({ navigation: { goBack } }) => {
+const CityDetailsScreen = ({ navigation: { goBack, navigate } }) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
 
@@ -338,8 +338,7 @@ const CityDetailsScreen = ({ navigation: { goBack } }) => {
               compact
               style={styles.SectionRightButton}
               onPress={() => {
-                // eslint-disable-next-line no-alert
-                alert("WIP: Reviews Screen Navigation");
+                navigate("ReviewsScreen");
               }}
             >
               Read More Reviews

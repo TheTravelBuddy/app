@@ -21,7 +21,10 @@ import useScreenDimensions from "../hooks/useScreenDimensions";
 import { CHIP_SPACING, SCREEN_PADDING } from "../constants";
 import API, { useAPI } from "../helpers/API";
 
-const BlogScreen = ({ navigation: { goBack }, route: { params } }) => {
+const BlogScreen = ({
+  navigation: { goBack, navigate },
+  route: { params },
+}) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
 
@@ -158,7 +161,9 @@ const BlogScreen = ({ navigation: { goBack }, route: { params } }) => {
                 <Button
                   compact
                   style={styles.SectionRightButton}
-                  onPress={() => {}}
+                  onPress={() => {
+                    navigate("CommentsScreen");
+                  }}
                 >
                   Read More Comments
                 </Button>

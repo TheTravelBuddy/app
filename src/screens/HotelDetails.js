@@ -22,7 +22,10 @@ import useScreenDimensions from "../hooks/useScreenDimensions";
 import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
 import API, { useAPI } from "../helpers/API";
 
-const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
+const HotelDetailsScreen = ({
+  navigation: { goBack, navigate },
+  route: { params },
+}) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
 
@@ -209,8 +212,7 @@ const HotelDetailsScreen = ({ navigation: { goBack }, route: { params } }) => {
                   compact
                   style={styles.SectionRightButton}
                   onPress={() => {
-                    // eslint-disable-next-line no-alert
-                    alert("WIP: Reviews Screen Navigation");
+                    navigate("ReviewsScreen");
                   }}
                 >
                   Read More Reviews
