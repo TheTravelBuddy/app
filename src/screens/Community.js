@@ -14,7 +14,7 @@ import {
 } from "../components";
 import { useAPI } from "../helpers/API";
 
-const CommunityScreen = () => {
+const CommunityScreen = ({ navigation }) => {
   const [apiRequest] = useAPI("/traveller/community");
 
   return (
@@ -29,8 +29,7 @@ const CommunityScreen = () => {
                 style={styles.ScreenPadded}
                 theme={{ colors: { primary: "white" } }}
                 onPress={() => {
-                  // eslint-disable-next-line no-alert
-                  alert("WIP: Write Blog Screen Endpoint");
+                  navigation.navigate("CreateBlogScreen");
                 }}
               >
                 Write a Blog
