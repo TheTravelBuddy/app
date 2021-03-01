@@ -54,6 +54,7 @@ import BookingFiltersModal from "./Modals/BookingFiltersModal";
 import BookingTypeModal from "./Modals/BookingTypeModal";
 import BookingSearchModal from "./Modals/BookingSearchModal";
 import BookingLocationModal from "./Modals/BookingLocationModal";
+import AboutAgencyModal from "./Modals/AboutAgencyModal";
 import RenderOnLoad from "./RenderOnLoad";
 
 export {
@@ -113,5 +114,6 @@ export {
   BookingTypeModal,
   BookingSearchModal,
   BookingLocationModal,
+  AboutAgencyModal,
   RenderOnLoad,
 };
