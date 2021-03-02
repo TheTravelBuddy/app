@@ -14,11 +14,24 @@ import {
 } from "../components";
 import { useAPI } from "../helpers/API";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation: { navigate } }) => {
   const [apiRequest] = useAPI("/traveller/home");
 
   return (
-    <Scaffold header={useMemo(() => ({ title: "Travel Buddy" }), [])}>
+    <Scaffold
+      header={useMemo(
+        () => ({
+          title: "Travel Buddy",
+          actions: [
+            {
+              icon: "magnify",
+              onPress: () => navigate("BookingSearchScreen"),
+            },
+          ],
+        }),
+        [navigate]
+      )}
+    >
       <RenderOnLoad loading={apiRequest.loading}>
         {() => (
           <>

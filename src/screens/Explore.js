@@ -71,9 +71,22 @@ const topBusinessesData = [
   },
 ];
 
-const ExploreScreen = () => {
+const ExploreScreen = ({ navigation: { navigate } }) => {
   return (
-    <Scaffold header={useMemo(() => ({ title: "Explore" }), [])}>
+    <Scaffold
+      header={useMemo(
+        () => ({
+          title: "Explore",
+          actions: [
+            {
+              icon: "magnify",
+              onPress: () => navigate("BookingSearchScreen"),
+            },
+          ],
+        }),
+        [navigate]
+      )}
+    >
       <View style={styles.Section}>
         <SectionHeader style={[styles.ScreenPadded, styles.SectionHeader]}>
           See What&apos;s Nearby

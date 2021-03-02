@@ -22,7 +22,20 @@ const CommunityScreen = ({ navigation: { navigate } }) => {
   }, [navigate]);
 
   return (
-    <Scaffold header={useMemo(() => ({ title: "Community" }), [])}>
+    <Scaffold
+      header={useMemo(
+        () => ({
+          title: "Community",
+          actions: [
+            {
+              icon: "magnify",
+              onPress: () => navigate("BookingSearchScreen"),
+            },
+          ],
+        }),
+        [navigate]
+      )}
+    >
       <RenderOnLoad loading={apiRequest.loading}>
         {() => (
           <>
