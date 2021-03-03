@@ -59,7 +59,9 @@ const ProfileScreen = ({ navigation: { navigate } }) => {
         <Divider />
         <List.Item
           title="My Blogs"
-          onPress={() => {}}
+          onPress={() => {
+            navigate("MyBlogsScreen");
+          }}
           left={(props) => <List.Icon {...props} icon="card-text-outline" />}
         />
         <Divider />
