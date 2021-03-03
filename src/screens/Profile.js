@@ -53,7 +53,9 @@ const ProfileScreen = ({ navigation: { navigate } }) => {
         <Divider />
         <List.Item
           title="My Reviews"
-          onPress={() => {}}
+          onPress={() => {
+            navigate("MyReviewsScreen");
+          }}
           left={(props) => <List.Icon {...props} icon="pencil-box-outline" />}
         />
         <Divider />

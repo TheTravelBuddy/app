@@ -35,6 +35,8 @@ import ExploreServiceScreen from "./screens/ExploreService";
 
 import MyBlogsScreen from "./screens/MyBlogs";
 
+import MyReviewsScreen from "./screens/MyReviews";
+
 import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
 
@@ -205,6 +207,7 @@ const Navigator = () => {
             component={ExploreServiceScreen}
           />
           <AppStack.Screen name="MyBlogsScreen" component={MyBlogsScreen} />
+          <AppStack.Screen name="MyReviewsScreen" component={MyReviewsScreen} />
         </AppStack.Navigator>
       ) : (
         <LoadingScreen />
