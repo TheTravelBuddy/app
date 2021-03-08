@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { View } from "react-native";
 
 import styles from "./styles";
@@ -14,8 +14,12 @@ import {
 } from "../components";
 import { useAPI } from "../helpers/API";
 
-const CommunityScreen = ({ navigation }) => {
+const CommunityScreen = ({ navigation: { navigate } }) => {
   const [apiRequest] = useAPI("/traveller/community");
+
+  const goToCreateBlog = useCallback(() => {
+    navigate("CreateBlogScreen");
+  }, [navigate]);
 
   return (
     <Scaffold header={useMemo(() => ({ title: "Community" }), [])}>
@@ -28,9 +32,7 @@ const CommunityScreen = ({ navigation }) => {
                 icon="pencil-outline"
                 style={styles.ScreenPadded}
                 theme={{ colors: { primary: "white" } }}
-                onPress={() => {
-                  navigation.navigate("CreateBlogScreen");
-                }}
+                onPress={goToCreateBlog}
               >
                 Write a Blog
               </Button>
