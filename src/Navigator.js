@@ -26,6 +26,9 @@ import PackageDetailsScreen from "./screens/PackageDetails";
 import CityDetailsScreen from "./screens/CityDetails";
 import BlogTopicScreen from "./screens/BlogTopic";
 import EditProfileScreen from "./screens/EditProfile";
+import ReviewsScreen from "./screens/Reviews";
+import CommentsScreen from "./screens/Comments";
+import BusinessCategoryScreen from "./screens/BusinessCategory";
 
 import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
@@ -178,6 +181,12 @@ const Navigator = () => {
             component={EditProfileScreen}
           />
           <AppStack.Screen name="BlogTopicScreen" component={BlogTopicScreen} />
+          <AppStack.Screen name="ReviewsScreen" component={ReviewsScreen} />
+          <AppStack.Screen name="CommentsScreen" component={CommentsScreen} />
+          <AppStack.Screen
+            name="BusinessCategoryScreen"
+            component={BusinessCategoryScreen}
+          />
         </AppStack.Navigator>
       ) : (
         <LoadingScreen />
