@@ -36,6 +36,9 @@ import BusinessBannerCard from "./Card/BusinessBannerCard";
 import HotelDetailCard from "./Card/HotelDetailCard";
 import PackageDetailCard from "./Card/PackageDetailCard";
 import BookingSearchCard from "./Card/BookingSearchCard";
+import HotelSearchCard from "./Card/HotelSearchCard";
+import PackageSearchCard from "./Card/PackageSearchCard";
+import HotelBookingCard from "./Card/HotelBookingCard";
 import BlogCard from "./Card/BlogCard";
 import BlogBannerCard from "./Card/BlogBannerCard";
 import BlogLocationCard from "./Card/BlogLocationCard";
@@ -85,6 +88,8 @@ export {
   HotelDetailCard,
   PackageDetailCard,
   BookingSearchCard,
+  HotelSearchCard,
+  PackageSearchCard,
   BlogCard,
   BlogBannerCard,
   BlogLocationCard,
@@ -97,6 +102,7 @@ export {
   ExploreServiceCard,
   BlogSearchCard,
   BusinessSearchCard,
+  HotelBookingCard,
   Chip,
   ModalTitle,
   BookingFiltersModal,

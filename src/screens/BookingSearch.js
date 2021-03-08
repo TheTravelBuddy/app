@@ -10,7 +10,8 @@ import {
   BookingTypeModal,
   SectionHeader,
   Scaffold,
-  BookingSearchCard,
+  HotelSearchCard,
+  PackageSearchCard,
   Chip,
   HorizontalScroller,
 } from "../components";
@@ -104,16 +105,21 @@ const BookingSearchScreen = ({ navigation }) => {
         >
           Search Results
         </SectionHeader>
-        {searchResults.map(
-          ({ id, coverUri, name, rating, locality, city, price, distance }) => (
-            <BookingSearchCard
-              key={id}
-              {...{ coverUri, name, rating, locality, city, price, distance }}
-              style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
-              onPress={() => navigation.navigate("HotelDetailsScreen")}
-            />
-          )
-        )}
+        {selectedBookingType === "HOTEL"
+          ? searchResults.map((data) => (
+              <HotelSearchCard
+                key={data.id}
+                {...data}
+                style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
+              />
+            ))
+          : searchResults.map((data) => (
+              <PackageSearchCard
+                key={data.id}
+                {...data}
+                style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
+              />
+            ))}
       </View>
       <BookingLocationModal
         visible={locationModal.visible}

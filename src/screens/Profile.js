@@ -10,7 +10,6 @@ import { useAuth } from "../stores/Auth";
 const ProfileScreen = ({ navigation: { navigate } }) => {
   const user = useAuth((state) => state.user);
   const logout = useAuth((state) => state.logout);
-
   return (
     <Scaffold
       header={useMemo(
@@ -44,7 +43,9 @@ const ProfileScreen = ({ navigation: { navigate } }) => {
       <View style={[screenStyles.Section, styles.ListContainer]}>
         <List.Item
           title="My Bookings"
-          onPress={() => {}}
+          onPress={() => {
+            navigate("MyBookingsScreen");
+          }}
           left={(props) => (
             <List.Icon {...props} icon="briefcase-check-outline" />
           )}

@@ -29,6 +29,7 @@ import EditProfileScreen from "./screens/EditProfile";
 import ReviewsScreen from "./screens/Reviews";
 import CommentsScreen from "./screens/Comments";
 import BusinessCategoryScreen from "./screens/BusinessCategory";
+import MyBookingsScreen from "./screens/MyBookings";
 
 import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
@@ -179,6 +180,10 @@ const Navigator = () => {
           <AppStack.Screen
             name="EditProfileScreen"
             component={EditProfileScreen}
+          />
+          <AppStack.Screen
+            name="MyBookingsScreen"
+            component={MyBookingsScreen}
           />
           <AppStack.Screen name="BlogTopicScreen" component={BlogTopicScreen} />
           <AppStack.Screen name="ReviewsScreen" component={ReviewsScreen} />
