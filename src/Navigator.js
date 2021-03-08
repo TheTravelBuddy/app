@@ -31,6 +31,7 @@ import CommentsScreen from "./screens/Comments";
 import BusinessCategoryScreen from "./screens/BusinessCategory";
 import MyBookingsScreen from "./screens/MyBookings";
 import CreateBlogScreen from "./screens/CreateBlog";
+import ExploreServiceScreen from "./screens/ExploreService";
 
 import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
@@ -196,6 +197,10 @@ const Navigator = () => {
           <AppStack.Screen
             name="CreateBlogScreen"
             component={CreateBlogScreen}
+          />
+          <AppStack.Screen
+            name="ExploreServiceScreen"
+            component={ExploreServiceScreen}
           />
         </AppStack.Navigator>
       ) : (

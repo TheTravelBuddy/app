@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Card, useTheme } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 import CardTitle from "../Typography/CardTitle";
 import { SCREEN_PADDING } from "../../constants";
 
 const ExploreServiceCard = ({ id, name, style, ...props }) => {
   const theme = useTheme();
+  const { navigate } = useNavigation();
+
+  const goToExploreService = useCallback(() => {
+    navigate("ExploreServiceScreen", { serviceId: id });
+  }, [id, navigate]);
 
   return (
     <Card
       style={[styles.Container, style]}
-      onPress={() => {
-        // eslint-disable-next-line no-alert
-        alert("WIP: Explore Service Screen Navigation");
-      }}
+      onPress={goToExploreService}
       {...props}
     >
       <CardTitle style={[styles.TitleText, theme.fonts.medium]}>
