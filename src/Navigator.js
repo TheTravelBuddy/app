@@ -25,15 +25,12 @@ import BusinessDetailsScreen from "./screens/BusinessDetails";
 import PackageDetailsScreen from "./screens/PackageDetails";
 import CityDetailsScreen from "./screens/CityDetails";
 import BlogTopicScreen from "./screens/BlogTopic";
-<<<<<<< HEAD
 import EditProfileScreen from "./screens/EditProfile";
 import ReviewsScreen from "./screens/Reviews";
 import CommentsScreen from "./screens/Comments";
 import BusinessCategoryScreen from "./screens/BusinessCategory";
-
-=======
 import MyBookingScreen from "./screens/MyBooking";
->>>>>>> 4122c36 (Booking card)
+
 import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
 
