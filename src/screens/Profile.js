@@ -44,7 +44,7 @@ const ProfileScreen = ({ navigation: { navigate } }) => {
         <List.Item
           title="My Bookings"
           onPress={() => {
-            navigate("MyBookingScreen");
+            navigate("MyBookingsScreen");
           }}
           left={(props) => (
             <List.Icon {...props} icon="briefcase-check-outline" />

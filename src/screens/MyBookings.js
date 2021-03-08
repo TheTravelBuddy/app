@@ -25,7 +25,7 @@ const hotelData = [
   },
 ];
 
-const MyBookingScreen = ({ navigation: { goBack } }) => {
+const MyBookingsScreen = ({ navigation: { goBack } }) => {
   return (
     <Scaffold
       header={useMemo(() => ({ title: "My Bookings", backAction: goBack }), [
@@ -45,4 +45,4 @@ const MyBookingScreen = ({ navigation: { goBack } }) => {
   );
 };
 
-export default MyBookingScreen;
+export default MyBookingsScreen;
