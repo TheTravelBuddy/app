@@ -24,7 +24,7 @@ const cardData = [
 const CreateBlogScreen = () => {
   return (
     <Scaffold header={useMemo(() => ({ title: "Create Blog" }), [])}>
-      <View style={styles.FormInput}>
+      <View style={styles.Section}>
         <Button
           mode="contained"
           icon="plus"
@@ -35,41 +35,36 @@ const CreateBlogScreen = () => {
           Add Images
         </Button>
       </View>
-      <View style={[styles.FormInput, styles.FormInputRight]}>
+      <View style={styles.Section}>
         <HorizontalScroller>
           {cardData.map((cardDatadetails) => (
             <BlogImageCard key={cardDatadetails.id} {...cardDatadetails} />
           ))}
         </HorizontalScroller>
       </View>
-
-      <View style={styles.Container}>
-        <View>
-          <TextInput label="Title" style={styles.FormInput} />
-          <View>
-            <View style={styles.FormInputContainer}>
-              <Picker
-                label="Topic"
-                items={[
-                  { value: "ADVENTURE", label: "Adventure" },
-                  { value: "Cuisine", label: "Cuisine" },
-                  { value: "Trekking", label: "Trekking" },
-                ]}
-                style={[styles.FormInput, styles.FormInputLeft]}
-              />
-              <TextInput
-                label="Location"
-                style={[styles.FormInput, styles.FormInputRight]}
-              />
-            </View>
-          </View>
+      <View style={[styles.Section, styles.ScreenPadded]}>
+        <TextInput label="Title" style={styles.FormInput} />
+        <View style={styles.FormInputContainer}>
+          <Picker
+            label="Topic"
+            items={[
+              { value: "ADVENTURE", label: "Adventure" },
+              { value: "Cuisine", label: "Cuisine" },
+              { value: "Trekking", label: "Trekking" },
+            ]}
+            style={[styles.FormInput, styles.FormInputLeft]}
+          />
           <TextInput
-            label="Write Something..."
-            numberOfLines={10}
-            multiline={true}
-            style={styles.FormInput}
+            label="Location"
+            style={[styles.FormInput, styles.FormInputRight]}
           />
         </View>
+        <TextInput
+          label="Write Something..."
+          numberOfLines={10}
+          multiline={true}
+          style={styles.FormInput}
+        />
         <Button mode="contained" onPress={() => {}}>
           CREATE BLOG
         </Button>
