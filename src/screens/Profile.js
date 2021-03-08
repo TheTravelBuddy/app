@@ -7,7 +7,7 @@ import { Scaffold, ScreenTitle, CardTitle } from "../components";
 import { SCREEN_PADDING } from "../constants";
 import { useAuth } from "../stores/Auth";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation: { navigate } }) => {
   const user = useAuth((state) => state.user);
   const logout = useAuth((state) => state.logout);
 
@@ -17,14 +17,17 @@ const ProfileScreen = () => {
         () => ({
           title: "Profile",
           actions: [
-            { icon: "pencil-outline", onPress: () => {} },
+            {
+              icon: "pencil-outline",
+              onPress: () => navigate("EditProfileScreen"),
+            },
             {
               icon: "exit-to-app",
               onPress: logout,
             },
           ],
         }),
-        [logout]
+        [logout, navigate]
       )}
     >
       <View style={styles.ProfileContainer}>
