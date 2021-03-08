@@ -87,6 +87,15 @@ const useAuth = create(
 
       if (status === 200) await get().getUserDetails();
     },
+    updateProfile: async (userDetails) => {
+      const { status } = await API({
+        url: "/traveller/profile/edit",
+        method: "PUT",
+        data: userDetails,
+      });
+
+      if (status === 200) await get().getUserDetails();
+    },
     getUserDetails: async () => {
       const { status, data: userData } = await API({
         url: "/traveller/auth/userData",
