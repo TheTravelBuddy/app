@@ -36,14 +36,14 @@ const ServiceSearchCard = ({
         <CardSubtitle>{timings}</CardSubtitle>
         <View style={styles.ButtonContainer}>
           <IconButton
-            size={22}
+            size={24}
             color={theme.colors.textSecondary}
             style={commonStyles.CardActionsIcon}
             icon="phone-outline"
             onPress={() => {}}
           />
           <IconButton
-            size={22}
+            size={24}
             color={theme.colors.textSecondary}
             style={commonStyles.CardActionsIcon}
             icon="map-marker-outline"

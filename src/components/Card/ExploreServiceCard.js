@@ -9,13 +9,14 @@ const ExploreServiceCard = ({ id, name, style, ...props }) => {
   const theme = useTheme();
   const { navigate } = useNavigation();
 
-  const ExploreServiceScreen = useCallback(() => {
-    navigate("ExploreServiceScreen", { blogId: id });
+  const goToExploreService = useCallback(() => {
+    navigate("ExploreServiceScreen", { serviceId: id });
   }, [id, navigate]);
+
   return (
     <Card
       style={[styles.Container, style]}
-      onPress={ExploreServiceScreen}
+      onPress={goToExploreService}
       {...props}
     >
       <CardTitle style={[styles.TitleText, theme.fonts.medium]}>
