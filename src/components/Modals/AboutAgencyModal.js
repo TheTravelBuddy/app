@@ -17,9 +17,11 @@ const AboutAgencyModal = ({ visible, onDismiss, name, rating, about }) => {
           <CardTitle style={styles.AgencyNameText}>{name}</CardTitle>
           <RatingPill rating={rating} />
         </View>
-        <SectionHeader>About</SectionHeader>
-        <Paragraph>{about}</Paragraph>
-        <View style={screenStyles.FormInputContainer}>
+        <View style={screenStyles.Section}>
+          <SectionHeader>About</SectionHeader>
+          <Paragraph>{about}</Paragraph>
+        </View>
+        <View style={[screenStyles.FormInputContainer]}>
           <Button
             mode="outlined"
             icon="map-marker-outline"
@@ -54,7 +56,7 @@ const styles = {
   },
   AgencyNameText: {
     flex: 1,
-    fontsize: 20,
+    fontSize: 20,
   },
 };
 export default AboutAgencyModal;
