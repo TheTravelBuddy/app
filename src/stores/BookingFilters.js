@@ -147,23 +147,46 @@ const useBookingFilters = create(
       get().updateResults();
     },
     updateResults: () => {
-      const { filters } = get();
+      const { filters, bookingType } = get();
       console.log("filters", filters);
       console.log("Updating results from server.");
       set(
         produce((draftState) => {
-          draftState.searchResults = [
-            {
-              coverUri:
-                "https://static.toiimg.com/photo/msid-52005539,width-96,height-65.cms",
-              name: "Taj Mahal Palace",
-              rating: 4.9,
-              locality: "Colaba",
-              city: "Mumbai",
-              price: 1000,
-              distance: 5,
-            },
-          ];
+          draftState.searchResults =
+            bookingType === "HOTEL"
+              ? [
+                  {
+                    coverUri:
+                      "https://static.toiimg.com/photo/msid-52005539,width-96,height-65.cms",
+                    name: "Taj Mahal Palace",
+                    rating: 4.9,
+                    locality: "Colaba",
+                    city: "Mumbai",
+                    price: 1000,
+                    distance: 5,
+                  },
+                ]
+              : [
+                  {
+                    id: 1,
+                    coverUri: "https://static.toiimg.com/photo/24476893.cms",
+                    name: "Majistic Mumbai",
+                    rating: 4.5,
+                    days: 5,
+                    nights: 6,
+                    price: 3550,
+                  },
+                  {
+                    id: 2,
+                    coverUri:
+                      "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/27/36/2736904_v5.jpeg",
+                    name: "Have Pleasure in Mumbai",
+                    rating: 5,
+                    days: 5,
+                    nights: 6,
+                    price: 4000,
+                  },
+                ];
         })
       );
     },

@@ -15,7 +15,7 @@ import HotelPriceSummary from "../Typography/HotelPriceSummary";
 import CardSubtitle from "../Typography/CardSubtitle";
 import { displayFilter } from "../../stores/BookingFilters";
 
-const MyBookingHotelCard = ({
+const HotelBookingCard = ({
   coverUri,
   name,
   rating,
@@ -131,4 +131,4 @@ const styles = {
   },
 };
 
-export default MyBookingHotelCard;
+export default HotelBookingCard;

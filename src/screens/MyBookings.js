@@ -3,7 +3,7 @@ import { View } from "react-native";
 
 import commonStyles from "./styles";
 
-import { Scaffold, MyBookingHotelCard } from "../components";
+import { Scaffold, HotelBookingCard } from "../components";
 
 const hotelData = [
   {
@@ -34,7 +34,7 @@ const MyBookingsScreen = ({ navigation: { goBack } }) => {
     >
       <View style={commonStyles.Section}>
         {hotelData.map((bookingDetails) => (
-          <MyBookingHotelCard
+          <HotelBookingCard
             key={bookingDetails.id}
             {...bookingDetails}
             style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Image } from "react-native";
 import { Card, useTheme } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 import commonStyles from "./styles";
 import RatingPill from "../RatingPill";
@@ -16,13 +17,13 @@ const PackageSearchCard = ({
   rating,
   nights,
   days,
-  duration,
   price,
   style,
   ...props
 }) => {
   const { width } = useScreenDimensions();
   const theme = useTheme();
+  const { navigate } = useNavigation();
 
   return (
     <Card
@@ -30,6 +31,7 @@ const PackageSearchCard = ({
         { width: width - 2 * SCREEN_PADDING, padding: CARD_SPACING },
         style,
       ]}
+      onPress={() => navigate("PackageDetailsScreen")}
       {...props}
     >
       <View style={styles.CardContent}>

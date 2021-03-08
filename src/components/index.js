@@ -38,7 +38,7 @@ import PackageDetailCard from "./Card/PackageDetailCard";
 import BookingSearchCard from "./Card/BookingSearchCard";
 import HotelSearchCard from "./Card/HotelSearchCard";
 import PackageSearchCard from "./Card/PackageSearchCard";
-import MyBookingHotelCard from "./Card/MyBookingHotelCard";
+import HotelBookingCard from "./Card/HotelBookingCard";
 import BlogCard from "./Card/BlogCard";
 import BlogBannerCard from "./Card/BlogBannerCard";
 import BlogLocationCard from "./Card/BlogLocationCard";
@@ -102,7 +102,7 @@ export {
   ExploreServiceCard,
   BlogSearchCard,
   BusinessSearchCard,
-  MyBookingHotelCard,
+  HotelBookingCard,
   Chip,
   ModalTitle,
   BookingFiltersModal,
