@@ -21,32 +21,31 @@ const CommentModal = ({
 
   return (
     <BottomModal {...{ visible, onDismiss }}>
-      <View style={screenStyles.Section}>
-        <View style={styles.Container}>
-          <Avatar.Image size={24} source={{ uri: profileuri }} />
-          <CardTitle style={styles.UserNameText}>{name}</CardTitle>
-        </View>
-        <Paragraph>{comment}</Paragraph>
-        <View style={styles.SectionRightButton}>
-          <IconButton
-            size={18}
-            color={theme.colors.textSecondary}
-            style={styles.CardActionsIcon}
-            icon="clock-outline"
-          />
-          <Text
-            style={[
-              { color: theme.colors.textSecondary },
-              screenStyles.CardActionsText,
-            ]}
-          >
-            {moment(publishedOn).fromNow().toUpperCase()}
-          </Text>
-        </View>
+      <View style={styles.Container}>
+        <Avatar.Image size={24} source={{ uri: profileuri }} />
+        <CardTitle style={styles.UserNameText}>{name}</CardTitle>
+      </View>
+      <Paragraph>{comment}</Paragraph>
+      <View style={styles.SectionRightButton}>
+        <IconButton
+          size={18}
+          color={theme.colors.textSecondary}
+          style={styles.CardActionsIcon}
+          icon="clock-outline"
+        />
+        <Text
+          style={[
+            { color: theme.colors.textSecondary },
+            screenStyles.CardActionsText,
+          ]}
+        >
+          {moment(publishedOn).fromNow()}
+        </Text>
       </View>
     </BottomModal>
   );
 };
+
 const styles = {
   Container: {
     flexDirection: "row",
@@ -68,4 +67,5 @@ const styles = {
     fontSize: 14,
   },
 };
+
 export default CommentModal;

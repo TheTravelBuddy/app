@@ -9,7 +9,7 @@ import Paragraph from "../Typography/Paragraph";
 import ReviewModal from "../Modals/ReviewModal";
 import useToggle from "../../hooks/useToggle";
 
-const ReviewCard = ({ id, rating, review, name, profileuri, publishedOn }) => {
+const ReviewCard = ({ id, rating, review, name, profileUri, publishedOn }) => {
   const reviewModal = useToggle(false);
 
   return (
@@ -30,11 +30,7 @@ const ReviewCard = ({ id, rating, review, name, profileuri, publishedOn }) => {
       <ReviewModal
         visible={reviewModal.visible}
         onDismiss={reviewModal.hide}
-        rating={rating}
-        review={review}
-        name={name}
-        profileuri={profileuri}
-        publishedOn={publishedOn}
+        {...{ rating, review, name, profileUri, publishedOn }}
       />
     </>
   );

@@ -26,8 +26,8 @@ const BusinessSearchCard = ({
   const theme = useTheme();
   const { navigate } = useNavigation();
 
-  const goToBusinessDetailsScreen = useCallback(() => {
-    navigate("BusinessDetailsScreen", { businessdetailsscreenid: id });
+  const goToBusiness = useCallback(() => {
+    navigate("BusinessDetailsScreen", { businessId: id });
   }, [id, navigate]);
 
   return (
@@ -36,7 +36,7 @@ const BusinessSearchCard = ({
         { width: width - 2 * SCREEN_PADDING, padding: CARD_SPACING },
         style,
       ]}
-      onPress={goToBusinessDetailsScreen}
+      onPress={goToBusiness}
       {...props}
     >
       <View style={styles.CardContent}>
@@ -55,16 +55,17 @@ const BusinessSearchCard = ({
           </View>
           <LocationSubtitle {...{ locality, city }} />
           <CardSubtitle>{timings}</CardSubtitle>
+          <View style={styles.Spacer} />
           <View style={styles.ButtonContainer}>
             <IconButton
-              size={22}
+              size={24}
               color={theme.colors.textSecondary}
               style={commonStyles.CardActionsIcon}
               icon="phone-outline"
               onPress={() => {}}
             />
             <IconButton
-              size={22}
+              size={24}
               color={theme.colors.textSecondary}
               style={commonStyles.CardActionsIcon}
               icon="map-marker-outline"
@@ -88,6 +89,9 @@ const styles = {
   },
   CardPrice: {
     alignSelf: "flex-end",
+  },
+  Spacer: {
+    flex: 1,
   },
   ButtonContainer: {
     flexDirection: "row",

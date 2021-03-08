@@ -11,14 +11,12 @@ const BusinessCard = ({ id, name, coverUri, style }) => {
   const { width } = useScreenDimensions();
   const { navigate } = useNavigation();
 
-  const goToBusinessCategorySearch = useCallback(() => {
-    navigate("BusinessCategoryScreen", { businessCategorySearchId: id });
+  const goToBusiness = useCallback(() => {
+    navigate("BusinessCategoryScreen", { businessCategoryId: id });
   }, [id, navigate]);
+
   return (
-    <Card
-      style={[{ width: width * 0.6 }, style]}
-      onPress={goToBusinessCategorySearch}
-    >
+    <Card style={[{ width: width * 0.6 }, style]} onPress={goToBusiness}>
       <Card.Cover
         style={{ height: Math.round(width * 0.3) }}
         source={{ uri: coverUri }}

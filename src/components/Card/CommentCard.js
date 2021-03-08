@@ -8,7 +8,7 @@ import Paragraph from "../Typography/Paragraph";
 import CommentModal from "../Modals/CommentModal";
 import useToggle from "../../hooks/useToggle";
 
-const CommentCard = ({ id, comment, name, profileuri, publishedOn }) => {
+const CommentCard = ({ id, comment, name, profileUri, publishedOn }) => {
   const commentModal = useToggle(false);
   return (
     <>
@@ -27,10 +27,7 @@ const CommentCard = ({ id, comment, name, profileuri, publishedOn }) => {
       <CommentModal
         visible={commentModal.visible}
         onDismiss={commentModal.hide}
-        name={name}
-        comment={comment}
-        profileuri={profileuri}
-        publishedOn={publishedOn}
+        {...{ comment, name, profileUri, publishedOn }}
       />
     </>
   );

@@ -16,36 +16,34 @@ const ReviewModal = ({
   rating,
   review,
   name,
-  profileuri,
+  profileUri,
   publishedOn,
 }) => {
   const theme = useTheme();
 
   return (
     <BottomModal {...{ visible, onDismiss }}>
-      <View style={screenStyles.Section}>
-        <View style={styles.Container}>
-          <Avatar.Image size={28} source={{ uri: profileuri }} />
-          <CardTitle style={styles.UserNameText}>{name}</CardTitle>
-          <RatingPill rating={rating} />
-        </View>
-        <Paragraph>{review}</Paragraph>
-        <View style={styles.SectionRightButton}>
-          <IconButton
-            size={18}
-            color={theme.colors.textSecondary}
-            style={styles.CardActionsIcon}
-            icon="clock-outline"
-          />
-          <Text
-            style={[
-              { color: theme.colors.textSecondary },
-              screenStyles.CardActionsText,
-            ]}
-          >
-            {moment(publishedOn).fromNow().toUpperCase()}
-          </Text>
-        </View>
+      <View style={styles.Container}>
+        <Avatar.Image size={28} source={{ uri: profileUri }} />
+        <CardTitle style={styles.UserNameText}>{name}</CardTitle>
+        <RatingPill rating={rating} />
+      </View>
+      <Paragraph>{review}</Paragraph>
+      <View style={styles.SectionRightButton}>
+        <IconButton
+          size={18}
+          color={theme.colors.textSecondary}
+          style={styles.CardActionsIcon}
+          icon="clock-outline"
+        />
+        <Text
+          style={[
+            { color: theme.colors.textSecondary },
+            screenStyles.CardActionsText,
+          ]}
+        >
+          {moment(publishedOn).fromNow()}
+        </Text>
       </View>
     </BottomModal>
   );
