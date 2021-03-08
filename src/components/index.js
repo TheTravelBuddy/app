@@ -43,6 +43,7 @@ import BlogCard from "./Card/BlogCard";
 import BlogBannerCard from "./Card/BlogBannerCard";
 import BlogLocationCard from "./Card/BlogLocationCard";
 import BlogTopicCard from "./Card/BlogTopicCard";
+import BlogImageCard from "./Card/BlogImageCard";
 import ReviewCard from "./Card/ReviewCard";
 import CommentCard from "./Card/CommentCard";
 import BlogSearchCard from "./Card/BlogSearchCard";
@@ -94,6 +95,7 @@ export {
   BlogBannerCard,
   BlogLocationCard,
   BlogTopicCard,
+  BlogImageCard,
   ReviewCard,
   CommentCard,
   BusinessCategoryCard,
