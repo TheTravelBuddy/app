@@ -16,8 +16,10 @@ import {
   SearchPackagePriceSummary,
   Paragraph,
   ReviewCard,
+  AboutAgencyModal,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
+import useToggle from "../hooks/useToggle";
 import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
 
 const packageDetails = {
@@ -55,6 +57,16 @@ const reviews = [
   },
 ];
 
+const agency = [
+  {
+    id: 1,
+    name: "Soorya Travel Agency",
+    rating: 4.5,
+    about:
+      "As a leading travel agent in Pune, we have access to the best hotel rates and have tied-up with top resorts, airlines, and ground transport companies to provide our customers with the best value for their money.",
+  },
+];
+
 const PackageDetailsScreen = ({ navigation: { goBack } }) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
@@ -68,7 +80,7 @@ const PackageDetailsScreen = ({ navigation: { goBack } }) => {
     }),
     [theme.colors.surface]
   );
-
+  const aboutAgencyModal = useToggle(false);
   return (
     <Scaffold
       renderFooter={() => (
@@ -148,10 +160,7 @@ const PackageDetailsScreen = ({ navigation: { goBack } }) => {
               icon="information-outline"
               style={screenStyles.FormInputLeft}
               theme={whiteButtonTheme}
-              onPress={() => {
-                // eslint-disable-next-line no-alert
-                alert("WIP: Open Hotel Location on Map");
-              }}
+              onPress={aboutAgencyModal.show}
             >
               About Agency
             </Button>
@@ -216,10 +225,17 @@ const PackageDetailsScreen = ({ navigation: { goBack } }) => {
           </View>
         </View>
       </View>
+      {agency.map((agencyDetails) => (
+        <AboutAgencyModal
+          key={agencyDetails.id}
+          {...agencyDetails}
+          visible={aboutAgencyModal.visible}
+          onDismiss={aboutAgencyModal.hide}
+        />
+      ))}
     </Scaffold>
   );
 };
-
 const styles = {
   BottomBar: {
     elevation: 4,
@@ -256,5 +272,4 @@ const styles = {
     alignSelf: "flex-end",
   },
 };
-
 export default PackageDetailsScreen;

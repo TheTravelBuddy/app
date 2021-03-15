@@ -19,6 +19,7 @@ import ProfileScreen from "./screens/Profile";
 import BookingSearchScreen from "./screens/BookingSearch";
 import BookingFavoritesScreen from "./screens/BookingFavorites";
 import HotelDetailsScreen from "./screens/HotelDetails";
+import HotelBookingScreen from "./screens/HotelBooking";
 import BlogScreen from "./screens/Blog";
 import AttractionDetailsScreen from "./screens/AttractionDetails";
 import BusinessDetailsScreen from "./screens/BusinessDetails";
@@ -173,6 +174,10 @@ const Navigator = () => {
             component={CityDetailsScreen}
           />
           <AppStack.Screen name="BlogTopicScreen" component={BlogTopicScreen} />
+          <AppStack.Screen
+            name="HotelBookingScreen"
+            component={HotelBookingScreen}
+          />
         </AppStack.Navigator>
       ) : (
         <LoadingScreen />
