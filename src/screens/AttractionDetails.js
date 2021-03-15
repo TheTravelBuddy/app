@@ -15,7 +15,9 @@ import {
   RatingPill,
   Paragraph,
   ReviewCard,
+  WriteReviewModal,
 } from "../components";
+import useToggle from "../hooks/useToggle";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import { SCREEN_PADDING } from "../constants";
 
@@ -67,7 +69,7 @@ const AttractionDetailsScreen = ({ navigation: { goBack, navigate } }) => {
     }),
     [theme.colors.surface]
   );
-
+  const writeReviewModal = useToggle(false);
   return (
     <Scaffold>
       <View>
@@ -172,6 +174,19 @@ const AttractionDetailsScreen = ({ navigation: { goBack, navigate } }) => {
           >
             Reviews
           </SectionHeader>
+          <View
+            style={[screenStyles.FormInputContainer, screenStyles.ScreenPadded]}
+          >
+            <Button
+              mode="contained"
+              icon="pencil-outline"
+              style={screenStyles.FormInputLeft}
+              theme={whiteButtonTheme}
+              onPress={writeReviewModal.show}
+            >
+              Write Review
+            </Button>
+          </View>
           <View style={screenStyles.ScreenPadded}>
             {reviews.map((review) => (
               <ReviewCard key={review.id} {...review} />
@@ -188,6 +203,10 @@ const AttractionDetailsScreen = ({ navigation: { goBack, navigate } }) => {
           </View>
         </View>
       </View>
+      <WriteReviewModal
+        visible={writeReviewModal.visible}
+        onDismiss={writeReviewModal.hide}
+      />
     </Scaffold>
   );
 };

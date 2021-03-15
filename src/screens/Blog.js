@@ -16,10 +16,12 @@ import {
   CommentCard,
   CardTitle,
   RenderOnLoad,
+  WriteCommentModal,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import { CHIP_SPACING, SCREEN_PADDING } from "../constants";
 import API, { useAPI } from "../helpers/API";
+import useToggle from "../hooks/useToggle";
 
 const BlogScreen = ({
   navigation: { goBack, navigate },
@@ -60,7 +62,7 @@ const BlogScreen = ({
     }),
     [theme.colors.surface]
   );
-
+  const writeCommentModal = useToggle(false);
   return (
     <Scaffold>
       <RenderOnLoad loading={!apiRequest.data}>
@@ -154,6 +156,22 @@ const BlogScreen = ({
               >
                 Comments
               </SectionHeader>
+              <View
+                style={[
+                  screenStyles.FormInputContainer,
+                  screenStyles.ScreenPadded,
+                ]}
+              >
+                <Button
+                  mode="contained"
+                  icon="pencil-outline"
+                  style={screenStyles.FormInputLeft}
+                  theme={whiteButtonTheme}
+                  onPress={writeCommentModal.show}
+                >
+                  Write Comment
+                </Button>
+              </View>
               <View style={screenStyles.ScreenPadded}>
                 {apiRequest.data.comments.map((comment) => (
                   <CommentCard key={comment.name} {...comment} />
@@ -172,6 +190,10 @@ const BlogScreen = ({
           </View>
         )}
       </RenderOnLoad>
+      <WriteCommentModal
+        visible={writeCommentModal.visible}
+        onDismiss={writeCommentModal.hide}
+      />
     </Scaffold>
   );
 };
