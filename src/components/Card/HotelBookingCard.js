@@ -7,7 +7,7 @@ import commonStyles from "./styles";
 import RatingPill from "../RatingPill";
 import CardTitle from "../Typography/CardTitle";
 import LocationSubtitle from "../Typography/LocationSubtitle";
-import DistanceSubtitle from "../Typography/DistanceSubtitle ";
+import DistanceSubtitle from "../Typography/DistanceSubtitle";
 import SearchHotelPriceSummary from "../Typography/SearchHotelPriceSummary";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
 import { CARD_SPACING, SCREEN_PADDING } from "../../constants";

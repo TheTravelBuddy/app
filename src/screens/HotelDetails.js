@@ -80,8 +80,7 @@ const HotelDetailsScreen = ({
               mode="contained"
               style={screenStyles.Flex}
               onPress={() => {
-                // eslint-disable-next-line no-alert
-                alert("WIP: Booking Flow");
+                navigate("HotelBookingScreen");
               }}
             >
               BOOK

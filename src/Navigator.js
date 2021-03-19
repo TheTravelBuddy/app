@@ -19,6 +19,7 @@ import ProfileScreen from "./screens/Profile";
 import BookingSearchScreen from "./screens/BookingSearch";
 import BookingFavoritesScreen from "./screens/BookingFavorites";
 import HotelDetailsScreen from "./screens/HotelDetails";
+import HotelBookingScreen from "./screens/HotelBooking";
 import BlogScreen from "./screens/Blog";
 import AttractionDetailsScreen from "./screens/AttractionDetails";
 import BusinessDetailsScreen from "./screens/BusinessDetails";
@@ -32,9 +33,7 @@ import BusinessCategoryScreen from "./screens/BusinessCategory";
 import MyBookingsScreen from "./screens/MyBookings";
 import CreateBlogScreen from "./screens/CreateBlog";
 import ExploreServiceScreen from "./screens/ExploreService";
-
 import MyBlogsScreen from "./screens/MyBlogs";
-
 import MyReviewsScreen from "./screens/MyReviews";
 
 import { useAuth, authStates } from "./stores/Auth";
@@ -192,6 +191,10 @@ const Navigator = () => {
             component={MyBookingsScreen}
           />
           <AppStack.Screen name="BlogTopicScreen" component={BlogTopicScreen} />
+          <AppStack.Screen
+            name="HotelBookingScreen"
+            component={HotelBookingScreen}
+          />
           <AppStack.Screen name="ReviewsScreen" component={ReviewsScreen} />
           <AppStack.Screen name="CommentsScreen" component={CommentsScreen} />
           <AppStack.Screen
