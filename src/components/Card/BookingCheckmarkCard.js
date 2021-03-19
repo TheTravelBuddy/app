@@ -4,7 +4,7 @@ import { Card, useTheme } from "react-native-paper";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
-import { CARD_SPACING, SCREEN_PADDING } from "../../constants";
+import { CARD_SPACING } from "../../constants";
 import ScreenTitle from "../Typography/ScreenTitle";
 
 const BookingCheckmarkCard = () => {
