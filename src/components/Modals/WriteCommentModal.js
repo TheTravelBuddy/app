@@ -7,59 +7,52 @@ import Button from "../Button";
 import screenStyles from "../../screens/styles";
 
 import CardTitle from "../Typography/CardTitle";
+import { CARD_SPACING } from "../../constants";
 
 const WriteCommentModal = ({ visible, onDismiss }) => {
   return (
     <BottomModal {...{ visible, onDismiss }}>
-      <View>
-        <View style={styles.Container}>
-          <CardTitle style={styles.Title}>Comment</CardTitle>
-        </View>
-
+      <>
+        <CardTitle style={styles.Title}>Write a Comment</CardTitle>
         <View style={screenStyles.Section}>
           <TextInput
-            label="Add a comment..."
+            label="Write comment..."
             numberOfLines={3}
             multiline={true}
-            style={screenStyles.FormInput}
+            style={styles.FormInput}
           />
         </View>
         <View style={[screenStyles.FormInputContainer]}>
           <Button
+            compact
             mode="outlined"
             style={screenStyles.FormInputLeft}
-            onPress={() => {
-              // eslint-disable-next-line no-alert
-              alert("WIP: Open Contact Details");
-            }}
+            onPress={onDismiss}
           >
             Cancel
           </Button>
           <Button
+            compact
             mode="contained"
             style={screenStyles.FormInputRight}
             onPress={() => {
               // eslint-disable-next-line no-alert
-              alert("WIP: Open Contact Details");
+              alert("WIP: Submit Comment");
             }}
           >
             Submit
           </Button>
         </View>
-      </View>
+      </>
     </BottomModal>
   );
 };
 const styles = {
-  Container: {
-    alignItems: "center",
-    flexDirection: "row",
-  },
   Title: {
     fontSize: 20,
   },
   FormInput: {
-    marginBottom: 12,
+    marginBottom: CARD_SPACING / 2,
   },
 };
 export default WriteCommentModal;
