@@ -1,5 +1,7 @@
 import Appbar from "./Appbar";
 import BottomModal from "./BottomModal";
+import CommentModal from "./Modals/CommentModal";
+import ReviewModal from "./Modals/ReviewModal";
 import Button from "./Button";
 import Loader from "./Loader";
 import Scaffold from "./Scaffold";
@@ -36,24 +38,36 @@ import BusinessBannerCard from "./Card/BusinessBannerCard";
 import HotelDetailCard from "./Card/HotelDetailCard";
 import PackageDetailCard from "./Card/PackageDetailCard";
 import BookingSearchCard from "./Card/BookingSearchCard";
+<<<<<<< HEAD
 import BookingCheckmarkCard from "./Card/BookingCheckmarkCard";
+=======
+import HotelSearchCard from "./Card/HotelSearchCard";
+import PackageSearchCard from "./Card/PackageSearchCard";
+import HotelBookingCard from "./Card/HotelBookingCard";
+>>>>>>> master
 import BlogCard from "./Card/BlogCard";
 import BlogBannerCard from "./Card/BlogBannerCard";
 import BlogLocationCard from "./Card/BlogLocationCard";
 import BlogTopicCard from "./Card/BlogTopicCard";
+import BlogImageCard from "./Card/BlogImageCard";
 import ReviewCard from "./Card/ReviewCard";
 import CommentCard from "./Card/CommentCard";
 import BlogSearchCard from "./Card/BlogSearchCard";
+import BusinessSearchCard from "./Card/BusinessSearchCard";
+import ServiceSearchCard from "./Card/ServiceSearchCard";
 import Chip from "./Chip";
 import BookingFiltersModal from "./Modals/BookingFiltersModal";
 import BookingTypeModal from "./Modals/BookingTypeModal";
 import BookingSearchModal from "./Modals/BookingSearchModal";
 import BookingLocationModal from "./Modals/BookingLocationModal";
+import AboutAgencyModal from "./Modals/AboutAgencyModal";
 import RenderOnLoad from "./RenderOnLoad";
 
 export {
   Appbar,
   BottomModal,
+  CommentModal,
+  ReviewModal,
   Button,
   Loader,
   Picker,
@@ -85,10 +99,13 @@ export {
   HotelDetailCard,
   PackageDetailCard,
   BookingSearchCard,
+  HotelSearchCard,
+  PackageSearchCard,
   BlogCard,
   BlogBannerCard,
   BlogLocationCard,
   BlogTopicCard,
+  BlogImageCard,
   ReviewCard,
   CommentCard,
   BusinessCategoryCard,
@@ -96,12 +113,19 @@ export {
   BusinessBannerCard,
   ExploreServiceCard,
   BlogSearchCard,
+<<<<<<< HEAD
   BookingCheckmarkCard,
+=======
+  BusinessSearchCard,
+  HotelBookingCard,
+  ServiceSearchCard,
+>>>>>>> master
   Chip,
   ModalTitle,
   BookingFiltersModal,
   BookingTypeModal,
   BookingSearchModal,
   BookingLocationModal,
+  AboutAgencyModal,
   RenderOnLoad,
 };

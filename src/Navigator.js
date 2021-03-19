@@ -26,6 +26,15 @@ import BusinessDetailsScreen from "./screens/BusinessDetails";
 import PackageDetailsScreen from "./screens/PackageDetails";
 import CityDetailsScreen from "./screens/CityDetails";
 import BlogTopicScreen from "./screens/BlogTopic";
+import EditProfileScreen from "./screens/EditProfile";
+import ReviewsScreen from "./screens/Reviews";
+import CommentsScreen from "./screens/Comments";
+import BusinessCategoryScreen from "./screens/BusinessCategory";
+import MyBookingsScreen from "./screens/MyBookings";
+import CreateBlogScreen from "./screens/CreateBlog";
+import ExploreServiceScreen from "./screens/ExploreService";
+import MyBlogsScreen from "./screens/MyBlogs";
+import MyReviewsScreen from "./screens/MyReviews";
 
 import { useAuth, authStates } from "./stores/Auth";
 import LoadingScreen from "./screens/Loading";
@@ -173,11 +182,35 @@ const Navigator = () => {
             name="CityDetailsScreen"
             component={CityDetailsScreen}
           />
+          <AppStack.Screen
+            name="EditProfileScreen"
+            component={EditProfileScreen}
+          />
+          <AppStack.Screen
+            name="MyBookingsScreen"
+            component={MyBookingsScreen}
+          />
           <AppStack.Screen name="BlogTopicScreen" component={BlogTopicScreen} />
           <AppStack.Screen
             name="HotelBookingScreen"
             component={HotelBookingScreen}
           />
+          <AppStack.Screen name="ReviewsScreen" component={ReviewsScreen} />
+          <AppStack.Screen name="CommentsScreen" component={CommentsScreen} />
+          <AppStack.Screen
+            name="BusinessCategoryScreen"
+            component={BusinessCategoryScreen}
+          />
+          <AppStack.Screen
+            name="CreateBlogScreen"
+            component={CreateBlogScreen}
+          />
+          <AppStack.Screen
+            name="ExploreServiceScreen"
+            component={ExploreServiceScreen}
+          />
+          <AppStack.Screen name="MyBlogsScreen" component={MyBlogsScreen} />
+          <AppStack.Screen name="MyReviewsScreen" component={MyReviewsScreen} />
         </AppStack.Navigator>
       ) : (
         <LoadingScreen />

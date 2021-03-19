@@ -8,7 +8,7 @@ const PackageDurationSubtitle = ({ nights, days, style, ...props }) => {
     <Text
       style={[styles.Title, theme.fonts.bold, style]}
       {...props}
-    >{`${nights}, ${days}`}</Text>
+    >{`${nights} Nights, ${days} Days`}</Text>
   );
 };
 

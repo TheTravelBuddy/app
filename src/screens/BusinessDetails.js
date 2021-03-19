@@ -54,7 +54,7 @@ const reviews = [
   },
 ];
 
-const BusinessDetailsScreen = ({ navigation: { goBack } }) => {
+const BusinessDetailsScreen = ({ navigation: { goBack, navigate } }) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
 
@@ -179,8 +179,7 @@ const BusinessDetailsScreen = ({ navigation: { goBack } }) => {
               compact
               style={styles.SectionRightButton}
               onPress={() => {
-                // eslint-disable-next-line no-alert
-                alert("WIP: Reviews Screen Navigation");
+                navigate("ReviewsScreen");
               }}
             >
               Read More Reviews

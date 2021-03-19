@@ -100,10 +100,6 @@ const BookingScreen = ({ navigation: { navigate } }) => {
               icon: "magnify",
               onPress: () => navigate("BookingSearchScreen"),
             },
-            {
-              icon: "heart-outline",
-              onPress: () => navigate("BookingFavoritesScreen"),
-            },
           ],
         }),
         [navigate]

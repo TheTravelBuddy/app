@@ -45,10 +45,18 @@ const SignUpScreen = () => {
       name: name.value,
       dob: moment(dob.value).format("YYYY-MM-DD"),
       gender: gender.value,
+      mood: mood.value,
     }).catch(() => {
       registerLoading.stop();
     });
-  }, [name.value, dob.value, gender.value, registerLoading, register]);
+  }, [
+    name.value,
+    dob.value,
+    gender.value,
+    mood.value,
+    registerLoading,
+    register,
+  ]);
 
   return (
     <Scaffold>

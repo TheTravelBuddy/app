@@ -7,24 +7,26 @@ import { Scaffold, ScreenTitle, CardTitle } from "../components";
 import { SCREEN_PADDING } from "../constants";
 import { useAuth } from "../stores/Auth";
 
-const ProfileScreen = () => {
+const ProfileScreen = ({ navigation: { navigate } }) => {
   const user = useAuth((state) => state.user);
   const logout = useAuth((state) => state.logout);
-
   return (
     <Scaffold
       header={useMemo(
         () => ({
           title: "Profile",
           actions: [
-            { icon: "pencil-outline", onPress: () => {} },
+            {
+              icon: "pencil-outline",
+              onPress: () => navigate("EditProfileScreen"),
+            },
             {
               icon: "exit-to-app",
               onPress: logout,
             },
           ],
         }),
-        [logout]
+        [logout, navigate]
       )}
     >
       <View style={styles.ProfileContainer}>
@@ -41,7 +43,9 @@ const ProfileScreen = () => {
       <View style={[screenStyles.Section, styles.ListContainer]}>
         <List.Item
           title="My Bookings"
-          onPress={() => {}}
+          onPress={() => {
+            navigate("MyBookingsScreen");
+          }}
           left={(props) => (
             <List.Icon {...props} icon="briefcase-check-outline" />
           )}
@@ -49,13 +53,17 @@ const ProfileScreen = () => {
         <Divider />
         <List.Item
           title="My Reviews"
-          onPress={() => {}}
+          onPress={() => {
+            navigate("MyReviewsScreen");
+          }}
           left={(props) => <List.Icon {...props} icon="pencil-box-outline" />}
         />
         <Divider />
         <List.Item
           title="My Blogs"
-          onPress={() => {}}
+          onPress={() => {
+            navigate("MyBlogsScreen");
+          }}
           left={(props) => <List.Icon {...props} icon="card-text-outline" />}
         />
         <Divider />
