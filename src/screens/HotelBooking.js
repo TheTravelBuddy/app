@@ -18,8 +18,7 @@ import {
   HotelPriceSummary,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
-
-import { CARD_SPACING } from "../constants";
+import { CARD_SPACING, SCREEN_PADDING } from "../constants";
 
 const hotelData = {
   id: 1,
@@ -53,46 +52,39 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
 
   return (
     <Scaffold>
+      <FAB
+        small
+        style={styles.HeaderBackFAB}
+        icon="arrow-left"
+        theme={whiteButtonTheme}
+        onPress={goBack}
+        elevation={0}
+      />
       <BookingCheckmarkCard />
-      <>
-        <FAB
-          small
-          style={styles.HeaderBackFAB}
-          mode="contained"
-          icon="arrow-left"
-          theme={whiteButtonTheme}
-          onPress={goBack}
-        />
-      </>
-      <View style={[screenStyles.Section]}>
-        <View style={screenStyles.ScreenPadded}>
-          <View style={[styles.Content]}>
-            <Image
-              style={{
-                width: width / 6,
-                height: width / 6,
-                borderRadius: theme.roundness,
-              }}
-              source={{ uri: hotelData.coverUri }}
-            />
-
-            <View style={styles.TextBody}>
-              <View style={styles.Content}>
-                <ScreenTitle style={styles.TitleBody}>
-                  {hotelData.name}
-                </ScreenTitle>
-                <RatingPill rating={hotelData.rating} />
-              </View>
-              <LocationSubtitle
-                locality={hotelData.locality}
-                city={hotelData.city}
-              />
+      <View style={styles.ScreenSection}>
+        <View style={[styles.Content]}>
+          <Image
+            style={{
+              width: width / 6,
+              height: width / 6,
+              borderRadius: theme.roundness,
+            }}
+            source={{ uri: hotelData.coverUri }}
+          />
+          <View style={styles.TextBody}>
+            <View style={styles.Content}>
+              <ScreenTitle style={styles.TitleBody}>
+                {hotelData.name}
+              </ScreenTitle>
+              <RatingPill rating={hotelData.rating} />
             </View>
+            <LocationSubtitle
+              locality={hotelData.locality}
+              city={hotelData.city}
+            />
           </View>
         </View>
-      </View>
-      <View style={[screenStyles.Section, screenStyles.ScreenPadded]}>
-        <View style={screenStyles.FormInputContainer}>
+        <View style={[screenStyles.FormInputContainer, styles.ActionButtons]}>
           <Button
             mode="contained"
             icon="map-marker-outline"
@@ -133,15 +125,14 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
           <MaterialCommunityIcons
             name="account-multiple-outline"
             size={18}
-            color={theme.colors.textSecondary}
             style={[styles.TextIcon]}
           />
-          <Text style={[{ color: theme.colors.textSecondary }]}>
+          <CardSubtitle>
             {displayFilter.booking({
               adults: hotelData.adults,
               children: hotelData.children,
             })}
-          </Text>
+          </CardSubtitle>
         </View>
         <View style={styles.Flex} />
         <View style={styles.TextContainer}>
@@ -151,37 +142,32 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
             style={[styles.TextIcon]}
             name="calendar-month-outline"
           />
-          <Text style={[{ color: theme.colors.textSecondary }]}>
-            {displayFilter.date(hotelData.date)}
-          </Text>
+          <CardSubtitle>{displayFilter.date(hotelData.date)}</CardSubtitle>
         </View>
       </View>
+
       <Divider />
+
       <View style={[screenStyles.Section, screenStyles.ScreenPadded]}>
         <View>
           <Text style={[styles.SectionHeader, theme.fonts.bold]}>
             Payment Breakdown
           </Text>
-
-          <View style={[screenStyles.Section]}>
-            <Text style={styles.SectionSubtitle}>Room Base Price</Text>
-
-            <View style={[screenStyles.Section]}>
-              <View style={[styles.TextContainer, styles.Content]}>
-                <HotelPriceSummary price={hotelData.price} />
-                <CardSubtitle>{` × ${displayFilter.booking({
-                  rooms: hotelData.rooms,
-                })}`}</CardSubtitle>
-
-                <View style={styles.TitleBody} />
-                <HotelPriceSummary price={hotelData.price} />
-              </View>
-            </View>
+          <View style={[styles.TextContainer, styles.Content]}>
+            <Text style={[styles.SectionSubtitle, styles.Flex]}>
+              Room Base Price
+            </Text>
+            <HotelPriceSummary price={hotelData.price} />
           </View>
 
-          <View style={styles.Content}>
-            <Text style={styles.SectionSubtitle}>Number of days</Text>
-            <View style={styles.Flex} />
+          <View style={[styles.TextContainer, styles.Content]}>
+            <Text style={[styles.SectionSubtitle, styles.Flex]}>Rooms</Text>
+            <CardSubtitle>{` × ${displayFilter.booking({
+              rooms: hotelData.rooms,
+            })}`}</CardSubtitle>
+          </View>
+          <View style={[styles.TextContainer, styles.Content]}>
+            <Text style={[styles.SectionSubtitle, styles.Flex]}>Days</Text>
             <CardSubtitle>
               {`× ${displayFilter.numberOfDays(hotelData.numberOfDays)}`}
             </CardSubtitle>
@@ -193,10 +179,14 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
 
       <View style={[screenStyles.Section, screenStyles.ScreenPadded]}>
         <View style={styles.Content}>
-          <ScreenTitle style={styles.TitleBody}>Total Amount </ScreenTitle>
+          <Text
+            style={[styles.TitleBody, styles.SectionHeader, theme.fonts.bold]}
+          >
+            Total Amount
+          </Text>
           <BookingCardPriceSubtitle
             style={styles.Price}
-            price={hotelData.price}
+            price={hotelData.price * hotelData.numberOfDays * hotelData.rooms}
           />
         </View>
       </View>
@@ -226,17 +216,23 @@ const styles = {
     left: 0,
     zIndex: 4,
   },
+  ActionButtons: {
+    marginTop: SCREEN_PADDING / 2,
+  },
+  ScreenSection: {
+    margin: SCREEN_PADDING,
+  },
   SectionRightButton: {
     alignSelf: "flex-end",
   },
   TextContainer: {
     flexDirection: "row",
     alignItems: "center",
-    // marginRight: CARD_SPACING / 2,
   },
   TextIcon: {
     marginRight: CARD_SPACING / 2,
     margin: 0,
+    color: "#696969",
   },
   Content: {
     flexDirection: "row",
@@ -265,7 +261,7 @@ const styles = {
     color: "#4A4A4A",
   },
   SectionSubtitle: {
-    fontSize: 18,
+    fontSize: 14,
     letterSpacing: 0.15,
     color: "#9D9BA6",
   },

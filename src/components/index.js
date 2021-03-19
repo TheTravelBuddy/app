@@ -22,7 +22,7 @@ import SearchHotelPriceSummary from "./Typography/SearchHotelPriceSummary";
 import SearchPackagePriceSummary from "./Typography/SearchPackagePriceSummary";
 import PackagePriceSummary from "./Typography/PackagePriceSummary";
 import HotelPriceSummary from "./Typography/HotelPriceSummary";
-import BookingCardPriceSubtitle from"./Typography/BookingCardPriceSubtitle";
+import BookingCardPriceSubtitle from "./Typography/BookingCardPriceSubtitle";
 import CardSubtitle from "./Typography/CardSubtitle";
 import DistanceSubtitle from "./Typography/DistanceSubtitle";
 import SectionSubtitle from "./Typography/SectionSubtitle";
@@ -38,13 +38,10 @@ import BusinessBannerCard from "./Card/BusinessBannerCard";
 import HotelDetailCard from "./Card/HotelDetailCard";
 import PackageDetailCard from "./Card/PackageDetailCard";
 import BookingSearchCard from "./Card/BookingSearchCard";
-<<<<<<< HEAD
 import BookingCheckmarkCard from "./Card/BookingCheckmarkCard";
-=======
 import HotelSearchCard from "./Card/HotelSearchCard";
 import PackageSearchCard from "./Card/PackageSearchCard";
 import HotelBookingCard from "./Card/HotelBookingCard";
->>>>>>> master
 import BlogCard from "./Card/BlogCard";
 import BlogBannerCard from "./Card/BlogBannerCard";
 import BlogLocationCard from "./Card/BlogLocationCard";
@@ -113,13 +110,10 @@ export {
   BusinessBannerCard,
   ExploreServiceCard,
   BlogSearchCard,
-<<<<<<< HEAD
   BookingCheckmarkCard,
-=======
   BusinessSearchCard,
   HotelBookingCard,
   ServiceSearchCard,
->>>>>>> master
   Chip,
   ModalTitle,
   BookingFiltersModal,
