@@ -17,7 +17,9 @@ import {
   Paragraph,
   ReviewCard,
   RenderOnLoad,
+  WriteReviewModal,
 } from "../components";
+import useToggle from "../hooks/useToggle";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
 import API, { useAPI } from "../helpers/API";
@@ -61,7 +63,7 @@ const HotelDetailsScreen = ({
     });
     await refetchData();
   }, [refetchData, params.hotelId]);
-
+  const writeReviewModal = useToggle(false);
   return (
     <Scaffold
       renderFooter={() =>
@@ -203,6 +205,22 @@ const HotelDetailsScreen = ({
               >
                 Reviews
               </SectionHeader>
+              <View
+                style={[
+                  screenStyles.FormInputContainer,
+                  screenStyles.ScreenPadded,
+                ]}
+              >
+                <Button
+                  mode="contained"
+                  icon="pencil-outline"
+                  style={screenStyles.FormInputLeft}
+                  theme={whiteButtonTheme}
+                  onPress={writeReviewModal.show}
+                >
+                  Write Review
+                </Button>
+              </View>
               <View style={screenStyles.ScreenPadded}>
                 {apiRequest.data.reviews.map((review) => (
                   <ReviewCard key={review.id} {...review} />
@@ -221,6 +239,10 @@ const HotelDetailsScreen = ({
           </View>
         )}
       </RenderOnLoad>
+      <WriteReviewModal
+        visible={writeReviewModal.visible}
+        onDismiss={writeReviewModal.hide}
+      />
     </Scaffold>
   );
 };

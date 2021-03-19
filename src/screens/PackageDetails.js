@@ -17,6 +17,7 @@ import {
   Paragraph,
   ReviewCard,
   AboutAgencyModal,
+  WriteReviewModal,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import useToggle from "../hooks/useToggle";
@@ -81,6 +82,7 @@ const PackageDetailsScreen = ({ navigation: { goBack, navigate } }) => {
     [theme.colors.surface]
   );
   const aboutAgencyModal = useToggle(false);
+  const writeReviewModal = useToggle(false);
   return (
     <Scaffold
       renderFooter={() => (
@@ -208,6 +210,19 @@ const PackageDetailsScreen = ({ navigation: { goBack, navigate } }) => {
           >
             Reviews
           </SectionHeader>
+          <View
+            style={[screenStyles.FormInputContainer, screenStyles.ScreenPadded]}
+          >
+            <Button
+              mode="contained"
+              icon="pencil-outline"
+              style={screenStyles.FormInputLeft}
+              theme={whiteButtonTheme}
+              onPress={writeReviewModal.show}
+            >
+              Write Review
+            </Button>
+          </View>
           <View style={screenStyles.ScreenPadded}>
             {reviews.map((review) => (
               <ReviewCard key={review.id} {...review} />
@@ -232,6 +247,10 @@ const PackageDetailsScreen = ({ navigation: { goBack, navigate } }) => {
           onDismiss={aboutAgencyModal.hide}
         />
       ))}
+      <WriteReviewModal
+        visible={writeReviewModal.visible}
+        onDismiss={writeReviewModal.hide}
+      />
     </Scaffold>
   );
 };

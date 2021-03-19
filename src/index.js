@@ -45,6 +45,7 @@ const theme = {
     ratingMedium: "#FFBB33",
     ratingLow: "#FF0000",
     ratingNull: "#BEBEBE",
+    star: "#F6C425",
   },
 };
 
