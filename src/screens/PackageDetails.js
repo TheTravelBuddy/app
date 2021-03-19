@@ -235,6 +235,7 @@ const PackageDetailsScreen = ({ navigation: { goBack, navigate } }) => {
     </Scaffold>
   );
 };
+
 const styles = {
   BottomBar: {
     elevation: 4,
@@ -271,4 +272,5 @@ const styles = {
     alignSelf: "flex-end",
   },
 };
+
 export default PackageDetailsScreen;
