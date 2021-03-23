@@ -69,7 +69,9 @@ const ProfileScreen = ({ navigation: { navigate } }) => {
         <Divider />
         <List.Item
           title="My Favourites"
-          onPress={() => {}}
+          onPress={() => {
+            navigate("MyFavouritesScreen");
+          }}
           left={(props) => <List.Icon {...props} icon="heart-outline" />}
         />
       </View>
