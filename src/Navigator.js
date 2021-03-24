@@ -24,6 +24,7 @@ import BlogScreen from "./screens/Blog";
 import AttractionDetailsScreen from "./screens/AttractionDetails";
 import BusinessDetailsScreen from "./screens/BusinessDetails";
 import PackageDetailsScreen from "./screens/PackageDetails";
+import PackageBookingScreen from "./screens/PackageBooking";
 import CityDetailsScreen from "./screens/CityDetails";
 import BlogTopicScreen from "./screens/BlogTopic";
 import EditProfileScreen from "./screens/EditProfile";
@@ -194,6 +195,10 @@ const Navigator = () => {
           <AppStack.Screen
             name="HotelBookingScreen"
             component={HotelBookingScreen}
+          />
+          <AppStack.Screen
+            name="PackageBookingScreen"
+            component={PackageBookingScreen}
           />
           <AppStack.Screen name="ReviewsScreen" component={ReviewsScreen} />
           <AppStack.Screen name="CommentsScreen" component={CommentsScreen} />

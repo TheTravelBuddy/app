@@ -30,8 +30,8 @@ const packageDetails = {
   about:
     "The Taj Mahal Palace Hotel is a heritage, five-star, luxury hotel built in the Saracenic Revival style in the Colaba area of Mumbai, Maharashtra, India, situated next to the Gateway of India. Historically it was known as the 'Taj Mahal Hotel' or simply 'The Taj'.",
   rating: 4.5,
-  nights: "4 Nights",
-  days: "5 Days",
+  nights: "4",
+  days: "5",
   photos: [
     "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/a5/d8/c1/exterior.jpg",
     "https://imgcy.trivago.com/c_lfill,d_dummy.jpeg,e_sharpen:60,f_auto,h_450,q_auto,w_450/itemimages/27/36/2736904_v5.jpeg",
@@ -98,8 +98,7 @@ const PackageDetailsScreen = ({ navigation: { goBack, navigate } }) => {
             mode="contained"
             style={screenStyles.Flex}
             onPress={() => {
-              // eslint-disable-next-line no-alert
-              alert("WIP: Booking Flow");
+              navigate("PackageBookingScreen");
             }}
           >
             BOOK
