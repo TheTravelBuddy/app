@@ -19,6 +19,7 @@ import {
   ReviewCard,
   RenderOnLoad,
   WriteReviewModal,
+  HotelBookingModal,
 } from "../components";
 import useToggle from "../hooks/useToggle";
 import useScreenDimensions from "../hooks/useScreenDimensions";
@@ -36,6 +37,8 @@ const HotelDetailsScreen = ({
 }) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
+  const writeReviewModal = useToggle(false);
+  const hotelBookingModal = useToggle(false);
 
   const [apiRequest, refetchData] = useAPI({
     url: "/traveller/hotel",
@@ -69,7 +72,6 @@ const HotelDetailsScreen = ({
     });
     await refetchData();
   }, [refetchData, params.hotelId]);
-  const writeReviewModal = useToggle(false);
   return (
     <Scaffold
       renderFooter={() =>
@@ -87,9 +89,7 @@ const HotelDetailsScreen = ({
             <Button
               mode="contained"
               style={screenStyles.Flex}
-              onPress={() => {
-                navigate("HotelBookingScreen");
-              }}
+              onPress={hotelBookingModal.show}
             >
               BOOK
             </Button>
@@ -299,6 +299,11 @@ const HotelDetailsScreen = ({
         onSubmit={refetchData}
         nodeType="hotel"
         nodeId={params.hotelId}
+      />
+      <HotelBookingModal
+        visible={hotelBookingModal.visible}
+        onDismiss={hotelBookingModal.hide}
+        hotelId={params.hotelId}
       />
     </Scaffold>
   );

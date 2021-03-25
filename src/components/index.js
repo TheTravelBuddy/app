@@ -59,6 +59,7 @@ import BookingLocationModal from "./Modals/BookingLocationModal";
 import AboutAgencyModal from "./Modals/AboutAgencyModal";
 import WriteReviewModal from "./Modals/WriteReviewModal";
 import WriteCommentModal from "./Modals/WriteCommentModal";
+import HotelBookingModal from "./Modals/HotelBookingModal";
 import RenderOnLoad from "./RenderOnLoad";
 
 export {
@@ -124,4 +125,5 @@ export {
   WriteCommentModal,
   WriteReviewModal,
   RenderOnLoad,
+  HotelBookingModal,
 };

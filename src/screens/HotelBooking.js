@@ -2,7 +2,8 @@ import React, { useMemo } from "react";
 import { View, Image } from "react-native";
 import { FAB, useTheme, Divider, Text } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { displayBooking } from "../helpers/booking";
+import { displayHotelBooking } from "../helpers/booking";
+import { openMap, openPhone } from "../helpers/links";
 
 import screenStyles from "./styles";
 
@@ -19,26 +20,19 @@ import {
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import { CARD_SPACING, SCREEN_PADDING } from "../constants";
+import { useAPI } from "../helpers/API";
 
-const hotelData = {
-  id: 1,
-  coverUri: "https://static.toiimg.com/photo/24476893.cms",
-  name: "Taj Hotel",
-  rating: 4.9,
-  locality: "Colaba",
-  city: "Mumbai",
-  price: 5000,
-  distance: 5,
-  adults: 3,
-  children: 2,
-  rooms: 2,
-  date: new Date(),
-  numberOfDays: 4,
-};
-
-const HotelBookingScreen = ({ navigation: { goBack } }) => {
+const HotelBookingScreen = ({ navigation: { goBack }, route: { params } }) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
+
+  const [apiRequest] = useAPI({
+    url: "/traveller/hotel/booking",
+    method: "get",
+    params: { hotelBookingId: params.hotelBookingId },
+  });
+
+  console.log(apiRequest.data);
 
   const whiteButtonTheme = useMemo(
     () => ({
@@ -69,18 +63,18 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
               height: width / 6,
               borderRadius: theme.roundness,
             }}
-            source={{ uri: hotelData.coverUri }}
+            source={{ uri: apiRequest.data?.hotel.coverUri }}
           />
           <View style={styles.TextBody}>
             <View style={styles.Content}>
               <ScreenTitle style={styles.TitleBody}>
-                {hotelData.name}
+                {apiRequest.data?.hotel.name}
               </ScreenTitle>
-              <RatingPill rating={hotelData.rating} />
+              <RatingPill rating={apiRequest.data?.hotel.rating} />
             </View>
             <LocationSubtitle
-              locality={hotelData.locality}
-              city={hotelData.city}
+              locality={apiRequest.data?.hotel.locality}
+              city={apiRequest.data?.hotel.city}
             />
           </View>
         </View>
@@ -91,8 +85,10 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
             style={screenStyles.FormInputLeft}
             theme={whiteButtonTheme}
             onPress={() => {
-              // eslint-disable-next-line no-alert
-              alert("WIP: Open Contact Details");
+              openMap({
+                latitude: apiRequest.data?.hotel.latitude,
+                longitude: apiRequest.data?.hotel.longitude,
+              });
             }}
           >
             View on Map
@@ -103,8 +99,7 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
             style={screenStyles.FormInputRight}
             theme={whiteButtonTheme}
             onPress={() => {
-              // eslint-disable-next-line no-alert
-              alert("WIP: Open Contact Details");
+              openPhone({ phoneNumber: apiRequest.data?.hotel.phone });
             }}
           >
             Call Hotel
@@ -128,9 +123,9 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
             style={[styles.TextIcon]}
           />
           <CardSubtitle>
-            {displayBooking.booking({
-              adults: hotelData.adults,
-              children: hotelData.children,
+            {displayHotelBooking.booking({
+              adults: apiRequest.data?.booking.adults,
+              children: apiRequest.data?.booking.children,
             })}
           </CardSubtitle>
         </View>
@@ -142,7 +137,9 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
             style={[styles.TextIcon]}
             name="calendar-month-outline"
           />
-          <CardSubtitle>{displayBooking.date(hotelData.date)}</CardSubtitle>
+          <CardSubtitle>
+            {displayHotelBooking.date(apiRequest.data?.booking.date)}
+          </CardSubtitle>
         </View>
       </View>
 
@@ -157,19 +154,21 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
             <Text style={[styles.SectionSubtitle, styles.Flex]}>
               Room Base Price
             </Text>
-            <HotelPriceSummary price={hotelData.price} />
+            <HotelPriceSummary price={apiRequest.data?.hotel.price} />
           </View>
 
           <View style={[styles.TextContainer, styles.Content]}>
             <Text style={[styles.SectionSubtitle, styles.Flex]}>Rooms</Text>
-            <CardSubtitle>{` × ${displayBooking.booking({
-              rooms: hotelData.rooms,
+            <CardSubtitle>{` × ${displayHotelBooking.booking({
+              rooms: apiRequest.data?.booking.rooms,
             })}`}</CardSubtitle>
           </View>
           <View style={[styles.TextContainer, styles.Content]}>
             <Text style={[styles.SectionSubtitle, styles.Flex]}>Days</Text>
             <CardSubtitle>
-              {`× ${displayBooking.numberOfDays(hotelData.numberOfDays)}`}
+              {`× ${displayHotelBooking.numberOfDays(
+                apiRequest.data?.booking.days
+              )}`}
             </CardSubtitle>
           </View>
         </View>
@@ -186,7 +185,11 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
           </Text>
           <BookingCardPriceSubtitle
             style={styles.Price}
-            price={hotelData.price * hotelData.numberOfDays * hotelData.rooms}
+            price={
+              apiRequest.data?.hotel.price *
+              apiRequest.data?.booking.days *
+              apiRequest.data?.booking.rooms
+            }
           />
         </View>
       </View>

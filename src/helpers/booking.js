@@ -21,11 +21,11 @@ export const displayFilter = {
       : `₹${budget.low} to ₹${budget.high}`,
 };
 
-export const displayBooking = {
+export const displayHotelBooking = {
   date: (date) => moment(date).format("ddd, Do MMM"),
   numberOfDays: (numberOfDays) =>
     numberOfDays > 1 ? `${numberOfDays} Days` : `1 Day`,
-  hotel: ({ rooms, adults, children }) => {
+  booking: ({ rooms, adults, children }) => {
     const list = [];
     if (rooms) list.push(`${rooms} ${rooms > 1 ? "Rooms" : "Room"}`);
     if (adults) list.push(`${adults} ${adults > 1 ? "Adults" : "Adult"}`);

@@ -13,7 +13,7 @@ import ModalTitle from "../Typography/ModalTitle";
 import { useReactiveTextInput } from "../../hooks/useTextInput";
 import { useReactivePicker } from "../../hooks/usePicker";
 
-const BookingFiltersModal = ({ visible, onDismiss, filters }) => {
+const BookingFiltersModal = ({ visible, onDismiss, filters, bookingType }) => {
   const mood = useReactivePicker(filters.value?.travelMood);
   const minBudget = useReactiveTextInput(filters.value?.budget?.low);
   const maxBudget = useReactiveTextInput(filters.value?.budget?.high);
