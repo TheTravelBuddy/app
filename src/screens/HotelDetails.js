@@ -3,7 +3,7 @@ import { View, Image } from "react-native";
 import { FAB, useTheme, IconButton } from "react-native-paper";
 
 import screenStyles from "./styles";
-
+import { openMap, openPhone } from "../helpers/links";
 import {
   SectionHeader,
   Scaffold,
@@ -22,7 +22,12 @@ import {
 } from "../components";
 import useToggle from "../hooks/useToggle";
 import useScreenDimensions from "../hooks/useScreenDimensions";
-import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
+import {
+  CARD_SPACING,
+  CHIP_SPACING,
+  SCREEN_PADDING,
+  hotelAmenities,
+} from "../constants";
 import API, { useAPI } from "../helpers/API";
 
 const HotelDetailsScreen = ({
@@ -59,7 +64,7 @@ const HotelDetailsScreen = ({
   const unlikeHotel = useCallback(async () => {
     await API({
       method: "delete",
-      url: "/traveller/hotel/unlike",
+      url: "/traveller/hotel/like",
       params: { hotelId: params.hotelId },
     });
     await refetchData();
@@ -156,8 +161,10 @@ const HotelDetailsScreen = ({
                   style={screenStyles.FormInputLeft}
                   theme={whiteButtonTheme}
                   onPress={() => {
-                    // eslint-disable-next-line no-alert
-                    alert("WIP: Open Hotel Location on Map");
+                    openMap({
+                      latitude: apiRequest.data?.latitude,
+                      longitude: apiRequest.data?.longitude,
+                    });
                   }}
                 >
                   View on map
@@ -168,8 +175,7 @@ const HotelDetailsScreen = ({
                   style={screenStyles.FormInputRight}
                   theme={whiteButtonTheme}
                   onPress={() => {
-                    // eslint-disable-next-line no-alert
-                    alert("WIP: Open Contact Details");
+                    openPhone({ phoneNumber: apiRequest.data?.phoneNumber });
                   }}
                 >
                   Contact Us
@@ -196,20 +202,36 @@ const HotelDetailsScreen = ({
                 size={22}
                 style={styles.ActionsIcon}
                 icon="check"
-                color={theme.colors.primary}
-                onPress={() => {
-                  // eslint-disable-next-line no-alert
-                  alert("WIP:  Action");
+                color={
+                  apiRequest.data?.visited
+                    ? theme.colors.primary
+                    : theme.colors.textSecondary
+                }
+                onPress={async () => {
+                  await API({
+                    method: "post",
+                    url: "/traveller/hotel/visited",
+                    params: { hotelId: params.hotelId },
+                  });
+                  await refetchData();
                 }}
               />
               <IconButton
                 size={22}
                 style={styles.ActionsIcon}
                 icon="close"
-                color={theme.colors.textSecondary}
-                onPress={() => {
-                  // eslint-disable-next-line no-alert
-                  alert("WIP: Action");
+                color={
+                  !apiRequest.data?.visited
+                    ? theme.colors.primary
+                    : theme.colors.textSecondary
+                }
+                onPress={async () => {
+                  await API({
+                    method: "delete",
+                    url: "/traveller/hotel/visited",
+                    params: { hotelId: params.hotelId },
+                  });
+                  await refetchData();
                 }}
               />
             </View>
@@ -222,7 +244,7 @@ const HotelDetailsScreen = ({
               <View style={styles.AmenitiesContainer}>
                 {apiRequest.data.amenities.map((amenity) => (
                   <Chip key={amenity} style={{ margin: CHIP_SPACING }}>
-                    {amenity.toUpperCase()}
+                    {hotelAmenities[amenity.toUpperCase()]}
                   </Chip>
                 ))}
               </View>
