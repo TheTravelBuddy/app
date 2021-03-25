@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from "react";
 import { View, Image } from "react-native";
-import { FAB, useTheme } from "react-native-paper";
+import { FAB, useTheme, IconButton } from "react-native-paper";
 
 import screenStyles from "./styles";
 
@@ -9,6 +9,7 @@ import {
   Scaffold,
   HorizontalScroller,
   LocationSubtitle,
+  SectionSubtitle,
   Button,
   Chip,
   ScreenTitle,
@@ -185,6 +186,33 @@ const HotelDetailsScreen = ({
                 {apiRequest.data.about}
               </Paragraph>
             </View>
+            <View style={[screenStyles.ScreenPadded, styles.TextContainer]}>
+              <SectionSubtitle
+                style={[screenStyles.SectionHeader, screenStyles.Flex]}
+              >
+                Have you stayed in this hotel before?
+              </SectionSubtitle>
+              <IconButton
+                size={22}
+                style={styles.ActionsIcon}
+                icon="check"
+                color={theme.colors.primary}
+                onPress={() => {
+                  // eslint-disable-next-line no-alert
+                  alert("WIP:  Action");
+                }}
+              />
+              <IconButton
+                size={22}
+                style={styles.ActionsIcon}
+                icon="close"
+                color={theme.colors.textSecondary}
+                onPress={() => {
+                  // eslint-disable-next-line no-alert
+                  alert("WIP: Action");
+                }}
+              />
+            </View>
             <View style={screenStyles.Section}>
               <SectionHeader
                 style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
@@ -199,6 +227,7 @@ const HotelDetailsScreen = ({
                 ))}
               </View>
             </View>
+
             <View style={screenStyles.Section}>
               <SectionHeader
                 style={[screenStyles.ScreenPadded, screenStyles.SectionHeader]}
@@ -281,6 +310,13 @@ const styles = {
   },
   SectionRightButton: {
     alignSelf: "flex-end",
+  },
+  TextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  ActionsIcon: {
+    margin: 0,
   },
 };
 
