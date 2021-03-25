@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { View } from "react-native";
 import { Searchbar, useTheme } from "react-native-paper";
 
@@ -34,7 +34,20 @@ const BookingSearchScreen = ({ navigation }) => {
   const city = usePicker();
   const bookingType = usePicker("HOTEL");
   const filters = useObjectState();
-  const [searchResults] = useState([]);
+
+  const [searchRequest] = useAPI({
+    url: `/traveller/${bookingType.value.toLowerCase()}/search`,
+    params: {
+      cityId: city.value.id,
+      ...(filters.value.budget?.low && {
+        budgetMin: filters.value.budget?.low,
+      }),
+      ...(filters.value.budget?.high && {
+        budgetMax: filters.value.budget?.high,
+      }),
+      query: searchQuery.value,
+    },
+  });
 
   const locationModal = useToggle(false);
   const bookingTypeModal = useToggle(false);
@@ -98,14 +111,14 @@ const BookingSearchScreen = ({ navigation }) => {
           Search Results
         </SectionHeader>
         {bookingType.value === "HOTEL"
-          ? searchResults.map((data) => (
+          ? searchRequest.data?.map((data) => (
               <HotelSearchCard
                 key={data.id}
                 {...data}
                 style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
               />
             ))
-          : searchResults.map((data) => (
+          : searchRequest.data?.map((data) => (
               <PackageSearchCard
                 key={data.id}
                 {...data}
