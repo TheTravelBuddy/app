@@ -1,34 +1,46 @@
 import React from "react";
 import { View } from "react-native";
+import Geolocation from "react-native-geolocation-service";
 
 import BottomModal from "../BottomModal";
 import Button from "../Button";
 import Chip from "../Chip";
 import ModalTitle from "../Typography/ModalTitle";
 import CardTitle from "../Typography/CardTitle";
-
-import { useBookingFilters } from "../../stores/BookingFilters";
 import screenStyles from "../../screens/styles";
+import { haversineDistance } from "../../helpers/distance";
+import { askLocationPermission } from "../../helpers/permission";
 
-const cities = [
-  { id: 0, name: "Mumbai" },
-  { id: 1, name: "Delhi" },
-  { id: 2, name: "Shimla" },
-  { id: 3, name: "Jaipur" },
-];
-
-const BookingLocationModal = ({ visible, onDismiss }) => {
-  const selectedCity = useBookingFilters((state) => state.city);
-  const setCity = useBookingFilters((state) => state.setCity);
-
+const BookingLocationModal = ({
+  visible,
+  onDismiss,
+  cities,
+  city: selectedCity,
+}) => {
   return (
     <BottomModal {...{ visible, onDismiss }}>
-      <ModalTitle>Where?</ModalTitle>
+      <ModalTitle>Select City</ModalTitle>
       <View style={screenStyles.Section}>
         <Button
           compact
           mode="outlined"
           icon="crosshairs-gps"
+          onPress={async () => {
+            if (!cities) return;
+
+            if (!askLocationPermission()) return;
+
+            Geolocation.getCurrentPosition(({ coords }) => {
+              selectedCity.setValue(
+                cities
+                  .map((city) => ({
+                    ...city,
+                    distance: haversineDistance(city, coords),
+                  }))
+                  .sort(({ distance: a }, { distance: b }) => a - b)[0]
+              );
+            }, console.warn);
+          }}
           style={styles.LocationSelector}
         >
           Current Location
@@ -39,12 +51,13 @@ const BookingLocationModal = ({ visible, onDismiss }) => {
           Popular Destinations
         </CardTitle>
         <View style={styles.OtherLocationsContainer}>
-          {cities.map((city) => (
+          {cities?.map((city) => (
             <Chip
-              mode={selectedCity.id === city.id ? "contained" : "flat"}
+              key={city.id}
+              mode={selectedCity.value.id === city.id ? "contained" : "flat"}
               style={styles.LocationSelector}
               onPress={() => {
-                setCity(city);
+                selectedCity.setValue(city);
               }}
             >
               {city.name}
