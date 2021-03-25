@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { View, Image } from "react-native";
 import { FAB, useTheme, Divider, Text } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { displayFilter } from "../stores/BookingFilters";
+import { displayBooking } from "../helpers/booking";
 
 import screenStyles from "./styles";
 
@@ -128,7 +128,7 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
             style={[styles.TextIcon]}
           />
           <CardSubtitle>
-            {displayFilter.booking({
+            {displayBooking.booking({
               adults: hotelData.adults,
               children: hotelData.children,
             })}
@@ -142,7 +142,7 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
             style={[styles.TextIcon]}
             name="calendar-month-outline"
           />
-          <CardSubtitle>{displayFilter.date(hotelData.date)}</CardSubtitle>
+          <CardSubtitle>{displayBooking.date(hotelData.date)}</CardSubtitle>
         </View>
       </View>
 
@@ -162,14 +162,14 @@ const HotelBookingScreen = ({ navigation: { goBack } }) => {
 
           <View style={[styles.TextContainer, styles.Content]}>
             <Text style={[styles.SectionSubtitle, styles.Flex]}>Rooms</Text>
-            <CardSubtitle>{` × ${displayFilter.booking({
+            <CardSubtitle>{` × ${displayBooking.booking({
               rooms: hotelData.rooms,
             })}`}</CardSubtitle>
           </View>
           <View style={[styles.TextContainer, styles.Content]}>
             <Text style={[styles.SectionSubtitle, styles.Flex]}>Days</Text>
             <CardSubtitle>
-              {`× ${displayFilter.numberOfDays(hotelData.numberOfDays)}`}
+              {`× ${displayBooking.numberOfDays(hotelData.numberOfDays)}`}
             </CardSubtitle>
           </View>
         </View>

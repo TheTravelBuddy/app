@@ -280,7 +280,10 @@ const HotelDetailsScreen = ({
                   compact
                   style={styles.SectionRightButton}
                   onPress={() => {
-                    navigate("ReviewsScreen");
+                    navigate("ReviewsScreen", {
+                      nodeType: "hotel",
+                      nodeId: params.hotelId,
+                    });
                   }}
                 >
                   Read More Reviews
@@ -293,6 +296,9 @@ const HotelDetailsScreen = ({
       <WriteReviewModal
         visible={writeReviewModal.visible}
         onDismiss={writeReviewModal.hide}
+        onSubmit={refetchData}
+        nodeType="hotel"
+        nodeId={params.hotelId}
       />
     </Scaffold>
   );

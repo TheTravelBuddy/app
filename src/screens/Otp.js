@@ -25,7 +25,6 @@ const OtpScreen = ({ route }) => {
   const handleOtp = useCallback(() => {
     loading.start();
     verifyOtp(otp.value)
-      .then(() => console.log("Signed In"))
       .catch((err) => {
         console.log(err);
         errorSnackbar.show();

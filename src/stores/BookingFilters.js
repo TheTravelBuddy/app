@@ -148,8 +148,6 @@ const useBookingFilters = create(
     },
     updateResults: () => {
       const { filters, bookingType } = get();
-      console.log("filters", filters);
-      console.log("Updating results from server.");
       set(
         produce((draftState) => {
           draftState.searchResults =

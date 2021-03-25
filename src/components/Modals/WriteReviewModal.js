@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { TextInput, IconButton, useTheme } from "react-native-paper";
+import { TextInput } from "react-native-paper";
 
 import BottomModal from "../BottomModal";
 import Button from "../Button";
@@ -8,9 +8,22 @@ import screenStyles from "../../screens/styles";
 
 import CardTitle from "../Typography/CardTitle";
 import { CARD_SPACING, SCREEN_PADDING } from "../../constants";
+import RatingInput from "../RatingInput";
+import usePicker from "../../hooks/usePicker";
+import useTextInput from "../../hooks/useTextInput";
+import API from "../../helpers/API";
+import useToggle from "../../hooks/useToggle";
 
-const WriteReviewModal = ({ visible, onDismiss }) => {
-  const theme = useTheme();
+const WriteReviewModal = ({
+  visible,
+  onDismiss,
+  nodeType,
+  nodeId,
+  onSubmit,
+}) => {
+  const rating = usePicker();
+  const review = useTextInput();
+  const loading = useToggle(false);
 
   return (
     <BottomModal {...{ visible, onDismiss }}>
@@ -19,63 +32,13 @@ const WriteReviewModal = ({ visible, onDismiss }) => {
           <CardTitle style={styles.Title}>Write a Review</CardTitle>
         </View>
         <View style={screenStyles.Section}>
-          <View style={styles.RatingContainer}>
-            <IconButton
-              size={28}
-              style={styles.RatingActionsIcon}
-              icon="star"
-              color={theme.colors.star}
-              onPress={() => {
-                // eslint-disable-next-line no-alert
-                alert("WIP:  Details");
-              }}
-            />
-            <IconButton
-              size={28}
-              style={styles.RatingActionsIcon}
-              icon="star"
-              color={theme.colors.star}
-              onPress={() => {
-                // eslint-disable-next-line no-alert
-                alert("WIP:  Details");
-              }}
-            />
-            <IconButton
-              size={28}
-              style={styles.RatingActionsIcon}
-              icon="star"
-              color={theme.colors.star}
-              onPress={() => {
-                // eslint-disable-next-line no-alert
-                alert("WIP:  Details");
-              }}
-            />
-            <IconButton
-              size={28}
-              style={styles.RatingActionsIcon}
-              icon="star-outline"
-              color={theme.colors.textSecondary}
-              onPress={() => {
-                // eslint-disable-next-line no-alert
-                alert("WIP:  Details");
-              }}
-            />
-            <IconButton
-              size={28}
-              style={styles.RatingActionsIcon}
-              icon="star-outline"
-              color={theme.colors.textSecondary}
-              onPress={() => {
-                // eslint-disable-next-line no-alert
-                alert("WIP: Details");
-              }}
-            />
-          </View>
+          <RatingInput {...rating.props} style={styles.RatingInput} />
           <TextInput
             label="Write Review..."
             numberOfLines={3}
             multiline={true}
-            // style={screenStyles.FormInput}
+            style={screenStyles.FormInput}
+            {...review.props}
           />
         </View>
         <View style={[screenStyles.FormInputContainer]}>
@@ -84,6 +47,7 @@ const WriteReviewModal = ({ visible, onDismiss }) => {
             mode="outlined"
             style={screenStyles.FormInputLeft}
             onPress={onDismiss}
+            disabled={loading.value}
           >
             Cancel
           </Button>
@@ -91,9 +55,22 @@ const WriteReviewModal = ({ visible, onDismiss }) => {
             compact
             mode="contained"
             style={screenStyles.FormInputRight}
+            disabled={loading.value}
+            loading={loading.value}
             onPress={() => {
-              // eslint-disable-next-line no-alert
-              alert("WIP: Submit Review");
+              loading.start();
+              API({
+                url: `/traveller/${nodeType}/review`,
+                method: "post",
+                params: { [`${nodeType}Id`]: nodeId },
+                data: { rating: rating.value, review: review.value },
+              })
+                .then(onSubmit)
+                .catch(console.log)
+                .finally(() => {
+                  loading.stop();
+                  onDismiss();
+                });
             }}
           >
             Submit
@@ -107,12 +84,8 @@ const styles = {
   Title: {
     fontSize: 20,
   },
-  RatingContainer: {
-    flexDirection: "row",
+  RatingInput: {
     marginBottom: SCREEN_PADDING / 2,
-  },
-  RatingActionsIcon: {
-    margin: -8,
   },
   FormInput: {
     marginBottom: CARD_SPACING / 2,

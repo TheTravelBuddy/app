@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { View } from "react-native";
 import { Searchbar, useTheme } from "react-native-paper";
 
@@ -110,21 +110,28 @@ const BookingSearchScreen = ({ navigation }) => {
         >
           Search Results
         </SectionHeader>
-        {bookingType.value === "HOTEL"
-          ? searchRequest.data?.map((data) => (
-              <HotelSearchCard
-                key={data.id}
-                {...data}
-                style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
-              />
-            ))
-          : searchRequest.data?.map((data) => (
-              <PackageSearchCard
-                key={data.id}
-                {...data}
-                style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
-              />
-            ))}
+        {!searchRequest.loading &&
+          (bookingType.value === "HOTEL"
+            ? searchRequest.data?.map((data) => (
+                <HotelSearchCard
+                  key={data.id}
+                  {...data}
+                  style={[
+                    commonStyles.ScreenPadded,
+                    commonStyles.HorizontalCard,
+                  ]}
+                />
+              ))
+            : searchRequest.data?.map((data) => (
+                <PackageSearchCard
+                  key={data.id}
+                  {...data}
+                  style={[
+                    commonStyles.ScreenPadded,
+                    commonStyles.HorizontalCard,
+                  ]}
+                />
+              )))}
       </View>
       <BookingLocationModal
         visible={locationModal.visible}

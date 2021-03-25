@@ -13,7 +13,7 @@ import useScreenDimensions from "../../hooks/useScreenDimensions";
 import { CARD_SPACING, SCREEN_PADDING } from "../../constants";
 import HotelPriceSummary from "../Typography/HotelPriceSummary";
 import CardSubtitle from "../Typography/CardSubtitle";
-import { displayFilter } from "../../stores/BookingFilters";
+import { displayBooking } from "../../helpers/booking";
 
 const HotelBookingCard = ({
   coverUri,
@@ -68,7 +68,7 @@ const HotelBookingCard = ({
                 commonStyles.CardActionsText,
               ]}
             >
-              {displayFilter.booking({ adults, children })}
+              {displayBooking.booking({ adults, children })}
             </Text>
           </View>
           <View style={commonStyles.CardActionsSpacer} />
@@ -89,17 +89,17 @@ const HotelBookingCard = ({
                 commonStyles.CardActionsText,
               ]}
             >
-              {displayFilter.date(date)}
+              {displayBooking.date(date)}
             </Text>
           </View>
         </View>
         <View style={[commonStyles.CardContent, styles.CardContent]}>
           <View style={styles.BillContainer}>
             <HotelPriceSummary {...{ price }} />
-            <CardSubtitle>{`× ${displayFilter.booking({
+            <CardSubtitle>{`× ${displayBooking.booking({
               rooms,
             })}`}</CardSubtitle>
-            <CardSubtitle>{`× ${displayFilter.numberOfDays(
+            <CardSubtitle>{`× ${displayBooking.numberOfDays(
               numberOfDays
             )}`}</CardSubtitle>
           </View>
