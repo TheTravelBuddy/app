@@ -30,3 +30,13 @@ export const hotelAmenities = {
   GYM: "Gym",
   SALON: "Salon",
 };
+
+export const packageAmenities = {
+  HOTELS: "Hotels",
+  SIGHTSEEING: "Sightseeing",
+  TRANSFERS: "Transfers",
+  ACTIVITIES: "Activities",
+  FLIGHTS: "Flights",
+  MEALS: "Meals",
+  CITY_TOURS: "City Tours",
+};

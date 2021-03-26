@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { View, Image } from "react-native";
 import { FAB, useTheme, Divider, Text } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { displayFilter } from "../stores/BookingFilters";
+import { displayPackageBooking } from "../helpers/booking";
 
 import screenStyles from "./styles";
 
@@ -140,7 +140,9 @@ const PackageBookingScreen = ({ navigation: { goBack } }) => {
             style={[styles.TextIcon]}
             name="calendar-month-outline"
           />
-          <CardSubtitle>{displayFilter.date(packageData.date)}</CardSubtitle>
+          <CardSubtitle>
+            {displayPackageBooking.date(packageData.date)}
+          </CardSubtitle>
         </View>
       </View>
 
@@ -162,7 +164,9 @@ const PackageBookingScreen = ({ navigation: { goBack } }) => {
             <Text style={[styles.SectionSubtitle, styles.Flex]}>
               Number of people
             </Text>
-            <CardSubtitle>{`× ${packageData.numberOfPeople}`}</CardSubtitle>
+            <CardSubtitle>{`× ${displayPackageBooking.booking({
+              people: packageData.numberOfPeople,
+            })}`}</CardSubtitle>
           </View>
         </View>
       </View>

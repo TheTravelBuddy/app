@@ -35,3 +35,10 @@ export const displayHotelBooking = {
     return list.join(", ");
   },
 };
+
+export const displayPackageBooking = {
+  date: (date) => moment(date).format("ddd, Do MMM"),
+  booking: ({ people }) => {
+    return `${people} ${people > 1 ? "People" : "Person"}`;
+  },
+};

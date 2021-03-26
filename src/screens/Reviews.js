@@ -3,7 +3,7 @@ import { View } from "react-native";
 
 import commonStyles from "./styles";
 
-import { Scaffold, ReviewCard } from "../components";
+import { Scaffold, ReviewCard, RenderOnLoad } from "../components";
 import { useAPI } from "../helpers/API";
 
 const ReviewsScreen = ({ navigation: { goBack }, route: { params } }) => {
@@ -18,11 +18,17 @@ const ReviewsScreen = ({ navigation: { goBack }, route: { params } }) => {
         goBack,
       ])}
     >
-      <View style={[commonStyles.Section, commonStyles.ScreenPadded]}>
-        {apiRequest.data?.map((review) => (
-          <ReviewCard key={review.id} {...review} />
-        ))}
-      </View>
+      <RenderOnLoad loading={!apiRequest.data}>
+        {() => (
+          <>
+            <View style={[commonStyles.Section, commonStyles.ScreenPadded]}>
+              {apiRequest.data?.map((review) => (
+                <ReviewCard key={review.id} {...review} />
+              ))}
+            </View>
+          </>
+        )}
+      </RenderOnLoad>
     </Scaffold>
   );
 };

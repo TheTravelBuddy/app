@@ -14,6 +14,7 @@ import {
   PackageSearchCard,
   Chip,
   HorizontalScroller,
+  RenderOnLoad,
 } from "../components";
 import { displayFilter, shouldDisplayFilter } from "../helpers/booking";
 import useToggle from "../hooks/useToggle";
@@ -104,35 +105,41 @@ const BookingSearchScreen = ({ navigation }) => {
         </View>
       )}
     >
-      <View style={commonStyles.Section}>
-        <SectionHeader
-          style={[commonStyles.ScreenPadded, styles.SectionHeader]}
-        >
-          Search Results
-        </SectionHeader>
-        {!searchRequest.loading &&
-          (bookingType.value === "HOTEL"
-            ? searchRequest.data?.map((data) => (
-                <HotelSearchCard
-                  key={data.id}
-                  {...data}
-                  style={[
-                    commonStyles.ScreenPadded,
-                    commonStyles.HorizontalCard,
-                  ]}
-                />
-              ))
-            : searchRequest.data?.map((data) => (
-                <PackageSearchCard
-                  key={data.id}
-                  {...data}
-                  style={[
-                    commonStyles.ScreenPadded,
-                    commonStyles.HorizontalCard,
-                  ]}
-                />
-              )))}
-      </View>
+      <RenderOnLoad loading={searchRequest.loading && !searchRequest.data}>
+        {() => (
+          <>
+            <View style={commonStyles.Section}>
+              <SectionHeader
+                style={[commonStyles.ScreenPadded, styles.SectionHeader]}
+              >
+                Search Results
+              </SectionHeader>
+              {!searchRequest.loading &&
+                (bookingType.value === "HOTEL"
+                  ? searchRequest.data?.map((data) => (
+                      <HotelSearchCard
+                        key={data.id}
+                        {...data}
+                        style={[
+                          commonStyles.ScreenPadded,
+                          commonStyles.HorizontalCard,
+                        ]}
+                      />
+                    ))
+                  : searchRequest.data?.map((data) => (
+                      <PackageSearchCard
+                        key={data.id}
+                        {...data}
+                        style={[
+                          commonStyles.ScreenPadded,
+                          commonStyles.HorizontalCard,
+                        ]}
+                      />
+                    )))}
+            </View>
+          </>
+        )}
+      </RenderOnLoad>
       <BookingLocationModal
         visible={locationModal.visible}
         onDismiss={locationModal.hide}
