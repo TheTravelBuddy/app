@@ -40,6 +40,8 @@ import PackageDetailCard from "./Card/PackageDetailCard";
 import BookingSearchCard from "./Card/BookingSearchCard";
 import BookingCheckmarkCard from "./Card/BookingCheckmarkCard";
 import HotelSearchCard from "./Card/HotelSearchCard";
+import CitySearchCard from "./Card/CitySearchCard";
+import AttractionSearchCard from "./Card/AttractionSearchCard";
 import PackageSearchCard from "./Card/PackageSearchCard";
 import HotelBookingCard from "./Card/HotelBookingCard";
 import BlogCard from "./Card/BlogCard";
@@ -99,7 +101,9 @@ export {
   PackageDetailCard,
   BookingSearchCard,
   HotelSearchCard,
+  AttractionSearchCard,
   PackageSearchCard,
+  CitySearchCard,
   BlogCard,
   BlogBannerCard,
   BlogLocationCard,

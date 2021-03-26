@@ -24,6 +24,7 @@ import BlogScreen from "./screens/Blog";
 import AttractionDetailsScreen from "./screens/AttractionDetails";
 import BusinessDetailsScreen from "./screens/BusinessDetails";
 import PackageDetailsScreen from "./screens/PackageDetails";
+import PackageBookingScreen from "./screens/PackageBooking";
 import CityDetailsScreen from "./screens/CityDetails";
 import BlogTopicScreen from "./screens/BlogTopic";
 import EditProfileScreen from "./screens/EditProfile";
@@ -31,6 +32,13 @@ import ReviewsScreen from "./screens/Reviews";
 import CommentsScreen from "./screens/Comments";
 import BusinessCategoryScreen from "./screens/BusinessCategory";
 import MyBookingsScreen from "./screens/MyBookings";
+import MyFavouritesScreen from "./screens/MyFavourites";
+import FavouriteDestinationsScreen from "./screens/FavouriteDestinations";
+import FavouriteAttractionsScreen from "./screens/FavouriteAttractions";
+import FavouritePackagesScreen from "./screens/FavouritePackages";
+import FavouriteHotelsScreen from "./screens/FavouriteHotels";
+import FavouriteNearbyLocationScreen from "./screens/FavouriteNearbyLocations";
+import FavouriteBlogsScreen from "./screens/FavouriteBlogs";
 import CreateBlogScreen from "./screens/CreateBlog";
 import ExploreServiceScreen from "./screens/ExploreService";
 import MyBlogsScreen from "./screens/MyBlogs";
@@ -190,10 +198,18 @@ const Navigator = () => {
             name="MyBookingsScreen"
             component={MyBookingsScreen}
           />
+          <AppStack.Screen
+            name="MyFavouritesScreen"
+            component={MyFavouritesScreen}
+          />
           <AppStack.Screen name="BlogTopicScreen" component={BlogTopicScreen} />
           <AppStack.Screen
             name="HotelBookingScreen"
             component={HotelBookingScreen}
+          />
+          <AppStack.Screen
+            name="PackageBookingScreen"
+            component={PackageBookingScreen}
           />
           <AppStack.Screen name="ReviewsScreen" component={ReviewsScreen} />
           <AppStack.Screen name="CommentsScreen" component={CommentsScreen} />
@@ -211,6 +227,30 @@ const Navigator = () => {
           />
           <AppStack.Screen name="MyBlogsScreen" component={MyBlogsScreen} />
           <AppStack.Screen name="MyReviewsScreen" component={MyReviewsScreen} />
+          <AppStack.Screen
+            name="FavouriteBlogsScreen"
+            component={FavouriteBlogsScreen}
+          />
+          <AppStack.Screen
+            name="FavouriteNearbyLocationScreen"
+            component={FavouriteNearbyLocationScreen}
+          />
+          <AppStack.Screen
+            name="FavouriteHotelsScreen"
+            component={FavouriteHotelsScreen}
+          />
+          <AppStack.Screen
+            name="FavouritePackagesScreen"
+            component={FavouritePackagesScreen}
+          />
+          <AppStack.Screen
+            name="FavouriteDestinationsScreen"
+            component={FavouriteDestinationsScreen}
+          />
+          <AppStack.Screen
+            name="FavouriteAttractionsScreen"
+            component={FavouriteAttractionsScreen}
+          />
         </AppStack.Navigator>
       ) : (
         <LoadingScreen />
