@@ -20,12 +20,9 @@ import API from "../../helpers/API";
 const today = new Date();
 const maxBookingDate = moment(today).add(1, "year").toDate();
 
-const HotelBookingModal = ({ visible, onDismiss, hotelId }) => {
-  const checkInDate = useReactiveDateTimePicker(today);
-  const noOfDays = useReactiveTextInput("1");
-  const noOfRooms = useReactiveTextInput("1");
-  const noOfAdults = useReactiveTextInput("1");
-  const noOfChildren = useReactiveTextInput("0");
+const PackageBookingModal = ({ visible, onDismiss, packageId }) => {
+  const date = useReactiveDateTimePicker(today);
+  const noOfPeople = useReactiveTextInput("1");
   const loading = useToggle(false);
   const { navigate } = useNavigation();
 
@@ -37,47 +34,18 @@ const HotelBookingModal = ({ visible, onDismiss, hotelId }) => {
         <View style={styles.FormInputContainer}>
           <DateTimePicker
             dense
-            {...checkInDate.props}
+            {...date.props}
             style={styles.FormInputLeft}
-            label="Check In"
+            label="Date"
             disabled={loading.value}
             maximumDate={maxBookingDate}
             minimumDate={today}
           />
           <TextInput
             dense
-            label="Days"
+            label="People"
             keyboardType="numeric"
-            {...noOfDays.props}
-            disabled={loading.value}
-            style={styles.FormInputRight}
-          />
-        </View>
-      </View>
-      <View style={styles.Section}>
-        <CardTitle style={styles.SectionHeader}>Rooms & Guests</CardTitle>
-        <TextInput
-          dense
-          label="Rooms"
-          {...noOfRooms.props}
-          keyboardType="numeric"
-          disabled={loading.value}
-          style={styles.FormInput}
-        />
-        <View style={styles.FormInputContainer}>
-          <TextInput
-            dense
-            label="Adults"
-            {...noOfAdults.props}
-            keyboardType="numeric"
-            disabled={loading.value}
-            style={styles.FormInputLeft}
-          />
-          <TextInput
-            dense
-            label="Children"
-            {...noOfChildren.props}
-            keyboardType="numeric"
+            {...noOfPeople.props}
             disabled={loading.value}
             style={styles.FormInputRight}
           />
@@ -103,21 +71,15 @@ const HotelBookingModal = ({ visible, onDismiss, hotelId }) => {
             onPress={() => {
               loading.start();
               API({
-                url: `/traveller/hotel/booking`,
+                url: `/traveller/package/booking`,
                 method: "post",
-                params: { hotelId },
-                data: {
-                  date: checkInDate.value,
-                  days: noOfDays.value,
-                  rooms: noOfRooms.value,
-                  adults: noOfAdults.value,
-                  children: noOfChildren.value,
-                },
+                params: { packageId },
+                data: { date: date.value, people: noOfPeople.value },
               })
                 .then((response) => {
                   console.log(response);
-                  const { data: hotelBookingId } = response;
-                  navigate("HotelBookingScreen", { hotelBookingId });
+                  const { data: packageBookingId } = response;
+                  navigate("PackageBookingScreen", { packageBookingId });
                 })
                 .catch(console.log)
                 .finally(() => {
@@ -134,4 +96,4 @@ const HotelBookingModal = ({ visible, onDismiss, hotelId }) => {
   );
 };
 
-export default HotelBookingModal;
+export default PackageBookingModal;

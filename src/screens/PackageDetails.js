@@ -22,6 +22,7 @@ import {
   WriteReviewModal,
   RenderOnLoad,
   CardTitle,
+  PackageBookingModal,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import useToggle from "../hooks/useToggle";
@@ -42,6 +43,7 @@ const PackageDetailsScreen = ({
   const { width } = useScreenDimensions();
   const aboutAgencyModal = useToggle(false);
   const writeReviewModal = useToggle(false);
+  const packageBookingModal = useToggle(false);
 
   const [apiRequest, refetchData] = useAPI({
     url: "/traveller/package",
@@ -75,9 +77,7 @@ const PackageDetailsScreen = ({
             <Button
               mode="contained"
               style={screenStyles.Flex}
-              onPress={() => {
-                navigate("PackageBookingScreen");
-              }}
+              onPress={packageBookingModal.show}
             >
               BOOK
             </Button>
@@ -341,7 +341,6 @@ const PackageDetailsScreen = ({
               </View>
             </View>
             <AboutAgencyModal
-              key={apiRequest.data?.agency.id}
               {...apiRequest.data?.agency}
               visible={aboutAgencyModal.visible}
               onDismiss={aboutAgencyModal.hide}
@@ -356,6 +355,11 @@ const PackageDetailsScreen = ({
           </>
         )}
       </RenderOnLoad>
+      <PackageBookingModal
+        visible={packageBookingModal.visible}
+        onDismiss={packageBookingModal.hide}
+        packageId={params.packageId}
+      />
     </Scaffold>
   );
 };

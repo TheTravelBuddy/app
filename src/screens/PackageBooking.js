@@ -17,41 +17,27 @@ import {
   BookingCardPriceSubtitle,
   PackagePriceSummary,
   AboutAgencyModal,
+  RenderOnLoad,
 } from "../components";
 import useScreenDimensions from "../hooks/useScreenDimensions";
 import { CARD_SPACING, SCREEN_PADDING } from "../constants";
 import useToggle from "../hooks/useToggle";
+import { useAPI } from "../helpers/API";
+import { openPhone } from "../helpers/links";
 
-const packageData = {
-  id: 1,
-  coverUri: "https://static.toiimg.com/photo/24476893.cms",
-  name: "Have Pleasure in Pune",
-  rating: 4.9,
-  nights: 4,
-  days: 5,
-  price: 5000,
-  distance: 5,
-  adults: 3,
-  children: 2,
-  rooms: 2,
-  date: new Date(),
-  numberOfDays: 4,
-  numberOfPeople: 2,
-};
-
-const agency = [
-  {
-    id: 1,
-    name: "Have Pleasure in Pune",
-    rating: 4.5,
-    about:
-      "As a leading travel agent in Pune, we have access to the best hotel rates and have tied-up with top resorts, airlines, and ground transport companies to provide our customers with the best value for their money.",
-  },
-];
-
-const PackageBookingScreen = ({ navigation: { goBack } }) => {
+const PackageBookingScreen = ({
+  navigation: { goBack },
+  route: { params },
+}) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
+  const aboutAgencyModal = useToggle(false);
+
+  const [apiRequest] = useAPI({
+    url: "/traveller/package/booking",
+    method: "get",
+    params: { packageBookingId: params.packageBookingId },
+  });
 
   const whiteButtonTheme = useMemo(
     () => ({
@@ -62,152 +48,165 @@ const PackageBookingScreen = ({ navigation: { goBack } }) => {
     }),
     [theme.colors.surface]
   );
-  const aboutAgencyModal = useToggle(false);
+
   return (
     <Scaffold>
-      <FAB
-        small
-        style={styles.HeaderBackFAB}
-        icon="arrow-left"
-        theme={whiteButtonTheme}
-        onPress={goBack}
-        elevation={0}
-      />
-      <BookingCheckmarkCard />
-      <View style={styles.ScreenSection}>
-        <View style={[styles.Content]}>
-          <Image
-            style={{
-              width: width / 6,
-              height: width / 6,
-              borderRadius: theme.roundness,
-            }}
-            source={{ uri: packageData.coverUri }}
-          />
-          <View style={styles.TextBody}>
-            <View style={styles.Content}>
-              <ScreenTitle style={styles.TitleBody}>
-                {packageData.name}
-              </ScreenTitle>
-              <RatingPill rating={packageData.rating} />
+      <RenderOnLoad loading={!apiRequest.data}>
+        {() => (
+          <>
+            <FAB
+              small
+              style={styles.HeaderBackFAB}
+              icon="arrow-left"
+              theme={whiteButtonTheme}
+              onPress={goBack}
+              elevation={0}
+            />
+            <BookingCheckmarkCard />
+            <View style={styles.ScreenSection}>
+              <View style={[styles.Content]}>
+                <Image
+                  style={{
+                    width: width / 6,
+                    height: width / 6,
+                    borderRadius: theme.roundness,
+                  }}
+                  source={{ uri: apiRequest.data?.package.coverUri }}
+                />
+                <View style={styles.TextBody}>
+                  <View style={styles.Content}>
+                    <ScreenTitle style={styles.TitleBody}>
+                      {apiRequest.data?.package.name}
+                    </ScreenTitle>
+                    <RatingPill rating={apiRequest.data?.package.rating} />
+                  </View>
+
+                  <PackageDurationSubtitle
+                    nights={apiRequest.data?.package.days - 1}
+                    days={apiRequest.data?.package.days}
+                  />
+                </View>
+              </View>
+              <View
+                style={[screenStyles.FormInputContainer, styles.ActionButtons]}
+              >
+                <Button
+                  mode="contained"
+                  icon="information-outline"
+                  style={screenStyles.FormInputLeft}
+                  theme={whiteButtonTheme}
+                  onPress={aboutAgencyModal.show}
+                >
+                  About Agency
+                </Button>
+                <Button
+                  mode="contained"
+                  icon="phone-outline"
+                  style={screenStyles.FormInputRight}
+                  theme={whiteButtonTheme}
+                  onPress={() => {
+                    openPhone({
+                      phoneNumber: apiRequest.data?.agency.phone,
+                    });
+                  }}
+                >
+                  Call Agency
+                </Button>
+              </View>
             </View>
 
-            <PackageDurationSubtitle
-              nights={packageData.nights}
-              days={packageData.days}
+            <Divider />
+
+            <View
+              style={[
+                screenStyles.Section,
+                screenStyles.ScreenPadded,
+                styles.Content,
+              ]}
+            >
+              <View style={styles.Flex} />
+              <View style={styles.TextContainer}>
+                <MaterialCommunityIcons
+                  size={18}
+                  color={theme.colors.textSecondary}
+                  style={[styles.TextIcon]}
+                  name="calendar-month-outline"
+                />
+                <CardSubtitle>
+                  {displayPackageBooking.date(apiRequest.data?.booking.date)}
+                </CardSubtitle>
+              </View>
+            </View>
+
+            <Divider />
+
+            <View style={[screenStyles.Section, screenStyles.ScreenPadded]}>
+              <View>
+                <Text style={[styles.SectionHeader, theme.fonts.bold]}>
+                  Payment Breakdown
+                </Text>
+                <View style={[styles.TextContainer, styles.Content]}>
+                  <Text style={[styles.SectionSubtitle, styles.Flex]}>
+                    Package Price
+                  </Text>
+                  <PackagePriceSummary price={apiRequest.data?.package.price} />
+                </View>
+
+                <View style={[styles.TextContainer, styles.Content]}>
+                  <Text style={[styles.SectionSubtitle, styles.Flex]}>
+                    Number of people
+                  </Text>
+                  <CardSubtitle>{`× ${displayPackageBooking.booking({
+                    people: apiRequest.data?.booking.people,
+                  })}`}</CardSubtitle>
+                </View>
+              </View>
+            </View>
+
+            <Divider />
+
+            <View style={[screenStyles.Section, screenStyles.ScreenPadded]}>
+              <View style={styles.Content}>
+                <Text
+                  style={[
+                    styles.TitleBody,
+                    styles.SectionHeader,
+                    theme.fonts.bold,
+                  ]}
+                >
+                  Total Amount
+                </Text>
+                <BookingCardPriceSubtitle
+                  style={styles.Price}
+                  price={
+                    apiRequest.data?.package.price *
+                    apiRequest.data?.booking.people
+                  }
+                />
+              </View>
+            </View>
+            <Divider />
+            <View style={[screenStyles.Section, screenStyles.ScreenPadded]}>
+              <View style={styles.TextContainer}>
+                <MaterialCommunityIcons
+                  name="alert-box-outline"
+                  size={18}
+                  color={theme.colors.textSecondary}
+                  style={[styles.TextIcon]}
+                />
+                <Text style={[{ color: theme.colors.textSecondary }]}>
+                  This booking is non-cancellable
+                </Text>
+              </View>
+            </View>
+            <AboutAgencyModal
+              {...apiRequest.data?.agency}
+              visible={aboutAgencyModal.visible}
+              onDismiss={aboutAgencyModal.hide}
             />
-          </View>
-        </View>
-        <View style={[screenStyles.FormInputContainer, styles.ActionButtons]}>
-          <Button
-            mode="contained"
-            icon="information-outline"
-            style={screenStyles.FormInputLeft}
-            theme={whiteButtonTheme}
-            onPress={aboutAgencyModal.show}
-          >
-            About Agency
-          </Button>
-          <Button
-            mode="contained"
-            icon="phone-outline"
-            style={screenStyles.FormInputRight}
-            theme={whiteButtonTheme}
-            onPress={() => {
-              // eslint-disable-next-line no-alert
-              alert("WIP: Open Contact Details");
-            }}
-          >
-            Call Agency
-          </Button>
-        </View>
-      </View>
-
-      <Divider />
-
-      <View
-        style={[
-          screenStyles.Section,
-          screenStyles.ScreenPadded,
-          styles.Content,
-        ]}
-      >
-        <View style={styles.Flex} />
-        <View style={styles.TextContainer}>
-          <MaterialCommunityIcons
-            size={18}
-            color={theme.colors.textSecondary}
-            style={[styles.TextIcon]}
-            name="calendar-month-outline"
-          />
-          <CardSubtitle>
-            {displayPackageBooking.date(packageData.date)}
-          </CardSubtitle>
-        </View>
-      </View>
-
-      <Divider />
-
-      <View style={[screenStyles.Section, screenStyles.ScreenPadded]}>
-        <View>
-          <Text style={[styles.SectionHeader, theme.fonts.bold]}>
-            Payment Breakdown
-          </Text>
-          <View style={[styles.TextContainer, styles.Content]}>
-            <Text style={[styles.SectionSubtitle, styles.Flex]}>
-              Package Price
-            </Text>
-            <PackagePriceSummary price={packageData.price} />
-          </View>
-
-          <View style={[styles.TextContainer, styles.Content]}>
-            <Text style={[styles.SectionSubtitle, styles.Flex]}>
-              Number of people
-            </Text>
-            <CardSubtitle>{`× ${displayPackageBooking.booking({
-              people: packageData.numberOfPeople,
-            })}`}</CardSubtitle>
-          </View>
-        </View>
-      </View>
-
-      <Divider />
-
-      <View style={[screenStyles.Section, screenStyles.ScreenPadded]}>
-        <View style={styles.Content}>
-          <Text
-            style={[styles.TitleBody, styles.SectionHeader, theme.fonts.bold]}
-          >
-            Total Amount
-          </Text>
-          <BookingCardPriceSubtitle
-            style={styles.Price}
-            price={packageData.price * packageData.numberOfPeople}
-          />
-        </View>
-      </View>
-      <Divider />
-      <View style={[screenStyles.Section, screenStyles.ScreenPadded]}>
-        <View style={styles.TextContainer}>
-          <MaterialCommunityIcons
-            name="alert-box-outline"
-            size={18}
-            color={theme.colors.textSecondary}
-            style={[styles.TextIcon]}
-          />
-          <Text style={[{ color: theme.colors.textSecondary }]}>
-            This booking is non-cancellable
-          </Text>
-        </View>
-      </View>
-      {agency.map((agencyDetails) => (
-        <AboutAgencyModal
-          key={agencyDetails.id}
-          {...agencyDetails}
-          visible={aboutAgencyModal.visible}
-          onDismiss={aboutAgencyModal.hide}
-        />
-      ))}
+          </>
+        )}
+      </RenderOnLoad>
     </Scaffold>
   );
 };

@@ -112,7 +112,7 @@ const BookingSearchScreen = ({ navigation }) => {
               <SectionHeader
                 style={[commonStyles.ScreenPadded, styles.SectionHeader]}
               >
-                Search Results
+                {!searchRequest.data?.length ? "No Results" : "Search Results"}
               </SectionHeader>
               {!searchRequest.loading &&
                 (bookingType.value === "HOTEL"

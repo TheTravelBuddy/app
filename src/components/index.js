@@ -62,6 +62,7 @@ import AboutAgencyModal from "./Modals/AboutAgencyModal";
 import WriteReviewModal from "./Modals/WriteReviewModal";
 import WriteCommentModal from "./Modals/WriteCommentModal";
 import HotelBookingModal from "./Modals/HotelBookingModal";
+import PackageBookingModal from "./Modals/PackageBookingModal";
 import RenderOnLoad from "./RenderOnLoad";
 
 export {
@@ -130,4 +131,5 @@ export {
   WriteReviewModal,
   RenderOnLoad,
   HotelBookingModal,
+  PackageBookingModal,
 };
