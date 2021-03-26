@@ -27,8 +27,8 @@ const packageData = {
   coverUri: "https://static.toiimg.com/photo/24476893.cms",
   name: "Have Pleasure in Pune",
   rating: 4.9,
-  nights: "4",
-  days: "5",
+  nights: 4,
+  days: 5,
   price: 5000,
   distance: 5,
   adults: 3,
@@ -36,8 +36,9 @@ const packageData = {
   rooms: 2,
   date: new Date(),
   numberOfDays: 4,
-  numberOfPeople: "1 person",
+  numberOfPeople: 2,
 };
+
 const agency = [
   {
     id: 1,
@@ -152,16 +153,16 @@ const PackageBookingScreen = ({ navigation: { goBack } }) => {
           </Text>
           <View style={[styles.TextContainer, styles.Content]}>
             <Text style={[styles.SectionSubtitle, styles.Flex]}>
-              Trip Price
+              Package Price
             </Text>
             <PackagePriceSummary price={packageData.price} />
           </View>
 
           <View style={[styles.TextContainer, styles.Content]}>
             <Text style={[styles.SectionSubtitle, styles.Flex]}>
-              Number of travellers
+              Number of people
             </Text>
-            <CardSubtitle>{` × ${packageData.numberOfPeople}`}</CardSubtitle>
+            <CardSubtitle>{`× ${packageData.numberOfPeople}`}</CardSubtitle>
           </View>
         </View>
       </View>
@@ -177,7 +178,7 @@ const PackageBookingScreen = ({ navigation: { goBack } }) => {
           </Text>
           <BookingCardPriceSubtitle
             style={styles.Price}
-            price={packageData.price}
+            price={packageData.price * packageData.numberOfPeople}
           />
         </View>
       </View>
