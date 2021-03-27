@@ -156,6 +156,7 @@ const HotelDetailsScreen = ({
                 ]}
               >
                 <Button
+                  compact
                   mode="contained"
                   icon="map-marker-outline"
                   style={screenStyles.FormInputLeft}
@@ -170,6 +171,7 @@ const HotelDetailsScreen = ({
                   View on map
                 </Button>
                 <Button
+                  compact
                   mode="contained"
                   icon="phone-outline"
                   style={screenStyles.FormInputRight}
@@ -263,6 +265,7 @@ const HotelDetailsScreen = ({
                 ]}
               >
                 <Button
+                  compact
                   mode="contained"
                   icon="pencil-outline"
                   style={screenStyles.FormInputLeft}

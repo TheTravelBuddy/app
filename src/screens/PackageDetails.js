@@ -167,6 +167,7 @@ const PackageDetailsScreen = ({
                   ]}
                 >
                   <Button
+                    compact
                     mode="contained"
                     icon="information-outline"
                     style={screenStyles.FormInputLeft}
@@ -176,6 +177,7 @@ const PackageDetailsScreen = ({
                     About Agency
                   </Button>
                   <Button
+                    compact
                     mode="contained"
                     icon="phone-outline"
                     style={screenStyles.FormInputRight}
@@ -312,6 +314,7 @@ const PackageDetailsScreen = ({
                   ]}
                 >
                   <Button
+                    compact
                     mode="contained"
                     icon="pencil-outline"
                     style={screenStyles.FormInputLeft}

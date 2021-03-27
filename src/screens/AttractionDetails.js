@@ -124,6 +124,7 @@ const AttractionDetailsScreen = ({ navigation: { goBack, navigate } }) => {
             style={[screenStyles.FormInputContainer, screenStyles.ScreenPadded]}
           >
             <Button
+              compact
               mode="contained"
               icon="map-marker-outline"
               style={screenStyles.FormInputLeft}
@@ -136,6 +137,7 @@ const AttractionDetailsScreen = ({ navigation: { goBack, navigate } }) => {
               View on map
             </Button>
             <Button
+              compact
               mode="contained"
               icon="phone-outline"
               style={screenStyles.FormInputRight}
@@ -205,6 +207,7 @@ const AttractionDetailsScreen = ({ navigation: { goBack, navigate } }) => {
             style={[screenStyles.FormInputContainer, screenStyles.ScreenPadded]}
           >
             <Button
+              compact
               mode="contained"
               icon="pencil-outline"
               style={screenStyles.FormInputLeft}

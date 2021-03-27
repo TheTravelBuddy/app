@@ -14,7 +14,6 @@ import {
   ScreenTitle,
   Paragraph,
   CommentCard,
-  CardTitle,
   RenderOnLoad,
   WriteCommentModal,
 } from "../components";
@@ -99,6 +98,17 @@ const BlogScreen = ({
             </View>
             <View style={screenStyles.Section}>
               <View style={styles.BlogDetailContainer}>
+                <Chip
+                  avatar={
+                    <Avatar.Image
+                      size={24}
+                      source={{ uri: apiRequest.data.authorProfile }}
+                    />
+                  }
+                  style={styles.BlogDetailChip}
+                >
+                  {apiRequest.data.authorName}
+                </Chip>
                 <Chip icon="map-marker-outline" style={styles.BlogDetailChip}>
                   {apiRequest.data.location}
                 </Chip>
@@ -109,20 +119,6 @@ const BlogScreen = ({
                   {moment(apiRequest.data.publishedOn).fromNow()}
                 </Chip>
               </View>
-            </View>
-            <View
-              style={[
-                screenStyles.Section,
-                screenStyles.ScreenPadded,
-                styles.UserDetails,
-              ]}
-            >
-              <Avatar.Image
-                size={24}
-                style={styles.ProflieImage}
-                source={{ uri: apiRequest.data.authorProfile }}
-              />
-              <CardTitle>{apiRequest.data.authorName}</CardTitle>
             </View>
             <View style={screenStyles.Section}>
               <Paragraph
@@ -163,6 +159,7 @@ const BlogScreen = ({
                 ]}
               >
                 <Button
+                  compact
                   mode="contained"
                   icon="pencil-outline"
                   style={screenStyles.FormInputLeft}

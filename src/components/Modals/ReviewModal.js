@@ -43,7 +43,7 @@ const ReviewModal = ({
           ]}
         >
           {(!Number.isNaN(publishedOn) &&
-          publishedOn.toString().indexOf(".") !== -1
+          publishedOn?.toString().indexOf(".") !== -1
             ? moment.unix(publishedOn)
             : moment(publishedOn)
           ).fromNow()}

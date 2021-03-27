@@ -241,6 +241,7 @@ const CityDetailsScreen = ({ navigation: { goBack, navigate } }) => {
             style={[screenStyles.FormInputContainer, screenStyles.ScreenPadded]}
           >
             <Button
+              compact
               mode="contained"
               icon="map-marker-outline"
               style={screenStyles.FormInputLeft}
@@ -366,6 +367,7 @@ const CityDetailsScreen = ({ navigation: { goBack, navigate } }) => {
             style={[screenStyles.FormInputContainer, screenStyles.ScreenPadded]}
           >
             <Button
+              compact
               mode="contained"
               icon="pencil-outline"
               style={screenStyles.FormInputLeft}
