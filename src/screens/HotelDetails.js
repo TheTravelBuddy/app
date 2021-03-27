@@ -3,7 +3,7 @@ import { View, Image } from "react-native";
 import { FAB, useTheme, IconButton } from "react-native-paper";
 
 import screenStyles from "./styles";
-
+import { openMap, openPhone } from "../helpers/links";
 import {
   SectionHeader,
   Scaffold,
@@ -19,10 +19,16 @@ import {
   ReviewCard,
   RenderOnLoad,
   WriteReviewModal,
+  HotelBookingModal,
 } from "../components";
 import useToggle from "../hooks/useToggle";
 import useScreenDimensions from "../hooks/useScreenDimensions";
-import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../constants";
+import {
+  CARD_SPACING,
+  CHIP_SPACING,
+  SCREEN_PADDING,
+  hotelAmenities,
+} from "../constants";
 import API, { useAPI } from "../helpers/API";
 
 const HotelDetailsScreen = ({
@@ -31,6 +37,8 @@ const HotelDetailsScreen = ({
 }) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
+  const writeReviewModal = useToggle(false);
+  const hotelBookingModal = useToggle(false);
 
   const [apiRequest, refetchData] = useAPI({
     url: "/traveller/hotel",
@@ -59,12 +67,11 @@ const HotelDetailsScreen = ({
   const unlikeHotel = useCallback(async () => {
     await API({
       method: "delete",
-      url: "/traveller/hotel/unlike",
+      url: "/traveller/hotel/like",
       params: { hotelId: params.hotelId },
     });
     await refetchData();
   }, [refetchData, params.hotelId]);
-  const writeReviewModal = useToggle(false);
   return (
     <Scaffold
       renderFooter={() =>
@@ -82,9 +89,7 @@ const HotelDetailsScreen = ({
             <Button
               mode="contained"
               style={screenStyles.Flex}
-              onPress={() => {
-                navigate("HotelBookingScreen");
-              }}
+              onPress={hotelBookingModal.show}
             >
               BOOK
             </Button>
@@ -156,8 +161,10 @@ const HotelDetailsScreen = ({
                   style={screenStyles.FormInputLeft}
                   theme={whiteButtonTheme}
                   onPress={() => {
-                    // eslint-disable-next-line no-alert
-                    alert("WIP: Open Hotel Location on Map");
+                    openMap({
+                      latitude: apiRequest.data?.latitude,
+                      longitude: apiRequest.data?.longitude,
+                    });
                   }}
                 >
                   View on map
@@ -168,8 +175,7 @@ const HotelDetailsScreen = ({
                   style={screenStyles.FormInputRight}
                   theme={whiteButtonTheme}
                   onPress={() => {
-                    // eslint-disable-next-line no-alert
-                    alert("WIP: Open Contact Details");
+                    openPhone({ phoneNumber: apiRequest.data?.phoneNumber });
                   }}
                 >
                   Contact Us
@@ -196,20 +202,36 @@ const HotelDetailsScreen = ({
                 size={22}
                 style={styles.ActionsIcon}
                 icon="check"
-                color={theme.colors.primary}
-                onPress={() => {
-                  // eslint-disable-next-line no-alert
-                  alert("WIP:  Action");
+                color={
+                  apiRequest.data?.visited
+                    ? theme.colors.primary
+                    : theme.colors.textSecondary
+                }
+                onPress={async () => {
+                  await API({
+                    method: "post",
+                    url: "/traveller/hotel/visited",
+                    params: { hotelId: params.hotelId },
+                  });
+                  await refetchData();
                 }}
               />
               <IconButton
                 size={22}
                 style={styles.ActionsIcon}
                 icon="close"
-                color={theme.colors.textSecondary}
-                onPress={() => {
-                  // eslint-disable-next-line no-alert
-                  alert("WIP: Action");
+                color={
+                  !apiRequest.data?.visited
+                    ? theme.colors.primary
+                    : theme.colors.textSecondary
+                }
+                onPress={async () => {
+                  await API({
+                    method: "delete",
+                    url: "/traveller/hotel/visited",
+                    params: { hotelId: params.hotelId },
+                  });
+                  await refetchData();
                 }}
               />
             </View>
@@ -222,7 +244,7 @@ const HotelDetailsScreen = ({
               <View style={styles.AmenitiesContainer}>
                 {apiRequest.data.amenities.map((amenity) => (
                   <Chip key={amenity} style={{ margin: CHIP_SPACING }}>
-                    {amenity.toUpperCase()}
+                    {hotelAmenities[amenity.toUpperCase()]}
                   </Chip>
                 ))}
               </View>
@@ -258,7 +280,10 @@ const HotelDetailsScreen = ({
                   compact
                   style={styles.SectionRightButton}
                   onPress={() => {
-                    navigate("ReviewsScreen");
+                    navigate("ReviewsScreen", {
+                      nodeType: "hotel",
+                      nodeId: params.hotelId,
+                    });
                   }}
                 >
                   Read More Reviews
@@ -271,6 +296,14 @@ const HotelDetailsScreen = ({
       <WriteReviewModal
         visible={writeReviewModal.visible}
         onDismiss={writeReviewModal.hide}
+        onSubmit={refetchData}
+        nodeType="hotel"
+        nodeId={params.hotelId}
+      />
+      <HotelBookingModal
+        visible={hotelBookingModal.visible}
+        onDismiss={hotelBookingModal.hide}
+        hotelId={params.hotelId}
       />
     </Scaffold>
   );

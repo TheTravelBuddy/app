@@ -13,6 +13,7 @@ import useScreenDimensions from "../../hooks/useScreenDimensions";
 import { CARD_SPACING, SCREEN_PADDING } from "../../constants";
 
 const HotelSearchCard = ({
+  id,
   coverUri,
   name,
   rating,
@@ -33,7 +34,7 @@ const HotelSearchCard = ({
         { width: width - 2 * SCREEN_PADDING, padding: CARD_SPACING },
         style,
       ]}
-      onPress={() => navigate("HotelDetailsScreen")}
+      onPress={() => navigate("HotelDetailsScreen", { hotelId: id })}
       {...props}
     >
       <View style={styles.CardContent}>

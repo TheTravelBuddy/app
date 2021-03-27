@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { View } from "react-native";
-import { ActivityIndicator, Searchbar, useTheme } from "react-native-paper";
+import { Searchbar, useTheme } from "react-native-paper";
 
 import commonStyles from "./styles";
 
@@ -14,35 +14,46 @@ import {
   PackageSearchCard,
   Chip,
   HorizontalScroller,
+  RenderOnLoad,
 } from "../components";
-import {
-  bookingTypes,
-  displayFilter,
-  shouldDisplayFilter,
-  useBookingFilters,
-} from "../stores/BookingFilters";
+import { displayFilter, shouldDisplayFilter } from "../helpers/booking";
 import useToggle from "../hooks/useToggle";
-import { SCREEN_PADDING } from "../constants";
+import { SCREEN_PADDING, bookingTypes } from "../constants";
+import usePicker from "../hooks/usePicker";
+import useObjectState from "../hooks/useObjectState";
+import useTextInput from "../hooks/useTextInput";
+import { useAPI } from "../helpers/API";
 
 const BookingSearchScreen = ({ navigation }) => {
   const theme = useTheme();
 
+  const [citiesRequest] = useAPI("/traveller/city");
+
   const searchInput = useRef(null);
 
-  const selectedCity = useBookingFilters((state) => state.city);
-  const selectedBookingType = useBookingFilters((state) => state.bookingType);
-  const filterValues = useBookingFilters((state) => state.filterValues);
-  const searchQuery = useBookingFilters((state) => state.searchQuery);
-  const setSearch = useBookingFilters((state) => state.setSearch);
-  const initData = useBookingFilters((state) => state.initData);
-  const clearFilter = useBookingFilters((state) => state.clearFilter);
-  const searchResults = useBookingFilters((state) => state.searchResults);
+  const searchQuery = useTextInput();
+  const city = usePicker();
+  const bookingType = usePicker("HOTEL");
+  const filters = useObjectState();
+
+  const [searchRequest] = useAPI({
+    url: `/traveller/${bookingType.value.toLowerCase()}/search`,
+    params: {
+      cityId: city.value.id,
+      ...(filters.value.budget?.low && {
+        budgetMin: filters.value.budget?.low,
+      }),
+      ...(filters.value.budget?.high && {
+        budgetMax: filters.value.budget?.high,
+      }),
+      query: searchQuery.value,
+    },
+  });
 
   const locationModal = useToggle(false);
   const bookingTypeModal = useToggle(false);
   const filtersModal = useToggle(false);
 
-  useEffect(initData, [initData]);
   // useEffect(() => {
   //   searchInput.current?.focus();
   // }, []);
@@ -61,8 +72,7 @@ const BookingSearchScreen = ({ navigation }) => {
           <Searchbar
             ref={searchInput}
             placeholder="Search"
-            value={searchQuery}
-            onChangeText={setSearch}
+            {...searchQuery.props}
             style={styles.SearchHeader}
           />
           <HorizontalScroller
@@ -70,25 +80,21 @@ const BookingSearchScreen = ({ navigation }) => {
             gap={SCREEN_PADDING / 4}
           >
             <Chip icon="map-marker-outline" onPress={locationModal.show}>
-              {selectedCity ? (
-                selectedCity.name
-              ) : (
-                <ActivityIndicator size={12} />
-              )}
+              {city.value ? city.value.name : "Select City"}
             </Chip>
             <Chip icon="home-outline" onPress={bookingTypeModal.show}>
-              {bookingTypes[selectedBookingType]}
+              {bookingTypes[bookingType.value]}
             </Chip>
             <Chip icon="filter-outline" onPress={filtersModal.show}>
               Filter
             </Chip>
-            {Object.entries(filterValues).map(
+            {Object.entries(filters.value).map(
               ([filterName, filterValue]) =>
                 shouldDisplayFilter[filterName](filterValue) && (
                   <Chip
                     key={filterName}
                     onClose={() => {
-                      clearFilter(filterName);
+                      filters.setProperty(filterName);
                     }}
                   >
                     {displayFilter[filterName](filterValue)}
@@ -99,39 +105,56 @@ const BookingSearchScreen = ({ navigation }) => {
         </View>
       )}
     >
-      <View style={commonStyles.Section}>
-        <SectionHeader
-          style={[commonStyles.ScreenPadded, styles.SectionHeader]}
-        >
-          Search Results
-        </SectionHeader>
-        {selectedBookingType === "HOTEL"
-          ? searchResults.map((data) => (
-              <HotelSearchCard
-                key={data.id}
-                {...data}
-                style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
-              />
-            ))
-          : searchResults.map((data) => (
-              <PackageSearchCard
-                key={data.id}
-                {...data}
-                style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
-              />
-            ))}
-      </View>
+      <RenderOnLoad loading={searchRequest.loading && !searchRequest.data}>
+        {() => (
+          <>
+            <View style={commonStyles.Section}>
+              <SectionHeader
+                style={[commonStyles.ScreenPadded, styles.SectionHeader]}
+              >
+                {!searchRequest.data?.length ? "No Results" : "Search Results"}
+              </SectionHeader>
+              {!searchRequest.loading &&
+                (bookingType.value === "HOTEL"
+                  ? searchRequest.data?.map((data) => (
+                      <HotelSearchCard
+                        key={data.id}
+                        {...data}
+                        style={[
+                          commonStyles.ScreenPadded,
+                          commonStyles.HorizontalCard,
+                        ]}
+                      />
+                    ))
+                  : searchRequest.data?.map((data) => (
+                      <PackageSearchCard
+                        key={data.id}
+                        {...data}
+                        style={[
+                          commonStyles.ScreenPadded,
+                          commonStyles.HorizontalCard,
+                        ]}
+                      />
+                    )))}
+            </View>
+          </>
+        )}
+      </RenderOnLoad>
       <BookingLocationModal
         visible={locationModal.visible}
         onDismiss={locationModal.hide}
+        cities={citiesRequest.data}
+        city={city}
       />
       <BookingTypeModal
         visible={bookingTypeModal.visible}
         onDismiss={bookingTypeModal.hide}
+        bookingType={bookingType}
       />
       <BookingFiltersModal
         visible={filtersModal.visible}
         onDismiss={filtersModal.hide}
+        filters={filters}
       />
     </Scaffold>
   );

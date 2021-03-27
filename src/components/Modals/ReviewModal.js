@@ -42,7 +42,11 @@ const ReviewModal = ({
             screenStyles.CardActionsText,
           ]}
         >
-          {moment(publishedOn).fromNow()}
+          {(!Number.isNaN(publishedOn) &&
+          publishedOn.toString().indexOf(".") !== -1
+            ? moment.unix(publishedOn)
+            : moment(publishedOn)
+          ).fromNow()}
         </Text>
       </View>
     </BottomModal>

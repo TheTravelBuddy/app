@@ -8,8 +8,18 @@ import RatingPill from "../RatingPill";
 import SectionHeader from "../Typography/SectionHeader";
 import CardTitle from "../Typography/CardTitle";
 import Paragraph from "../Typography/Paragraph";
+import { openMap, openPhone } from "../../helpers/links";
 
-const AboutAgencyModal = ({ visible, onDismiss, name, rating, about }) => {
+const AboutAgencyModal = ({
+  visible,
+  onDismiss,
+  name,
+  rating,
+  description,
+  latitude,
+  longitude,
+  phone,
+}) => {
   return (
     <BottomModal {...{ visible, onDismiss }}>
       <View>
@@ -18,8 +28,12 @@ const AboutAgencyModal = ({ visible, onDismiss, name, rating, about }) => {
           <RatingPill rating={rating} />
         </View>
         <View style={screenStyles.Section}>
-          <SectionHeader>About</SectionHeader>
-          <Paragraph>{about}</Paragraph>
+          {description && (
+            <>
+              <SectionHeader>About</SectionHeader>
+              <Paragraph>{description}</Paragraph>
+            </>
+          )}
         </View>
         <View style={[screenStyles.FormInputContainer]}>
           <Button
@@ -27,8 +41,7 @@ const AboutAgencyModal = ({ visible, onDismiss, name, rating, about }) => {
             icon="map-marker-outline"
             style={screenStyles.FormInputLeft}
             onPress={() => {
-              // eslint-disable-next-line no-alert
-              alert("WIP: Open Contact Details");
+              openMap({ latitude, longitude });
             }}
           >
             View on Map
@@ -38,8 +51,7 @@ const AboutAgencyModal = ({ visible, onDismiss, name, rating, about }) => {
             icon="phone-outline"
             style={screenStyles.FormInputRight}
             onPress={() => {
-              // eslint-disable-next-line no-alert
-              alert("WIP: Open Contact Details");
+              openPhone({ phoneNumber: phone });
             }}
           >
             Contact Us

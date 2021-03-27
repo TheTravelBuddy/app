@@ -12,10 +12,10 @@ import useScreenDimensions from "../../hooks/useScreenDimensions";
 import { CARD_SPACING, SCREEN_PADDING } from "../../constants";
 
 const PackageSearchCard = ({
+  id,
   coverUri,
   name,
   rating,
-  nights,
   days,
   price,
   style,
@@ -31,7 +31,7 @@ const PackageSearchCard = ({
         { width: width - 2 * SCREEN_PADDING, padding: CARD_SPACING },
         style,
       ]}
-      onPress={() => navigate("PackageDetailsScreen")}
+      onPress={() => navigate("PackageDetailsScreen", { packageId: id })}
       {...props}
     >
       <View style={styles.CardContent}>
@@ -48,7 +48,7 @@ const PackageSearchCard = ({
             <CardTitle style={commonStyles.CardTitleText}>{name}</CardTitle>
             <RatingPill rating={rating} />
           </View>
-          <PackageDurationSubtitle {...{ nights, days }} />
+          <PackageDurationSubtitle {...{ nights: days - 1, days }} />
           <View style={commonStyles.CardActionsSpacer} />
           <SearchPackagePriceSummary {...{ price }} style={styles.CardPrice} />
         </View>

@@ -32,7 +32,7 @@ const HomeScreen = ({ navigation: { navigate } }) => {
         [navigate]
       )}
     >
-      <RenderOnLoad loading={apiRequest.loading}>
+      <RenderOnLoad loading={!apiRequest.data}>
         {() => (
           <>
             <View style={styles.Section}>

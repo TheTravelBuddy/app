@@ -7,12 +7,9 @@ import screenStyles from "../../screens/styles";
 import HotelSelectIllustration from "../../../assets/illustrations/HotelSelectIllustration.svg";
 import PackageSelectIllustration from "../../../assets/illustrations/PackageSelectIllustration.svg";
 
-import { useBookingFilters } from "../../stores/BookingFilters";
 import BookingTypeCard from "../Card/BookingTypeCard";
 
-const BookingTypeModal = ({ visible, onDismiss }) => {
-  const setBookingType = useBookingFilters((state) => state.setBookingType);
-
+const BookingTypeModal = ({ visible, onDismiss, bookingType }) => {
   return (
     <BottomModal {...{ visible, onDismiss }}>
       <ModalTitle>What?</ModalTitle>
@@ -24,7 +21,7 @@ const BookingTypeModal = ({ visible, onDismiss }) => {
               <HotelSelectIllustration {...props} />
             )}
             onPress={() => {
-              setBookingType("HOTEL");
+              bookingType.setValue("HOTEL");
               onDismiss();
             }}
           />
@@ -34,7 +31,7 @@ const BookingTypeModal = ({ visible, onDismiss }) => {
               <PackageSelectIllustration {...props} />
             )}
             onPress={() => {
-              setBookingType("PACKAGE");
+              bookingType.setValue("PACKAGE");
               onDismiss();
             }}
           />

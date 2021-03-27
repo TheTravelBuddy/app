@@ -57,11 +57,12 @@ import ServiceSearchCard from "./Card/ServiceSearchCard";
 import Chip from "./Chip";
 import BookingFiltersModal from "./Modals/BookingFiltersModal";
 import BookingTypeModal from "./Modals/BookingTypeModal";
-import BookingSearchModal from "./Modals/BookingSearchModal";
 import BookingLocationModal from "./Modals/BookingLocationModal";
 import AboutAgencyModal from "./Modals/AboutAgencyModal";
 import WriteReviewModal from "./Modals/WriteReviewModal";
 import WriteCommentModal from "./Modals/WriteCommentModal";
+import HotelBookingModal from "./Modals/HotelBookingModal";
+import PackageBookingModal from "./Modals/PackageBookingModal";
 import RenderOnLoad from "./RenderOnLoad";
 
 export {
@@ -124,10 +125,11 @@ export {
   ModalTitle,
   BookingFiltersModal,
   BookingTypeModal,
-  BookingSearchModal,
   BookingLocationModal,
   AboutAgencyModal,
   WriteCommentModal,
   WriteReviewModal,
   RenderOnLoad,
+  HotelBookingModal,
+  PackageBookingModal,
 };

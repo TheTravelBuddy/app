@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { View } from "react-native";
 
 import styles from "./styles";
@@ -11,7 +11,6 @@ import {
   HotelDetailCard,
   HorizontalScroller,
 } from "../components";
-import { useBookingFilters } from "../stores/BookingFilters";
 
 const packagesData = [
   {
@@ -86,10 +85,6 @@ const hotelDetailsData = [
 ];
 
 const BookingScreen = ({ navigation: { navigate } }) => {
-  const initData = useBookingFilters((state) => state.initData);
-
-  useEffect(initData, [initData]);
-
   return (
     <Scaffold
       header={useMemo(
