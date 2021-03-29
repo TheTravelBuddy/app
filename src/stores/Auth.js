@@ -96,6 +96,15 @@ const useAuth = create(
 
       if (status === 200) await get().getUserDetails();
     },
+    updateProfilePicture: async (profilePicture) => {
+      const { status } = await API({
+        url: "/traveller/profile/picture",
+        method: "PUT",
+        data: { profilePicture },
+      });
+
+      if (status === 200) await get().getUserDetails();
+    },
     getUserDetails: async () => {
       const { status, data: userData } = await API({
         url: "/traveller/auth/userData",
