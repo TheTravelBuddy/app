@@ -33,7 +33,7 @@ const ProfileScreen = ({ navigation: { navigate } }) => {
         <Avatar.Image
           size={108}
           style={styles.ProfileImage}
-          source={{ uri: "https://picsum.photos/1420" }}
+          source={{ uri: user.profilePicture }}
         />
         <View style={styles.ProfileDetails}>
           <ScreenTitle>{user.name}</ScreenTitle>
