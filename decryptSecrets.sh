@@ -5,4 +5,6 @@
 gpg --quiet --batch --yes --decrypt --passphrase="$ENCRYPTION_KEY" \
     --output ./android/app/google-services.json ./android/app/google-services.json.gpg
 gpg --quiet --batch --yes --decrypt --passphrase="$ENCRYPTION_KEY" \
+    --output ./android/app/release.keystore ./android/app/release.keystore.gpg
+gpg --quiet --batch --yes --decrypt --passphrase="$ENCRYPTION_KEY" \
     --output ./src/helpers/secret-config.json ./src/helpers/secret-config.json.gpg
