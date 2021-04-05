@@ -91,6 +91,7 @@ const PackageBookingScreen = ({
                 style={[screenStyles.FormInputContainer, styles.ActionButtons]}
               >
                 <Button
+                  compact
                   mode="contained"
                   icon="information-outline"
                   style={screenStyles.FormInputLeft}
@@ -100,6 +101,7 @@ const PackageBookingScreen = ({
                   About Agency
                 </Button>
                 <Button
+                  compact
                   mode="contained"
                   icon="phone-outline"
                   style={screenStyles.FormInputRight}

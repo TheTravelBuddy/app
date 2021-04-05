@@ -54,7 +54,11 @@ const BlogSearchCard = ({
               styles.CardActionsText,
             ]}
           >
-            {moment(publishedOn).fromNow().toUpperCase()}
+            {(!Number.isNaN(publishedOn) &&
+            publishedOn?.toString().indexOf(".") !== -1
+              ? moment.unix(publishedOn)
+              : moment(publishedOn)
+            ).fromNow()}
           </Text>
           <View style={styles.CardActionsSpacer} />
           <IconButton
@@ -62,10 +66,6 @@ const BlogSearchCard = ({
             color={theme.colors.textSecondary}
             style={styles.CardActionsIcon}
             icon="heart-outline"
-            onPress={() => {
-              // eslint-disable-next-line no-alert
-              alert("WIP: Like Blog Endpoint");
-            }}
           />
           <Text
             style={[

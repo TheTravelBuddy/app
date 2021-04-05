@@ -7,18 +7,18 @@ import { useNavigation } from "@react-navigation/native";
 import commonStyles from "./styles";
 import RatingPill from "../RatingPill";
 import CardTitle from "../Typography/CardTitle";
-import LocationSubtitle from "../Typography/LocationSubtitle";
 import BookingCardPriceSubtitle from "../Typography/BookingCardPriceSubtitle";
+import PackagePriceSummary from "../Typography/PackagePriceSummary";
+import CardSubtitle from "../Typography/CardSubtitle";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
 import { CARD_SPACING, SCREEN_PADDING } from "../../constants";
-import HotelPriceSummary from "../Typography/HotelPriceSummary";
-import CardSubtitle from "../Typography/CardSubtitle";
-import { displayHotelBooking } from "../../helpers/booking";
+import { displayPackageBooking } from "../../helpers/booking";
+import PackageDurationSubtitle from "../Typography/PackageDurationSubtitle";
 
-const HotelBookingCard = ({
-  id: hotelBookingId,
-  details: { coverUri, name, rating, locality, city, distance, price } = {},
-  booking: { adults, children, rooms, numberOfDays, date } = {},
+const MyBookingPackageCard = ({
+  id: packageBookingId,
+  details: { coverUri, name, rating, price, days } = {},
+  booking: { people, date } = {},
   style,
   ...props
 }) => {
@@ -29,7 +29,7 @@ const HotelBookingCard = ({
   return (
     <Card
       style={[{ width: width - 2 * SCREEN_PADDING }, style]}
-      onPress={() => navigate("HotelBookingScreen", { hotelBookingId })}
+      onPress={() => navigate("PackageBookingScreen", { packageBookingId })}
       {...props}
     >
       <View style={commonStyles.CardContainer}>
@@ -47,40 +47,20 @@ const HotelBookingCard = ({
               <CardTitle style={commonStyles.CardTitleText}>{name}</CardTitle>
               <RatingPill rating={rating} />
             </View>
-            <LocationSubtitle {...{ locality, city }} />
+            <PackageDurationSubtitle nights={days - 1} days={days} />
           </View>
         </View>
       </View>
       <Divider />
       <View style={commonStyles.CardContainer}>
         <View style={styles.CardContent}>
-          <View style={styles.TextContainer}>
-            <MaterialCommunityIcons
-              name="account-multiple-outline"
-              size={16}
-              color={theme.colors.textSecondary}
-              style={[commonStyles.CardActionsIcon, styles.TextIcon]}
-            />
-            <Text
-              style={[
-                { color: theme.colors.textSecondary },
-                commonStyles.CardActionsText,
-              ]}
-            >
-              {displayHotelBooking.booking({ adults, children })}
-            </Text>
-          </View>
-          <View style={commonStyles.CardActionsSpacer} />
+          <View style={styles.Flex} />
           <View style={styles.TextContainer}>
             <MaterialCommunityIcons
               size={16}
               color={theme.colors.textSecondary}
               style={[commonStyles.CardActionsIcon, styles.TextIcon]}
               name="calendar-month-outline"
-              onPress={() => {
-                // eslint-disable-next-line no-alert
-                alert("WIP: Like Blog Endpoint");
-              }}
             />
             <Text
               style={[
@@ -88,7 +68,7 @@ const HotelBookingCard = ({
                 commonStyles.CardActionsText,
               ]}
             >
-              {displayHotelBooking.date(date)}
+              {displayPackageBooking.date(date)}
             </Text>
           </View>
         </View>
@@ -97,16 +77,16 @@ const HotelBookingCard = ({
       <View style={commonStyles.CardContainer}>
         <View style={[commonStyles.CardContent, styles.CardContent]}>
           <View style={styles.BillContainer}>
-            <HotelPriceSummary {...{ price }} />
-            <CardSubtitle>{`× ${displayHotelBooking.booking({
-              rooms,
+            <PackagePriceSummary {...{ price }} />
+            <CardSubtitle>{`× ${displayPackageBooking.booking({
+              people,
             })}`}</CardSubtitle>
-            <CardSubtitle>{`× ${displayHotelBooking.numberOfDays(
-              numberOfDays
-            )}`}</CardSubtitle>
           </View>
           <View style={commonStyles.CardActionsSpacer} />
-          <BookingCardPriceSubtitle {...{ price }} style={styles.CardPrice} />
+          <BookingCardPriceSubtitle
+            {...{ price: price * people }}
+            style={styles.CardPrice}
+          />
         </View>
       </View>
     </Card>
@@ -114,6 +94,9 @@ const HotelBookingCard = ({
 };
 
 const styles = {
+  Flex: {
+    flexGrow: 1,
+  },
   TextContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -133,4 +116,4 @@ const styles = {
   },
 };
 
-export default HotelBookingCard;
+export default MyBookingPackageCard;

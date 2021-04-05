@@ -109,15 +109,19 @@ const BlogScreen = ({
                 >
                   {apiRequest.data.authorName}
                 </Chip>
-                <Chip icon="map-marker-outline" style={styles.BlogDetailChip}>
-                  {apiRequest.data.location}
-                </Chip>
-                <Chip icon="card-text-outline" style={styles.BlogDetailChip}>
-                  {apiRequest.data.topic}
-                </Chip>
                 <Chip icon="clock-outline" style={styles.BlogDetailChip}>
                   {moment(apiRequest.data.publishedOn).fromNow()}
                 </Chip>
+                {apiRequest.data.location && (
+                  <Chip icon="map-marker-outline" style={styles.BlogDetailChip}>
+                    {apiRequest.data.location}
+                  </Chip>
+                )}
+                {apiRequest.data.topic && (
+                  <Chip icon="card-text-outline" style={styles.BlogDetailChip}>
+                    {apiRequest.data.topic}
+                  </Chip>
+                )}
               </View>
             </View>
             <View style={screenStyles.Section}>

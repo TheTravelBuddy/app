@@ -44,6 +44,7 @@ import CitySearchCard from "./Card/CitySearchCard";
 import AttractionSearchCard from "./Card/AttractionSearchCard";
 import PackageSearchCard from "./Card/PackageSearchCard";
 import HotelBookingCard from "./Card/HotelBookingCard";
+import PackageBookingCard from "./Card/PackageBookingCard";
 import BlogCard from "./Card/BlogCard";
 import BlogBannerCard from "./Card/BlogBannerCard";
 import BlogLocationCard from "./Card/BlogLocationCard";
@@ -120,6 +121,7 @@ export {
   BookingCheckmarkCard,
   BusinessSearchCard,
   HotelBookingCard,
+  PackageBookingCard,
   ServiceSearchCard,
   Chip,
   ModalTitle,

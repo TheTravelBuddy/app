@@ -84,6 +84,7 @@ const HotelBookingScreen = ({ navigation: { goBack }, route: { params } }) => {
                 style={[screenStyles.FormInputContainer, styles.ActionButtons]}
               >
                 <Button
+                  compact
                   mode="contained"
                   icon="map-marker-outline"
                   style={screenStyles.FormInputLeft}
@@ -98,6 +99,7 @@ const HotelBookingScreen = ({ navigation: { goBack }, route: { params } }) => {
                   View on Map
                 </Button>
                 <Button
+                  compact
                   mode="contained"
                   icon="phone-outline"
                   style={screenStyles.FormInputRight}

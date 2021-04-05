@@ -3,7 +3,8 @@ import { View } from "react-native";
 
 import commonStyles from "./styles";
 
-import { Scaffold, BlogSearchCard } from "../components";
+import { Scaffold, BlogSearchCard, RenderOnLoad } from "../components";
+import { useAPI } from "../helpers/API";
 
 const blogsData = [
   {
@@ -64,21 +65,31 @@ const blogsData = [
 ];
 
 const MyBlogsScreen = ({ navigation: { goBack } }) => {
+  const [apiRequest] = useAPI("/traveller/profile/blog");
   return (
     <Scaffold
       header={useMemo(() => ({ title: "My Blogs", backAction: goBack }), [
         goBack,
       ])}
     >
-      <View style={commonStyles.Section}>
-        {blogsData.map((blogsDataDetails) => (
-          <BlogSearchCard
-            key={blogsDataDetails.id}
-            {...blogsDataDetails}
-            style={[commonStyles.ScreenPadded, commonStyles.HorizontalCard]}
-          />
-        ))}
-      </View>
+      <RenderOnLoad loading={!apiRequest.data}>
+        {() => (
+          <>
+            <View style={commonStyles.Section}>
+              {apiRequest.data?.map((blog) => (
+                <BlogSearchCard
+                  key={blog.id}
+                  {...blog}
+                  style={[
+                    commonStyles.ScreenPadded,
+                    commonStyles.HorizontalCard,
+                  ]}
+                />
+              ))}
+            </View>
+          </>
+        )}
+      </RenderOnLoad>
     </Scaffold>
   );
 };

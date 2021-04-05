@@ -8,7 +8,11 @@ const BlogSubtitle = ({ username, location, style, ...props }) => {
   return (
     <View style={[styles.TitleContainer, style]} {...props}>
       <Text style={[styles.Title, theme.fonts.bold]}>{username}</Text>
-      <Text style={[styles.Title, theme.fonts.regular]}>{`, ${location}`}</Text>
+      {location && (
+        <Text
+          style={[styles.Title, theme.fonts.regular]}
+        >{`, ${location}`}</Text>
+      )}
     </View>
   );
 };
