@@ -31,7 +31,6 @@ const BlogCard = ({ id, title, content, likes, style }) => {
               color={theme.colors.textSecondary}
               style={styles.CardActionsIcon}
               icon="heart-outline"
-              onPress={() => {}}
             />
             <Text
               style={[

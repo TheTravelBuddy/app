@@ -27,7 +27,7 @@ import { useAPI } from "../helpers/API";
 const BookingSearchScreen = ({ navigation }) => {
   const theme = useTheme();
 
-  const [citiesRequest] = useAPI("/traveller/city");
+  const [citiesRequest] = useAPI("/traveller/city/all");
 
   const searchInput = useRef(null);
 

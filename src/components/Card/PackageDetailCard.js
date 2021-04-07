@@ -13,7 +13,7 @@ import PackagePriceSummary from "../Typography/PackagePriceSummary";
 const PackageDetailCard = ({
   id,
   name,
-  duration,
+  days,
   coverUri,
   rating,
   price,
@@ -42,7 +42,9 @@ const PackageDetailCard = ({
           <CardTitle style={styles.CardTitleText}>{name}</CardTitle>
           <RatingPill rating={rating} />
         </View>
-        <CardSubtitle>{duration}</CardSubtitle>
+        {days && (
+          <CardSubtitle>{`${days - 1} nights, ${days} days`}</CardSubtitle>
+        )}
         <View style={styles.CardContent}>
           <PackagePriceSummary {...{ price }} />
         </View>

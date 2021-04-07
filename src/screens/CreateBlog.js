@@ -19,7 +19,7 @@ import useToggle from "../hooks/useToggle";
 const CreateBlogScreen = ({ navigation: { replace } }) => {
   const theme = useTheme();
   const [topicsRequest] = useAPI("/traveller/blog/topic");
-  const [citiesRequest] = useAPI("/traveller/city");
+  const [citiesRequest] = useAPI("/traveller/city/all");
 
   const loading = useToggle(false);
 
