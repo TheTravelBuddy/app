@@ -115,7 +115,6 @@ const HotelBookingModal = ({ visible, onDismiss, hotelId }) => {
                 },
               })
                 .then((response) => {
-                  console.log(response);
                   const { data: hotelBookingId } = response;
                   navigate("HotelBookingScreen", { hotelBookingId, new: true });
                 })

@@ -5,13 +5,13 @@ import { useNavigation } from "@react-navigation/native";
 import CardTitle from "../Typography/CardTitle";
 import { SCREEN_PADDING } from "../../constants";
 
-const ExploreServiceCard = ({ id, name, style, ...props }) => {
+const ExploreServiceCard = ({ id, name, coordinates, style, ...props }) => {
   const theme = useTheme();
   const { navigate } = useNavigation();
 
   const goToExploreService = useCallback(() => {
-    navigate("ExploreServiceScreen", { serviceId: id });
-  }, [id, navigate]);
+    navigate("ExploreServiceScreen", { serviceId: id, name, ...coordinates });
+  }, [id, name, coordinates, navigate]);
 
   return (
     <Card

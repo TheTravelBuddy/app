@@ -59,6 +59,7 @@ import Chip from "./Chip";
 import BookingFiltersModal from "./Modals/BookingFiltersModal";
 import BookingTypeModal from "./Modals/BookingTypeModal";
 import BookingLocationModal from "./Modals/BookingLocationModal";
+import ExploreLocationModal from "./Modals/ExploreLocationModal";
 import AboutAgencyModal from "./Modals/AboutAgencyModal";
 import WriteReviewModal from "./Modals/WriteReviewModal";
 import WriteCommentModal from "./Modals/WriteCommentModal";
@@ -128,6 +129,7 @@ export {
   BookingFiltersModal,
   BookingTypeModal,
   BookingLocationModal,
+  ExploreLocationModal,
   AboutAgencyModal,
   WriteCommentModal,
   WriteReviewModal,

@@ -24,12 +24,7 @@ const OtpScreen = ({ route }) => {
 
   const handleOtp = useCallback(() => {
     loading.start();
-    verifyOtp(otp.value)
-      .catch((err) => {
-        console.log(err);
-        errorSnackbar.show();
-      })
-      .finally(loading.stop);
+    verifyOtp(otp.value).catch(errorSnackbar.show).finally(loading.stop);
   }, [otp, verifyOtp, loading, errorSnackbar]);
 
   const handleResend = useCallback(() => {

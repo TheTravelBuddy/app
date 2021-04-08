@@ -62,7 +62,6 @@ const CreateBlogScreen = ({ navigation: { replace } }) => {
       },
     })
       .then((response) => {
-        console.log(response);
         const { data: blogId } = response;
         replace("BlogScreen", { blogId });
       })

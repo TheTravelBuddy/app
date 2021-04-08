@@ -3,7 +3,7 @@ import { View, Image } from "react-native";
 import { FAB, useTheme, IconButton } from "react-native-paper";
 
 import screenStyles from "./styles";
-import { openMap, openPhone } from "../helpers/links";
+import { openMapLocationName, openPhone } from "../helpers/links";
 import {
   SectionHeader,
   Scaffold,
@@ -162,9 +162,8 @@ const HotelDetailsScreen = ({
                   style={screenStyles.FormInputLeft}
                   theme={whiteButtonTheme}
                   onPress={() => {
-                    openMap({
-                      latitude: apiRequest.data?.latitude,
-                      longitude: apiRequest.data?.longitude,
+                    openMapLocationName({
+                      location: `${apiRequest.data?.name}, ${apiRequest.data?.locality}, ${apiRequest.data?.city}`,
                     });
                   }}
                 >

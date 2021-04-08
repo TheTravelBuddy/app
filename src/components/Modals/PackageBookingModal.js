@@ -77,7 +77,6 @@ const PackageBookingModal = ({ visible, onDismiss, packageId }) => {
                 data: { date: date.value, people: noOfPeople.value },
               })
                 .then((response) => {
-                  console.log(response);
                   const { data: packageBookingId } = response;
                   navigate("PackageBookingScreen", {
                     packageBookingId,

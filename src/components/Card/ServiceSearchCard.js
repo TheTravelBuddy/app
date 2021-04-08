@@ -1,54 +1,79 @@
 import React from "react";
 import { View } from "react-native";
-import { Card, IconButton, useTheme } from "react-native-paper";
+import { Card } from "react-native-paper";
 
 import commonStyles from "./styles";
 import CardTitle from "../Typography/CardTitle";
 import CardSubtitle from "../Typography/CardSubtitle";
+import Chip from "../Chip";
 import useScreenDimensions from "../../hooks/useScreenDimensions";
-import { SCREEN_PADDING } from "../../constants";
+import { CARD_SPACING, CHIP_SPACING, SCREEN_PADDING } from "../../constants";
+import { openLink, openDirections, openPhone } from "../../helpers/links";
+import DistanceSubtitle from "../Typography/DistanceSubtitle";
 
 const ServiceSearchCard = ({
   id,
-  coverUri,
   name,
-  rating,
+  distance,
   address,
   timings,
+  phone,
+  website,
+  latitude,
+  longitude,
   style,
   ...props
 }) => {
   const { width } = useScreenDimensions();
-  const theme = useTheme();
 
   return (
-    <Card
-      style={[{ width: width - 2 * SCREEN_PADDING }, style]}
-      onPress={() => {}}
-      {...props}
-    >
+    <Card style={[{ width: width - 2 * SCREEN_PADDING }, style]} {...props}>
       <View style={commonStyles.CardContainer}>
         <View style={commonStyles.CardTitleContainer}>
           <CardTitle style={commonStyles.CardTitleText}>{name}</CardTitle>
         </View>
 
+        <DistanceSubtitle fromCurrentLocation {...{ distance }} />
         <CardSubtitle>{address}</CardSubtitle>
-        <CardSubtitle>{timings}</CardSubtitle>
-        <View style={styles.ButtonContainer}>
-          <IconButton
-            size={24}
-            color={theme.colors.textSecondary}
-            style={commonStyles.CardActionsIcon}
-            icon="phone-outline"
-            onPress={() => {}}
-          />
-          <IconButton
-            size={24}
-            color={theme.colors.textSecondary}
-            style={commonStyles.CardActionsIcon}
-            icon="map-marker-outline"
-            onPress={() => {}}
-          />
+        {timings && <CardSubtitle bold>{timings}</CardSubtitle>}
+
+        <View style={styles.ActionsContainer}>
+          {phone && (
+            <Chip
+              icon="phone-outline"
+              mode="flat"
+              style={styles.ActionChip}
+              onPress={() => {
+                openPhone(phone);
+              }}
+            >
+              Call
+            </Chip>
+          )}
+          {website && (
+            <Chip
+              icon="web"
+              mode="flat"
+              style={styles.ActionChip}
+              onPress={() => {
+                openLink({ link: website });
+              }}
+            >
+              Website
+            </Chip>
+          )}
+          {latitude && longitude && (
+            <Chip
+              icon="map-marker-outline"
+              mode="flat"
+              style={styles.ActionChip}
+              onPress={() => {
+                openDirections({ latitude, longitude });
+              }}
+            >
+              Directions
+            </Chip>
+          )}
         </View>
       </View>
     </Card>
@@ -56,9 +81,14 @@ const ServiceSearchCard = ({
 };
 
 const styles = {
-  ButtonContainer: {
+  ActionsContainer: {
+    marginTop: CARD_SPACING / 2,
     flexDirection: "row",
     alignSelf: "flex-end",
+    flexWrap: "wrap",
+  },
+  ActionChip: {
+    margin: CHIP_SPACING / 2,
   },
 };
 
