@@ -79,7 +79,10 @@ const PackageBookingModal = ({ visible, onDismiss, packageId }) => {
                 .then((response) => {
                   console.log(response);
                   const { data: packageBookingId } = response;
-                  navigate("PackageBookingScreen", { packageBookingId });
+                  navigate("PackageBookingScreen", {
+                    packageBookingId,
+                    new: true,
+                  });
                 })
                 .catch(console.log)
                 .finally(() => {

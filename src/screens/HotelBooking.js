@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useRef, useEffect } from "react";
 import { View, Image } from "react-native";
 import { FAB, useTheme, Divider, Text } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Confetti from "react-native-confetti";
 import { displayHotelBooking } from "../helpers/booking";
 import { openMap, openPhone } from "../helpers/links";
 
@@ -26,12 +27,17 @@ import { useAPI } from "../helpers/API";
 const HotelBookingScreen = ({ navigation: { goBack }, route: { params } }) => {
   const theme = useTheme();
   const { width } = useScreenDimensions();
+  const confettiRef = useRef(null);
 
   const [apiRequest] = useAPI({
     url: "/traveller/hotel/booking",
     method: "get",
     params: { hotelBookingId: params.hotelBookingId },
   });
+
+  useEffect(() => {
+    apiRequest.data && confettiRef.current?.startConfetti();
+  }, [apiRequest.data]);
 
   const whiteButtonTheme = useMemo(
     () => ({
@@ -221,6 +227,15 @@ const HotelBookingScreen = ({ navigation: { goBack }, route: { params } }) => {
                 </Text>
               </View>
             </View>
+            {params?.new && (
+              <Confetti
+                elevation={2}
+                timeout={0.001}
+                confettiCount={30}
+                duration={3000}
+                ref={confettiRef}
+              />
+            )}
           </>
         )}
       </RenderOnLoad>

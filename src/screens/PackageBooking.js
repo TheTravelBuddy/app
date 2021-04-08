@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useRef, useEffect } from "react";
 import { View, Image } from "react-native";
 import { FAB, useTheme, Divider, Text } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Confetti from "react-native-confetti";
 import { displayPackageBooking } from "../helpers/booking";
 
 import screenStyles from "./styles";
@@ -32,12 +33,17 @@ const PackageBookingScreen = ({
   const theme = useTheme();
   const { width } = useScreenDimensions();
   const aboutAgencyModal = useToggle(false);
+  const confettiRef = useRef(null);
 
   const [apiRequest] = useAPI({
     url: "/traveller/package/booking",
     method: "get",
     params: { packageBookingId: params.packageBookingId },
   });
+
+  useEffect(() => {
+    apiRequest.data && confettiRef.current?.startConfetti();
+  }, [apiRequest.data]);
 
   const whiteButtonTheme = useMemo(
     () => ({
@@ -206,6 +212,15 @@ const PackageBookingScreen = ({
               visible={aboutAgencyModal.visible}
               onDismiss={aboutAgencyModal.hide}
             />
+            {params?.new && (
+              <Confetti
+                elevation={2}
+                timeout={0.001}
+                confettiCount={30}
+                duration={3000}
+                ref={confettiRef}
+              />
+            )}
           </>
         )}
       </RenderOnLoad>
