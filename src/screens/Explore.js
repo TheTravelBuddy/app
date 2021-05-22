@@ -21,8 +21,18 @@ import { haversineDistance } from "../helpers/distance";
 import { askLocationPermission } from "../helpers/permission";
 
 const businessData = [
-  { id: 1, name: "Cake Shops", coverUri: "https://picsum.photos/1003" },
-  { id: 2, name: "Best Places To Eat", coverUri: "https://picsum.photos/1002" },
+  {
+    id: 1,
+    name: "Cake Shops",
+    coverUri:
+      "https://i.pinimg.com/736x/30/ae/5d/30ae5dce03089906320f94158f7919b4.jpg",
+  },
+  {
+    id: 2,
+    name: "Restaurants",
+    coverUri:
+      "https://cache.marriott.com/marriottassets/marriott/BOMXR/bomxr-asian-restaurant-9851-hor-feat.jpg",
+  },
   { id: 3, name: "Parks", coverUri: "https://picsum.photos/1001" },
   { id: 4, name: "Shopping Malls", coverUri: "https://picsum.photos/1003" },
 ];
@@ -83,7 +93,9 @@ const ExploreScreen = ({ navigation: { navigate } }) => {
   const [apiRequest] = useAPI(
     useMemo(
       () =>
-        !selectedLocation.value
+        !selectedLocation?.value?.latitude ||
+        !selectedLocation?.value?.longitude ||
+        !selectedLocation?.value?.city
           ? ""
           : {
               url: "/traveller/explore",

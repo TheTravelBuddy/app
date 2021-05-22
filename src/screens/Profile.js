@@ -33,11 +33,11 @@ const ProfileScreen = ({ navigation: { navigate } }) => {
         <Avatar.Image
           size={108}
           style={styles.ProfileImage}
-          source={{ uri: user.profilePicture }}
+          source={{ uri: user?.profilePicture }}
         />
         <View style={styles.ProfileDetails}>
-          <ScreenTitle>{user.name}</ScreenTitle>
-          <CardTitle>{user.phoneNumber}</CardTitle>
+          <ScreenTitle>{user?.name}</ScreenTitle>
+          <CardTitle>{user?.phoneNumber}</CardTitle>
         </View>
       </View>
       <View style={[screenStyles.Section, styles.ListContainer]}>

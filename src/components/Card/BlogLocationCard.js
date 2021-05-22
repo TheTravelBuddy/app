@@ -19,6 +19,7 @@ import useScreenDimensions from "../../hooks/useScreenDimensions";
 const BlogLocationCard = ({
   id,
   title,
+  locationId,
   locationName,
   content,
   likes,
@@ -38,8 +39,7 @@ const BlogLocationCard = ({
     >
       <TouchableRipple
         onPress={() => {
-          // eslint-disable-next-line no-alert
-          alert("WIP: City Details Screen Navigation ");
+          navigate("CityDetailsScreen", { cityId: locationId });
         }}
       >
         <View style={[commonStyles.CardContainer, styles.LocationContainer]}>
